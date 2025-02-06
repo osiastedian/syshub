@@ -1,4 +1,4 @@
-/* eslint-disable flowtype/require-valid-file-annotation */
+
 
 //Import react/redux
 import React, { Component } from "react";

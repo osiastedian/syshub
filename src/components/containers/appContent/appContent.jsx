@@ -1,4 +1,4 @@
-/* eslint-disable flowtype/require-valid-file-annotation */
+
 
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';

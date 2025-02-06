@@ -1,4 +1,4 @@
-/* eslint-disable flowtype/require-valid-file-annotation */
+
 
 import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';

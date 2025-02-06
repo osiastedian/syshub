@@ -1,4 +1,4 @@
-/* eslint-disable flowtype/require-valid-file-annotation */
+
 
 import React, { useState } from 'react';
 import { withRoot } from '../../HOC';

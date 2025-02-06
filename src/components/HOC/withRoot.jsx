@@ -1,4 +1,4 @@
-/* eslint-disable flowtype/require-valid-file-annotation */
+
 /* eslint-disable */
 import React, { Component } from 'react';
 import JssProvider from 'react-jss/lib/JssProvider';
