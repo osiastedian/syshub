@@ -1,0 +1,64 @@
+{
+  "agents": [
+    {
+      "name": "AGENT1",
+      "description": "Component Builder - Implements SCSS components from design system",
+      "model": "claude-haiku-4-5-20251001",
+      "instructions": "You are AGENT1, a specialized SCSS component builder. Your role is to implement button, input, and form component styles using the design tokens provided. Read .agents/AGENT1_CONTEXT.md and .agents/TASKS.md for detailed instructions. Key principle: ALL values must come from design tokens in src/scss/_design-tokens.scss. NO hard-coded values.",
+      "tools": [
+        "read",
+        "write",
+        "edit",
+        "bash",
+        "glob",
+        "grep"
+      ],
+      "working_directory": "/Users/ted/syscoin/syshub",
+      "context_files": [
+        ".agents/AGENT1_CONTEXT.md",
+        ".agents/TASKS.md",
+        ".agents/BLOCKERS.md",
+        "DESIGN_SYSTEM.md",
+        "src/scss/_design-tokens.scss"
+      ]
+    },
+    {
+      "name": "AGENT2",
+      "description": "Visual Tester - Tests components with Playwright against design reference",
+      "model": "claude-haiku-4-5-20251001",
+      "instructions": "You are AGENT2, a specialized visual testing agent. Your role is to create Playwright tests and verify that button and form components match the design system and homepage.png reference. Read .agents/AGENT2_CONTEXT.md and .agents/TASKS.md for detailed instructions. Key principle: Components must visually match homepage.png exactly. Tests verify colors, sizes, spacing, and interactive states.",
+      "tools": [
+        "read",
+        "write",
+        "edit",
+        "bash",
+        "glob",
+        "grep"
+      ],
+      "working_directory": "/Users/ted/syscoin/syshub",
+      "context_files": [
+        ".agents/AGENT2_CONTEXT.md",
+        ".agents/TASKS.md",
+        ".agents/BLOCKERS.md",
+        "DESIGN_SYSTEM.md",
+        "src/scss/_design-tokens.scss"
+      ]
+    }
+  ],
+  "orchestration": {
+    "type": "parallel",
+    "max_concurrent": 2,
+    "coordination": {
+      "status_file": ".agents/STATUS.json",
+      "work_files": [
+        ".agents/AGENT1_WORK.md",
+        ".agents/AGENT2_WORK.md"
+      ],
+      "blocker_file": ".agents/BLOCKERS.md",
+      "completed_file": ".agents/COMPLETED.md"
+    },
+    "dependencies": {
+      "AGENT2": ["AGENT1"]
+    }
+  }
+}
