@@ -1,0 +1,156 @@
+{
+  "timestamp": "2025-10-29T12:01:59.171Z",
+  "tests": [
+    {
+      "buttonIndex": 1,
+      "buttonText": "Learn More",
+      "tests": [
+        {
+          "name": "Background Color",
+          "expected": "rgb(251, 176, 59) or #FBB03B",
+          "actual": "rgb(251, 176, 59)",
+          "passed": true
+        },
+        {
+          "name": "Text Color",
+          "expected": "rgb(255, 255, 255) or #FFFFFF",
+          "actual": "rgb(255, 255, 255)",
+          "passed": true
+        },
+        {
+          "name": "Height",
+          "expected": "40px",
+          "actual": "40px",
+          "passed": true
+        },
+        {
+          "name": "Border Radius",
+          "expected": "20px",
+          "actual": "20px",
+          "passed": true
+        },
+        {
+          "name": "Cursor",
+          "expected": "pointer",
+          "actual": "pointer",
+          "passed": true
+        },
+        {
+          "name": "Button Text",
+          "expected": "One of: \"Learn More\", \"Setup SentryNode\", \"Sign up\"",
+          "actual": "Learn More",
+          "passed": true
+        },
+        {
+          "name": "Hover Opacity Change",
+          "expected": "Opacity should change (typically to 0.8)",
+          "actual": "Initial: 1, Hover: 0.9",
+          "passed": true
+        }
+      ]
+    },
+    {
+      "buttonIndex": 2,
+      "buttonText": "Setup SentryNode",
+      "tests": [
+        {
+          "name": "Background Color",
+          "expected": "rgb(251, 176, 59) or #FBB03B",
+          "actual": "rgb(251, 176, 59)",
+          "passed": true
+        },
+        {
+          "name": "Text Color",
+          "expected": "rgb(255, 255, 255) or #FFFFFF",
+          "actual": "rgb(0, 0, 0)",
+          "passed": false
+        },
+        {
+          "name": "Height",
+          "expected": "40px",
+          "actual": "40px",
+          "passed": true
+        },
+        {
+          "name": "Border Radius",
+          "expected": "20px",
+          "actual": "20px",
+          "passed": true
+        },
+        {
+          "name": "Cursor",
+          "expected": "pointer",
+          "actual": "pointer",
+          "passed": true
+        },
+        {
+          "name": "Button Text",
+          "expected": "One of: \"Learn More\", \"Setup SentryNode\", \"Sign up\"",
+          "actual": "Setup SentryNode",
+          "passed": true
+        },
+        {
+          "name": "Hover Opacity Change",
+          "expected": "Opacity should change (typically to 0.8)",
+          "actual": "Initial: 0.9, Hover: 0.9",
+          "passed": false
+        }
+      ]
+    },
+    {
+      "buttonIndex": 3,
+      "buttonText": "Sign up",
+      "tests": [
+        {
+          "name": "Background Color",
+          "expected": "rgb(251, 176, 59) or #FBB03B",
+          "actual": "rgb(251, 176, 59)",
+          "passed": true
+        },
+        {
+          "name": "Text Color",
+          "expected": "rgb(255, 255, 255) or #FFFFFF",
+          "actual": "rgb(0, 0, 0)",
+          "passed": false
+        },
+        {
+          "name": "Height",
+          "expected": "40px",
+          "actual": "40px",
+          "passed": true
+        },
+        {
+          "name": "Border Radius",
+          "expected": "20px",
+          "actual": "20px",
+          "passed": true
+        },
+        {
+          "name": "Cursor",
+          "expected": "pointer",
+          "actual": "pointer",
+          "passed": true
+        },
+        {
+          "name": "Button Text",
+          "expected": "One of: \"Learn More\", \"Setup SentryNode\", \"Sign up\"",
+          "actual": "Sign up",
+          "passed": true
+        },
+        {
+          "name": "Hover Opacity Change",
+          "expected": "Opacity should change (typically to 0.8)",
+          "actual": "Initial: 0.9, Hover: 0.9",
+          "passed": false
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "passed": 17,
+    "failed": 4,
+    "total": 21
+  },
+  "referenceImageFound": true,
+  "referenceImagePath": "/Users/ted/syscoin/syshub/homepage.png"
+}
