@@ -64,14 +64,17 @@
 // Used for primary CTAs like "Learn More", "Check Now", etc.
 
 .btn-primary,
-.btn--blue {
+.btn--blue,
+a.btn-primary,
+a.btn--blue {
   background-color: $color-primary;
-  color: $color-text;
+  color: $color-text !important;
   border: none;
 
   &:hover {
     opacity: 0.9;
     background-color: $color-primary;
+    color: $color-text !important;
   }
 
   &:active {
