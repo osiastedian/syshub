@@ -2,6 +2,18 @@
 // $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 // @import "~bootstrap-sass/assets/stylesheets/bootstrap";
 
+// ============================================================================
+// Design System - Import Order
+// ============================================================================
+// 1. Design tokens (colors, typography, spacing)
+// 2. Mixins (utility functions)
+// 3. Settings (Bootstrap overrides)
+// 4. Component styles
+// ============================================================================
+
+// Design Tokens (foundation of the design system)
+@import "_design-tokens.scss";
+
 // Default variable overrides
 $body-bg: #000;
 $body-color: #D3DFFF;
