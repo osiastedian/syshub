@@ -16,19 +16,19 @@ function HomeButtons() {
 
   return (
     <div className="article__actions vertical">
-      <Link to="/about" className="btn btn-outline-primary">
+      <Link to="/about" className="btn btn-primary">
         Learn More
       </Link>
       <a
         href="https://support.syscoin.org/t/syscoin-nexus-sentry-node-install-guide/463"
-        className="btn btn-outline-primary"
+        className="btn btn-primary"
         rel="noopener noreferrer"
         target="_blank"
       >
         Setup SentryNode
       </a>
       {!user && (
-        <Link to="/signup" className="btn btn-outline-primary">
+        <Link to="/signup" className="btn btn-primary">
           Sign up
         </Link>
       )}
