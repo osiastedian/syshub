@@ -1,212 +1,475 @@
-.input-form
-{
+// ============================================================================
+// Input & Form Components - SentryNodes Redesign
+// ============================================================================
+// All form field styles using design tokens from _design-tokens.scss
+// Includes inputs, labels, checkboxes, radio buttons, toggle switches
+// ============================================================================
 
-    &.centered
-    {
-        max-width: 400px;
-        margin: 0 auto;
-    }
-    
-    max-width:800px;
+// Design tokens are imported in styles.scss, available globally
+
+// ============================================================================
+// Form Container
+// ============================================================================
+
+.input-form {
+  max-width: 800px;
+  margin: 0 auto;
+
+  &.centered {
+    max-width: 400px;
     margin: 0 auto;
-
-    input.ip,
-    input.styled-round
-    {
-        @include border-radius(24px);
-        background: #359df530;
-        padding: 15px 20px;
-        border: 0;
-        width: 100%;
-        text-align: center;
-        line-height: initial;
-
-        &::-webkit-input-placeholder,&::placeholder
-        {
-            color:#d3dfff6b;
-        }
-    }
-
-    input.styled-round
-    {
-        margin-bottom:20px;
-    }
-
-    .input-cont 
-    {
-        text-align:center;
-        margin-bottom:20px;
-        line-height: 1.6;
-    }
-
-    .form-group 
-    {
-        margin-bottom:20px;
-        text-align: left;
-        clear:both;
-
-        &.spacer
-        {
-            height:40px;
-
-            &.line 
-            {
-                height:20px;
-                margin-bottom:20px;
-                border-bottom:1px solid #ffffff0f;
-            }
-        }
-
-        &.half 
-        {
-            width:50%;
-            float: left;
-            clear:none;
-
-            &:nth-child(even)
-            {
-                padding-left:10px;
-            }
-
-            &:nth-child(odd)
-            {
-                padding-right:10px;
-            }
-        }
-
-        &.nomargin 
-        {
-            margin-bottom:0;
-        }
-
-        .btn-group
-        {
-            width:100%;
-
-            .btn 
-            {
-                min-width:50px;
-                margin-bottom: 10px;
-                margin-right: 10px;
-            }
-        }
-
-        label 
-        {
-            display:inline-block;
-            margin-bottom:10px;
-            line-height: 1.4;
-
-            &.big
-            {
-                font-size:20px;
-            }
-        }
-
-        .description
-        {
-            width:100%;
-            display:block;
-            margin-bottom:20px;
-            line-height: 1.4;
-        }
-
-        .indicator 
-        {
-            font-weight: 600;
-            color:$blue;
-            line-height: 1.4;
-            margin-bottom: 20px;
-
-            &.red 
-            {
-                color:$color-red;
-            }
-        }
-
-        .styled 
-        {
-            display: block;
-            width: 100%;
-            @include border-radius(3px);
-            background: #359df530;
-            padding: 15px 20px;
-            border: 0;
-            width: 100%;
-            text-align: left;
-
-            option 
-            {
-                color:#22367a;
-            }
-        }
-
-        small 
-        {
-            font-size:14px;
-            line-height: 1.4;
-        }
-    }
-
-    a.btn 
-    {
-        margin: 20px auto;
-        width: 150px;
-        display: block;
-    }
-
-    .form-actions-spaced
-    {
-        margin: 0px auto 0;
-        padding-top:20px;
-
-        .btn 
-        {
-            margin:0 10px 20px;
-        }
-    }
-
-    .wizard-head
-    {
-        font-weight: 600;
-        color:$blue;
-        line-height: 30px;
-        margin-bottom: 20px;
-
-        span 
-        {
-            @include border-radius(15px);
-            background:$blue;
-            color:white;
-            display:inline-block;
-            text-align: center;
-            width:30px;
-            height:30px;
-            line-height: 30px;
-            margin-right:20px;
-        }
-    }
-
-    .wizard-body
-    {
-        border-left:1px solid #ffffff0f;
-        margin:10px 0 20px 15px;
-        padding:20px;
-
-        &.collapsed 
-        {
-            height: 0;
-            overflow: hidden;
-            padding: 0;
-        }
-    }
+  }
 }
 
-@media (max-width:$breakpoint-mobile) {
-    .form-group.half 
-    {
-        width:100% !important;
-        padding:0 !important;
-        float: none !important;
+// ============================================================================
+// Form Group - Base Container
+// ============================================================================
+
+.form-group {
+  margin-bottom: $space-lg;
+  text-align: left;
+  clear: both;
+
+  // Spacer utilities
+  &.spacer {
+    height: 40px;
+
+    &.line {
+      height: 20px;
+      margin-bottom: $space-lg;
+      border-bottom: 1px solid $color-overlay-white-10;
     }
+  }
+
+  // Half-width form groups (side by side)
+  &.half {
+    width: 50%;
+    float: left;
+    clear: none;
+
+    &:nth-child(even) {
+      padding-left: $space-sm;
+    }
+
+    &:nth-child(odd) {
+      padding-right: $space-sm;
+    }
+  }
+
+  // Remove margin utility
+  &.nomargin {
+    margin-bottom: 0;
+  }
+}
+
+// ============================================================================
+// Labels
+// ============================================================================
+
+label {
+  display: inline-block;
+  margin-bottom: $space-sm;
+  @include typography-body-medium-semi-bold;
+  color: $color-text;
+  line-height: $line-height-normal;
+
+  &.big {
+    font-size: $font-size-h5;
+  }
+}
+
+// ============================================================================
+// Text Inputs
+// ============================================================================
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+input[type="tel"],
+input[type="url"],
+input.ip,
+input.styled,
+input.styled-round,
+textarea.styled,
+select.styled {
+  display: block;
+  width: 100%;
+  height: $input-height;
+  padding: $space-md $space-md;
+  background-color: $input-background;
+  border: $input-border-width solid $input-border-color;
+  border-radius: $input-border-radius;
+  color: $input-text-color;
+  @include typography-body-medium-regular;
+  text-align: left;
+  transition: border-color $transition-base, box-shadow $transition-base;
+  outline: none;
+
+  // Placeholder styling
+  &::placeholder {
+    color: $input-placeholder-color;
+  }
+
+  // Focus state
+  &:focus {
+    border-color: $color-brand-blue;
+    box-shadow: 0 0 0 3px rgba(31, 94, 255, 0.1);
+  }
+
+  // Disabled state
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background-color: $color-surface;
+  }
+}
+
+// Textarea specific styles
+textarea.styled {
+  min-height: 120px;
+  resize: vertical;
+  padding: $space-md;
+}
+
+// Select specific styles
+select.styled {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg width='12' height='8' viewBox='0 0 12 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1 1L6 6L11 1' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right $space-md center;
+  padding-right: $space-xl;
+
+  option {
+    background-color: $input-background;
+    color: $input-text-color;
+  }
+}
+
+// Rounded input variant
+input.styled-round {
+  border-radius: $radius-pill;
+  text-align: center;
+  margin-bottom: $space-lg;
+}
+
+// ============================================================================
+// Helper Text & Descriptions
+// ============================================================================
+
+.description,
+.form-text,
+small {
+  width: 100%;
+  display: block;
+  margin-bottom: $space-lg;
+  @include typography-body-small-regular;
+  color: $color-text-secondary;
+  line-height: $line-height-normal;
+}
+
+// Input container with helper text
+.input-cont {
+  text-align: center;
+  margin-bottom: $space-lg;
+  line-height: $line-height-relaxed;
+}
+
+// ============================================================================
+// Indicators & Status Messages
+// ============================================================================
+
+.indicator {
+  font-weight: $font-weight-semi-bold;
+  color: $color-brand-blue;
+  line-height: $line-height-normal;
+  margin-bottom: $space-lg;
+
+  &.red {
+    color: $color-error-text;
+  }
+
+  &.success {
+    color: $color-success-text;
+  }
+
+  &.warning {
+    color: $color-warning-text;
+  }
+}
+
+// ============================================================================
+// Checkboxes
+// ============================================================================
+
+input[type="checkbox"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid $color-border;
+  border-radius: $radius-md;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: background-color $transition-base, border-color $transition-base;
+  vertical-align: middle;
+  margin-right: $space-xs;
+
+  // Checked state
+  &:checked {
+    background-color: $color-primary;
+    border-color: $color-primary;
+
+    // Checkmark
+    &::after {
+      content: '';
+      position: absolute;
+      left: 5px;
+      top: 2px;
+      width: 5px;
+      height: 10px;
+      border: solid $color-text;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+    }
+  }
+
+  // Focus state
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+
+  // Disabled state
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Checkbox label
+.checkbox-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  @include typography-body-medium-regular;
+
+  input[type="checkbox"] {
+    margin-right: $space-sm;
+  }
+}
+
+// ============================================================================
+// Radio Buttons
+// ============================================================================
+
+input[type="radio"] {
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border: 2px solid $color-border;
+  border-radius: $radius-full;
+  background-color: transparent;
+  cursor: pointer;
+  position: relative;
+  transition: background-color $transition-base, border-color $transition-base;
+  vertical-align: middle;
+  margin-right: $space-xs;
+
+  // Checked state
+  &:checked {
+    background-color: $color-primary;
+    border-color: $color-primary;
+
+    // Inner circle
+    &::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      width: 8px;
+      height: 8px;
+      border-radius: $radius-full;
+      background-color: $color-text;
+    }
+  }
+
+  // Focus state
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: 2px;
+  }
+
+  // Disabled state
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// Radio button label
+.radio-label {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  @include typography-body-medium-regular;
+
+  input[type="radio"] {
+    margin-right: $space-sm;
+  }
+}
+
+// ============================================================================
+// Toggle Switches
+// ============================================================================
+
+.toggle-switch {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+
+  input[type="checkbox"] {
+    appearance: none;
+    width: 48px;
+    height: 24px;
+    background-color: $color-border;
+    border-radius: $radius-pill;
+    position: relative;
+    cursor: pointer;
+    transition: background-color $transition-base;
+    border: none;
+    margin-right: $space-sm;
+
+    // Toggle circle
+    &::after {
+      content: '';
+      position: absolute;
+      left: 2px;
+      top: 2px;
+      width: 20px;
+      height: 20px;
+      background-color: $color-text;
+      border-radius: $radius-full;
+      transition: transform $transition-base;
+    }
+
+    // Checked state
+    &:checked {
+      background-color: $color-primary;
+
+      &::after {
+        transform: translateX(24px);
+      }
+    }
+
+    // Focus state
+    &:focus {
+      outline: 2px solid $color-primary;
+      outline-offset: 2px;
+    }
+
+    // Disabled state
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+  }
+
+  span {
+    @include typography-body-medium-regular;
+  }
+}
+
+// ============================================================================
+// Button Groups in Forms
+// ============================================================================
+
+.btn-group {
+  width: 100%;
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+
+  .btn {
+    min-width: 50px;
+    margin: 0;
+  }
+}
+
+// ============================================================================
+// Form Actions
+// ============================================================================
+
+.form-actions-spaced {
+  margin: 0 auto;
+  padding-top: $space-lg;
+  display: flex;
+  gap: $space-sm;
+  justify-content: center;
+  flex-wrap: wrap;
+
+  .btn {
+    margin: 0;
+  }
+}
+
+// Form link buttons
+a.btn {
+  margin: $space-lg auto;
+  width: 150px;
+  display: block;
+}
+
+// ============================================================================
+// Wizard/Multi-step Form Components
+// ============================================================================
+
+.wizard-head {
+  font-weight: $font-weight-semi-bold;
+  color: $color-brand-blue;
+  line-height: 30px;
+  margin-bottom: $space-lg;
+  display: flex;
+  align-items: center;
+
+  span {
+    border-radius: $radius-full;
+    background-color: $color-brand-blue;
+    color: $color-text;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    margin-right: $space-lg;
+  }
+}
+
+.wizard-body {
+  border-left: 1px solid $color-overlay-white-10;
+  margin: $space-sm 0 $space-lg 15px;
+  padding: $space-lg;
+
+  &.collapsed {
+    height: 0;
+    overflow: hidden;
+    padding: 0;
+  }
+}
+
+// ============================================================================
+// Responsive Styles
+// ============================================================================
+
+@media (max-width: $breakpoint-md) {
+  .form-group.half {
+    width: 100% !important;
+    padding: 0 !important;
+    float: none !important;
+  }
 }

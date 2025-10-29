@@ -5,28 +5,36 @@
 // ============================================================================
 // Design System - Import Order
 // ============================================================================
-// 1. Design tokens (colors, typography, spacing)
-// 2. Mixins (utility functions)
-// 3. Settings (Bootstrap overrides)
-// 4. Component styles
+// 1. Settings (Bootstrap overrides) - must come before Bootstrap
+// 2. Bootstrap
+// 3. Design tokens (colors, typography, spacing)
+// 4. Mixins (utility functions)
+// 5. Component styles
 // ============================================================================
+
+// Settings and variable overrides (must come before Bootstrap)
+$body-bg: #000;
+$body-color: #D3DFFF;
+@import "_settings.scss";
+
+// Bootstrap-specific overrides (convert px to rem for compatibility)
+$font-size-base: 1rem; // Override to use Bootstrap's default unit system
+$line-height-base: 2.5;
+
+// Bootstrap (needs settings variables)
+@import "bootstrap/scss/bootstrap";
 
 // Design Tokens (foundation of the design system)
 @import "_design-tokens.scss";
 
-// Default variable overrides
-$body-bg: #000;
-$body-color: #D3DFFF;
-// Required
-@use "bootstrap/scss/bootstrap";
+// Mixins
 @import "_mixins.scss";
-@import "_settings.scss";
 // @import "_header.scss";
 // @import "_nav.scss";
 // @import "_backgrounds.scss";
-// @use "_btns.scss";
+@import "_btns.scss";
 // @import "_article.scss";
-// @import "_inputs.scss";
+@import "_inputs.scss";
 @import "_tables.scss";
 // @import "_modal.scss";
 // @import "_icons.scss";

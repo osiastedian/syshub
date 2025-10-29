@@ -1,63 +1,247 @@
-@use "settings" as *;
+// ============================================================================
+// Button Components - SentryNodes Redesign
+// ============================================================================
+// All button styles using design tokens from _design-tokens.scss
+// Includes primary, secondary, and various utility button classes
+// ============================================================================
 
-/* ------------------------------------------------------------ *\
-	Button
-\* ------------------------------------------------------------ */
+// Design tokens are imported in styles.scss, available globally
 
-.btn { position: relative; display: inline-block; vertical-align: middle; height: 48px; line-height: 48px; border-radius: 24px; min-width: 184px; padding: 0 24px; color: $white; font-size: 14px; text-align: center; cursor: pointer; text-decoration: none; appearance: none; transition: background .3s, color .3s, border-color .3s; }
+// ============================================================================
+// Base Button Styles
+// ============================================================================
+// Common styles shared by all button types
 
-.btn:disabled { cursor: not-allowed; }
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  height: $button-height-default;
+  line-height: $button-height-default;
+  border-radius: $button-border-radius;
+  min-width: 184px;
+  padding: $button-padding-y $button-padding-x;
+  color: $color-text;
+  @include typography-body-medium-semi-bold;
+  text-align: center;
+  cursor: pointer;
+  text-decoration: none;
+  appearance: none;
+  border: none;
+  gap: $space-sm;
+  transition: background-color $transition-base,
+              color $transition-base,
+              border-color $transition-base,
+              opacity $transition-base;
 
-.btn i { position: absolute; right: 23px; top: 51%; transform: translateY(-50%); }
+  // Disabled state for all buttons
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
 
-.btn.btn-center 
-{
-	display: block;
-	margin:0 auto;
+  // Icon inside button
+  i,
+  svg {
+    width: $button-icon-size;
+    height: $button-icon-size;
+    transition: transform $transition-base;
+  }
+
+  // Remove text decoration on hover
+  &:hover {
+    text-decoration: none;
+  }
 }
-/*  Button Block  */
 
-.btn--block { display: block; padding-left: 0; padding-right: 0; }
+// ============================================================================
+// Primary Button (Gold Background)
+// ============================================================================
+// Main action button with gold background and white text
+// Used for primary CTAs like "Learn More", "Check Now", etc.
 
-/*  Btn blue  */
-.btn--blue { border:0; background: linear-gradient(to right, #4a9bf7 0%,#4694f6 8%,#4590f5 11%,#3d84f0 21%,#3273e7 34%,#2e6ae6 43%,#2e6ce7 59%,#3374ea 66%,#357bea 75%,#3b84ed 79%,#438ef4 87%,#4594f3 92%,#4795f7 93%,#4899f5 96%,#4b9cf8 100%); background-size: 200% 100%; color: $white; box-shadow: 0 14px 32px 0 rgba(2,92, 221, .3), 0 16px 32px 0 rgba(0,0,0, .12);-webkit-transition: box-shadow .4s, background .2s linear;-o-transition: box-shadow .4s, background .2s linear;transition: box-shadow .4s, background .2s linear; transition-timing-function: ease; }
+.btn-primary,
+.btn--blue {
+  background-color: $color-primary;
+  color: $color-text;
+  border: none;
 
-.btn--blue:hover { box-shadow:none; background-position: -100%; }
+  &:hover {
+    opacity: 0.9;
+    background-color: $color-primary;
+  }
 
-/*  btn-outline-primary  */
+  &:active {
+    opacity: 0.8;
+  }
 
-.btn-outline-primary { background:transparent; border: 2px solid $blue; line-height: 44px; box-shadow: 0 16px 32px rgba(0, 0, 0, 0.12); }
+  &:disabled {
+    opacity: 0.5;
+  }
+}
 
-.btn-outline-primary:hover { background: $blue; }
+// ============================================================================
+// Secondary Button (White Outline)
+// ============================================================================
+// Secondary action button with white border and transparent background
+// Used for secondary actions like "Reset Search"
 
-.btn--small { min-width: 152px; }
-.btn--md { min-width: 236px; }
-.btn--md-2 { min-width: 224px; }
-.btn--large { min-width: 242px; }
+.btn-secondary,
+.btn-outline-primary {
+  background-color: transparent;
+  color: $color-text;
+  border: 2px solid $color-text;
+  line-height: calc(#{$button-height-default} - 4px); // Adjust for border
 
-/*  Btn play  */
-.btn--play { width: 88px; min-width: 0; height: 88px; border-radius: 50%; text-align: center; line-height: 88px; background: linear-gradient(215.61deg, #269CFF 0%, #6863FF 100%); }
-.btn--play img { transition: transform .3s; }
-.btn--play:hover img { transform: scale(1.1); }
+  &:hover {
+    background-color: $color-overlay-white-10;
+    border-color: $color-text;
+  }
 
-/*  Btn Shadow Dark  */
-.btn--shadow-dark { box-shadow: 0 16px 32px 0 rgba(0,0,0, .12) }
+  &:active {
+    background-color: $color-overlay-white-30;
+  }
 
-/*  Btn Shadow Clear  */
-.btn--shadow-clear { box-shadow: none; }
+  &:disabled {
+    opacity: 0.5;
+    background-color: transparent;
+  }
+}
 
-/*  Btn Gradient  */
-.btn--gradient { position: relative; height: 44px; line-height: 44px; padding: 0; }
+// ============================================================================
+// Button Variants & Sizes
+// ============================================================================
 
-.btn--gradient span { position: relative; z-index: 5; display: inline-block; width: 100%; height: 100%; padding: 0 24px; border-radius: 24px; background-image: linear-gradient(to top, rgba(53, 158, 246, 1), rgba(2, 92, 221, 1)); }
+// Block button (full width)
+.btn--block {
+  display: block;
+  width: 100%;
+  padding-left: 0;
+  padding-right: 0;
+}
 
-.btn--gradient:before,
-.btn--gradient:after { content: ''; position: absolute; top: -2px; left: -2px; right: -2px; bottom: -2px; border-radius: 24px; }
+// Centered button
+.btn.btn-center {
+  display: block;
+  margin: 0 auto;
+}
 
-.btn--gradient:before { background-image: linear-gradient(to top, rgba(53, 158, 246,1), rgba(2, 92, 221, 1)); opacity: 1; }
+// Size variants
+.btn--small {
+  min-width: 152px;
+  height: $button-height-default;
+}
 
-.btn--gradient:after { z-index: 2; background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, .14)); opacity: 1; }
+.btn--md {
+  min-width: 236px;
+}
 
-.btn--gradient:hover span,
-.btn--gradient:hover:before,
-.btn--gradient:hover:after { background: $color-blue-8; }
+.btn--md-2 {
+  min-width: 224px;
+}
+
+.btn--large {
+  min-width: 242px;
+}
+
+// ============================================================================
+// Special Button Types
+// ============================================================================
+
+// Play button (circular)
+.btn--play {
+  width: 88px;
+  min-width: 0;
+  height: 88px;
+  border-radius: $radius-full;
+  text-align: center;
+  line-height: 88px;
+  background: linear-gradient(215.61deg, $color-brand-blue 0%, #6863FF 100%);
+  padding: 0;
+
+  img {
+    transition: transform $transition-base;
+  }
+
+  &:hover img {
+    transform: scale(1.1);
+  }
+}
+
+// ============================================================================
+// Button Utilities
+// ============================================================================
+
+// Shadow variants
+.btn--shadow-dark {
+  box-shadow: $shadow-md;
+}
+
+.btn--shadow-clear {
+  box-shadow: none;
+}
+
+// Gradient button (using brand colors)
+.btn--gradient {
+  position: relative;
+  height: 44px;
+  line-height: 44px;
+  padding: 0;
+  background-color: transparent;
+
+  span {
+    position: relative;
+    z-index: 5;
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    padding: 0 $space-lg;
+    border-radius: $button-border-radius;
+    background-image: linear-gradient(to top, $color-brand-blue, $color-secondary);
+  }
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: $button-border-radius;
+  }
+
+  &:before {
+    background-image: linear-gradient(to top, $color-brand-blue, $color-secondary);
+    opacity: 1;
+  }
+
+  &:after {
+    z-index: 2;
+    background-image: linear-gradient(to top, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.14));
+    opacity: 1;
+  }
+
+  &:hover span,
+  &:hover:before,
+  &:hover:after {
+    opacity: 0.9;
+  }
+}
+
+// ============================================================================
+// Button Groups
+// ============================================================================
+
+.btn-group {
+  display: flex;
+  gap: $space-sm;
+  flex-wrap: wrap;
+
+  .btn {
+    margin: 0;
+  }
+}
