@@ -77,15 +77,15 @@ This folder contains all documentation for the SentryNodes redesign initiative, 
   - 100% design token compliance
   - Performance metrics and testing results
 
-### Project Setup Guides
-- **`AGENTS.md`** ← Project overview and architecture
+### Project Setup Guides (in root folder)
+- **`AGENTS.md`** (root) ← Project overview and architecture
   - Tech stack (React 16.14, Firebase, Bootstrap 5)
   - Development commands
   - Component organization
   - State management and styling
   - Common development patterns
 
-- **`CLAUDE.md`** ← Claude Code guidance
+- **`CLAUDE.md`** (root) ← Claude Code guidance
   - Reference to AGENTS.md
   - Project context for Claude Code instances
 
@@ -139,11 +139,12 @@ $color-white: #FFFFFF          // Text
 
 ### "I want complete context"
 → Read in this order:
-1. `PHASE3_INDEX.md`
-2. `SESSION_SUMMARY.md`
-3. `REDESIGN_PLAN.md`
-4. `PHASE3_RESUME_PROMPT.md`
-5. `PHASE3_TEST_PLAN.md`
+1. `AGENTS.md` (root) - project overview
+2. `PHASE3_INDEX.md` (redesign_docs)
+3. `SESSION_SUMMARY.md` (redesign_docs)
+4. `REDESIGN_PLAN.md` (redesign_docs)
+5. `PHASE3_RESUME_PROMPT.md` (redesign_docs)
+6. `PHASE3_TEST_PLAN.md` (redesign_docs)
 
 ### "I'm debugging an issue"
 → Check `PHASE2_COMPLETION.md` or `PHASE3_TEST_PLAN.md`
@@ -187,10 +188,9 @@ $color-white: #FFFFFF          // Text
 | REDESIGN_PLAN.md | 470+ | Master design plan |
 | PHASE1_COMPLETION.md | 250+ | Phase 1 report |
 | PHASE2_COMPLETION.md | 415+ | Phase 2 report |
-| AGENTS.md | 250+ | Project overview |
-| CLAUDE.md | 15 | Claude Code guidance |
 
-**Total:** 3,400+ lines of documentation
+**Total in redesign_docs/:** 2,600+ lines of documentation
+**Plus:** AGENTS.md, CLAUDE.md in root folder
 
 ---
 
@@ -244,15 +244,37 @@ A: Start with `PHASE3_INDEX.md` - it guides you based on available time.
 
 ---
 
+## 📁 File Organization
+
+```
+Root Directory (Project Files)
+├── AGENTS.md ← Project overview and architecture
+├── CLAUDE.md ← Claude Code guidance
+├── README.md
+├── src/
+├── tests/
+└── redesign_docs/ ← All redesign phase documentation
+    ├── README.md (this file - navigation guide)
+    ├── QUICK_START.md (2-minute resume)
+    ├── PHASE3_INDEX.md (complete navigation)
+    ├── REDESIGN_PLAN.md (master plan)
+    ├── PHASE1_COMPLETION.md
+    ├── PHASE2_COMPLETION.md
+    ├── PHASE3_TEST_PLAN.md
+    ├── PHASE3_RESUME_PROMPT.md
+    └── SESSION_SUMMARY.md
+```
+
 ## 🚀 Next Steps
 
-1. **Now:** Read `QUICK_START.md`
-2. **Next Session:** Copy prompt and execute Phase 3
+1. **Now:** Read `QUICK_START.md` or `AGENTS.md` (root)
+2. **Next Session:** Copy prompt from `redesign_docs/QUICK_START.md` and execute Phase 3
 3. **After Phase 3:** Phase 4 deployment
 
 ---
 
 **Documentation Folder:** `redesign_docs/`
+**Project Setup:** Root folder (AGENTS.md, CLAUDE.md)
 **Status:** Ready for Phase 3 Execution
 **Branch:** `redesign`
 **Updated:** 2025-10-29
