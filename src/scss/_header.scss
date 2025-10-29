@@ -1,35 +1,141 @@
+/* ============================================================================
+   HEADER COMPONENT STYLES - SentryNodes Design System
+   ============================================================================ */
+
+// Design tokens are imported in styles.scss before this file
+
 /* ------------------------------------------------------------ *\
-	Header
+   Header Base Styles
 \* ------------------------------------------------------------ */
 
-.header { 
-	-webkit-transition: 0.5s; /* Safari */
-  	transition: 0.5s;
-	position: absolute; top: 0; left: 0; right: 0; padding: 41px 0; z-index: 20; }
-.header .header__inner { display: flex; justify-content: space-between; padding: 0 10px; }
-.header .header__content { flex: 0 0 76.5%; max-width: 76.5%; display: flex; justify-content: space-between; }
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: $navbar-height;
+  padding: $space-md 0;
+  background-color: $color-background;
+  border-bottom: 1px solid $color-border;
+  z-index: 20;
+  transition: all $transition-base;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
-.header.fixed 
-{
-	position: fixed;
-	padding:11px 0;
-	background:#243066;
+  // Scrolled state (fixed navbar)
+  &.fixed {
+    padding: $space-sm 0;
+    background-color: rgba($color-background, 0.98);
+    backdrop-filter: blur(10px);
+  }
 }
 
-@media(min-width: 1180px){
-	.header .header__content { display: flex !important;  }
+// Header inner container
+.header__inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  padding: 0 $space-lg;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* Tablet Portrait */
-
-@media (max-width:$breakpoint-tablet-portrait) {
-	.header .header__content { flex: 0 0 90%; max-width: 90%; }
-
+// Header content (logo + nav + user menu)
+.header__content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  gap: $space-lg;
 }
 
-/* Mobile */
+/* ------------------------------------------------------------ *\
+   Logo Styling
+\* ------------------------------------------------------------ */
 
-@media (max-width:$breakpoint-mobile) {
-	.header { padding: 20px 0; }
-	.header .header__content { display: none; position: absolute; top: 100%; left: 0; width: 100%; max-width: 100%; padding: 20px 10px; z-index: 1000; text-align: center; border: 2px solid rgba(0, 171, 251, 0.08); box-shadow: 0 16px 32px rgba(19, 32, 62, 0.13); border-radius: 5px; background-color: rgba(37, 40, 98, 1); }
+.logo {
+  display: inline-block;
+  width: 43px;
+  height: 41px;
+  flex-shrink: 0;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity $transition-base;
+
+  &:hover {
+    opacity: 0.9;
+  }
+}
+
+.logo-alt {
+  display: inline-block;
+  width: 187px;
+  height: 92px;
+  flex-shrink: 0;
+  margin-bottom: $space-md;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  @media (max-width: $breakpoint-tablet-portrait) {
+    width: 83px;
+    height: 43px;
+    margin-bottom: $space-sm;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Tablet Portrait
+\* ------------------------------------------------------------ */
+
+@media (max-width: $breakpoint-tablet-portrait) {
+  .header {
+    height: auto;
+    padding: $space-md 0;
+  }
+
+  .header__inner {
+    padding: 0 $space-md;
+  }
+
+  .header__content {
+    flex-direction: column;
+    gap: $space-md;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Mobile
+\* ------------------------------------------------------------ */
+
+@media (max-width: $breakpoint-mobile) {
+  .header {
+    padding: $space-sm 0;
+  }
+
+  .header__inner {
+    padding: 0 $space-md;
+    gap: $space-md;
+  }
+
+  .header__content {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    display: none;
+    padding: $space-md;
+    background-color: rgba($color-surface, 0.98);
+    border-top: 1px solid $color-border;
+    border-radius: 0 0 $radius-md $radius-md;
+    z-index: 1000;
+
+    &.open {
+      display: flex;
+    }
+  }
 }

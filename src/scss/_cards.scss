@@ -1,0 +1,518 @@
+/* ============================================================================
+   CARDS & CONTENT SECTION STYLES - SentryNodes Design System
+   ============================================================================ */
+
+// Design tokens are imported in styles.scss before this file
+
+/* ------------------------------------------------------------ *\
+   Card Base
+\* ------------------------------------------------------------ */
+
+.card {
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  padding: $space-lg;
+  transition: all $transition-base;
+  position: relative;
+  overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($color-primary, 0.5),
+      transparent
+    );
+  }
+
+  &:hover {
+    border-color: $color-primary;
+    box-shadow: 0 8px 24px rgba($color-primary, 0.1);
+    transform: translateY(-4px);
+  }
+}
+
+.card--interactive {
+  cursor: pointer;
+  transition: all $transition-base;
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  &:active {
+    transform: translateY(-2px);
+  }
+}
+
+.card--elevated {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    box-shadow: 0 12px 32px rgba($color-primary, 0.15);
+  }
+}
+
+.card--gold {
+  border-color: rgba($color-primary, 0.3);
+
+  &:hover {
+    border-color: $color-primary;
+    background-color: rgba($color-primary, 0.05);
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Card Header
+\* ------------------------------------------------------------ */
+
+.card__header {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-md;
+  margin-bottom: $space-lg;
+  padding-bottom: $space-lg;
+  border-bottom: 1px solid $color-border;
+
+  &:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+    margin-bottom: 0;
+  }
+}
+
+.card__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  background-color: rgba($color-primary, 0.1);
+  border-radius: $radius-md;
+  font-size: 20px;
+  color: $color-primary;
+}
+
+.card__title {
+  @include typography-body-medium-semi-bold;
+  color: $color-text;
+  margin: 0;
+  flex: 1;
+}
+
+.card__subtitle {
+  @include typography-body-small-regular;
+  color: rgba($color-text, 0.6);
+  margin: 0;
+  margin-top: $space-sm;
+}
+
+/* ------------------------------------------------------------ *\
+   Card Content
+\* ------------------------------------------------------------ */
+
+.card__content {
+  color: rgba($color-text, 0.8);
+  line-height: 1.6;
+
+  p {
+    margin-bottom: $space-md;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  a {
+    color: $color-primary;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all $transition-base;
+
+    &:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Card Footer
+\* ------------------------------------------------------------ */
+
+.card__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-md;
+  margin-top: $space-lg;
+  padding-top: $space-lg;
+  border-top: 1px solid $color-border;
+
+  .btn {
+    min-width: auto;
+    padding: $space-sm $space-md;
+    font-size: $font-size-body-small;
+  }
+}
+
+.card__meta {
+  display: flex;
+  gap: $space-lg;
+  font-size: 12px;
+  color: rgba($color-text, 0.5);
+
+  span {
+    display: flex;
+    align-items: center;
+    gap: $space-sm;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Card Grid
+\* ------------------------------------------------------------ */
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: $space-lg;
+  margin-bottom: $space-xl;
+
+  @media (max-width: $breakpoint-tablet-portrait) {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: $space-md;
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+    gap: $space-md;
+  }
+}
+
+.cards-grid--2col {
+  grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: $breakpoint-tablet-portrait) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.cards-grid--3col {
+  grid-template-columns: repeat(3, 1fr);
+
+  @media (max-width: $breakpoint-tablet-portrait) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: $breakpoint-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Content Section
+\* ------------------------------------------------------------ */
+
+.section {
+  padding: $space-2xl 0;
+  border-bottom: 1px solid $color-border;
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.section--full-width {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  padding-left: calc(50vw - 50%);
+  padding-right: calc(50vw - 50%);
+  background-color: $color-surface;
+}
+
+.section__container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 $space-lg;
+}
+
+.section__header {
+  text-align: center;
+  margin-bottom: $space-xl;
+}
+
+.section__title {
+  @include typography-h2;
+  color: $color-text;
+  margin-bottom: $space-md;
+
+  .accent {
+    color: $color-primary;
+  }
+}
+
+.section__subtitle {
+  @include typography-body-medium-regular;
+  color: rgba($color-text, 0.7);
+  margin: 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 18px;
+}
+
+.section__content {
+  display: grid;
+  gap: $space-xl;
+}
+
+/* ------------------------------------------------------------ *\
+   Feature Card
+\* ------------------------------------------------------------ */
+
+.feature-card {
+  @extend .card;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: $space-xl;
+
+  .feature-card__icon {
+    font-size: 48px;
+    margin-bottom: $space-lg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+  }
+
+  .feature-card__title {
+    @include typography-body-medium-semi-bold;
+    color: $color-text;
+    margin-bottom: $space-md;
+    font-size: 18px;
+  }
+
+  .feature-card__description {
+    @include typography-body-small-regular;
+    color: rgba($color-text, 0.7);
+    line-height: 1.6;
+    flex: 1;
+    margin-bottom: $space-lg;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Stat Card
+\* ------------------------------------------------------------ */
+
+.stat-card {
+  @extend .card;
+  text-align: center;
+  padding: $space-xl;
+  background: linear-gradient(135deg, rgba($color-primary, 0.05) 0%, transparent 100%);
+
+  .stat-card__value {
+    @include typography-h2;
+    color: $color-primary;
+    margin-bottom: $space-sm;
+    font-size: 40px;
+  }
+
+  .stat-card__label {
+    @include typography-body-small-semi-bold;
+    color: rgba($color-text, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 0;
+  }
+
+  .stat-card__unit {
+    font-size: 14px;
+    color: rgba($color-text, 0.5);
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Testimonial Card
+\* ------------------------------------------------------------ */
+
+.testimonial-card {
+  @extend .card;
+  display: flex;
+  flex-direction: column;
+  padding: $space-xl;
+
+  .testimonial-card__quote {
+    @include typography-body-medium-regular;
+    color: $color-text;
+    margin-bottom: $space-lg;
+    line-height: 1.8;
+    font-style: italic;
+    position: relative;
+    padding-left: $space-lg;
+
+    &:before {
+      content: '"';
+      position: absolute;
+      left: 0;
+      top: -10px;
+      font-size: 48px;
+      color: rgba($color-primary, 0.2);
+    }
+  }
+
+  .testimonial-card__author {
+    display: flex;
+    align-items: center;
+    gap: $space-md;
+    margin-top: auto;
+  }
+
+  .testimonial-card__avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $color-primary, $color-secondary);
+    flex-shrink: 0;
+  }
+
+  .testimonial-card__name {
+    @include typography-body-small-semi-bold;
+    color: $color-text;
+    margin: 0;
+  }
+
+  .testimonial-card__title {
+    @include typography-body-small-regular;
+    color: rgba($color-text, 0.6);
+    margin: 0;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Responsive
+\* ------------------------------------------------------------ */
+
+@media (max-width: $breakpoint-tablet-portrait) {
+  .section {
+    padding: $space-xl 0;
+  }
+
+  .section__container {
+    padding: 0 $space-md;
+  }
+
+  .section__title {
+    font-size: 32px;
+  }
+
+  .cards-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: $space-md;
+  }
+
+  .card {
+    padding: $space-md;
+  }
+
+  .stat-card__value {
+    font-size: 32px;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .section {
+    padding: $space-lg 0;
+  }
+
+  .section__container {
+    padding: 0 $space-md;
+  }
+
+  .section__header {
+    margin-bottom: $space-lg;
+  }
+
+  .section__title {
+    @include typography-h3;
+    font-size: 24px;
+    margin-bottom: $space-md;
+  }
+
+  .section__subtitle {
+    font-size: 14px;
+  }
+
+  .cards-grid {
+    grid-template-columns: 1fr;
+    gap: $space-sm;
+  }
+
+  .cards-grid--2col,
+  .cards-grid--3col {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: $space-md;
+  }
+
+  .card__header {
+    margin-bottom: $space-md;
+    padding-bottom: $space-md;
+  }
+
+  .card__footer {
+    flex-direction: column;
+    gap: $space-sm;
+
+    .btn {
+      width: 100%;
+    }
+  }
+
+  .feature-card {
+    padding: $space-lg;
+
+    .feature-card__icon {
+      font-size: 40px;
+      height: 60px;
+      margin-bottom: $space-md;
+    }
+
+    .feature-card__title {
+      font-size: 16px;
+    }
+  }
+
+  .stat-card {
+    padding: $space-lg;
+
+    .stat-card__value {
+      font-size: 28px;
+    }
+  }
+
+  .testimonial-card {
+    padding: $space-lg;
+
+    .testimonial-card__quote {
+      margin-bottom: $space-md;
+      padding-left: $space-md;
+    }
+  }
+}

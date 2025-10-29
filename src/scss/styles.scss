@@ -29,12 +29,23 @@ $line-height-base: 2.5;
 
 // Mixins
 @import "_mixins.scss";
-// @import "_header.scss";
-// @import "_nav.scss";
-// @import "_backgrounds.scss";
+
+// Layout & Structure
+@import "_header.scss";
+@import "_nav.scss";
+@import "_hero.scss";
+@import "_footer.scss";
+
+// Components
 @import "_btns.scss";
-// @import "_article.scss";
 @import "_inputs.scss";
+@import "_cards.scss";
 @import "_tables.scss";
+
+// Content & Typography
+@import "_article.scss";
+
+// Optional (commented out for now)
+// @import "_backgrounds.scss";
 // @import "_modal.scss";
 // @import "_icons.scss";
