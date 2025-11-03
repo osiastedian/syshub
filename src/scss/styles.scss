@@ -41,11 +41,11 @@ $line-height-base: 2.5;
 @import "_inputs.scss";
 @import "_cards.scss";
 @import "_tables.scss";
+@import "_modal.scss";
+@import "_icons.scss";
+
+// Backgrounds (Phase 3.5 - must come after components)
+@import "_backgrounds.scss";
 
 // Content & Typography
 @import "_article.scss";
-
-// Optional (commented out for now)
-// @import "_backgrounds.scss";
-// @import "_modal.scss";
-// @import "_icons.scss";

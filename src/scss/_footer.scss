@@ -9,13 +9,12 @@
 \* ------------------------------------------------------------ */
 
 footer {
-  background-color: rgba($color-background, 0.95);
+  background-color: $color-surface;
   border-top: 1px solid $color-border;
   color: $color-text;
   padding: $space-2xl $space-lg;
   margin-top: $space-2xl;
   position: relative;
-  backdrop-filter: blur(10px);
 }
 
 .footer {
@@ -102,17 +101,22 @@ footer {
     justify-content: center;
     width: 36px;
     height: 36px;
-    background-color: rgba($color-primary, 0.1);
+    background-color: rgba($color-secondary, 0.1);
     border-radius: $radius-md;
-    color: $color-primary;
+    color: $color-secondary;
     text-decoration: none;
     transition: all $transition-base;
     font-size: 16px;
 
     &:hover {
-      background-color: $color-primary;
-      color: $color-background;
+      background-color: $color-secondary;
+      color: $color-neutral-white;
       transform: translateY(-2px);
+    }
+
+    &:focus {
+      outline: 2px solid $color-secondary;
+      outline-offset: 2px;
     }
   }
 }
@@ -253,7 +257,8 @@ footer {
 
 .footer__copyright {
   @include typography-body-small-regular;
-  color: rgba($color-text, 0.6);
+  color: rgba($color-text, 0.7);
+  font-size: $font-size-body-small;
 
   a {
     color: inherit;

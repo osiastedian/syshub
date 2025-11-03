@@ -80,6 +80,7 @@
   display: flex;
   align-items: center;
   gap: $space-sm;
+  white-space: nowrap; // Prevent "Not logged in" from wrapping to multiple lines
 
   i {
     font-size: $font-size-body-medium;

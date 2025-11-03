@@ -97,7 +97,7 @@ class Home extends Component {
         if(this.state.dataload===1) {
             return (
                 <Background>
-                    <BackgroundInner type="A" />
+                    <BackgroundInner type="clean" />
                     <main className="section homePage">
                         <MetaTags>
                             <title>{t('home.title')}</title>
@@ -168,7 +168,7 @@ class Home extends Component {
         } else {
             return (
                 <Background>
-                    <BackgroundInner type="A" />
+                    <BackgroundInner type="clean" />
                     <main className="section homePage">
                         <MetaTags>
                             <title>{t('home.title')}</title>

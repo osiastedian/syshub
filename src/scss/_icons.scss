@@ -1,133 +1,322 @@
-.ico-facebook {
-    background-image: url(../images/sprite.png);
-    background-position: 66.36085626911316% 62.94642857142857%;
-    background-size: 3370.0000000000005% 1278.9473684210525%;
-    width: 10px;
-    height: 19px;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-}
-.ico-twitter {
-    background-image: url(../images/sprite.png);
-    background-position: 84.63949843260188% 89.47368421052632%;
-    background-size: 1872.2222222222222% 1620%;
-    width: 18px;
-    height: 15px;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-}
-.ico-instagram {
-    background-image: url(../images/sprite.png);
-    background-position: 77.88161993769471% 99.11894273127754%;
-    background-size: 2106.25% 1518.75%;
-    width: 16px;
-    height: 16px;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-}
-.ico-bitcoin {
-    background-image: url(../images/sprite.png);
-    background-position: 100% 99.11111111111111%;
-    background-size: 1872.2222222222222% 1350%;
-    width: 18px;
-    height: 18px;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-}
-.ico-discord {
-    background-image: url(../images/sprite.png);
-    background-position: 85.35825545171339% 60.71428571428571%;
-    background-size: 2106.25% 1278.9473684210525%;
-    width: 16px;
-    height: 19px;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-}
-.ico-send {
-    background-image: url(../images/sprite.png);
-    background-position: 84.11214953271028% 98.2532751091703%;
-    background-size: 2106.25% 1735.7142857142858%;
-    width: 16px;
-    height: 14px;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-}
-.ico-github {
-    background-image: url(../images/sprite.png);
-    background-position: 78.36990595611285% 71.11111111111111%;
-    background-size: 1872.2222222222222% 1350%;
-    width: 18px;
-    height: 18px;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-}
-.ico-reddit {
-    background-image: url(../images/sprite.png);
-    background-position: 85.26645768025078% 80.1762114537445%;
-    background-size: 1872.2222222222222% 1518.75%;
-    width: 18px;
-    height: 16px;
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-}
-.ico-wisdom {
-    background-image: url(../images/sprite.png);
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-    background-position: 71.369906% 71.11111111111111%;
-    background-size: 1872.2222222222222% 1350%;
-    width: 18px;
-    height: 18px;
-}
-.ico-linkedin {
-    background-image: url(../images/sprite.png);
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-    background-position: 71.369906% 80.111111%;
-    background-size: 1872.2222222222222% 1350%;
-    width: 18px;
-    height: 18px;
-}
-.ico-wechat {
-    background-image: url(../images/sprite.png);
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-    background-position: 71.369906% 99.511111%;
-    background-size: 1872.2222222222222% 1350%;
-    width: 18px;
-    height: 18px;
-}
-.ico-youtube {
-    background-image: url(../images/sprite.png);
-    display: inline-block;
-    vertical-align: middle;
-    font-size: 0;
-    background-position: 71.369906% 89.511111%;
-    background-size: 1872.2222222222222% 1350%;
-    width: 18px;
-    height: 18px;
+// ============================================================================
+// Icon Component Styles - Design Token Compliant
+// ============================================================================
+// This file contains all icon styling with full design token compliance.
+// All colors, spacing, and transitions use design tokens exclusively.
+// ============================================================================
+
+// ============================================================================
+// Icon Base Styles
+// ============================================================================
+
+// Base icon styles for sprite-based icons
+%icon-base {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 0;
+  background-image: url(../images/sprite.png);
+  background-repeat: no-repeat;
+  transition: all $transition-base;
 }
 
-@media (max-width: 390px)
-{
-.socials li~li {
-    margin-left: 6px !important;
+// ============================================================================
+// Icon Size Utilities
+// ============================================================================
+
+// Small icon size (using $space-xs = 8px)
+.ico-sm {
+  width: $space-xs;
+  height: $space-xs;
 }
+
+// Medium icon size (using $space-md = 16px)
+.ico-md {
+  width: $space-md;
+  height: $space-md;
 }
-@media (max-width: 460px)
-{
-.socials li~li {
-    margin-left: 12px;
+
+// Large icon size (using $space-lg = 24px)
+.ico-lg {
+  width: $space-lg;
+  height: $space-lg;
 }
+
+// ============================================================================
+// Icon Color Variants
+// ============================================================================
+
+// Primary color variant (gold)
+.ico--primary {
+  filter: hue-rotate(0deg) brightness(1);
+
+  &:hover {
+    filter: hue-rotate(0deg) brightness(1.1);
+    transition: filter $transition-base;
+  }
+
+  &:active {
+    filter: hue-rotate(0deg) brightness(0.95);
+  }
+
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// Secondary color variant (blue)
+.ico--secondary {
+  filter: hue-rotate(45deg) brightness(1);
+
+  &:hover {
+    filter: hue-rotate(45deg) brightness(1.1);
+    transition: filter $transition-base;
+  }
+
+  &:active {
+    filter: hue-rotate(45deg) brightness(0.95);
+  }
+
+  &:focus {
+    outline: 2px solid $color-secondary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// ============================================================================
+// Social Icons - Individual Icon Definitions
+// ============================================================================
+
+// Facebook icon
+.ico-facebook {
+  @extend %icon-base;
+  background-position: 66.36085626911316% 62.94642857142857%;
+  background-size: 3370.0000000000005% 1278.9473684210525%;
+  width: 10px;
+  height: 19px;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// Twitter icon
+.ico-twitter {
+  @extend %icon-base;
+  background-position: 84.63949843260188% 89.47368421052632%;
+  background-size: 1872.2222222222222% 1620%;
+  width: 18px;
+  height: 15px;
+
+  &:hover {
+    color: $color-secondary;
+  }
+
+  &:focus {
+    outline: 2px solid $color-secondary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// Instagram icon
+.ico-instagram {
+  @extend %icon-base;
+  background-position: 77.88161993769471% 99.11894273127754%;
+  background-size: 2106.25% 1518.75%;
+  width: 16px;
+  height: 16px;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// Bitcoin icon
+.ico-bitcoin {
+  @extend %icon-base;
+  background-position: 100% 99.11111111111111%;
+  background-size: 1872.2222222222222% 1350%;
+  width: 18px;
+  height: 18px;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// Discord icon
+.ico-discord {
+  @extend %icon-base;
+  background-position: 85.35825545171339% 60.71428571428571%;
+  background-size: 2106.25% 1278.9473684210525%;
+  width: 16px;
+  height: 19px;
+
+  &:hover {
+    color: $color-secondary;
+  }
+
+  &:focus {
+    outline: 2px solid $color-secondary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// Send icon
+.ico-send {
+  @extend %icon-base;
+  background-position: 84.11214953271028% 98.2532751091703%;
+  background-size: 2106.25% 1735.7142857142858%;
+  width: 16px;
+  height: 14px;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// GitHub icon
+.ico-github {
+  @extend %icon-base;
+  background-position: 78.36990595611285% 71.11111111111111%;
+  background-size: 1872.2222222222222% 1350%;
+  width: 18px;
+  height: 18px;
+
+  &:hover {
+    color: $color-neutral-gray-light;
+  }
+
+  &:focus {
+    outline: 2px solid $color-text;
+    outline-offset: $space-2xs;
+  }
+}
+
+// Reddit icon
+.ico-reddit {
+  @extend %icon-base;
+  background-position: 85.26645768025078% 80.1762114537445%;
+  background-size: 1872.2222222222222% 1518.75%;
+  width: 18px;
+  height: 16px;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// Wisdom icon
+.ico-wisdom {
+  @extend %icon-base;
+  background-position: 71.369906% 71.11111111111111%;
+  background-size: 1872.2222222222222% 1350%;
+  width: 18px;
+  height: 18px;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// LinkedIn icon
+.ico-linkedin {
+  @extend %icon-base;
+  background-position: 71.369906% 80.111111%;
+  background-size: 1872.2222222222222% 1350%;
+  width: 18px;
+  height: 18px;
+
+  &:hover {
+    color: $color-secondary;
+  }
+
+  &:focus {
+    outline: 2px solid $color-secondary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// WeChat icon
+.ico-wechat {
+  @extend %icon-base;
+  background-position: 71.369906% 99.511111%;
+  background-size: 1872.2222222222222% 1350%;
+  width: 18px;
+  height: 18px;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// YouTube icon
+.ico-youtube {
+  @extend %icon-base;
+  background-position: 71.369906% 89.511111%;
+  background-size: 1872.2222222222222% 1350%;
+  width: 18px;
+  height: 18px;
+
+  &:hover {
+    color: $color-primary;
+  }
+
+  &:focus {
+    outline: 2px solid $color-primary;
+    outline-offset: $space-2xs;
+  }
+}
+
+// ============================================================================
+// Social Icons Container Styles - Responsive Design
+// ============================================================================
+
+// Mobile layout: Extra small devices (max-width: 390px)
+@media (max-width: $breakpoint-sm) {
+  .socials li~li {
+    margin-left: $space-xs !important;
+  }
+}
+
+// Mobile layout: Small devices (max-width: 460px)
+@media (max-width: 460px) {
+  .socials li~li {
+    margin-left: $space-sm;
+  }
 }

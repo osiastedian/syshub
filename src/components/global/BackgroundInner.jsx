@@ -5,9 +5,22 @@ import React from 'react';
  * Component for showing the Inner Backgrounds
  * @component
  * @subcategory Global
- * @param {string} type Type of the background wanted (A, B, or default)
+ * @param {string} type Type of the background wanted (A, B, clean, or default)
+ *
+ * REDESIGN NOTE: For homepage with clean black background (#0A0A0A), use type="clean"
+ * to hide decorative purple gradient images and show only solid black background.
  */
 const BackgroundInner = ({type}) => {
+  // Clean black background for homepage (Phase 3.5 UX fix)
+  if (type === 'clean') {
+    return (
+      <div className="main__backgrounds">
+        <div className="main__gradient"></div>
+        {/* No decorative background images - clean black background only */}
+      </div>
+    );
+  }
+
   if (type === 'A') {
     return (
       <div className="main__backgrounds">

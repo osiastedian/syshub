@@ -1,330 +1,371 @@
+// ============================================================================
+// TABLE STYLES - Design Token Compliant
+// ============================================================================
+
 .table-resp, .react-bootstrap-table
 {
-    width:100%;
+    width: 100%;
     overflow: hidden;
 }
 
 .check_table, .react-bootstrap-table
 {
-    margin: 45px auto 0;
+    margin: $space-3xl auto 0;
     width: 100%;
-    background: #ffffff1f;
-    padding: 20px;
-    @include border-radius(3px);
-    overflow-x:auto;
+    background: $color-overlay-white-10;
+    padding: $space-lg;
+    border-radius: $radius-sm;
+    overflow-x: auto;
 
-    table 
+    table
     {
         width: 100%;
-        min-width:840px;
+        min-width: 840px;
         table-layout: auto !important;
 
-        thead td, thead th 
+        thead td, thead th
         {
-            font-weight: 500;
-            color:white;
-            line-height: 20px;
-            padding: 10px 5px;
-        }
-        tbody td 
-        {
-            font-size:16px;
-            line-height: 20px;
-            padding: 10px 5px;
+            font-weight: $font-weight-medium;
+            color: $color-text;
+            line-height: $line-height-normal;
+            padding: $space-sm $space-2xs;
+            transition: background-color $transition-base;
         }
 
+        tbody td
+        {
+            font-size: $font-size-body-medium;
+            line-height: $line-height-normal;
+            padding: $space-sm $space-2xs;
+            transition: background-color $transition-base;
+        }
+
+        // Icon hover state with proper color token
         i:hover
         {
-            cursor:pointer;
-            color:#798ab7;
+            cursor: pointer;
+            color: $color-secondary;
         }
 
+        // Table and MNS hover states with gold accent
         &.mns, &.table
         {
-            tr:hover 
+            tr:hover
             {
-                background: #ffffff1f;
+                background: $color-overlay-white-10;
+                transition: background-color $transition-base;
             }
         }
 
+        // Seniority table specific hover state
         &.seniority
         {
-            tbody tr:hover 
+            tbody tr:hover
             {
-                background: #ffffff1f;
+                background: $color-overlay-white-10;
+                transition: background-color $transition-base;
             }
 
             td
             {
-                line-height: 1.4;
-                padding:10px;
+                line-height: $line-height-relaxed;
+                padding: $space-sm;
             }
         }
     }
 }
 
+// ============================================================================
+// PAGINATION STYLES
+// ============================================================================
+
 .pagination-cont
 {
-    margin:20px 0 80px;
+    margin: $space-lg 0 $space-3xl;
 }
 
 ul.pagination
 {
     list-style: none;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     display: table;
     margin: 0 auto;
     float: none;
 
     &.react-bootstrap-table-page-btns-ul
     {
-        margin:20px auto 80px;
+        margin: $space-lg auto $space-3xl;
     }
 
-    li 
+    li
     {
-        float:left;
-        margin:0 5px;
+        float: left;
+        margin: 0 $space-xs;
 
         &.disabled
         {
-            opacity:0.5;
+            opacity: 0.5;
         }
 
-        &.active 
+        &.active
         {
-            font-weight: 600;
-            color:$color-blue-4;
+            font-weight: $font-weight-semi-bold;
+            color: $color-secondary;
+            transition: color $transition-base;
         }
 
         &:hover:not(.disabled)
         {
-            color:$color-blue-4;
+            color: $color-secondary;
+            transition: color $transition-base;
         }
 
-        a 
+        a
         {
-            padding:0 5px;
+            padding: 0 $space-xs;
             text-decoration: none;
+            transition: color $transition-base;
 
             &.disabled
             {
-                opacity:0.5;
+                opacity: 0.5;
             }
 
-            &.active 
+            &.active
             {
-                font-weight: 600;
-                color:$color-blue-4;
+                font-weight: $font-weight-semi-bold;
+                color: $color-secondary;
             }
 
             &:hover:not(.disabled)
             {
-                color:$color-blue-4;
+                color: $color-secondary;
+            }
+
+            // Accessibility focus state
+            &:focus
+            {
+                outline: 2px solid $color-primary;
+                outline-offset: 2px;
+                border-radius: $radius-sm;
             }
         }
     }
 }
 
 
+// ============================================================================
+// PROPOSALS SECTION
+// ============================================================================
+
 .proposal-subtitle
 {
-    line-height: 1.2;
+    line-height: $line-height-tight;
     text-align: center;
-    padding:0 30px 30px;
+    padding: 0 $space-2xl $space-2xl;
 }
+
 .proposals
 {
-    overflow:hidden;
+    overflow: hidden;
 
     &.overflow
     {
-        max-height:600px;
+        max-height: 600px;
         overflow-y: scroll;
-        padding-right:10px;
+        padding-right: $space-sm;
     }
 
     .proposal
     {
-        width:100%;
-        float:left;
-        background: #ffffff1f;
-        padding:20px;
-        @include border-radius(3px);
-        margin-bottom:10px;
+        width: 100%;
+        float: left;
+        background: $color-overlay-white-10;
+        padding: $space-lg;
+        border-radius: $radius-sm;
+        margin-bottom: $space-sm;
         border: 1px solid transparent;
-        @include transition(all, .15s);
+        transition: all $transition-fast;
 
         &:hover {
-            background: rgba(255,255,255,0.18);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            border-color: rgba(255,255,255,0.25);
+            background: $color-overlay-white-30;
+            box-shadow: $shadow-md;
+            border-color: rgba(255, 255, 255, 0.25);
+            transition: all $transition-base;
+        }
+
+        &:focus-within {
+            outline: 2px solid $color-primary;
+            outline-offset: 2px;
         }
 
         &.proposal--expanded {
-            background: rgba(255,255,255,0.24);
-            box-shadow: 0 4px 14px rgba(0,0,0,0.35);
-            border-color: rgba(255,255,255,0.35);
+            background: rgba(255, 255, 255, 0.24);
+            box-shadow: $shadow-lg;
+            border-color: rgba(255, 255, 255, 0.35);
         }
 
         .vote-count
         {
-            width:20%;
-            float:left;
+            width: 20%;
+            float: left;
 
-            .yes 
+            .yes
             {
-                color:$vote-green;
-                font-size: 34px;
-                font-weight: 600;
+                color: $color-success-text;
+                font-size: $font-size-h3;
+                font-weight: $font-weight-semi-bold;
                 line-height: 1;
 
-                &::after 
+                &::after
                 {
-                    content:'/';
-                    color:gray;
-                    font-weight: 300;
-                    padding:0 5px;
+                    content: '/';
+                    color: $color-text-secondary;
+                    font-weight: $font-weight-light;
+                    padding: 0 $space-xs;
                 }
             }
 
-            .no 
+            .no
             {
-                color:$vote-red;
-                font-size: 34px;
-                font-weight: 600;
+                color: $color-error-text;
+                font-size: $font-size-h3;
+                font-weight: $font-weight-semi-bold;
                 line-height: 1;
             }
 
             .passed
             {
                 line-height: 1;
-                font-size:20px;
-                font-weight: 500;
-                color:white;
+                font-size: $font-size-h5;
+                font-weight: $font-weight-medium;
+                color: $color-text;
                 text-transform: uppercase;
 
-                i 
+                i
                 {
-                    color:$vote-green;
-                    font-size: 35px;
+                    color: $color-success-text;
+                    font-size: $font-size-h3;
                 }
             }
-            
+
             .not-passed
             {
                 line-height: 1;
-                font-size:20px;
-                font-weight: 500;
-                color:white;
+                font-size: $font-size-h5;
+                font-weight: $font-weight-medium;
+                color: $color-text;
                 text-transform: uppercase;
 
-                i 
+                i
                 {
-                    color:$vote-red;
-                    font-size: 35px;
+                    color: $color-error-text;
+                    font-size: $font-size-h3;
                 }
             }
         }
 
         .description
         {
-            float:left;
-            width:70%;
-            line-height: 1.2;
-            font-size:24px;
-            color:white;
+            float: left;
+            width: 70%;
+            line-height: $line-height-tight;
+            font-size: $font-size-h4;
+            color: $color-text;
 
             .proposal-title {
                 display: inline-flex;
                 align-items: center;
-                gap: 8px;
-                color: #fff;
+                gap: $space-sm;
+                color: $color-text;
                 background: transparent;
                 border: none;
-                padding: 2px 4px;
+                padding: $space-2xs $space-sm;
                 margin: 0;
                 cursor: pointer;
                 text-decoration: underline;
-                text-decoration-color: rgba(255,255,255,0.5);
+                text-decoration-color: rgba(255, 255, 255, 0.5);
                 text-underline-offset: 2px;
                 font-size: inherit;
-                line-height: 1.2;
-                border-radius: 4px;
-                @include transition(all, .15s);
+                line-height: $line-height-tight;
+                border-radius: $radius-sm;
+                transition: all $transition-fast;
             }
+
             .proposal-title:hover,
             .proposal-title:focus {
-                outline: 2px solid rgba(255,255,255,0.35);
+                outline: 2px solid $color-primary;
                 outline-offset: 2px;
-                background: rgba(255,255,255,0.10);
+                background: rgba(255, 255, 255, 0.10);
             }
+
             .proposal-title__icon {
                 font-size: 0.9em;
                 opacity: 0.9;
             }
 
-            .date 
+            .date
             {
-                color:$off-white;
+                color: $color-text-secondary;
                 font-style: italic;
                 line-height: 1;
-                font-size:16px;
-                margin-bottom:10px;
+                font-size: $font-size-body-medium;
+                margin-bottom: $space-sm;
             }
 
-            .budget 
+            .budget
             {
-                color:$off-white;
-                margin-top:10px;
-                font-size: 16px;
-                line-height: 1.4;
+                color: $color-text-secondary;
+                margin-top: $space-sm;
+                font-size: $font-size-body-medium;
+                line-height: $line-height-relaxed;
             }
-
-            
         }
 
         .proposal-back {
-            margin-top: 12px;
+            margin-top: $space-md;
         }
 
-        .actions 
+        .actions
         {
-            width:10%;
-            float:left;
+            width: 10%;
+            float: left;
 
-            .vote 
+            .vote
             {
-                line-height: 1.2;
+                line-height: $line-height-tight;
                 text-align: center;
                 width: 100px;
-                height: 44px;
+                height: $button-height-default;
                 float: right;
                 clear: right;
-                margin-bottom: 4px;
-                @include transition(all, .3s);
+                margin-bottom: $space-2xs;
+                transition: all $transition-slow;
                 display: flex;
                 flex-direction: row;
                 align-items: center;
                 justify-content: center;
                 position: relative;
                 border: none;
-                border-radius: 4px;
+                border-radius: $radius-sm;
                 cursor: pointer;
-                color: white;
-                font-weight: 600;
-                padding: 0 8px;
+                color: $color-text;
+                font-weight: $font-weight-semi-bold;
+                padding: 0 $space-sm;
 
                 &:hover
                 {
                     transform: translateY(-1px);
-                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+                    box-shadow: $shadow-md;
+                    transition: all $transition-base;
                 }
 
                 &:focus
                 {
-                    box-shadow: 0 0 0 3px rgba(38, 143, 255, 0.35);
+                    box-shadow: 0 0 0 3px rgba(251, 176, 59, 0.35);
+                    outline: 2px solid $color-primary;
+                    outline-offset: 2px;
                 }
 
                 &:disabled
@@ -337,62 +378,71 @@ ul.pagination
 
                 .vote-emoji
                 {
-                    font-size: 14px;
-                    margin-right: 4px;
+                    font-size: $font-size-sub-1;
+                    margin-right: $space-2xs;
                     display: inline-block;
                 }
 
                 .vote-label
                 {
-                    font-size: 10px;
-                    font-weight: 600;
+                    font-size: $font-size-sub-3;
+                    font-weight: $font-weight-semi-bold;
                     text-transform: none;
                     letter-spacing: 0.1px;
                     white-space: nowrap;
                 }
 
+                // Vote Yes button - uses success color
                 &.vote--yes
                 {
-                    background: #28a745 !important;
-                    color: white !important;
-                    
-                    &:hover 
+                    background: $color-success-text !important;
+                    color: $color-text !important;
+
+                    &:hover
                     {
-                        background: #218838 !important;
+                        background: darken($color-success-text, 10%) !important;
                     }
+
                     &:focus
                     {
-                        box-shadow: 0 0 0 3px rgba(40,167,69,0.35);
+                        box-shadow: 0 0 0 3px rgba(82, 169, 41, 0.35);
+                        outline: 2px solid $color-success-text;
                     }
                 }
 
+                // Vote Abstain button - uses neutral gray
                 &.vote--abstain
                 {
-                    background: #6c757d !important;
-                    color: white !important;
-                    
-                    &:hover 
+                    background: $color-neutral-gray-medium !important;
+                    color: $color-text !important;
+
+                    &:hover
                     {
-                        background: #5a6268 !important;
+                        background: darken($color-neutral-gray-medium, 15%) !important;
                     }
+
                     &:focus
                     {
-                        box-shadow: 0 0 0 3px rgba(108,117,125,0.35);
+                        box-shadow: 0 0 0 3px rgba(102, 102, 102, 0.35);
+                        outline: 2px solid $color-neutral-gray-medium;
                     }
                 }
 
+                // Vote No button - uses error color
                 &.vote--no
                 {
-                    background: #dc3545 !important;
-                    color: white !important;
-                    
-                    &:hover 
+                    background: $color-error-text !important;
+                    color: $color-text !important;
+
+                    &:hover
                     {
-                        background: #c82333 !important;
+                        background: darken($color-error-text, 10%) !important;
                     }
+
                     &:focus
                     {
-                        box-shadow: 0 0 0 3px rgba(220,53,69,0.35);
+                        box-shadow: 0 0 0 3px rgba(246, 118, 118, 0.35);
+                        outline: 2px solid $color-error-text;
                     }
                 }
             }
@@ -400,72 +450,150 @@ ul.pagination
     }
 }
 
-/* Breadcrumbs */
+// ============================================================================
+// BREADCRUMBS
+// ============================================================================
+
 .breadcrumbs {
-    font-size: 14px;
-    color: #ddd;
-    margin: 10px 0 20px;
-}
-.breadcrumbs a {
-    color: #fff;
-    text-decoration: underline;
-}
-.breadcrumbs .breadcrumb-sep {
-    margin: 0 8px;
-    opacity: .7;
-}
-.breadcrumbs .breadcrumb-current {
-    color: #fff;
+    font-size: $font-size-body-small;
+    color: $color-text-secondary;
+    margin: $space-xs 0 $space-lg;
 }
 
-/* Loading spinner */
-.loading--center { display: flex; align-items: center; justify-content: center; gap: 10px; }
+.breadcrumbs a {
+    color: $color-text;
+    text-decoration: underline;
+    transition: color $transition-base;
+
+    &:hover {
+        color: $color-primary;
+    }
+
+    &:focus {
+        outline: 2px solid $color-primary;
+        outline-offset: 2px;
+        border-radius: $radius-sm;
+    }
+}
+
+.breadcrumbs .breadcrumb-sep {
+    margin: 0 $space-sm;
+    opacity: 0.7;
+}
+
+.breadcrumbs .breadcrumb-current {
+    color: $color-text;
+    font-weight: $font-weight-semi-bold;
+}
+
+// ============================================================================
+// LOADING SPINNER
+// ============================================================================
+
+.loading--center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: $space-sm;
+}
+
 .spinner {
-    width: 18px; height: 18px; border-radius: 50%;
-    border: 2px solid rgba(255,255,255,0.25); border-top-color: #fff;
+    width: 18px;
+    height: 18px;
+    border-radius: $radius-full;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    border-top-color: $color-text;
     animation: spin 0.8s linear infinite;
 }
-@keyframes spin { from { transform: rotate(0); } to { transform: rotate(360deg); } }
+
+@keyframes spin {
+    from {
+        transform: rotate(0);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// ============================================================================
+// MINISTRY STATS & WORLD DISTRIBUTION
+// ============================================================================
 
 .ministats, .world-dist
 {
-    .subtitle 
+    .subtitle
     {
-        font-weight: 500;
-        font-size:24px;
+        font-weight: $font-weight-medium;
+        font-size: $font-size-h4;
         text-align: center;
     }
 }
 
 .subtitle-in-between
 {
-    font-weight: 500;
-    font-size:24px;
+    font-weight: $font-weight-medium;
+    font-size: $font-size-h4;
     text-align: center;
-    color:white;
+    color: $color-text;
 }
+
+// ============================================================================
+// MINISTRY STATS VARIANTS
+// ============================================================================
 
 .ministats
 {
-    &.mndata 
+    &.mndata
     {
-        width:75%;
-        margin:60px auto 90px;
+        // Full-width edge-to-edge gold background
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+
+        // Gold background from design tokens
+        background-color: $color-primary; /* #FBB03B */
+
+        // Vertical spacing
+        padding: $space-3xl $space-lg;
+        margin-top: $space-3xl;
+        margin-bottom: $space-3xl;
+
+        // Container for centered content
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: $space-lg;
+    }
+
+    // Black text on gold background for mndata variant
+    &.mndata .stat
+    {
+        color: $color-neutral-black; /* #0A0A0A - black text on gold */
+        font-weight: $font-weight-bold;
+
+        .stat-data
+        {
+            color: $color-neutral-black;
+            font-weight: $font-weight-semi-bold;
+        }
     }
 
     &.mndata-expanded
     {
-        width:75%;
-        margin:30px auto 20px;
+        width: 75%;
+        margin: $space-2xl auto $space-lg;
 
         .stat
         {
-            font-size: 18px;
+            font-size: $font-size-body-large;
             text-transform: uppercase;
 
-            .stat-data 
+            .stat-data
             {
-                font-size:15px;
+                font-size: $font-size-sub-1;
                 text-transform: none;
             }
         }
@@ -473,82 +601,89 @@ ul.pagination
 
     &.mndata-governance
     {
-        width:75%;
-        margin:30px auto 20px;
+        width: 75%;
+        margin: $space-2xl auto $space-lg;
 
         .stat
         {
-            width:100%;
+            width: 100%;
             text-align: left;
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 15px;
-            padding: 10px 0;
+            font-size: $font-size-body-large;
+            line-height: $line-height-relaxed;
+            margin-bottom: $space-md;
+            padding: $space-sm 0;
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: border-color $transition-base;
 
             &:last-child {
                 border-bottom: none;
             }
 
             strong {
-                color: #4A90E2;
-                font-weight: 600;
+                color: $color-secondary;
+                font-weight: $font-weight-semi-bold;
             }
 
-            .stat-data 
+            .stat-data
             {
-                font-size:15px;
+                font-size: $font-size-sub-1;
                 text-transform: none;
             }
         }
 
-        @media (max-width:$breakpoint-mobile) {
+        @media (max-width: $breakpoint-sm) {
             width: 90%;
-            margin: 20px auto 15px;
+            margin: $space-lg auto $space-sm;
 
             .stat {
-                font-size: 16px;
-                padding: 8px 0;
-                margin-bottom: 12px;
+                font-size: $font-size-body-medium;
+                padding: $space-xs 0;
+                margin-bottom: $space-sm;
             }
         }
     }
 }
 
-// Governance table styles
+// ============================================================================
+// GOVERNANCE TABLE
+// ============================================================================
+
 .table--governance {
     width: 100%;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: $space-lg 0;
     background: rgba(255, 255, 255, 0.05);
-    border-radius: 8px;
+    border-radius: $radius-md;
     overflow: hidden;
+    transition: background-color $transition-base;
 
     th {
-        background: rgba(74, 144, 226, 0.2);
-        color: #4A90E2;
-        font-weight: 600;
-        font-size: 16px;
-        padding: 15px 12px;
+        background: rgba(31, 94, 255, 0.15);
+        color: $color-secondary;
+        font-weight: $font-weight-semi-bold;
+        font-size: $font-size-body-medium;
+        padding: $space-md $space-sm;
         text-align: left;
-        border-bottom: 2px solid rgba(74, 144, 226, 0.3);
+        border-bottom: 2px solid rgba(31, 94, 255, 0.3);
+        transition: background-color $transition-base;
     }
 
     td {
-        padding: 12px;
+        padding: $space-sm;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         vertical-align: top;
+        transition: background-color $transition-base;
     }
 
     .table-label {
-        font-weight: 600;
-        color: #4A90E2;
+        font-weight: $font-weight-semi-bold;
+        color: $color-secondary;
         width: 50%;
         min-width: 180px;
     }
 
     .table-value {
-        color: #ffffff;
+        color: $color-text;
         word-break: break-word;
     }
 
@@ -557,16 +692,17 @@ ul.pagination
     }
 
     tr:hover {
-        background: rgba(255, 255, 255, 0.02);
+        background: rgba(255, 255, 255, 0.03);
+        transition: background-color $transition-base;
     }
 
-    @media (max-width:$breakpoint-mobile) {
-        font-size: 14px;
-        
+    @media (max-width: $breakpoint-sm) {
+        font-size: $font-size-body-small;
+
         th, td {
-            padding: 10px 8px;
+            padding: $space-xs;
         }
-        
+
         .table-label {
             width: 45%;
             min-width: 140px;
@@ -574,66 +710,75 @@ ul.pagination
     }
 }
 
+// ============================================================================
+// MAIN MINISTRY STATS SECTION
+// ============================================================================
+
 .ministats {
-    overflow:hidden;
-    margin:40px 0 90px;
+    overflow: hidden;
+    margin: $space-2xl * 1.4 0 $space-3xl * 1.5;
 
     .stat
     {
-        width:25%;
-        float:left;
+        width: 25%;
+        float: left;
         text-align: center;
-        font-weight: 600;
-        color:$off-white;
-        line-height: 1.4;
-        margin-bottom:20px;
+        font-weight: $font-weight-semi-bold;
+        color: $color-text-secondary;
+        line-height: $line-height-relaxed;
+        margin-bottom: $space-lg;
 
-        .stat-data 
+        .stat-data
         {
-            font-weight: 400;
-            color:white;
+            font-weight: $font-weight-regular;
+            color: $color-text;
 
-            span 
+            span
             {
-                border-bottom: 1px dotted $color-blue-2;
+                border-bottom: 1px dotted $color-secondary;
                 cursor: help;
+                transition: border-color $transition-base;
+            }
+
+            span:hover {
+                border-bottom-color: $color-primary;
             }
         }
     }
 
-    &.thirds .stat 
+    &.thirds .stat
     {
-        width:33%;
+        width: 33%;
     }
 
     .chart-mini-hor
     {
-        width:100%;
+        width: 100%;
         overflow: hidden;
-        height:40px;
-        @include border-radius(3px);
+        height: 40px;
+        border-radius: $radius-sm;
 
-        div 
+        div
         {
-            float:left;
+            float: left;
         }
 
-        .blue 
+        .blue
         {
-            height:40px;
-            background-color: $color-blue-9;
+            height: 40px;
+            background-color: $color-secondary;
         }
 
-        .red 
+        .red
         {
-            height:40px;
-            background-color: $color-red2;
+            height: 40px;
+            background-color: $color-brand-orange; /* #F7931A - brand orange instead of error red */
         }
 
-        .white 
+        .white
         {
-            height:40px;
-            background-color: $off-white;
+            height: 40px;
+            background-color: $color-text-secondary;
         }
     }
 
@@ -643,31 +788,34 @@ ul.pagination
 
         > span
         {
-            margin-right:30px;
-            white-space: nowrap; 
+            margin-right: $space-2xl;
+            white-space: nowrap;
+
             span.red
             {
-                background-color: $color-red2; 
-                width:13px;
-                height:13px;
-                @include border-radius(5px);
-                display:inline-block;
+                background-color: $color-brand-orange; /* #F7931A - brand orange for consistency */
+                width: 13px;
+                height: 13px;
+                border-radius: 5px;
+                display: inline-block;
             }
+
             span.blue
             {
-                background-color: $color-blue-9; 
-                width:13px;
-                height:13px;
-                @include border-radius(5px);
-                display:inline-block;
+                background-color: $color-secondary;
+                width: 13px;
+                height: 13px;
+                border-radius: 5px;
+                display: inline-block;
             }
+
             span.white
             {
-                background-color: $off-white; 
-                width:13px;
-                height:13px;
-                @include border-radius(5px);
-                display:inline-block;
+                background-color: $color-text-secondary;
+                width: 13px;
+                height: 13px;
+                border-radius: 5px;
+                display: inline-block;
             }
         }
     }

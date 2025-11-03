@@ -1,111 +1,163 @@
-.backdrop
-{
-    position:fixed;
-    top:0;
-    bottom:0;
-    left:0;
-    right:0;
-    background:#444680d4;
-    overflow: hidden;
-    padding:20px;
-    backdrop-filter: blur(2px);
-    z-index:1000;
+// ============================================================================
+// Modal Backdrop and Container Styles
+// ============================================================================
+// Uses design tokens for all colors, spacing, transitions, shadows, and sizing
+// Supports responsive modal variants (sm, md, lg)
+// ============================================================================
 
-    .modal
-    {
-        max-width:$shell-large-max-width;
-        background:#242652;
+.backdrop {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    // Backdrop with semi-transparent black using design token + opacity
+    background: rgba($color-neutral-black, 0.7);
+    overflow: hidden;
+    padding: $space-lg;
+    // Modern blur effect using design token values
+    backdrop-filter: blur($space-2xs);
+    z-index: $z-modal-backdrop;
+
+    // ========================================================================
+    // Modal Container
+    // ========================================================================
+
+    .modal {
+        // Default size: large
+        max-width: $shell-large-max-width;
+        background: $color-neutral-dark-bg;
         position: relative;
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%);
-        @include border-radius(5px);
-        max-height: calc(100vh - 130px);
+        @include border-radius($radius-lg);
+        max-height: calc(100vh - $space-2xl);
         overflow-y: auto;
+        // Apply box shadow using design token
+        box-shadow: $shadow-xl;
 
-        &.sm 
-        {
-            max-width:$shell-sm-max-width;
+        // ====================================================================
+        // Modal Size Variants
+        // ====================================================================
+
+        // Small modal: 600px max-width
+        &.sm {
+            max-width: $shell-sm-max-width;
         }
 
-        &.md
-        {
-            max-width:$shell-md-max-width;
+        // Medium modal: 960px max-width
+        &.md {
+            max-width: $shell-md-max-width;
         }
 
-        .modal-title 
-        {
-            padding:20px;
-            border-bottom:1px solid #ffffff1c;
+        // Large modal: 1155px max-width (default, explicit for clarity)
+        &.lg {
+            max-width: $shell-large-max-width;
+        }
 
-            .close 
-            {
-                position:absolute;
-                top:20px;
-                right:20px;
+        // ====================================================================
+        // Modal Header (Title Section)
+        // ====================================================================
+
+        .modal-title {
+            padding: $space-lg;
+            border-bottom: 1px solid $color-overlay-white-10;
+
+            // Close button styling
+            .close {
+                position: absolute;
+                top: $space-lg;
+                right: $space-lg;
                 line-height: 1.2;
-                transition: color .3s;
+                cursor: pointer;
+                color: $color-text;
+                @include transition(color, $transition-base);
 
-                &:hover 
-                {
-                    color:$blue;
+                // Hover state: change to primary gold color
+                &:hover {
+                    color: $color-primary;
+                }
+
+                // Focus state for accessibility
+                &:focus {
+                    color: $color-primary;
+                    outline: 2px solid $color-primary;
+                    outline-offset: 2px;
+                }
+
+                // Active state
+                &:active {
+                    color: darken($color-primary, 10%);
                 }
             }
         }
 
-        .modal-body
-        {
-            padding:20px;
+        // ====================================================================
+        // Modal Body Content
+        // ====================================================================
 
-            .modal-section
-            {
-                padding:10px 0;
-                border-bottom:1px solid #ffffff0f;
+        .modal-body {
+            padding: $space-lg;
 
-                &:last-child
-                {
-                    border-bottom:none;
+            // Sections within modal body
+            .modal-section {
+                padding: $space-sm 0;
+                border-bottom: 1px solid $color-overlay-white-10;
+                @include transition(background-color, $transition-base);
+
+                // Remove border from last section
+                &:last-child {
+                    border-bottom: none;
                 }
             }
         }
 
-        .modal-footer
-        {
-            padding:20px 20px 0 20px;
-            border-top:1px solid #ffffff1c;
+        // ====================================================================
+        // Modal Footer (Actions)
+        // ====================================================================
 
-            .modal__actions 
-            {
-                &.actions_left
-                {
-                    float:left;
+        .modal-footer {
+            padding: $space-lg;
+            padding-top: 0;
+            border-top: 1px solid $color-overlay-white-10;
 
-                    .btn
-                    {
-                        margin-right:20px;
+            // Action button containers
+            .modal__actions {
+                // Left-aligned actions
+                &.actions_left {
+                    float: left;
+
+                    .btn {
+                        margin-right: $space-lg;
                     }
                 }
 
-                &.actions_right
-                {
-                    float:right;
+                // Right-aligned actions
+                &.actions_right {
+                    float: right;
 
-                    .btn
-                    {
-                        margin-left:20px;
+                    .btn {
+                        margin-left: $space-lg;
                     }
                 }
-                
-                .btn
-                {
-                    margin-bottom:20px;
+
+                // Vertical spacing for all buttons
+                .btn {
+                    margin-bottom: $space-lg;
                 }
             }
         }
     }
 }
 
+// ============================================================================
+// Tooltip Styling (SystemClass)
+// ============================================================================
+
 .tooltipSysClass {
-    background: #242652;
-    border-radius: 5px;
+    background: $color-neutral-dark-bg;
+    @include border-radius($radius-lg);
+    box-shadow: $shadow-lg;
+    color: $color-text;
 }
