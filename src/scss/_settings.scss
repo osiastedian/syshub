@@ -446,20 +446,11 @@ nav ol { list-style: none outside none; }
 
 
 /* ------------------------------------------------------------ *\
-	Footer
+	Footer (DEPRECATED - Now using _footer.scss)
 \* ------------------------------------------------------------ */
 
-.footer { padding: 8px 0; background-image: linear-gradient(-41deg, #051147 0%, #2b307a 100%); font-weight: 500; color: $white; }
-.footer .logo { margin-right: 83px; }
-.footer .footer__inner { display: flex; align-items: center; margin: 0 -10px; }
-.footer .footer__entry { display: flex; align-items: center; }
-.footer .nav { padding-top: 11px; font-family: $font-family-lato; text-transform: capitalize; }
-.footer .nav ul { display: flex; list-style: none; }
-.footer .nav li ~ li { margin-left: 25px; }
-.footer .nav a { text-decoration: none; -webkit-transition: color .4s;-o-transition: color .4s;transition: color .4s; }
-.footer .nav a:hover { color: #359EF6; }
-.footer .footer__content { padding: 16px 47px 0 0; flex: 0 0 40%; max-width: 40%; text-align: right; }
-.footer .copyright { position: relative; margin-top: -18px; color: $off-white; }
+// Old footer styles removed - now using modular _footer.scss with design tokens
+// These styles were causing conflicts with the new design system
 
 /* Tablet Portrait */
 
