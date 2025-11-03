@@ -22,6 +22,57 @@ footer {
   margin: 0 auto;
 }
 
+/* ------------------------------------------------------------ *\
+   Footer Header (Logo + Tagline)
+\* ------------------------------------------------------------ */
+
+.footer__header {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+  margin-bottom: $space-2xl;
+
+  @media (max-width: $breakpoint-tablet-portrait) {
+    text-align: center;
+    align-items: center;
+  }
+}
+
+.footer__logo {
+  display: inline-block;
+
+  .logo {
+    width: 60px;
+    height: 54px;
+    background-size: contain;
+    background-position: left;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    transition: opacity $transition-base;
+
+    &:hover {
+      opacity: 1;
+    }
+
+    @media (max-width: $breakpoint-tablet-portrait) {
+      background-position: center;
+    }
+  }
+}
+
+.footer__tagline {
+  @include typography-body-small-regular;
+  color: rgba($color-text, 0.7);
+  max-width: 500px;
+  line-height: 1.6;
+  margin: 0;
+
+  @media (max-width: $breakpoint-tablet-portrait) {
+    text-align: center;
+    max-width: 100%;
+  }
+}
+
 .footer__inner {
   display: flex;
   gap: $space-xl;
@@ -216,11 +267,23 @@ footer {
     cursor: pointer;
     transition: all $transition-base;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: $space-sm;
+
+    .arrow {
+      font-size: 18px;
+      transition: transform $transition-base;
+    }
 
     &:hover {
       opacity: 0.9;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba($color-primary, 0.3);
+
+      .arrow {
+        transform: translateX(4px);
+      }
     }
 
     &:active {
@@ -233,6 +296,62 @@ footer {
 
     button {
       width: 100%;
+      justify-content: center;
+    }
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Footer Social Section
+\* ------------------------------------------------------------ */
+
+.footer__social-section {
+  margin-top: $space-2xl;
+  padding-top: $space-xl;
+  border-top: 1px solid $color-border;
+  display: flex;
+  justify-content: center;
+
+  .socials {
+    ul {
+      display: flex;
+      gap: $space-md;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      flex-wrap: wrap;
+      justify-content: center;
+
+      li {
+        a, button {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 40px;
+          height: 40px;
+          background-color: rgba($color-secondary, 0.1);
+          border-radius: $radius-md;
+          color: $color-secondary;
+          text-decoration: none;
+          transition: all $transition-base;
+          font-size: 18px;
+
+          &:hover {
+            background-color: $color-secondary;
+            color: $color-neutral-white;
+            transform: translateY(-2px);
+          }
+
+          &:focus {
+            outline: 2px solid $color-secondary;
+            outline-offset: 2px;
+          }
+        }
+      }
+
+      @media (max-width: $breakpoint-mobile) {
+        gap: $space-sm;
+      }
     }
   }
 }
@@ -243,14 +362,12 @@ footer {
 
 .footer__bottom {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding-top: $space-lg;
-  border-top: 1px solid $color-border;
+  padding-top: $space-xl;
+  margin-top: $space-lg;
 
   @media (max-width: $breakpoint-tablet-portrait) {
-    flex-direction: column;
-    gap: $space-lg;
     text-align: center;
   }
 }
