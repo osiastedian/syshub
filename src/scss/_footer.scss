@@ -10,7 +10,7 @@
 
 footer {
   background-color: $color-background;
-  border-top: 1px solid $color-border;
+  border-top: 2px solid $color-primary; // Gold border at top
   color: $color-text;
   padding: $space-2xl $space-lg;
   margin-top: $space-2xl;
@@ -27,20 +27,36 @@ footer {
 }
 
 /* ------------------------------------------------------------ *\
-   Footer Header (Logo + Tagline)
+   Main Content Area (Logo/Tagline LEFT, 3 Columns RIGHT)
 \* ------------------------------------------------------------ */
 
-.footer__header {
+.footer__main {
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  gap: $space-lg;
+  gap: $space-3xl;
   margin-bottom: $space-2xl;
+  padding-bottom: $space-2xl;
+  border-bottom: 1px solid $color-border;
 
-  @media (max-width: $breakpoint-tablet-portrait) {
+  @media (max-width: $breakpoint-lg) {
     flex-direction: column;
-    text-align: center;
+    gap: $space-2xl;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Left Side: Branding (Logo + Tagline)
+\* ------------------------------------------------------------ */
+
+.footer__branding {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
+
+  @media (max-width: $breakpoint-lg) {
+    flex: 0 0 auto;
     align-items: center;
+    text-align: center;
   }
 }
 
@@ -61,7 +77,7 @@ footer {
       opacity: 1;
     }
 
-    @media (max-width: $breakpoint-tablet-portrait) {
+    @media (max-width: $breakpoint-lg) {
       background-position: center;
     }
   }
@@ -70,26 +86,23 @@ footer {
 .footer__tagline {
   @include typography-body-small-regular;
   color: rgba($color-text, 0.7);
-  max-width: 500px;
   line-height: 1.6;
   margin: 0;
-
-  @media (max-width: $breakpoint-tablet-portrait) {
-    text-align: center;
-    max-width: 100%;
-  }
 }
 
-.footer__inner {
-  display: flex;
-  gap: $space-2xl;
-  margin-bottom: $space-xl;
-  padding-bottom: $space-xl;
-  border-bottom: 1px solid $color-border;
+/* ------------------------------------------------------------ *\
+   Right Side: 3 Columns
+\* ------------------------------------------------------------ */
 
-  @media (max-width: $breakpoint-tablet-portrait) {
-    flex-direction: column;
-    gap: $space-lg;
+.footer__columns {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: $space-2xl;
+
+  @media (max-width: $breakpoint-lg) {
+    grid-template-columns: 1fr;
+    gap: $space-xl;
   }
 }
 
@@ -98,16 +111,9 @@ footer {
 \* ------------------------------------------------------------ */
 
 .footer__column {
-  flex: 1;
-  min-width: 200px;
-
-  &:first-child {
-    flex: 0 0 300px;
-
-    @media (max-width: $breakpoint-tablet-portrait) {
-      flex: 0 0 100%;
-    }
-  }
+  display: flex;
+  flex-direction: column;
+  gap: $space-md;
 }
 
 .footer__column-title {
@@ -116,66 +122,11 @@ footer {
   color: $color-primary;
   text-transform: uppercase;
   letter-spacing: 0.1em;
-  margin-bottom: $space-lg;
+  margin: 0 0 $space-sm 0;
   display: block;
-}
 
-/* ------------------------------------------------------------ *\
-   Footer Logo & Branding
-\* ------------------------------------------------------------ */
-
-.footer__logo {
-  display: inline-block;
-  width: 60px;
-  height: 54px;
-  margin-bottom: $space-lg;
-  background-size: contain;
-  background-position: left;
-  background-repeat: no-repeat;
-  opacity: 0.9;
-  transition: opacity $transition-base;
-
-  &:hover {
-    opacity: 1;
-  }
-}
-
-.footer__description {
-  @include typography-body-small-regular;
-  color: rgba($color-text, 0.7);
-  margin-bottom: $space-lg;
-  line-height: 1.6;
-  max-width: 250px;
-}
-
-.footer__social {
-  display: flex;
-  gap: $space-md;
-  align-items: center;
-
-  a {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    background-color: rgba($color-secondary, 0.1);
-    border-radius: $radius-md;
-    color: $color-secondary;
-    text-decoration: none;
-    transition: all $transition-base;
-    font-size: 16px;
-
-    &:hover {
-      background-color: $color-secondary;
-      color: $color-neutral-white;
-      transform: translateY(-2px);
-    }
-
-    &:focus {
-      outline: 2px solid $color-secondary;
-      outline-offset: 2px;
-    }
+  &--secondary {
+    margin-top: $space-lg;
   }
 }
 
@@ -189,24 +140,20 @@ footer {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: $space-md;
+  gap: $space-sm;
 }
 
 .footer__link {
   @include typography-body-small-regular;
-  color: rgba($color-text, 0.8);
-  transition: all $transition-base;
-  padding: $space-sm 0;
-  border-bottom: 1px solid transparent;
 
   a {
-    color: inherit;
+    color: rgba($color-text, 0.8);
     text-decoration: none;
-    display: block;
+    display: inline-block;
+    transition: all $transition-base;
 
     &:hover {
       color: $color-primary;
-      border-bottom-color: $color-primary;
     }
   }
 
@@ -217,7 +164,7 @@ footer {
 }
 
 /* ------------------------------------------------------------ *\
-   Footer Subscribe
+   Subscribe Section
 \* ------------------------------------------------------------ */
 
 .footer__subscribe {
@@ -226,307 +173,122 @@ footer {
   gap: $space-md;
 }
 
-.footer__subscribe-title {
-  @include typography-body-medium-semi-bold;
-  color: $color-text;
-  margin-bottom: $space-sm;
-}
-
 .footer__subscribe-text {
   @include typography-body-small-regular;
   color: rgba($color-text, 0.7);
-  margin-bottom: $space-md;
+  margin: 0;
+  line-height: 1.5;
 }
 
 .footer__subscribe-form {
   display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.footer__subscribe-input {
+  width: 100%;
+  padding: $space-md;
+  background-color: rgba($color-text, 0.05);
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  color: $color-text;
+  font-family: $font-family-body;
+  font-size: $font-size-body-small;
+  transition: all $transition-base;
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    background-color: rgba($color-text, 0.1);
+  }
+
+  &::placeholder {
+    color: rgba($color-text, 0.5);
+  }
+}
+
+.footer__subscribe-button {
+  width: 100%;
+  padding: $space-md $space-lg;
+  background-color: $color-primary;
+  color: $color-background;
+  border: none;
+  border-radius: $radius-pill; // Pill-shaped
+  font-weight: 600;
+  font-size: $font-size-body-small;
+  cursor: pointer;
+  transition: all $transition-base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   gap: $space-sm;
 
-  input {
-    flex: 1;
-    padding: $space-md;
-    background-color: rgba($color-text, 0.05);
-    border: 1px solid $color-border;
-    border-radius: $radius-md;
-    color: $color-text;
-    font-family: $font-family-body;
-    font-size: $font-size-body-small;
-    transition: all $transition-base;
-
-    &:focus {
-      outline: none;
-      border-color: $color-primary;
-      background-color: rgba($color-text, 0.1);
-    }
-
-    &::placeholder {
-      color: rgba($color-text, 0.5);
-    }
+  .arrow {
+    font-size: 18px;
+    transition: transform $transition-base;
+    order: -1; // Arrow on LEFT side
   }
 
-  button {
-    padding: $space-md $space-lg;
-    background-color: $color-primary;
-    color: $color-background;
-    border: none;
-    border-radius: $radius-md;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all $transition-base;
-    white-space: nowrap;
-    display: inline-flex;
-    align-items: center;
-    gap: $space-sm;
+  &:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba($color-primary, 0.3);
 
     .arrow {
-      font-size: 18px;
-      transition: transform $transition-base;
-    }
-
-    &:hover {
-      opacity: 0.9;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba($color-primary, 0.3);
-
-      .arrow {
-        transform: translateX(4px);
-      }
-    }
-
-    &:active {
-      transform: translateY(0);
+      transform: translateX(4px);
     }
   }
 
-  @media (max-width: $breakpoint-mobile) {
-    flex-direction: column;
-
-    button {
-      width: 100%;
-      justify-content: center;
-    }
+  &:active {
+    transform: translateY(0);
   }
 }
 
 /* ------------------------------------------------------------ *\
-   Footer Social Section
-\* ------------------------------------------------------------ */
-
-.footer__social-section {
-  margin-top: $space-2xl;
-  padding-top: $space-xl;
-  border-top: 1px solid $color-border;
-  display: flex;
-  justify-content: center;
-
-  .socials {
-    ul {
-      display: flex;
-      gap: $space-md;
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      flex-wrap: wrap;
-      justify-content: center;
-
-      li {
-        a, button {
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-          width: 40px;
-          height: 40px;
-          background-color: rgba($color-secondary, 0.1);
-          border-radius: $radius-md;
-          color: $color-secondary;
-          text-decoration: none;
-          transition: all $transition-base;
-          font-size: 18px;
-
-          &:hover {
-            background-color: $color-secondary;
-            color: $color-neutral-white;
-            transform: translateY(-2px);
-          }
-
-          &:focus {
-            outline: 2px solid $color-secondary;
-            outline-offset: 2px;
-          }
-        }
-      }
-
-      @media (max-width: $breakpoint-mobile) {
-        gap: $space-sm;
-      }
-    }
-  }
-}
-
-/* ------------------------------------------------------------ *\
-   Footer Bottom / Copyright
+   Footer Bottom (Copyright & Legal Links)
 \* ------------------------------------------------------------ */
 
 .footer__bottom {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
-  padding-top: $space-xl;
-  margin-top: $space-lg;
+  padding-top: $space-lg;
 
   @media (max-width: $breakpoint-tablet-portrait) {
+    flex-direction: column;
+    gap: $space-md;
     text-align: center;
   }
 }
 
 .footer__copyright {
   @include typography-body-small-regular;
-  color: rgba($color-text, 0.7);
+  color: rgba($color-text, 0.6);
   font-size: $font-size-body-small;
 
-  a {
-    color: inherit;
-    text-decoration: none;
-    transition: color $transition-base;
-
-    &:hover {
-      color: $color-primary;
-    }
+  p {
+    margin: 0;
   }
 }
 
 .footer__legal {
   display: flex;
   gap: $space-lg;
-  list-style: none;
-  margin: 0;
-  padding: 0;
 
-  li {
+  a {
     @include typography-body-small-regular;
+    color: rgba($color-text, 0.6);
+    text-decoration: none;
+    transition: color $transition-base;
+    font-size: $font-size-body-small;
 
-    a {
-      color: rgba($color-text, 0.6);
-      text-decoration: none;
-      transition: color $transition-base;
-
-      &:hover {
-        color: $color-primary;
-      }
+    &:hover {
+      color: $color-primary;
     }
   }
 
-  @media (max-width: $breakpoint-mobile) {
-    flex-direction: column;
-    gap: $space-md;
-  }
-}
-
-/* ------------------------------------------------------------ *\
-   Footer Divider
-\* ------------------------------------------------------------ */
-
-.footer__divider {
-  height: 1px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    $color-border 20%,
-    $color-border 80%,
-    transparent 100%
-  );
-  margin: $space-xl 0;
-}
-
-/* ------------------------------------------------------------ *\
-   Footer Responsive
-\* ------------------------------------------------------------ */
-
-@media (max-width: $breakpoint-tablet-portrait) {
-  footer {
-    padding: $space-xl $space-md;
-    margin-top: $space-xl;
-  }
-
-  .footer__inner {
-    flex-direction: column;
-    gap: $space-lg;
-    margin-bottom: $space-lg;
-    padding-bottom: $space-lg;
-  }
-
-  .footer__column {
-    flex: 0 0 100%;
-
-    &:first-child {
-      flex: 0 0 100%;
-    }
-  }
-
-  .footer__links {
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: $space-lg;
-  }
-
-  .footer__link {
-    flex: 0 0 calc(50% - 8px);
-  }
-
-  .footer__bottom {
-    text-align: center;
-  }
-
-  .footer__legal {
-    justify-content: center;
-  }
-}
-
-@media (max-width: $breakpoint-mobile) {
-  footer {
-    padding: $space-lg $space-md;
-    margin-top: $space-lg;
-  }
-
-  .footer__inner {
-    gap: $space-md;
-    margin-bottom: $space-md;
-    padding-bottom: $space-md;
-  }
-
-  .footer__column {
-    flex: 0 0 100%;
-  }
-
-  .footer__logo {
-    width: 50px;
-    height: 45px;
-  }
-
-  .footer__links {
-    flex-direction: column;
-    gap: $space-md;
-  }
-
-  .footer__link {
-    flex: 0 0 100%;
-  }
-
-  .footer__subscribe-form {
-    flex-direction: column;
-  }
-
-  .footer__subscribe-form input,
-  .footer__subscribe-form button {
-    width: 100%;
-  }
-
-  .footer__bottom {
-    flex-direction: column;
-    gap: $space-md;
-  }
-
-  .footer__legal {
+  @media (max-width: $breakpoint-tablet-portrait) {
     flex-direction: column;
     gap: $space-sm;
   }
