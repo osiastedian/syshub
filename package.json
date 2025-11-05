@@ -2,6 +2,7 @@
   "name": "sysnode",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/",
   "engines": {
     "node": "^v20",
     "npm": "10.x"
