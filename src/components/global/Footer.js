@@ -85,7 +85,13 @@ class Footer extends Component {
                             <h3 className="footer__column-title">RESOURCES</h3>
                             <ul className="footer__links">
                                 <li className="footer__link">
-                                    <a href="#news">News</a>
+                                    <a
+                                        href="https://support.syscoin.org/hc/en-us"
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                    >
+                                        FAQ
+                                    </a>
                                 </li>
                                 <li className="footer__link">
                                     <a
