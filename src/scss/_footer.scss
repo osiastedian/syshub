@@ -28,11 +28,13 @@ footer {
 
 .footer__header {
   display: flex;
-  flex-direction: column;
-  gap: $space-md;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: $space-lg;
   margin-bottom: $space-2xl;
 
   @media (max-width: $breakpoint-tablet-portrait) {
+    flex-direction: column;
     text-align: center;
     align-items: center;
   }
@@ -40,6 +42,7 @@ footer {
 
 .footer__logo {
   display: inline-block;
+  flex-shrink: 0;
 
   .logo {
     width: 60px;
@@ -75,7 +78,7 @@ footer {
 
 .footer__inner {
   display: flex;
-  gap: $space-xl;
+  gap: $space-2xl;
   margin-bottom: $space-xl;
   padding-bottom: $space-xl;
   border-bottom: 1px solid $color-border;
