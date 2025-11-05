@@ -3,6 +3,13 @@ const webpack = require("webpack");
 const path = require("path");
 
 module.exports = function override(config) {
+  // Add TypeScript extensions to module resolution
+  config.resolve.extensions = [
+    ...(config.resolve.extensions || []),
+    '.ts',
+    '.tsx'
+  ];
+
   config.resolve.fallback = {
     ...config.resolve.fallback,
     url: require.resolve("url/"),
