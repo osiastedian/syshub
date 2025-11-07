@@ -267,22 +267,13 @@ footer {
 
 .footer__bottom {
   display: flex;
-  justify-content: flex-start;
+  flex-direction: column;
   gap: $space-lg;
-  align-items: center;
   padding-top: $space-lg;
-
-  @media (max-width: $breakpoint-tablet-portrait) {
-    flex-direction: column;
-    gap: $space-md;
-    text-align: center;
-    justify-content: center;
-  }
 }
 
 .footer__copyright {
-  @include typography-body-small-regular;
-  color: rgba($color-text, 0.6);
+  color: $color-text;
   font-size: $font-size-body-small;
 
   p {
@@ -292,11 +283,11 @@ footer {
 
 .footer__legal {
   display: flex;
+  justify-content: space-between;
   gap: $space-lg;
 
   a {
-    @include typography-body-small-regular;
-    color: rgba($color-text, 0.6);
+    color: $color-text;
     text-decoration: none;
     transition: color $transition-base;
     font-size: $font-size-body-small;
@@ -304,10 +295,5 @@ footer {
     &:hover {
       color: $color-primary;
     }
-  }
-
-  @media (max-width: $breakpoint-tablet-portrait) {
-    flex-direction: column;
-    gap: $space-sm;
   }
 }
