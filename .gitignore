@@ -37,6 +37,11 @@ debug.log
 
 .playwright-mcp
 
+# Playwright test artifacts
+/test-results/
+/playwright-report/
+tests/footer-validation-report.json
+
 # Legacy static CSS (SCSS source in src/scss/ is the source of truth)
 /public/assets/css/styles.css
 /public/assets/css/styles.css.backup
