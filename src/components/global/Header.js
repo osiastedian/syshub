@@ -131,55 +131,54 @@ function Header({ t }) {
                   </a>
                 </li>
 
-                {user && (
-                  <li>
-                    <div className="user">
-                      <span
-                        style={{
-                          display: "inline-block",
-                          verticalAlign: "middle",
-                          whiteSpace: "nowrap",
-                          maxWidth: "9ch",
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                        }}
-                      >
-                        {username(user)}
-                      </span>
-                      <i className="icon-user"></i>
-                      <div className="dropdown">
-                        <ul>
-                          <li onClick={menuLinks}>
-                            <Link to="/profile">{t("header.profile")}</Link>
-                          </li>
-                          <li onClick={menuLinks}>
-                            <Link to="/create-proposal">
-                              {t("header.proposal")}
-                            </Link>
-                          </li>
-                          {userAdmin === "admin" && (
-                            <li onClick={menuLinks}>
-                              <Link to="/admin">{t("header.admin")}</Link>
-                            </li>
-                          )}
-                          <li onClick={menuLinks}>
-                            <Link to="/faq">{t("header.faq")}</Link>
-                          </li>
-                          <li onClick={menuLinks}>
-                            <button className="nav-btn" onClick={logout}>
-                              {t("header.logout")}
-                            </button>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </li>
-                )}
               </ul>
             </nav>
           </div>
 
-          {/* TODO:click event open mobile menu add className .open to .header__content */}
+          {/* Logged in user dropdown or login button */}
+          {user && (
+            <div className="user">
+              <span
+                style={{
+                  display: "inline-block",
+                  verticalAlign: "middle",
+                  whiteSpace: "nowrap",
+                  maxWidth: "9ch",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {username(user)}
+              </span>
+              <i className="icon-user"></i>
+              <div className="dropdown">
+                <ul>
+                  <li onClick={menuLinks}>
+                    <Link to="/profile">{t("header.profile")}</Link>
+                  </li>
+                  <li onClick={menuLinks}>
+                    <Link to="/create-proposal">
+                      {t("header.proposal")}
+                    </Link>
+                  </li>
+                  {userAdmin === "admin" && (
+                    <li onClick={menuLinks}>
+                      <Link to="/admin">{t("header.admin")}</Link>
+                    </li>
+                  )}
+                  <li onClick={menuLinks}>
+                    <Link to="/faq">{t("header.faq")}</Link>
+                  </li>
+                  <li onClick={menuLinks}>
+                    <button className="nav-btn" onClick={logout}>
+                      {t("header.logout")}
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          )}
+
           {!user && (
             <Link to="/login" className="header__login-btn">
               <span className="header__login-btn__icon">
