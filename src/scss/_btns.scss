@@ -342,33 +342,6 @@ a.btn-primary--dark-text {
 }
 
 // ============================================================================
-// MasternodeTable Actions Container
-// ============================================================================
-
-.masternode-table__actions {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  align-items: center;
-  margin-top: 16px;
-
-  @media (min-width: 768px) {
-    flex-direction: row;
-    justify-content: center;
-
-    .sentry-btn {
-      width: 245px;
-    }
-  }
-
-  @media (max-width: 767px) {
-    .sentry-btn {
-      width: 100%;
-    }
-  }
-}
-
-// ============================================================================
 // Button Groups
 // ============================================================================
 

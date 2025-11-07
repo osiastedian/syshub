@@ -172,19 +172,19 @@ class MasternodeTable extends Component {
                 onKeyUp={this.searchInTable}
                 style={{ marginBottom: "32px", height: "48px", fontSize: "18px" }}
               />
-              <div className="masternode-table__actions">
+              <div className="d-flex flex-column flex-md-row gap-3 align-items-center justify-content-center mt-3">
                 {this.state.isMobile ? (
                   <>
                     <Link
                       to={path !== undefined ?`${path}/masternode-registration`:`masternodes/masternode-registration`}
-                      className="sentry-btn sentry-btn--register"
+                      className="sentry-btn sentry-btn--register w-100"
                     >
                       <span className="sentry-btn__text">{t("check.register.link")}</span>
                     </Link>
 
                     <button
                       type="button"
-                      className="sentry-btn sentry-btn--reset"
+                      className="sentry-btn sentry-btn--reset w-100"
                       onClick={this.resetSearch}
                     >
                       <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
@@ -195,6 +195,7 @@ class MasternodeTable extends Component {
                     <button
                       type="button"
                       className="sentry-btn sentry-btn--reset"
+                      style={{ width: "245px" }}
                       onClick={this.resetSearch}
                     >
                       <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
@@ -203,6 +204,7 @@ class MasternodeTable extends Component {
                     <Link
                       to={path !== undefined ?`${path}/masternode-registration`:`masternodes/masternode-registration`}
                       className="sentry-btn sentry-btn--register"
+                      style={{ width: "245px" }}
                     >
                       <span className="sentry-btn__text">{t("check.register.link")}</span>
                     </Link>
