@@ -55,8 +55,8 @@ footer {
 
   @media (max-width: $breakpoint-lg) {
     flex: 0 0 auto;
-    align-items: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
   }
 }
 
@@ -75,10 +75,6 @@ footer {
 
     &:hover {
       opacity: 1;
-    }
-
-    @media (max-width: $breakpoint-lg) {
-      background-position: center;
     }
   }
 }
