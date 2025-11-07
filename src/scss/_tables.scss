@@ -474,10 +474,9 @@ ul.pagination
         .actions
         {
             width: 100%;
-            float: none;
             display: flex;
             flex-direction: column;
-            gap: $space-xs;
+            gap: 16px;
 
             .vote
             {
@@ -1105,10 +1104,6 @@ ul.pagination
             }
         }
 
-        .actions
-        {
-            width:15%;
-        }
     }
 
 }
@@ -1121,9 +1116,5 @@ ul.pagination
             width:75%;
         }
 
-        .actions
-        {
-            width:25%;
-        }
     }
 }
