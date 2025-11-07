@@ -51,7 +51,9 @@
 \* ------------------------------------------------------------ */
 
 .logo {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   width: 43px;
   height: 41px;
   flex-shrink: 0;
