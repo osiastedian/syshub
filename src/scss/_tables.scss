@@ -422,7 +422,7 @@ ul.pagination
                 background: transparent;
                 border: none;
                 padding: 0;
-                margin: 0;
+                margin: 0 0 $space-md 0;
                 cursor: pointer;
                 text-decoration: underline;
                 text-decoration-color: rgba(255, 255, 255, 0.5);
@@ -456,6 +456,7 @@ ul.pagination
                 color: $color-text-secondary;
                 margin-top: $space-sm;
                 font-size: $font-size-body-medium;
+                font-weight: $font-weight-medium;
                 line-height: $line-height-relaxed;
             }
         }
