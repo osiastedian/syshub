@@ -39,14 +39,36 @@
   margin-right: -50vw;
   padding-top: 100px;
   padding-bottom: 100px;
+  padding-left: 16px;
+  padding-right: 16px;
   background-color: #FBB03B;
   color: #000000;
+  max-width: none;
 }
 
-.home-page__stats {
+.home-page__stats > * {
   max-width: 1400px;
-  margin: 0 auto;
-  padding: 0 16px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (max-width: 767px) {
+  .home-page__stats {
+    width: 100%;
+    position: static;
+    left: auto;
+    right: auto;
+    margin-left: 0;
+    margin-right: 0;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .home-page__stats > * {
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+  }
 }
 
 .home-page__stats h2,
