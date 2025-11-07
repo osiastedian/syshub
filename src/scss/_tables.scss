@@ -808,6 +808,12 @@ ul.pagination
             height: 40px;
             background-color: $color-brand-gold-dark;
         }
+
+        .gold
+        {
+            height: 40px;
+            background-color: $color-brand-gold;
+        }
     }
 
     .char-mini-legend
@@ -847,6 +853,11 @@ ul.pagination
             .bg-dark-gold
             {
                 background-color: $color-brand-gold-dark;
+            }
+
+            .bg-gold
+            {
+                background-color: $color-brand-gold;
             }
 
             // Legacy selectors for backward compatibility

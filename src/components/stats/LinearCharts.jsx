@@ -112,20 +112,20 @@ class LinearChart extends Component {
                     <div className="chart-heading">Total SentryNodes ({dataChart1.totalMN})</div>
                     <div className="chart-mini-hor">
                         <div className="blue" style={{ width: dataChart1.enabledPercent }} title={dataChart1.totalEnabled}></div>
-                        <div className="red" style={{ width: dataChart1.newStartPercent }} title={dataChart1.totalNewStart}></div>
-                        <div className="white" style={{ width: dataChart1.sentPercent }} title={dataChart1.totalSent}></div>
+                        <div className="dark-gold" style={{ width: dataChart1.newStartPercent }} title={dataChart1.totalNewStart}></div>
+                        <div className="gold" style={{ width: dataChart1.sentPercent }} title={dataChart1.totalSent}></div>
                     </div>
                     <div className="char-mini-legend">
                         <span>
-                        <span className="blue"></span> Enabled{" "}
+                        <span className="legend-color bg-blue"></span> Enabled{" "}
                         <span className="sb">{dataChart1.enabledPercent}</span>
                         </span>
                         <span>
-                        <span className="red"></span> NSR{" "}
+                        <span className="legend-color bg-dark-gold"></span> NSR{" "}
                         <span className="sb">{dataChart1.newStartPercent}</span>
                         </span>
                         <span>
-                        <span className="white"></span> SPE{" "}
+                        <span className="legend-color bg-gold"></span> SPE{" "}
                         <span className="sb">{dataChart1.sentPercent}</span>
                         </span>
                     </div>
