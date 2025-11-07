@@ -11,7 +11,7 @@
   color: #FFFFFF;
 }
 
-.home-page__governance .cols {
+.home-page__governance {
   max-width: 1400px;
   margin: 0 auto;
 }
@@ -43,7 +43,7 @@
   color: #000000;
 }
 
-.home-page__stats .cols {
+.home-page__stats {
   max-width: 1400px;
   margin: 0 auto;
   padding: 0 16px;
@@ -67,7 +67,7 @@
   color: #FFFFFF;
 }
 
-.home-page__charts .cols {
+.home-page__charts {
   max-width: 75%;
   margin: 0 auto;
 }
@@ -76,9 +76,6 @@
   .home-page__charts {
     padding-top: 60px;
     padding-bottom: 60px;
-  }
-
-  .home-page__charts .cols {
     max-width: 100%;
   }
 }

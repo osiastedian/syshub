@@ -118,63 +118,43 @@ class Home extends Component {
                                 </BannerImage>
 
                                     <section className="sentrynode-section">
-                                        <div className="cols">
-                                            <div className="col col--size-12">
-                                                <SubTitle heading="Check your sentrynode" uppercase={true} className="sentrynode-section__title" />
-                                                <MasternodeTable simple={true} sizePerPage={5} />
-                                                <div className="d-flex justify-content-center mt-5">
-                                                    <Link to="/sentrynodes" className="btn btn-primary--dark-text" style={{ width: "75%" }}>All masternodes</Link>
-                                                </div>
-                                            </div>
+                                        <SubTitle heading="Check your sentrynode" uppercase={true} className="sentrynode-section__title" />
+                                        <MasternodeTable simple={true} sizePerPage={5} />
+                                        <div className="d-flex justify-content-center mt-5">
+                                            <Link to="/sentrynodes" className="btn btn-primary--dark-text" style={{ width: "75%" }}>All masternodes</Link>
                                         </div>
                                     </section>
-                                    
+
                                     <section className="home-page__governance">
-                                        <div className="cols">
-                                            <div className="col col--size-12">
-                                                <ProposalsList statsData={this.state.api_data.stats.mn_stats} />
-                                                <div className="text-center">
-                                                    <Link to="/governance" className="homepage-cta homepage-cta--primary">
-                                                        <span className="homepage-cta__icon">
-                                                            <i className="icon-right-open"></i>
-                                                        </span>
-                                                        <span className="homepage-cta__text">More about governance</span>
-                                                    </Link>
-                                                </div>
-                                            </div>
+                                        <ProposalsList statsData={this.state.api_data.stats.mn_stats} />
+                                        <div className="text-center">
+                                            <Link to="/governance" className="homepage-cta homepage-cta--primary">
+                                                <span className="homepage-cta__icon">
+                                                    <i className="icon-right-open"></i>
+                                                </span>
+                                                <span className="homepage-cta__text">More about governance</span>
+                                            </Link>
                                         </div>
                                     </section>
 
                                     <section className="home-page__stats">
-                                        <div className="cols">
-                                            <div className="col col--size-12">
-                                                <h2 className="text-center text-uppercase">Stats</h2>
-                                                <StatsShow statsData={this.state.api_data.stats} />
-                                            </div>
-                                        </div>
+                                        <h2 className="text-center text-uppercase">Stats</h2>
+                                        <StatsShow statsData={this.state.api_data.stats} />
                                     </section>
 
                                     <section className="home-page__charts">
-                                        <div className="cols">
-                                            <div className="col col--size-12">
-                                                <LinearCharts chartData={this.state.api_data.stats.mn_stats}/>
-                                            </div>
-                                        </div>
+                                        <LinearCharts chartData={this.state.api_data.stats.mn_stats}/>
                                     </section>
 
                                     <section className="home-page__locations">
-                                        <div className="cols">
-                                            <div className="col col--size-12">
-                                                <WorldMap mapData={this.state.api_data.mapData} mapFills={this.state.api_data.mapFills} />
-                                                <div className="text-center home-page__world-map">
-                                                    <Link to="/stats" className="homepage-cta homepage-cta--primary">
-                                                        <span className="homepage-cta__icon">
-                                                            <i className="icon-right-open"></i>
-                                                        </span>
-                                                        <span className="homepage-cta__text">More stats</span>
-                                                    </Link>
-                                                </div>
-                                            </div>
+                                        <WorldMap mapData={this.state.api_data.mapData} mapFills={this.state.api_data.mapFills} />
+                                        <div className="text-center home-page__world-map">
+                                            <Link to="/stats" className="homepage-cta homepage-cta--primary">
+                                                <span className="homepage-cta__icon">
+                                                    <i className="icon-right-open"></i>
+                                                </span>
+                                                <span className="homepage-cta__text">More stats</span>
+                                            </Link>
                                         </div>
                                     </section>
                             </div>
