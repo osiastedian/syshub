@@ -17,7 +17,7 @@
 }
 
 .home-page__governance h2 {
-  margin-bottom: 48px;
+  margin-bottom: 60px;
 }
 
 .home-page__governance .proposals {
@@ -26,7 +26,6 @@
 
 .section-header--governance {
   text-transform: uppercase;
-  margin-bottom: 60px;
 }
 
 /* Stats Section - Gold background */
