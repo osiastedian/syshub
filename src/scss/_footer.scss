@@ -269,7 +269,8 @@ footer {
 
 .footer__bottom {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: $space-lg;
   align-items: center;
   padding-top: $space-lg;
 
@@ -277,6 +278,7 @@ footer {
     flex-direction: column;
     gap: $space-md;
     text-align: center;
+    justify-content: center;
   }
 }
 
