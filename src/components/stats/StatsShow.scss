@@ -1,0 +1,26 @@
+// ============================================================================
+// StatsShow Component Styles
+// ============================================================================
+// Styles for the statistics display component with grid layout
+
+@import '../../scss/design-tokens';
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.stat-value {
+  font-size: $font-size-h4;
+  font-weight: $font-weight-black;
+  margin-bottom: 16px;
+  line-height: 130%;
+}
+
+.stat-label {
+  font-size: $font-size-body-medium;
+  line-height: 130%;
+}

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
+import "./StatsShow.scss";
 
 /**
  * Component to show the stats data
@@ -39,30 +40,29 @@ class StatsShow extends Component {
     if (this.state.dataload === 1) {
       return (
         <>
-          <div className="ministats mndata">
-            <div className="stat">
-              Collateral
-              <div className="stat-data">
+          <div className="stats-grid">
+            <div className="text-center">
+              <div className="stat-value">
                 {statsData.mn_stats.collateral_req} SYS
               </div>
+              <div className="stat-label">Collateral</div>
             </div>
-            <div className="stat">
-              MN Cost
-              <div className="stat-data">
+            <div className="text-center">
+              <div className="stat-value">
                 {statsData.mn_stats.masternode_price_usd}
               </div>
+              <div className="stat-label">MN Cost</div>
             </div>
-            <div className="stat">
-              ROI
-              <div className="stat-data">
+            <div className="text-center">
+              <div className="stat-value">
                 <span title="Return on investment">
                   {statsData.mn_stats.roi}
                 </span>
               </div>
+              <div className="stat-label">ROI</div>
             </div>
-            <div className="stat">
-              Monthly income
-              <div className="stat-data">
+            <div className="text-center">
+              <div className="stat-value">
                 <span title="Regular SentryNode">
                   {statsData.income_stats.usd.monthly}
                 </span>{" "}
@@ -71,32 +71,35 @@ class StatsShow extends Component {
                   {statsData.income_stats_seniority_one_year.usd.monthly}
                 </span>
               </div>
+              <div className="stat-label">Monthly income</div>
             </div>
-            <div className="stat">
-              First reward
-              <div className="stat-data">{statsData.mn_stats.first_pay}</div>
+            <div className="text-center">
+              <div className="stat-value">
+                {statsData.mn_stats.first_pay}
+              </div>
+              <div className="stat-label">First reward</div>
             </div>
-            <div className="stat">
-              Reward elegibility
-              <div className="stat-data">
+            <div className="text-center">
+              <div className="stat-value">
                 {statsData.mn_stats.reward_eligble}
               </div>
+              <div className="stat-label">Reward elegibility</div>
             </div>
-            <div className="stat">
-              SentryNodes
-              <div className="stat-data">
+            <div className="text-center">
+              <div className="stat-value">
                 <span title="Enabled SentryNodes">
                   {statsData.mn_stats.enabled}
                 </span>{" "}
                 /{" "}
                 <span title="All SentryNodes">{statsData.mn_stats.total}</span>
               </div>
+              <div className="stat-label">SentryNodes</div>
             </div>
-            <div className="stat">
-              SYS collateralized
-              <div className="stat-data">
+            <div className="text-center">
+              <div className="stat-value">
                 {statsData.mn_stats.coins_percent_locked}
               </div>
+              <div className="stat-label">SYS collateralized</div>
             </div>
           </div>
         </>

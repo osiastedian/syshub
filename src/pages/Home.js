@@ -4,6 +4,7 @@ import axios from "axios";
 import { withTranslation } from "react-i18next";
 import MetaTags from 'react-meta-tags';
 import { Link } from 'react-router-dom';
+import './Home.css';
 
 import Background from '../components/global/Background';
 import BackgroundInner from '../components/global/BackgroundInner';
@@ -143,15 +144,33 @@ class Home extends Component {
                                         </div>
                                     </section>
 
-                                    <section className="article article--revirse article--offsets-bottom">
+                                    <section className="home-page__stats">
                                         <div className="cols">
                                             <div className="col col--size-12">
-                                                <div className="article__content">
-                                                    <SubTitle heading="Stats" />
+                                                <div>
+                                                    <h2 className="text-center text-uppercase">Stats</h2>
                                                     <StatsShow statsData={this.state.api_data.stats} />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <section className="home-page__charts">
+                                        <div className="cols">
+                                            <div className="col col--size-12">
+                                                <div>
                                                     <LinearCharts chartData={this.state.api_data.stats.mn_stats}/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <div className="cols">
+                                            <div className="col col--size-12">
+                                                <div>
                                                     <WorldMap mapData={this.state.api_data.mapData} mapFills={this.state.api_data.mapFills} />
-                                                    <div className="article__actions text-center">
+                                                    <div className="text-center home-page__world-map">
                                                         <Link to="/stats" className="btn btn-outline-primary">More stats</Link>
                                                     </div>
                                                 </div>

@@ -1,0 +1,34 @@
+/* ============================================================================
+ * Home Page Styles
+ * ============================================================================
+ */
+
+/* Stats Section - Gold background */
+.home-page__stats {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-color: #FBB03B;
+  margin-left: -15px;
+  margin-right: -15px;
+  color: #000000;
+}
+
+.home-page__stats h2 {
+  font-size: 32px;
+  font-weight: 600;
+  font-family: sans-serif;
+  margin: 0 0 37px 0;
+}
+
+/* Charts Section - Transparent background */
+.home-page__charts {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-color: transparent;
+  color: #FFFFFF;
+}
+
+/* WorldMap Section */
+.home-page__world-map {
+  margin-top: 20px;
+}

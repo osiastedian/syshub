@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
+import "./LinearCharts.scss";
 
 /**
  * Component to show the masternodes and coins data on charts
@@ -108,7 +109,7 @@ class LinearChart extends Component {
             return (
             <>
                 <div className="ministats">
-                    <div className="subtitle">Total SentryNodes ({dataChart1.totalMN})</div>
+                    <div className="chart-heading">Total SentryNodes ({dataChart1.totalMN})</div>
                     <div className="chart-mini-hor">
                         <div className="blue" style={{ width: dataChart1.enabledPercent }} title={dataChart1.totalEnabled}></div>
                         <div className="red" style={{ width: dataChart1.newStartPercent }} title={dataChart1.totalNewStart}></div>
@@ -131,18 +132,18 @@ class LinearChart extends Component {
                 </div>
 
                 <div className="ministats">
-                    <div className="subtitle">Coins collaterized</div>
+                    <div className="chart-heading linear-charts-coins-heading">Coins collaterized</div>
                     <div className="chart-mini-hor">
-                        <div className="blue" style={{ width: dataChart2.lockedPercent }} title={dataChart2.totalLocked}></div>
+                        <div className="dark-gold" style={{ width: dataChart2.lockedPercent }} title={dataChart2.totalLocked}></div>
                         <div className="red" style={{ width: dataChart2.remPercent }} title={dataChart2.remSupply}></div>
                     </div>
                     <div className="char-mini-legend">
                         <span >
-                        <span className="blue"></span> Locked{" "}
+                        <span className="legend-color bg-dark-gold"></span> Locked{" "}
                         <span className="sb">{dataChart2.lockedPercent}</span>
                         </span>
                         <span>
-                        <span className="red"></span> Remaining supply{" "}
+                        <span className="legend-color bg-orange"></span> Remaining supply{" "}
                         <span className="sb">{dataChart2.remPercent}</span>
                         </span>
                     </div>

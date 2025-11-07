@@ -1,0 +1,18 @@
+// ============================================================================
+// LinearCharts Component Styles
+// ============================================================================
+
+@import '../../scss/design-tokens';
+
+.linear-charts-coins-heading {
+  margin-top: 58px;
+}
+
+// Dark gold color for Locked section in coins chart
+.ministats:nth-of-type(2) .chart-mini-hor .dark-gold {
+  background-color: $color-brand-gold-dark;
+}
+
+.ministats:nth-of-type(2) .char-mini-legend .dark-gold {
+  background-color: $color-brand-gold-dark;
+}

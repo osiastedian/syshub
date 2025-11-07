@@ -542,6 +542,19 @@ ul.pagination
     }
 }
 
+// ============================================================================
+// CHART HEADINGS
+// ============================================================================
+
+.chart-heading
+{
+    font-weight: $font-weight-semi-bold;
+    font-size: $font-size-h4;
+    line-height: 36px;
+    text-align: center;
+    margin-bottom: $space-md;
+}
+
 .subtitle-in-between
 {
     font-weight: $font-weight-medium;
@@ -558,16 +571,13 @@ ul.pagination
 {
     &.mndata
     {
-        // Full-width edge-to-edge gold background
+        // Full-width edge-to-edge layout
         width: 100vw;
         position: relative;
         left: 50%;
         right: 50%;
         margin-left: -50vw;
         margin-right: -50vw;
-
-        // Gold background from design tokens
-        background-color: $color-primary; /* #FBB03B */
 
         // Vertical spacing
         padding: $space-3xl $space-lg;
@@ -729,7 +739,6 @@ ul.pagination
 
 .ministats {
     overflow: hidden;
-    margin: $space-2xl * 1.4 0 $space-3xl * 1.5;
 
     .stat
     {
@@ -793,17 +802,54 @@ ul.pagination
             height: 40px;
             background-color: $color-text-secondary;
         }
+
+        .dark-gold
+        {
+            height: 40px;
+            background-color: $color-brand-gold-dark;
+        }
     }
 
     .char-mini-legend
     {
-        text-align: center;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: $space-lg;
 
         > span
         {
-            margin-right: $space-2xl;
             white-space: nowrap;
 
+            .legend-color
+            {
+                width: 13px;
+                height: 13px;
+                border-radius: 5px;
+                display: inline-block;
+            }
+
+            .bg-blue
+            {
+                background-color: $color-secondary;
+            }
+
+            .bg-orange
+            {
+                background-color: $color-brand-orange;
+            }
+
+            .bg-gray
+            {
+                background-color: $color-text-secondary;
+            }
+
+            .bg-dark-gold
+            {
+                background-color: $color-brand-gold-dark;
+            }
+
+            // Legacy selectors for backward compatibility
             span.red
             {
                 background-color: $color-brand-orange; /* #F7931A - brand orange for consistency */
