@@ -236,7 +236,7 @@ ul.pagination
         .proposal-header
         {
             display: flex;
-            align-items: flex-start;
+            align-items: center;
             justify-content: space-between;
             gap: $space-lg;
             margin-bottom: $space-md;
@@ -431,6 +431,7 @@ ul.pagination
                 line-height: $line-height-tight;
                 border-radius: $radius-sm;
                 transition: all $transition-fast;
+                text-align: left;
             }
 
             .proposal-title:hover,
