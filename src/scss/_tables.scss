@@ -34,7 +34,8 @@
             padding: $space-sm $space-2xs;
             transition: background-color $transition-base;
             background: transparent;
-            border: none !important;
+            border-right: none !important;
+            border-left: none !important;
         }
 
         tbody {
@@ -48,7 +49,8 @@
             padding: $space-sm $space-2xs;
             transition: background-color $transition-base;
             background: transparent;
-            border: none !important;
+            border-right: none !important;
+            border-left: none !important;
         }
 
         tbody tr {
