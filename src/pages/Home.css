@@ -67,10 +67,19 @@
   color: #FFFFFF;
 }
 
+.home-page__charts .cols {
+  max-width: 75%;
+  margin: 0 auto;
+}
+
 @media (max-width: 767px) {
   .home-page__charts {
     padding-top: 60px;
     padding-bottom: 60px;
+  }
+
+  .home-page__charts .cols {
+    max-width: 100%;
   }
 }
 
