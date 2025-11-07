@@ -200,6 +200,8 @@ ul.pagination
         margin-bottom: $space-sm;
         border: 2px solid $color-primary;
         transition: all $transition-fast;
+        display: flex;
+        flex-direction: column;
 
         &:hover {
             background: transparent;
@@ -217,6 +219,18 @@ ul.pagination
             background: transparent;
             box-shadow: $shadow-lg;
             border-color: $color-primary;
+        }
+
+        .date
+        {
+            color: $color-text-secondary;
+            font-style: italic;
+            line-height: 1;
+            font-size: $font-size-body-small;
+            font-weight: $font-weight-regular;
+            font-family: $font-family-body;
+            margin-bottom: $space-sm;
+            order: -1;
         }
 
         .vote-count
@@ -318,19 +332,6 @@ ul.pagination
                 opacity: 0.9;
             }
 
-            .date
-            {
-                color: $color-text-secondary;
-                font-style: italic;
-                line-height: 1;
-                font-size: $font-size-body-small;
-                font-weight: $font-weight-regular;
-                font-family: $font-family-body;
-                margin-bottom: $space-sm;
-                display: block;
-                margin-top: 0;
-                margin-right: auto;
-            }
 
             .budget
             {
