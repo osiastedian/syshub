@@ -415,7 +415,7 @@ ul.pagination
             color: $color-text;
 
             .proposal-title {
-                display: inline-flex;
+                display: flex;
                 align-items: center;
                 gap: $space-sm;
                 color: $color-text;
@@ -432,6 +432,16 @@ ul.pagination
                 border-radius: $radius-sm;
                 transition: all $transition-fast;
                 text-align: left;
+                width: 100%;
+                min-width: 0;
+            }
+
+            .proposal-title__text {
+                flex: 1;
+                min-width: 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
             }
 
             .proposal-title:hover,
@@ -440,12 +450,6 @@ ul.pagination
                 outline-offset: 2px;
                 background: rgba(255, 255, 255, 0.10);
             }
-
-            .proposal-title__icon {
-                font-size: 0.9em;
-                opacity: 0.9;
-            }
-
 
             .budget
             {

@@ -209,7 +209,6 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
           }}
         >
           <span className="proposal-title__text">{proposal.title || proposal.name}</span>
-          <span className="proposal-title__icon" aria-hidden>{useCollapse ? '▾' : '▸'}</span>
         </button>
 
         <br />
