@@ -270,7 +270,7 @@ footer {
   flex-direction: column;
   gap: $space-md;
   text-align: center;
-  max-width: 75%;
+  width: fit-content;
   margin: 0 auto;
 }
 
