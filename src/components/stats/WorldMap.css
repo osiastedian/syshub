@@ -4,9 +4,13 @@
  */
 
 .world_map {
-  width: 100%;
-  height: 550px;
+  width: 100vw;
   position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  height: 550px;
 }
 
 /* Responsive height for mobile devices */
