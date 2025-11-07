@@ -723,6 +723,26 @@
 }
 
 /* ============================================================================
+   SentryNode Section Styles
+   ============================================================================ */
+
+.sentrynode-section {
+  padding: $space-2xl $space-lg;
+  padding-top: $space-2xl;
+}
+
+.sentrynode-section__title {
+  font-family: 'DM Sans', sans-serif;
+  font-style: normal;
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 1.3;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  margin-bottom: $space-xl;
+}
+
+/* ============================================================================
    SentryNode Section Styles - Mobile
    ============================================================================ */
 

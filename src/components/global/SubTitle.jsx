@@ -7,9 +7,11 @@ import React from 'react'
  * @param {string} heading The content of the subtitle
  * @param {string} className Optional additional classes to apply
  * @param {boolean} highlightFirstWord Whether to highlight the first word in gold
+ * @param {boolean} uppercase Whether to render text in uppercase
  */
-export default function SubTitle({heading, propsRef, className, highlightFirstWord}) {
-  const classes = className ? `text-center ${className}` : 'text-center';
+export default function SubTitle({heading, propsRef, className, highlightFirstWord, uppercase}) {
+  const baseClasses = uppercase ? 'text-uppercase' : 'text-center';
+  const classes = className ? `${baseClasses} ${className}` : baseClasses;
 
   const renderHeading = () => {
     if (!highlightFirstWord || !heading) return heading;

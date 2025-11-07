@@ -121,7 +121,7 @@ class Home extends Component {
                                         <div className="cols">
                                             <div className="col col--size-12">
                                                 <div>
-                                                    <SubTitle heading="Check your sentrynode" />
+                                                    <SubTitle heading="Check your sentrynode" uppercase={true} className="sentrynode-section__title" />
                                                     <MasternodeTable simple={true} sizePerPage={5} />
                                                     <div className="d-flex justify-content-center mt-5">
                                                         <Link to="/sentrynodes" className="btn btn-primary--dark-text" style={{ width: "75%" }}>All masternodes</Link>
