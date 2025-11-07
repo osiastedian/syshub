@@ -194,7 +194,7 @@ ul.pagination
     {
         width: 100%;
         float: left;
-        background: $color-overlay-white-10;
+        background: transparent;
         padding: $space-lg;
         border-radius: $radius-sm;
         margin-bottom: $space-sm;
@@ -202,7 +202,7 @@ ul.pagination
         transition: all $transition-fast;
 
         &:hover {
-            background: $color-overlay-white-30;
+            background: transparent;
             box-shadow: $shadow-md;
             border-color: rgba(255, 255, 255, 0.25);
             transition: all $transition-base;
@@ -214,7 +214,7 @@ ul.pagination
         }
 
         &.proposal--expanded {
-            background: rgba(255, 255, 255, 0.24);
+            background: transparent;
             box-shadow: $shadow-lg;
             border-color: rgba(255, 255, 255, 0.35);
         }
