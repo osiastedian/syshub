@@ -116,14 +116,14 @@ class Home extends Component {
                                     <HomeButtons />
                                 </BannerImage>
 
-                                    <section className="article article--revirse article--offsets-bottom">
+                                    <section className="sentrynode-section">
                                         <div className="cols">
                                             <div className="col col--size-12">
-                                                <div className="article__content">
+                                                <div>
                                                     <SubTitle heading="Check your sentrynode" />
                                                     <MasternodeTable simple={true} sizePerPage={5} />
-                                                    <div className="article__actions text-center">
-                                                        <Link to="/sentrynodes" className="btn btn-outline-primary">All masternodes</Link>
+                                                    <div className="d-flex justify-content-center mt-5">
+                                                        <Link to="/sentrynodes" className="btn btn-primary--dark-text" style={{ width: "75%" }}>All masternodes</Link>
                                                     </div>
                                                 </div>
                                             </div>

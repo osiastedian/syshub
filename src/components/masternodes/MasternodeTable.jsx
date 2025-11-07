@@ -29,6 +29,7 @@ class MasternodeTable extends Component {
       tableData: [],
       sizePerPage: this.props.sizePerPage || 10,
       totalRecords: 0,
+      isMobile: window.innerWidth <= 768,
     };
     this.searchInTable = this.searchInTable.bind(this);
     this.resetSearch = this.resetSearch.bind(this);
@@ -43,6 +44,11 @@ class MasternodeTable extends Component {
   componentDidMount() {
     this._isMounted = true;
     this.loadData();
+    window.addEventListener('resize', this.handleResize);
+  }
+
+  handleResize = () => {
+    this.setState({ isMobile: window.innerWidth <= 768 });
   }
   /**
    * Unmount to cancel all requests
@@ -51,6 +57,7 @@ class MasternodeTable extends Component {
   componentWillUnmount() {
     this._isMounted = false;
     this.source.cancel("Request has been canceled");
+    window.removeEventListener('resize', this.handleResize);
   }
   /**
    * Function that takes the value of the searh input and refetch LoadData
@@ -163,30 +170,23 @@ class MasternodeTable extends Component {
                 className="ip"
                 placeholder={t("check.table.ipInput")}
                 onKeyUp={this.searchInTable}
+                style={{ marginBottom: "32px", height: "48px", fontSize: "18px" }}
               />
-              <div
-                className="btn-group text-center"
-                style={{ marginTop: "20px" }}
-              >
-                <button
-                  type="button"
-                  className="btn btn--blue"
-                  onClick={this.resetSearch}
-                >
-                  {t("check.table.resetBtn")}
-                </button>
-
+              <div className="d-flex flex-column gap-2 align-items-center mt-1">
                 <Link
                   to={path !== undefined ?`${path}/masternode-registration`:`masternodes/masternode-registration`}
-                  className="btn btn--blue"
-                  style={{
-                    display: "inline-block",
-                    width: " auto",
-                    marginTop: "auto",
-                  }}
+                  className="sentry-btn sentry-btn--register"
                 >
-                  {t("check.register.link")}
+                  <span className="sentry-btn__text">{t("check.register.link")}</span>
                 </Link>
+
+                <button
+                  type="button"
+                  className="sentry-btn sentry-btn--reset"
+                  onClick={this.resetSearch}
+                >
+                  <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
+                </button>
               </div>
             </div>
           </div>
@@ -201,6 +201,7 @@ class MasternodeTable extends Component {
             changeFieldOrder={this.changeFieldOrder}
             t={t}
             simple={this.props.simple}
+            isMobile={this.state.isMobile}
           />
         </>
       );

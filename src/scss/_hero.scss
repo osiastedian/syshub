@@ -650,3 +650,38 @@
     width: 250px;
   }
 }
+
+/* ============================================================================
+   SentryNode Section Styles - Mobile
+   ============================================================================ */
+
+@media (max-width: $breakpoint-mobile) {
+  .sentrynode-section {
+    margin-top: 60px;
+    margin-bottom: 60px;
+
+    .article__title {
+      width: 358px;
+      height: 84px;
+      font-family: 'DM Sans', sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 32px;
+      line-height: 130%; /* or 42px */
+      display: flex;
+      align-items: center;
+      text-align: center;
+      text-transform: uppercase;
+      color: #FFFFFF;
+      flex: none;
+      order: 0;
+      align-self: stretch;
+      flex-grow: 0;
+      margin: 0 auto;
+    }
+
+    .input-form {
+      margin-top: 60px;
+    }
+  }
+}

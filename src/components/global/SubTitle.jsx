@@ -8,7 +8,7 @@ import React from 'react'
  */
 export default function SubTitle({heading, propsRef}) {
   return (
-    <h2 ref={propsRef} className="article__title text-center title-border title-border--blue">
+    <h2 ref={propsRef} className="article__title text-center">
       {heading}
     </h2>
   )

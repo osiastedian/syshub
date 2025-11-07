@@ -12,16 +12,19 @@
 {
     margin: $space-3xl auto 0;
     width: 100%;
-    background: $color-overlay-white-10;
-    padding: $space-lg;
+    background: transparent;
     border-radius: $radius-sm;
     overflow-x: auto;
 
     table
     {
         width: 100%;
-        min-width: 840px;
+        min-width: 100%;
         table-layout: auto !important;
+
+        thead {
+            background: transparent;
+        }
 
         thead td, thead th
         {
@@ -30,6 +33,11 @@
             line-height: $line-height-normal;
             padding: $space-sm $space-2xs;
             transition: background-color $transition-base;
+            background: transparent;
+        }
+
+        tbody {
+            background: transparent;
         }
 
         tbody td
@@ -38,6 +46,11 @@
             line-height: $line-height-normal;
             padding: $space-sm $space-2xs;
             transition: background-color $transition-base;
+            background: transparent;
+        }
+
+        tbody tr {
+            background: transparent;
         }
 
         // Icon hover state with proper color token

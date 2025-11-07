@@ -86,6 +86,30 @@ a.btn--blue {
   }
 }
 
+// Primary button variant with black text
+.btn-primary--dark-text,
+a.btn-primary--dark-text {
+  background-color: $color-primary;
+  color: #000000 !important;
+  border: none;
+  font-size: 16px;
+  font-weight: 400;
+
+  &:hover {
+    opacity: 0.9;
+    background-color: $color-primary;
+    color: #000000 !important;
+  }
+
+  &:active {
+    opacity: 0.8;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+  }
+}
+
 // ============================================================================
 // Secondary Button (White Outline)
 // ============================================================================
@@ -232,6 +256,88 @@ a.btn--blue {
   &:hover:before,
   &:hover:after {
     opacity: 0.9;
+  }
+}
+
+
+// ============================================================================
+// Sentry Node Table Buttons
+// ============================================================================
+// Buttons for the sentrynode section (register and reset search)
+
+.sentry-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px 4px 4px;
+  gap: 13px;
+  width: 100%;
+  height: 40px;
+  border-radius: 1000px;
+  flex: none;
+  flex-grow: 0;
+  text-decoration: none;
+  font-weight: $font-weight-medium;
+  transition: opacity $transition-base;
+  border: none;
+  cursor: pointer;
+  margin: 0;
+
+  &:hover {
+    opacity: 0.9;
+    text-decoration: none;
+  }
+
+  .sentry-btn__text {
+    height: 21px;
+    font-family: sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 130%;
+    flex: none;
+    flex-grow: 0;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  // Reset font to normal for button text to override any inherited bold styles
+  span {
+    font-family: sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+  }
+
+  /* Register button - White background, dark text */
+  &.sentry-btn--register {
+    background: #FFFFFF;
+    color: #0A0A0A;
+
+    .sentry-btn__text {
+      color: #0A0A0A;
+    }
+
+    &:hover {
+      color: #0A0A0A;
+    }
+  }
+
+  /* Reset button - Transparent background, white border, white text */
+  &.sentry-btn--reset {
+    background: transparent;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+
+    .sentry-btn__text {
+      color: #FFFFFF;
+    }
+
+    &:hover {
+      color: #FFFFFF;
+    }
   }
 }
 
