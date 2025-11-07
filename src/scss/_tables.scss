@@ -323,8 +323,13 @@ ul.pagination
                 color: $color-text-secondary;
                 font-style: italic;
                 line-height: 1;
-                font-size: $font-size-body-medium;
+                font-size: $font-size-body-small;
+                font-weight: $font-weight-regular;
+                font-family: $font-family-body;
                 margin-bottom: $space-sm;
+                display: block;
+                margin-top: 0;
+                margin-right: auto;
             }
 
             .budget
