@@ -247,6 +247,7 @@ ul.pagination
             display: flex;
             align-items: center;
             gap: $space-xs;
+            margin-bottom: 0;
 
             .yes
             {
