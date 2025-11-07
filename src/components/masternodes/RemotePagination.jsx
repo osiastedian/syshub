@@ -25,14 +25,20 @@ const getColumns = (t, isMobile) => {
       text: t("check.table.payee"),
       dataField: "payee",
       formatter: (cell) => (
-        <div style={{
+        <span style={{
+          fontSize: "12px",
+          backgroundColor: "#FBB03B33",
+          color: "#FBB03B",
+          padding: "2px 6px",
+          borderRadius: "12px",
+          whiteSpace: "nowrap",
+          display: "inline-block",
           maxWidth: "120px",
           overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap"
+          textOverflow: "ellipsis"
         }}>
           {cell}
-        </div>
+        </span>
       ),
     },
     {
