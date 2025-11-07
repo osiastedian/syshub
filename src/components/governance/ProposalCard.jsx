@@ -211,8 +211,6 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
           <span className="proposal-title__text">{proposal.title || proposal.name}</span>
         </button>
 
-        <br />
-
         <div className="budget">
           {`${parseFloat(proposal.payment_amount * proposal.nPayment)} SYS`}{" "}
           <br />
