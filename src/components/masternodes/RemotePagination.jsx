@@ -26,7 +26,7 @@ const getColumns = (t, isMobile) => {
       dataField: "payee",
       formatter: (cell) => (
         <div style={{
-          maxWidth: "200px",
+          maxWidth: "120px",
           overflow: "hidden",
           textOverflow: "ellipsis",
           whiteSpace: "nowrap"
