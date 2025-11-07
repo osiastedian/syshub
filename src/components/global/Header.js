@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
 import { useUser } from "../../context/user-context";
@@ -12,8 +12,6 @@ import { useUser } from "../../context/user-context";
  */
 function Header({ t }) {
   const { user, userAdmin, logoutUser } = useUser();
-  const location = useLocation();
-  const isHomepage = location.pathname === "/";
 
   const isMounted = useRef(false);
 
@@ -187,15 +185,15 @@ function Header({ t }) {
               <span className="header__login-btn__text">{t("header.login")}</span>
             </Link>
           )}
-          {!isHomepage && user && (
+          {user && (
             <button
               onClick={toggleMenu}
-              className="nav-trigger"
-              style={{ border: "none", background: "none", outline: "none" }}
+              className="header__menu-btn"
             >
-              <span></span>
-              <span></span>
-              <span></span>
+              <span className="header__menu-btn__icon">
+                <i className="icon-menu"></i>
+              </span>
+              <span className="header__menu-btn__text">Menu</span>
             </button>
           )}
         </div>
