@@ -11,9 +11,6 @@
   margin-left: -50vw;
   margin-right: -50vw;
   height: 550px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
 }
 
 /* Responsive height for mobile devices */
