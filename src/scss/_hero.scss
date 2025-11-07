@@ -537,7 +537,13 @@
   .col {
     flex: 0 0 100%;
   }
+}
 
+/* ------------------------------------------------------------ *\
+   Hero Section - Mobile Layout (below 768px)
+\* ------------------------------------------------------------ */
+
+@media (max-width: 767px) {
   /* Hero section mobile layout - image first */
   .hero-section {
     display: flex;
@@ -552,7 +558,7 @@
       width: 195.73px;
       height: 257px;
       margin: 0 auto 44px auto; /* Center horizontally, 44px spacing to header text */
-      
+
       img {
         width: 195.73px;
         height: 257px;
