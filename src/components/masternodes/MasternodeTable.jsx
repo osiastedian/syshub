@@ -173,20 +173,41 @@ class MasternodeTable extends Component {
                 style={{ marginBottom: "32px", height: "48px", fontSize: "18px" }}
               />
               <div className="masternode-table__actions">
-                <button
-                  type="button"
-                  className="sentry-btn sentry-btn--reset"
-                  onClick={this.resetSearch}
-                >
-                  <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
-                </button>
+                {this.state.isMobile ? (
+                  <>
+                    <Link
+                      to={path !== undefined ?`${path}/masternode-registration`:`masternodes/masternode-registration`}
+                      className="sentry-btn sentry-btn--register"
+                    >
+                      <span className="sentry-btn__text">{t("check.register.link")}</span>
+                    </Link>
 
-                <Link
-                  to={path !== undefined ?`${path}/masternode-registration`:`masternodes/masternode-registration`}
-                  className="sentry-btn sentry-btn--register"
-                >
-                  <span className="sentry-btn__text">{t("check.register.link")}</span>
-                </Link>
+                    <button
+                      type="button"
+                      className="sentry-btn sentry-btn--reset"
+                      onClick={this.resetSearch}
+                    >
+                      <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
+                    </button>
+                  </>
+                ) : (
+                  <>
+                    <button
+                      type="button"
+                      className="sentry-btn sentry-btn--reset"
+                      onClick={this.resetSearch}
+                    >
+                      <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
+                    </button>
+
+                    <Link
+                      to={path !== undefined ?`${path}/masternode-registration`:`masternodes/masternode-registration`}
+                      className="sentry-btn sentry-btn--register"
+                    >
+                      <span className="sentry-btn__text">{t("check.register.link")}</span>
+                    </Link>
+                  </>
+                )}
               </div>
             </div>
           </div>
