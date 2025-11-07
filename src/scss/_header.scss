@@ -317,12 +317,16 @@
   }
 
   .header__menu-btn__text {
-    flex: none;
-    text-align: center;
+    flex: 1;
+    text-align: left;
     display: flex;
     align-items: center;
     line-height: 1;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+    font-size: 14px;
   }
 }
 

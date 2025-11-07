@@ -76,6 +76,20 @@ function Header({ t }) {
     return username;
   };
 
+  /**
+   * Returns username with email in parentheses
+   * @function
+   * @param {Object} userInfo Using the email of the user
+   * @return {string}         Username (email)
+   */
+  const usernameWithEmail = (userInfo) => {
+    let username = userInfo.data.email.substring(
+      0,
+      userInfo.data.email.lastIndexOf("@")
+    );
+    return `${username}(${userInfo.data.email})`;
+  };
+
   return (
     <header className={`header ${isNotTop ? "fixed" : ""}`}>
       {/* TODO: add className "fixed" to .header when scroll > 0 */}
@@ -151,7 +165,7 @@ function Header({ t }) {
                 <span className="header__menu-btn__icon">
                   <i className="icon-user"></i>
                 </span>
-                <span className="header__menu-btn__text">{username(user)}</span>
+                <span className="header__menu-btn__text">{usernameWithEmail(user)}</span>
               </button>
               <div className={`header__user-dropdown ${isMobileMenu ? "open" : ""}`}>
                 <ul>
