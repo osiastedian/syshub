@@ -148,7 +148,7 @@ footer {
 
 .footer__link {
   a {
-    color: rgba($color-text, 0.8);
+    color: $color-text;
     text-decoration: none;
     display: inline-block;
     transition: all $transition-base;
