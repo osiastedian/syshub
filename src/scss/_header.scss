@@ -44,7 +44,7 @@
 .header__content {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   flex: 1;
   gap: $space-lg;
 }
@@ -159,7 +159,7 @@
   align-items: center;
   padding: 4px 12px 4px 4px; /* top: 4px, right: 12px, bottom: 4px, left: 4px */
   gap: 12px;
-  margin: 0;
+  margin: 0 0 0 auto;
   width: auto;
   height: 40px;
   background: #FFFFFF;

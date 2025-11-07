@@ -13,7 +13,6 @@
   align-items: center;
   justify-content: center;
   gap: $space-lg;
-  flex: 1;
   font-family: $font-family-body;
   font-weight: $font-weight-regular;
   color: #FFFFFF;
@@ -27,6 +26,8 @@
   margin: 0;
   padding: 0;
   font-size: 16px;
+  align-items: center;
+  justify-content: center;
 }
 
 .nav li {
@@ -82,6 +83,7 @@
   align-items: center;
   gap: $space-sm;
   white-space: nowrap; // Prevent "Not logged in" from wrapping to multiple lines
+  margin-left: auto;
 
   i {
     font-size: $font-size-body-medium;
