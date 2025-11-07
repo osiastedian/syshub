@@ -84,30 +84,10 @@
 }
 
 /* ------------------------------------------------------------ *\
-   Tablet Portrait
+   Mobile (below 768px)
 \* ------------------------------------------------------------ */
 
-@media (max-width: $breakpoint-tablet-portrait) {
-  .header {
-    height: auto;
-    padding: $space-md 0;
-  }
-
-  .header__inner {
-    padding: 0 $space-md;
-  }
-
-  .header__content {
-    flex-direction: column;
-    gap: $space-md;
-  }
-}
-
-/* ------------------------------------------------------------ *\
-   Mobile
-\* ------------------------------------------------------------ */
-
-@media (max-width: $breakpoint-mobile) {
+@media (max-width: 767px) {
   .header {
     padding: $space-sm 0;
   }
