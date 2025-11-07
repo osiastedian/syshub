@@ -13,14 +13,16 @@
     margin: $space-3xl auto 0;
     width: 100%;
     background: transparent;
-    border-radius: $radius-sm;
-    overflow-x: auto;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 
     table
     {
         width: 100%;
         min-width: 100%;
         table-layout: fixed;
+        border-collapse: collapse;
 
         thead {
             background: transparent;
