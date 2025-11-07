@@ -99,7 +99,7 @@ footer {
 
   @media (max-width: $breakpoint-lg) {
     grid-template-columns: repeat(2, 1fr);
-    gap: $space-xl;
+    gap: $space-md;
   }
 }
 
