@@ -20,25 +20,52 @@ const getColumns = (t, isMobile) => {
     {
       text: t("check.table.status"),
       dataField: "status",
+      formatter: (cell) => {
+        const lowerStatus = cell?.toLowerCase() || "";
+        let styles = {
+          backgroundColor: "#f0f0f0",
+          color: "#333"
+        };
+
+        if (lowerStatus === "pending") {
+          styles = {
+            backgroundColor: "#1F5EFF33",
+            color: "#1F5EFF"
+          };
+        } else if (lowerStatus === "enabled") {
+          styles = {
+            backgroundColor: "#FBB03B33",
+            color: "#FBB03B"
+          };
+        }
+
+        return (
+          <span style={{
+            fontSize: "12px",
+            padding: "2px 6px",
+            borderRadius: "12px",
+            whiteSpace: "nowrap",
+            display: "inline-block",
+            width: "fit-content",
+            ...styles
+          }}>
+            {cell}
+          </span>
+        );
+      },
     },
     {
       text: t("check.table.payee"),
       dataField: "payee",
       formatter: (cell) => (
-        <span style={{
-          fontSize: "12px",
-          backgroundColor: "#FBB03B33",
-          color: "#FBB03B",
-          padding: "2px 6px",
-          borderRadius: "12px",
-          whiteSpace: "nowrap",
-          display: "inline-block",
+        <div style={{
           maxWidth: "120px",
           overflow: "hidden",
-          textOverflow: "ellipsis"
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap"
         }}>
           {cell}
-        </span>
+        </div>
       ),
     },
     {
