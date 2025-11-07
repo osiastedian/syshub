@@ -549,7 +549,7 @@ ul.pagination
                 &.vote--yes
                 {
                     background: $color-success-text !important;
-                    color: $color-text !important;
+                    color: #1D410B !important;
 
                     &:hover
                     {
@@ -567,7 +567,7 @@ ul.pagination
                 &.vote--abstain
                 {
                     background: $color-neutral-gray-medium !important;
-                    color: $color-text !important;
+                    color: #FFFFFF !important;
 
                     &:hover
                     {
