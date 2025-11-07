@@ -196,15 +196,15 @@ ul.pagination
         float: left;
         background: transparent;
         padding: $space-lg;
-        border-radius: $radius-sm;
+        border-radius: $radius-md;
         margin-bottom: $space-sm;
-        border: 1px solid transparent;
+        border: 2px solid $color-primary;
         transition: all $transition-fast;
 
         &:hover {
             background: transparent;
             box-shadow: $shadow-md;
-            border-color: rgba(255, 255, 255, 0.25);
+            border-color: $color-primary;
             transition: all $transition-base;
         }
 
@@ -216,7 +216,7 @@ ul.pagination
         &.proposal--expanded {
             background: transparent;
             box-shadow: $shadow-lg;
-            border-color: rgba(255, 255, 255, 0.35);
+            border-color: $color-primary;
         }
 
         .vote-count
