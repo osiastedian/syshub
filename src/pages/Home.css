@@ -61,18 +61,32 @@
 
 /* Charts Section - Transparent background */
 .home-page__charts {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 100px;
+  padding-bottom: 100px;
   background-color: transparent;
   color: #FFFFFF;
 }
 
+@media (max-width: 767px) {
+  .home-page__charts {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+}
+
 /* SentryNode Locations Section */
 .home-page__locations {
-  padding-top: 60px;
-  padding-bottom: 60px;
+  padding-top: 100px;
+  padding-bottom: 100px;
   background-color: transparent;
   color: #FFFFFF;
+}
+
+@media (max-width: 767px) {
+  .home-page__locations {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
 }
 
 /* WorldMap Section */
