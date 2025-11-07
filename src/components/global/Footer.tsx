@@ -27,9 +27,8 @@ const Footer: React.FC = () => {
 
     return (
         <footer className="footer">
-            <div className="shell">
-                {/* Main Content Area: Logo/Tagline on Left, 3 Columns on Right */}
-                <div className="footer__main">
+            {/* Main Content Area: Logo/Tagline on Left, 3 Columns on Right */}
+            <div className="footer__main">
                     {/* Left Side: Logo and Tagline */}
                     <div className="footer__branding">
                         <Link to="/" className="footer__logo">
@@ -157,15 +156,14 @@ const Footer: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Bottom Row: Copyright and Legal Links */}
-                <div className="footer__bottom">
-                    <div className="footer__copyright">
-                        <p>© {new Date().getFullYear()} Syscoin. All Rights Reserved.</p>
-                    </div>
-                    <div className="footer__legal">
-                        <a href="/privacy-policy">Privacy Policy</a>
-                        <a href="/terms-of-service">Terms of Service</a>
-                    </div>
+            {/* Bottom Row: Copyright and Legal Links */}
+            <div className="footer__bottom">
+                <div className="footer__copyright">
+                    <p>© {new Date().getFullYear()} Syscoin. All Rights Reserved.</p>
+                </div>
+                <div className="footer__legal">
+                    <a href="/privacy-policy">Privacy Policy</a>
+                    <a href="/terms-of-service">Terms of Service</a>
                 </div>
             </div>
         </footer>
