@@ -81,7 +81,7 @@ function Header({ t }) {
   return (
     <header className={`header ${isNotTop ? "fixed" : ""}`}>
       {/* TODO: add className "fixed" to .header when scroll > 0 */}
-      <div className="shell">
+      <div className="container">
         <div className="header__inner">
           <Link to="/" onClick={menuLinks}>
             <div
