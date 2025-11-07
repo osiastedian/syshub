@@ -24,6 +24,10 @@
   margin-bottom: 36px;
 }
 
+.section-header--governance {
+  text-transform: uppercase;
+}
+
 /* Stats Section - Gold background */
 .home-page__stats {
   padding-top: 60px;
