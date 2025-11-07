@@ -473,8 +473,11 @@ ul.pagination
 
         .actions
         {
-            width: 10%;
-            float: left;
+            width: 100%;
+            float: none;
+            display: flex;
+            flex-direction: column;
+            gap: $space-xs;
 
             .vote
             {
@@ -484,7 +487,7 @@ ul.pagination
                 height: 40px;
                 float: none;
                 clear: none;
-                margin-bottom: $space-sm;
+                margin-bottom: 0;
                 transition: all $transition-base;
                 display: flex;
                 flex-direction: row;
