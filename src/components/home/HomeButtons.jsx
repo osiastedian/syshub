@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useUser } from "../../context/user-context";
 
 /**
  * Buttons showed on the home image banner
@@ -12,26 +11,25 @@ import { useUser } from "../../context/user-context";
  * )
  */
 function HomeButtons() {
-  const { user } = useUser();
-
   return (
-    <div className="article__actions vertical">
-      <Link to="/about" className="btn btn-primary">
-        Learn More
+    <div className="hero-section__actions">
+      <Link to="/about" className="hero-btn hero-btn--learn-more">
+        <span className="hero-btn__icon">
+          <i className="icon-right-open"></i>
+        </span>
+        <span className="hero-btn__text">Learn More</span>
       </Link>
       <a
         href="https://support.syscoin.org/t/syscoin-nexus-sentry-node-install-guide/463"
-        className="btn btn-primary"
+        className="hero-btn hero-btn--setup"
         rel="noopener noreferrer"
         target="_blank"
       >
-        Setup SentryNode
+        <span className="hero-btn__icon">
+          <i className="icon-right-open"></i>
+        </span>
+        <span className="hero-btn__text">Setup SentryNode</span>
       </a>
-      {!user && (
-        <Link to="/signup" className="btn btn-primary">
-          Sign up
-        </Link>
-      )}
     </div>
   );
 }

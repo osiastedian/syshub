@@ -104,18 +104,17 @@ class Home extends Component {
                             <meta name="keywords" content={t('home.keywords')} />
                             {/* <meta name="description" content={t('home.description')} /> */}
                         </MetaTags>
-                        <div className="shell-large">
+                        <div className="container-fluid">
                             <div className="section__body">
-                                <div className="articles">
-                                    <BannerImage heading={t('home.title')} direction="left">
-                                        <div className="article__content-text">
-                                            <p>
-                                                Everything you need to know about SentryNodes and Governance.
-                                            </p>
-                                        </div>
+                                <BannerImage heading={t('home.title')} direction="left">
+                                    <div className="hero-section__text">
+                                        <p>
+                                            Everything you need to know about SentryNodes and Governance.
+                                        </p>
+                                    </div>
 
-                                        <HomeButtons />
-                                    </BannerImage>
+                                    <HomeButtons />
+                                </BannerImage>
 
                                     <section className="article article--revirse article--offsets-bottom">
                                         <div className="cols">
@@ -159,7 +158,6 @@ class Home extends Component {
                                             </div>
                                         </div>
                                     </section>
-                                </div>
                             </div>
                         </div>
                     </main>
@@ -175,17 +173,15 @@ class Home extends Component {
                             <meta name="keywords" content={t('home.keywords')} />
                             <meta name="description" content={t('home.description')} />
                         </MetaTags>
-                        <div className="shell-large">
+                        <div className="container-fluid">
                             <div className="section__body">
-                                <div className="articles">
-                                    <BannerImage heading={t('home.title')} direction="left">
-                                        <div className="article__content-text">
-                                            <p>Everything you need to know about SentryNodes and Governance.</p>
-                                        </div>
+                                <BannerImage heading={t('home.title')} direction="left">
+                                    <div className="hero-section__text">
+                                        <p>Everything you need to know about SentryNodes and Governance.</p>
+                                    </div>
 
-                                        <HomeButtons />
-                                    </BannerImage>
-                                </div>
+                                    <HomeButtons />
+                                </BannerImage>
                             </div>
                         </div>
                     </main>
