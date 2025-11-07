@@ -54,12 +54,12 @@
 
 @media (max-width: 767px) {
   .home-page__stats {
-    width: 100%;
-    position: static;
-    left: auto;
-    right: auto;
-    margin-left: 0;
-    margin-right: 0;
+    width: 100vw;
+    position: relative;
+    left: 50%;
+    right: 50%;
+    margin-left: -50vw;
+    margin-right: -50vw;
     padding-top: 60px;
     padding-bottom: 60px;
   }
