@@ -172,14 +172,7 @@ class MasternodeTable extends Component {
                 onKeyUp={this.searchInTable}
                 style={{ marginBottom: "32px", height: "48px", fontSize: "18px" }}
               />
-              <div className="d-flex flex-column gap-2 align-items-center mt-1">
-                <Link
-                  to={path !== undefined ?`${path}/masternode-registration`:`masternodes/masternode-registration`}
-                  className="sentry-btn sentry-btn--register"
-                >
-                  <span className="sentry-btn__text">{t("check.register.link")}</span>
-                </Link>
-
+              <div className="masternode-table__actions">
                 <button
                   type="button"
                   className="sentry-btn sentry-btn--reset"
@@ -187,6 +180,13 @@ class MasternodeTable extends Component {
                 >
                   <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
                 </button>
+
+                <Link
+                  to={path !== undefined ?`${path}/masternode-registration`:`masternodes/masternode-registration`}
+                  className="sentry-btn sentry-btn--register"
+                >
+                  <span className="sentry-btn__text">{t("check.register.link")}</span>
+                </Link>
               </div>
             </div>
           </div>
