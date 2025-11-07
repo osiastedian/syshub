@@ -209,6 +209,12 @@ ul.pagination
         display: flex;
         flex-direction: column;
 
+        @media (min-width: 768px) {
+            flex-direction: row;
+            gap: $space-lg;
+            align-items: flex-start;
+        }
+
         &:hover {
             background: transparent;
             box-shadow: $shadow-md;
@@ -237,6 +243,13 @@ ul.pagination
             font-family: $font-family-body;
             margin-bottom: $space-sm;
             order: -1;
+
+            @media (min-width: 768px) {
+                flex: 0 0 auto;
+                width: 100%;
+                order: 0;
+                margin-bottom: $space-md;
+            }
         }
 
         .proposal-header
@@ -246,6 +259,16 @@ ul.pagination
             justify-content: space-between;
             gap: $space-lg;
             margin-bottom: $space-md;
+
+            @media (min-width: 768px) {
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: flex-start;
+                flex: 0 0 auto;
+                width: auto;
+                margin-bottom: 0;
+                gap: $space-md;
+            }
         }
 
         .vote-count
@@ -420,6 +443,13 @@ ul.pagination
             font-size: $font-size-h4;
             color: $color-text;
 
+            @media (min-width: 768px) {
+                float: none;
+                width: auto;
+                flex: 1;
+                min-width: 0;
+            }
+
             .proposal-title {
                 display: flex;
                 align-items: center;
@@ -477,6 +507,11 @@ ul.pagination
             display: flex;
             flex-direction: column;
             gap: 16px;
+
+            @media (min-width: 768px) {
+                flex: 0 0 auto;
+                width: 150px;
+            }
 
             .vote
             {
@@ -1070,6 +1105,26 @@ ul.pagination
 
     .proposals .proposal
     {
+        flex-direction: column;
+        gap: $space-md;
+
+        .date
+        {
+            order: -1;
+            width: 100%;
+            margin-bottom: $space-sm;
+        }
+
+        .proposal-header
+        {
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            gap: $space-lg;
+            margin-bottom: $space-md;
+        }
+
         .vote-count
         {
             width:100%;
@@ -1094,13 +1149,19 @@ ul.pagination
 
         .description
         {
-            width:85%;
+            width:100%;
+            float: none;
             font-size:20px;
 
             .date,.budget
             {
                 font-size:14px;
             }
+        }
+
+        .actions
+        {
+            width: 100%;
         }
 
     }
@@ -1112,7 +1173,7 @@ ul.pagination
     {
         .description
         {
-            width:75%;
+            width:100%;
         }
 
     }
