@@ -137,7 +137,12 @@ class Home extends Component {
                                                 <div>
                                                     <ProposalsList statsData={this.state.api_data.stats.mn_stats} />
                                                     <div className="text-center">
-                                                        <Link to="/governance" className="btn btn-outline-primary">More about governance</Link>
+                                                        <Link to="/governance" className="homepage-cta homepage-cta--primary">
+                                                            <span className="homepage-cta__icon">
+                                                                <i className="icon-right-open"></i>
+                                                            </span>
+                                                            <span className="homepage-cta__text">More about governance</span>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </div>
