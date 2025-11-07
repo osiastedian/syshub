@@ -105,7 +105,7 @@ class Home extends Component {
                             <meta name="keywords" content={t('home.keywords')} />
                             {/* <meta name="description" content={t('home.description')} /> */}
                         </MetaTags>
-                        <div className="container-fluid">
+                        <div className="container">
                             <div className="section__body">
                                 <BannerImage heading={t('home.title')} direction="left">
                                     <div className="hero-section__text">
