@@ -95,6 +95,7 @@ footer {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: $space-2xl;
+  min-width: 0;
 
   @media (max-width: $breakpoint-lg) {
     grid-template-columns: repeat(2, 1fr);
@@ -110,6 +111,7 @@ footer {
   display: flex;
   flex-direction: column;
   gap: $space-md;
+  min-width: 0;
 
   @media (max-width: $breakpoint-lg) {
     &:nth-child(3) {
