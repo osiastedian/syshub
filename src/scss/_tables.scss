@@ -1048,8 +1048,9 @@ ul.pagination
         {
             width:100%;
             text-align: center;
+            margin-bottom: 0;
 
-            .yes,.no 
+            .yes,.no
             {
                 font-size:22px;
             }
@@ -1058,13 +1059,11 @@ ul.pagination
             {
                 font-size:14px;
 
-                i 
+                i
                 {
                     font-size: 18px;
                 }
             }
-
-        margin-bottom:15px;
         }
 
         .description
