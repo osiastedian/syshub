@@ -30,7 +30,6 @@ footer {
   gap: $space-3xl;
   margin-bottom: $space-2xl;
   padding-bottom: $space-2xl;
-  border-bottom: 1px solid $color-border;
 
   @media (max-width: $breakpoint-lg) {
     flex-direction: column;
