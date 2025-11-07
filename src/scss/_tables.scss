@@ -343,10 +343,66 @@ ul.pagination
             justify-content: flex-end;
             flex-shrink: 0;
 
-            .passed,
+            .passed
+            {
+                /* Auto layout */
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: $space-xs;
+                gap: $space-xs;
+
+                /* Positioning */
+                margin: 0;
+                width: auto;
+                height: 34px;
+
+                /* Styling */
+                background: rgba($color-success-text, 0.2);
+                border-radius: $radius-lg;
+
+                /* Typography */
+                font-size: $font-size-h5;
+                font-weight: $font-weight-medium;
+                color: $color-success-text;
+                text-transform: uppercase;
+                line-height: 1;
+
+                /* Flex item */
+                flex: none;
+                flex-grow: 0;
+            }
+
             .not-passed
             {
+                /* Auto layout */
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                padding: $space-xs;
+                gap: $space-xs;
+
+                /* Positioning */
                 margin: 0;
+                width: auto;
+                height: 34px;
+
+                /* Styling */
+                background: rgba($color-error-text, 0.2);
+                border-radius: $radius-lg;
+
+                /* Typography */
+                font-size: $font-size-h5;
+                font-weight: $font-weight-medium;
+                color: $color-error-text;
+                text-transform: uppercase;
+                line-height: 1;
+
+                /* Flex item */
+                flex: none;
+                flex-grow: 0;
             }
         }
 
