@@ -20,7 +20,7 @@
     {
         width: 100%;
         min-width: 100%;
-        table-layout: auto !important;
+        table-layout: fixed;
 
         thead {
             background: transparent;

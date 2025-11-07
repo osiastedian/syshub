@@ -24,6 +24,16 @@ const getColumns = (t, isMobile) => {
     {
       text: t("check.table.payee"),
       dataField: "payee",
+      formatter: (cell) => (
+        <div style={{
+          maxWidth: "200px",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "nowrap"
+        }}>
+          {cell}
+        </div>
+      ),
     },
     {
       text: t("check.table.lastpaidtime"),
