@@ -272,6 +272,13 @@ footer {
   align-items: center;
   gap: $space-md;
   width: 100%;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto;
+  }
 }
 
 .footer__copyright {
@@ -281,6 +288,10 @@ footer {
 
   p {
     margin: 0;
+  }
+
+  @media (max-width: 767px) {
+    text-align: center;
   }
 }
 
@@ -300,5 +311,10 @@ footer {
     &:hover {
       color: $color-primary;
     }
+  }
+
+  @media (max-width: 767px) {
+    justify-content: space-between;
+    gap: $space-md;
   }
 }
