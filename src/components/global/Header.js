@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
 import { useUser } from "../../context/user-context";
@@ -12,6 +12,8 @@ import { useUser } from "../../context/user-context";
  */
 function Header({ t }) {
   const { user, userAdmin, logoutUser } = useUser();
+  const location = useLocation();
+  const isHomepage = location.pathname === "/";
 
   const isMounted = useRef(false);
 
@@ -199,15 +201,25 @@ function Header({ t }) {
           </div>
 
           {/* TODO:click event open mobile menu add className .open to .header__content */}
-          <button
-            onClick={toggleMenu}
-            className="nav-trigger"
-            style={{ border: "none", background: "none", outline: "none" }}
-          >
-            <span></span>
-            <span></span>
-            <span></span>
-          </button>
+          {!isHomepage && (
+            <button
+              onClick={toggleMenu}
+              className="nav-trigger"
+              style={{ border: "none", background: "none", outline: "none" }}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+          )}
+          {isHomepage && !user && (
+            <Link to="/login" className="header__login-btn-mobile">
+              <span className="header__login-btn-icon">
+                <i className="icon-right-open"></i>
+              </span>
+              <span className="header__login-btn-text">{t("header.login")}</span>
+            </Link>
+          )}
         </div>
       </div>
     </header>
