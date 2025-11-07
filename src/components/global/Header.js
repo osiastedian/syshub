@@ -133,23 +133,27 @@ function Header({ t }) {
             </nav>
           </div>
 
-          {/* Logged in user dropdown or login button */}
-          {user && (
-            <div className="user">
-              <span
-                style={{
-                  display: "inline-block",
-                  verticalAlign: "middle",
-                  whiteSpace: "nowrap",
-                  maxWidth: "9ch",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                }}
-              >
-                {username(user)}
+          {!user && (
+            <Link to="/login" className="header__login-btn">
+              <span className="header__login-btn__icon">
+                <i className="icon-right-open"></i>
               </span>
-              <i className="icon-user"></i>
-              <div className="dropdown">
+              <span className="header__login-btn__text">{t("header.login")}</span>
+            </Link>
+          )}
+
+          {user && (
+            <div style={{ position: "relative" }}>
+              <button
+                onClick={toggleMenu}
+                className="header__menu-btn"
+              >
+                <span className="header__menu-btn__icon">
+                  <i className="icon-user"></i>
+                </span>
+                <span className="header__menu-btn__text">{username(user)}</span>
+              </button>
+              <div className={`header__user-dropdown ${isMobileMenu ? "open" : ""}`}>
                 <ul>
                   <li onClick={menuLinks}>
                     <Link to="/profile">{t("header.profile")}</Link>
@@ -175,26 +179,6 @@ function Header({ t }) {
                 </ul>
               </div>
             </div>
-          )}
-
-          {!user && (
-            <Link to="/login" className="header__login-btn">
-              <span className="header__login-btn__icon">
-                <i className="icon-right-open"></i>
-              </span>
-              <span className="header__login-btn__text">{t("header.login")}</span>
-            </Link>
-          )}
-          {user && (
-            <button
-              onClick={toggleMenu}
-              className="header__menu-btn"
-            >
-              <span className="header__menu-btn__icon">
-                <i className="icon-menu"></i>
-              </span>
-              <span className="header__menu-btn__text">Menu</span>
-            </button>
           )}
         </div>
       </div>

@@ -189,104 +189,80 @@
 }
 
 /* ------------------------------------------------------------ *\
-   User Dropdown (Header Sidebar)
+   User Dropdown (Header Menu Button)
 \* ------------------------------------------------------------ */
 
-.header__inner .user {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: $space-sm;
-  font-weight: 400;
-  font-size: $font-size-body-small;
-  color: #FFFFFF;
-  white-space: nowrap;
-  cursor: pointer;
-  transition: color $transition-base;
-  margin: 0 0 0 auto;
+.header__user-dropdown {
+  display: none;
+  position: absolute;
+  top: calc(100% + $space-sm);
+  right: $space-lg;
+  width: 160px;
+  color: $color-text;
+  background-color: rgba($color-surface, 0.98);
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
 
-  i {
-    font-size: $font-size-body-medium;
-  }
-
-  &:hover {
-    color: $color-primary;
-  }
-
-  .dropdown {
-    display: none;
+  &:after {
     position: absolute;
-    top: 100%;
-    right: 0;
-    width: 160px;
-    color: $color-text;
-    padding-top: $space-lg;
-    margin-top: $space-sm;
-    background-color: rgba($color-surface, 0.98);
-    border: 1px solid $color-border;
-    border-radius: $radius-md;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    right: 20px;
+    top: -8px;
+    width: 0;
+    height: 0;
+    content: '';
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid rgba($color-surface, 0.98);
+  }
 
-    &:after {
-      position: absolute;
-      right: 15px;
-      top: -8px;
-      width: 0;
-      height: 0;
-      content: '';
-      border-left: 8px solid transparent;
-      border-right: 8px solid transparent;
-      border-bottom: 8px solid rgba($color-surface, 0.98);
-    }
+  ul {
+    display: block;
+    list-style: none;
+    margin: 0;
+    padding: $space-md;
+    gap: 0;
 
-    ul {
-      display: block;
-      list-style: none;
+    li {
+      width: 100%;
+      text-align: left;
       margin: 0;
-      padding: $space-md;
-      gap: 0;
+      padding: $space-sm 0;
+      line-height: 1.4;
+      font-size: $font-size-body-small;
+      font-weight: 400;
+      color: $color-text;
 
-      li {
+      a,
+      button {
+        color: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        background: none;
+        border: none;
+        font-size: inherit;
+        font-weight: inherit;
         width: 100%;
         text-align: left;
-        margin: 0;
-        padding: $space-sm 0;
-        line-height: 1.4;
-        font-size: $font-size-body-small;
-        font-weight: 400;
-        color: $color-text;
+        padding: 0;
+        display: block;
+      }
+
+      &:hover {
+        color: $color-primary;
 
         a,
         button {
           color: inherit;
-          text-decoration: none;
-          cursor: pointer;
-          background: none;
-          border: none;
-          font-size: inherit;
-          font-weight: inherit;
-          width: 100%;
-          text-align: left;
-          padding: 0;
-          display: block;
-        }
-
-        &:hover {
-          color: $color-primary;
-
-          a,
-          button {
-            color: inherit;
-          }
         }
       }
     }
   }
 
-  &:hover .dropdown {
+  &.open {
     display: block;
-    opacity: 1;
   }
 }
 
