@@ -233,10 +233,20 @@ ul.pagination
             order: -1;
         }
 
+        .proposal-header
+        {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: $space-lg;
+            margin-bottom: $space-md;
+        }
+
         .vote-count
         {
-            width: 20%;
-            float: left;
+            display: flex;
+            align-items: center;
+            gap: $space-xs;
 
             .yes
             {
@@ -290,6 +300,20 @@ ul.pagination
                     color: $color-error-text;
                     font-size: $font-size-h3;
                 }
+            }
+        }
+
+        .proposal-status
+        {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            flex-shrink: 0;
+
+            .passed,
+            .not-passed
+            {
+                margin: 0;
             }
         }
 

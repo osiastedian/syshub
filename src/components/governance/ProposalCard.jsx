@@ -165,15 +165,19 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
   return (
     <div className={`proposal ${useCollapse ? 'proposal--expanded' : ''}`} role="region" aria-labelledby={`proposal-title-${proposal.Hash}`}>
       <div className="date">{proposalDate(proposal.CreationTime)}</div>
-      <div className="vote-count">
-        <span className="yes">{proposal.YesCount}</span>
-        <span className="no">{proposal.NoCount}</span>
-        {proposalPassing(
-          proposal.YesCount,
-          proposal.NoCount,
-          comaToNum(enabled),
-          proposal.AbsoluteYesCount
-        )}
+      <div className="proposal-header">
+        <div className="vote-count">
+          <span className="yes">{proposal.YesCount}</span>
+          <span className="no">{proposal.NoCount}</span>
+        </div>
+        <div className="proposal-status">
+          {proposalPassing(
+            proposal.YesCount,
+            proposal.NoCount,
+            comaToNum(enabled),
+            proposal.AbsoluteYesCount
+          )}
+        </div>
       </div>
       <div className="description">
 
