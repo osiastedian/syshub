@@ -879,6 +879,8 @@ ul.pagination
 
 .ministats {
     overflow: hidden;
+    max-width: 75%;
+    margin: 0 auto;
 
     .stat
     {
@@ -1043,6 +1045,9 @@ ul.pagination
         margin-bottom:100px;
     }
 
+    .ministats {
+        max-width: 100%;
+    }
 
     .ministats .stat
     {
