@@ -111,6 +111,16 @@
   }
 }
 
+/* SentryNode Locations Section Header */
+.home-page__locations .section-header {
+  font-size: 32px;
+  font-weight: 600;
+  font-family: 'DM Sans', sans-serif;
+  margin-bottom: 60px;
+  text-transform: uppercase;
+  text-align: center;
+}
+
 /* WorldMap Section */
 .home-page__world-map {
   margin-top: 20px;
