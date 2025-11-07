@@ -3,6 +3,14 @@
  * ============================================================================
  */
 
+/* Governance Section */
+.home-page__governance {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-color: transparent;
+  color: #FFFFFF;
+}
+
 /* Stats Section - Gold background */
 .home-page__stats {
   padding-top: 60px;
@@ -28,7 +36,72 @@
   color: #FFFFFF;
 }
 
+/* SentryNode Locations Section */
+.home-page__locations {
+  padding-top: 60px;
+  padding-bottom: 60px;
+  background-color: transparent;
+  color: #FFFFFF;
+}
+
 /* WorldMap Section */
 .home-page__world-map {
   margin-top: 20px;
+}
+
+/* Homepage CTA Button Styles */
+.homepage-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 16px;
+  height: 40px;
+  border-radius: 1000px;
+  background-color: #FBB03B;
+  color: #0A0A0A;
+  text-decoration: none;
+  transition: all 200ms ease-in-out;
+  border: none;
+  cursor: pointer;
+}
+
+.homepage-cta:hover {
+  color: #0A0A0A;
+  text-decoration: none;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.homepage-cta--primary {
+  background-color: #FBB03B;
+  color: #0A0A0A;
+}
+
+.homepage-cta--primary:hover {
+  color: #0A0A0A;
+}
+
+.homepage-cta__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: #FFFFFF;
+  border-radius: 50%;
+  margin-left: -8px;
+  flex-shrink: 0;
+}
+
+.homepage-cta__icon i {
+  color: #0A0A0A;
+  font-size: 16px;
+}
+
+.homepage-cta__text {
+  display: flex;
+  align-items: center;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
 }

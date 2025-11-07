@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Datamaps from 'datamaps';
 import { withTranslation } from "react-i18next";
 import SubTitle from '../global/SubTitle';
+import './WorldMap.css';
 
 /**
  * Component to show the worldMap and it's masternodes
@@ -109,8 +110,8 @@ class WorldMap extends Component {
         const { t } = this.props;
         return (
             <>
-                <SubTitle heading={t('worldMap.title')} />
-                <div ref={this.worldMapRef} className="world_map" style={{width:'100%', height:'550px', position: 'relative'}}></div>
+                <SubTitle heading={t('worldMap.title')} className="section-header" />
+                <div ref={this.worldMapRef} className="world_map"></div>
             </>
         )
     }

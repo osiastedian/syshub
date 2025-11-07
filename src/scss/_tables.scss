@@ -543,15 +543,24 @@ ul.pagination
 }
 
 // ============================================================================
-// CHART HEADINGS
+// SECTION HEADERS
 // ============================================================================
 
-.chart-heading
+.section-header
 {
     font-weight: $font-weight-semi-bold;
     font-size: $font-size-h4;
     line-height: 36px;
     text-align: center;
+}
+
+// ============================================================================
+// CHART HEADINGS
+// ============================================================================
+
+.chart-heading
+{
+    @extend .section-header;
     margin-bottom: $space-md;
 }
 

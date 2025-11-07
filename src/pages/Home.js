@@ -131,12 +131,12 @@ class Home extends Component {
                                         </div>
                                     </section>
                                     
-                                    <section className="article article--revirse article--offsets-bottom">
+                                    <section className="home-page__governance">
                                         <div className="cols">
                                             <div className="col col--size-12">
-                                                <div className="article__content">
+                                                <div>
                                                     <ProposalsList statsData={this.state.api_data.stats.mn_stats} />
-                                                    <div className="article__actions text-center">
+                                                    <div className="text-center">
                                                         <Link to="/governance" className="btn btn-outline-primary">More about governance</Link>
                                                     </div>
                                                 </div>
@@ -165,13 +165,18 @@ class Home extends Component {
                                         </div>
                                     </section>
 
-                                    <section>
+                                    <section className="home-page__locations">
                                         <div className="cols">
                                             <div className="col col--size-12">
                                                 <div>
                                                     <WorldMap mapData={this.state.api_data.mapData} mapFills={this.state.api_data.mapFills} />
                                                     <div className="text-center home-page__world-map">
-                                                        <Link to="/stats" className="btn btn-outline-primary">More stats</Link>
+                                                        <Link to="/stats" className="homepage-cta homepage-cta--primary">
+                                                            <span className="homepage-cta__icon">
+                                                                <i className="icon-right-open"></i>
+                                                            </span>
+                                                            <span className="homepage-cta__text">More stats</span>
+                                                        </Link>
                                                     </div>
                                                 </div>
                                             </div>

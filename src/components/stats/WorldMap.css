@@ -1,0 +1,23 @@
+/* ============================================================================
+ * WorldMap Component Styles
+ * ============================================================================
+ */
+
+.world_map {
+  width: 100%;
+  height: 550px;
+  position: relative;
+}
+
+/* Responsive height for mobile devices */
+@media (max-width: 768px) {
+  .world_map {
+    height: 350px;
+  }
+}
+
+@media (max-width: 576px) {
+  .world_map {
+    height: 280px;
+  }
+}
