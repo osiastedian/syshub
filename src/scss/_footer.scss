@@ -214,39 +214,52 @@ footer {
 
 .footer__subscribe-button {
   width: 100%;
-  padding: $space-md $space-lg;
-  background-color: $color-primary;
-  color: $color-background;
-  border: none;
-  border-radius: $radius-pill; // Pill-shaped
-  font-weight: 600;
-  font-size: $font-size-body-small;
-  cursor: pointer;
-  transition: all $transition-base;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: $space-sm;
-
-  .arrow {
-    font-size: 18px;
-    transition: transform $transition-base;
-    order: -1; // Arrow on LEFT side
-  }
+  gap: 12px;
+  padding: 4px 16px;
+  height: 40px;
+  border-radius: $radius-pill;
+  background-color: $color-primary;
+  color: $color-background;
+  border: none;
+  cursor: pointer;
+  transition: all $transition-base;
 
   &:hover {
-    opacity: 0.9;
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba($color-primary, 0.3);
-
-    .arrow {
-      transform: translateX(4px);
-    }
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   }
 
   &:active {
     transform: translateY(0);
   }
+}
+
+.footer-cta__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background-color: $color-text;
+  border-radius: $radius-full;
+  margin-left: -8px;
+  flex-shrink: 0;
+
+  i {
+    color: $color-background;
+    font-size: 16px;
+  }
+}
+
+.footer-cta__text {
+  display: flex;
+  align-items: center;
+  font-family: $font-family-body;
+  font-size: 16px;
+  font-weight: 400;
 }
 
 /* ------------------------------------------------------------ *\

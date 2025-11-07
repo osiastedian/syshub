@@ -145,9 +145,11 @@ const Footer: React.FC = () => {
                                         aria-label="Email address"
                                         className="footer__subscribe-input"
                                     />
-                                    <button type="submit" className="footer__subscribe-button">
-                                        <span className="arrow">→</span>
-                                        Subscribe now
+                                    <button type="submit" className="footer__subscribe-button footer-cta">
+                                        <span className="footer-cta__icon">
+                                            <i className="icon-right-open"></i>
+                                        </span>
+                                        <span className="footer-cta__text">Subscribe now</span>
                                     </button>
                                 </form>
                             </div>
