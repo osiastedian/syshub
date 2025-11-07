@@ -120,7 +120,7 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
     if (((yesCount - noCount) / enabled) * 100 > 10) {
       return (
         <div className="passed" title={t("govlist.table.green_text")}>
-          <i className="demo-icon icon-ok"></i> Passed
+          Passed
         </div>
       );
     } else {
@@ -129,7 +129,7 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
       let newText = originalText.replace("[API]", need);
       return (
         <div className="not-passed" title={newText}>
-          <i className="demo-icon icon-cancel-1"></i> Not passed
+          Not passed
         </div>
       );
     }

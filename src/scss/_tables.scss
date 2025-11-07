@@ -274,32 +274,26 @@ ul.pagination
 
             .passed
             {
-                line-height: 1;
+                line-height: 1.5;
                 font-size: $font-size-h5;
                 font-weight: $font-weight-medium;
-                color: $color-text;
+                color: $color-success-text;
                 text-transform: uppercase;
-
-                i
-                {
-                    color: $color-success-text;
-                    font-size: $font-size-h3;
-                }
+                background-color: $color-success-bg-light;
+                padding: $space-xs $space-sm;
+                border-radius: $radius-sm;
             }
 
             .not-passed
             {
-                line-height: 1;
+                line-height: 1.5;
                 font-size: $font-size-h5;
                 font-weight: $font-weight-medium;
-                color: $color-text;
+                color: $color-error-text;
                 text-transform: uppercase;
-
-                i
-                {
-                    color: $color-error-text;
-                    font-size: $font-size-h3;
-                }
+                background-color: $color-error-bg-light;
+                padding: $space-xs $space-sm;
+                border-radius: $radius-sm;
             }
         }
 
