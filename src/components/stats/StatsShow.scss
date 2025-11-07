@@ -7,10 +7,15 @@
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 12px;
-  max-width: 600px;
+  max-width: 100%;
   margin: 0 auto;
+
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 600px;
+  }
 }
 
 .stat-value {
