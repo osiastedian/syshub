@@ -31,12 +31,22 @@
 
 /* Stats Section - Gold background */
 .home-page__stats {
+  width: 100vw;
+  position: relative;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
   padding-top: 60px;
   padding-bottom: 60px;
   background-color: #FBB03B;
-  margin-left: -15px;
-  margin-right: -15px;
   color: #000000;
+}
+
+.home-page__stats .cols {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 16px;
 }
 
 .home-page__stats h2 {
