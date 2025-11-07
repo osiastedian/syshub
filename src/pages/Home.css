@@ -17,15 +17,16 @@
 }
 
 .home-page__governance h2 {
-  margin-bottom: 60px;
+  margin-bottom: 48px;
 }
 
 .home-page__governance .proposals {
   margin-bottom: 36px;
 }
 
-.section-header--governance {
+.text-center.section-header.section-header--governance {
   text-transform: uppercase;
+  margin-bottom: 60px;
 }
 
 /* Stats Section - Gold background */
