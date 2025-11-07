@@ -100,7 +100,7 @@ function ProposalsList(props) {
 
   return (
     <>
-      <SubTitle heading={t('govlist.table.title')} />
+      <SubTitle heading={t('govlist.table.title')} className="section-header" />
       {
         (dataload === 0) && (
           <div className="loading loading--center" role="status" aria-live="polite">
