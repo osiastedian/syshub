@@ -29,7 +29,6 @@ footer {
 .footer__main {
   display: flex;
   gap: $space-3xl;
-  padding-bottom: 36px;
   margin-bottom: 36px;
 
   @media (max-width: $breakpoint-lg) {
