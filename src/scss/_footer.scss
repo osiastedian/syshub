@@ -200,6 +200,7 @@ footer {
   font-family: $font-family-body;
   font-size: $font-size-body-small;
   transition: all $transition-base;
+  box-sizing: border-box;
 
   &:focus {
     outline: none;
@@ -227,6 +228,7 @@ footer {
   cursor: pointer;
   transition: all $transition-base;
   text-align: left;
+  box-sizing: border-box;
 
   &:hover {
     transform: translateY(-2px);
