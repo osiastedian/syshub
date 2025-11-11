@@ -42,6 +42,7 @@
     @include typography-h2;
     color: $color-text;
     margin-bottom: $space-lg;
+    line-height: 1.2; // Tight for headlines
 
     @media (max-width: $breakpoint-md) {
       font-size: $font-size-h3;
@@ -53,12 +54,13 @@
     color: $color-primary;
     font-style: italic;
     margin-bottom: $space-lg;
+    line-height: 1.5; // Normal for body text
   }
 
   &__description {
     @include typography-body-medium-regular;
     color: $color-text-secondary;
-    line-height: $line-height-relaxed;
+    line-height: 1.8; // Relaxed for long-form content
     margin-bottom: 0;
   }
 }

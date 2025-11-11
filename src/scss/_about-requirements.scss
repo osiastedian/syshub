@@ -15,6 +15,7 @@
     @include typography-h2;
     color: $color-text;
     margin-bottom: $space-2xl;
+    line-height: 1.2; // Tight for headlines
 
     @media (max-width: $breakpoint-md) {
       font-size: $font-size-h3;
@@ -37,6 +38,7 @@
     padding: $space-md 0;
     border-bottom: 1px solid $color-border;
     transition: all $transition-fast;
+    line-height: 1.5; // Normal for body text
 
     &:last-child {
       border-bottom: none;
