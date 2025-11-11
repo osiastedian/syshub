@@ -62,21 +62,6 @@ function Header({ t }) {
   };
 
   /**
-   * Returns a showable username
-   * @function
-   * @param {Object} userInfo Using the email of the user to create a showable username on the header
-   * @return {string}         Username of the user
-   */
-  const username = (userInfo) => {
-    let username = userInfo.data.email.substring(
-      0,
-      userInfo.data.email.lastIndexOf("@")
-    );
-
-    return username;
-  };
-
-  /**
    * Returns username with email in parentheses
    * @function
    * @param {Object} userInfo Using the email of the user
