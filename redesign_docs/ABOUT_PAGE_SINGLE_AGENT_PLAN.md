@@ -332,6 +332,71 @@ Use Bootstrap grid classes + SCSS media queries:
 
 ---
 
+## Agent Role Rules & Responsibilities
+
+This is a **multi-faceted single-agent task**. Throughout execution, you will adopt different specialized roles:
+
+### ROLE 1: Component Builder (Steps 3-8)
+**When executing**: Steps 3, 4, 5, 6, 7, 8 (component creation and SCSS styling)
+
+**Read the Component Builder System Prompt** from `.claude/agents/component-builder.md`:
+- MUST follow design token compliance absolutely - NO hard-coded colors, spacing, or sizing
+- Review `src/scss/_design-tokens.scss` before writing any styles
+- Use ONLY design tokens in SCSS files
+- Cover all interactive states (default, hover, active, disabled, focus)
+- Verify SCSS compilation with `npm run build`
+- Follow BEM naming conventions and component patterns
+- Quality check each component before moving forward
+
+**Key Rules**:
+- ✅ ALL values must come from design tokens
+- ✅ Verify all color values match token definitions
+- ✅ Verify all spacing uses token variables
+- ✅ Verify all typography follows token patterns
+- ❌ NO hard-coded hex colors
+- ❌ NO inline styles
+- ❌ NO magic numbers for spacing
+
+### ROLE 2: UX Design Reviewer (Steps 9, 10)
+**When executing**: Steps 9 and 10 (visual verification and polish)
+
+**Read the UX Design Reviewer System Prompt** from `.claude/agents/ux-design-reviewer.md`:
+- Perform meticulous pixel-perfect review against Figma design
+- Examine spacing, layout, typography, colors with precision
+- Check responsive behavior across all breakpoints (mobile, tablet, desktop)
+- Document any discrepancies with exact values
+- Compare rendered output against Figma design systematically
+- Verify interactive states match design
+- Use methodology: layout → components → spacing → typography → colors → interactive states
+
+**Key Rules**:
+- ✅ Compare EVERY visual element against Figma
+- ✅ Note exact measurements (px values, colors, spacing)
+- ✅ Test at 375px (mobile), 768px (tablet), 1440px (desktop)
+- ✅ Verify hover/focus states match design
+- ❌ Don't skip responsive testing
+- ❌ Don't accept "close enough" - pixel-perfect match required
+
+### ROLE 3: Visual Tester (Step 12 - Post-build verification)
+**When executing**: Step 12 (build verification and browser testing)
+
+**Read the Visual Tester System Prompt** from `.claude/agents/visual-tester.md`:
+- Verify visual properties (colors, sizes, spacing) match design tokens
+- Test all component states in built version
+- Cross-reference rendered colors against design token values
+- Report any mismatches with specific hex values
+- Ensure screenshot comparisons verify rendering consistency
+
+**Key Rules**:
+- ✅ Verify colors match design tokens exactly
+- ✅ Test all interactive states
+- ✅ Cross-reference values against _design-tokens.scss
+- ✅ Provide specific hex values in reports
+- ❌ Don't skip any component states
+- ❌ Don't proceed if build has errors
+
+---
+
 ## Notes for Agent
 
 1. **Source of Truth**: Figma design image and current About.js implementation
@@ -344,6 +409,7 @@ Use Bootstrap grid classes + SCSS media queries:
 8. **Performance**: Optimize images, avoid unnecessary re-renders
 9. **Accessibility**: Ensure keyboard navigation and semantic HTML
 10. **Documentation**: Comments for complex logic, but code should be self-documenting
+11. **Role-Based Rigor**: When in Component Builder mode, ensure design token compliance. When in UX Reviewer mode, be pixel-perfect. When in Visual Tester mode, be exhaustive about state coverage.
 
 ---
 
@@ -390,5 +456,126 @@ Paragraph 3:
 ---
 
 **Plan Created**: 2025-11-11
-**Target Agent**: General Purpose / Component Builder
+**Target Agent**: General Purpose / Component Builder (with role-based switching)
 **Status**: Ready for Execution
+
+---
+
+## Progress Tracking & Session Continuation
+
+### How to Track Progress
+
+Create/Update `ABOUT_PAGE_PROGRESS.md` after each session to track:
+
+1. **Session Summary**
+   - Date and duration
+   - Which steps were completed
+   - Current status
+
+2. **Completed Steps**
+   - List each completed step with ✅
+   - Include what was delivered
+   - Note any issues encountered and how they were resolved
+
+3. **In-Progress Step**
+   - Current step being worked on
+   - What has been done so far
+   - What remains to be done
+   - Any blockers or decisions needed
+
+4. **Files Modified/Created**
+   - List all files touched in this session
+   - Include file paths
+   - Brief description of changes
+
+5. **Known Issues**
+   - Any bugs, warnings, or errors encountered
+   - How they were addressed (or if unresolved)
+   - Recommendations for next session
+
+6. **Next Session Instructions**
+   - Which step to resume from
+   - Any prerequisites to run first
+   - Quick setup commands if needed
+   - Critical context for resuming
+
+### Progress File Template
+
+```markdown
+# ABOUT PAGE REDESIGN - Session Progress
+
+**Session Date**: [DATE]
+**Duration**: [HOURS]
+**Agent**: [AGENT NAME]
+
+## Session Summary
+[Brief overview of what was accomplished]
+
+## Completed Steps
+- [x] Step 1: Analyzed current implementation ✅
+- [x] Step 2: Updated translation keys ✅
+- [x] Step 3: Created feature cards component ✅
+- [ ] Step 4: Seniority toggle component
+- [ ] Step 5: Hero section refactor
+... etc
+
+## Current Status: [STEP_NUMBER - IN_PROGRESS]
+
+### What's Done
+- [Description of completed work in current step]
+
+### What Remains
+- [Description of remaining work]
+
+### Blockers
+- [Any issues preventing progress]
+
+## Files Modified/Created This Session
+- `src/components/About/FeatureCards.jsx` - NEW
+- `src/scss/_about-cards.scss` - NEW
+- `public/locales/en/about.json` - MODIFIED
+
+## Known Issues
+- [Issue description] - [Status: Fixed/Pending/Workaround]
+
+## Next Session Start Point
+- **Resume from**: Step [X]
+- **Prerequisites**: Run `npm install` if new packages added
+- **Key file locations**:
+  - Components: `src/components/About/`
+  - Styling: `src/scss/_about*.scss`
+  - Translations: `public/locales/*/about.json`
+- **Quick commands**:
+  ```bash
+  npm start                 # Start dev server
+  npm run build            # Test production build
+  git status               # Check changes
+  ```
+
+## Agent Notes for Next Session
+[Any specific guidance or context for continuing the work]
+```
+
+### When to Update Progress
+
+- **End of each step**: Update after completing major steps (especially 3, 4, 5, 6)
+- **Before switching contexts**: If pausing and resuming later
+- **Before final commit**: Comprehensive summary of entire session
+- **After encountering issues**: Document the issue and solution for continuity
+
+### Important for Continuity
+
+The progress file ensures:
+1. ✅ Next agent/session knows exactly where to resume
+2. ✅ No duplicate work or missed steps
+3. ✅ Context about decisions made and issues encountered
+4. ✅ Quick reference for file locations and git status
+5. ✅ Prevention of scope creep (clear what's done vs todo)
+
+### File Location
+Save as: `redesign_docs/ABOUT_PAGE_PROGRESS.md`
+
+Push to git at end of session with commit message:
+```
+docs: Update About page redesign progress - [COMPLETED STEPS]
+```
