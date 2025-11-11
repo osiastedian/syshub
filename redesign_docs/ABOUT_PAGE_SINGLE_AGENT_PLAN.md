@@ -13,28 +13,35 @@ Complete redesign of the About page from traditional timeline layout to modern c
 ### 1. Hero Section
 - **Current**: InnerBanner with basic heading
 - **New**: Large hero section with:
-  - Heading: "Learn about Syscoin SentryNodes"
-  - 3 paragraphs of descriptive text (from Figma)
-  - 3D device image positioned on right side
+  - Heading: `about.hero.title` = "Learn about Syscoin SentryNodes"
+  - Description: `about.hero.description` = Full paragraph about SentryNodes protecting blockchain (from Figma)
+  - Illustration with decorative elements positioned on right side
   - Responsive layout (stack on mobile)
 
 ### 2. Feature Cards Section (NEW)
 - **Location**: After hero section
 - **Layout**: 4-card responsive grid (4 cols desktop → 2 cols tablet → 1 col mobile)
-- **Cards**:
-  1. "Syscoin Features and Services"
-  2. "Seniority benefits to masternode operators"
-  3. "2-DBG Protocol's instant asset transfer"
-  4. "Scalability"
+- **Cards** (from Figma):
+  1. `about.features.list.f1` = "Facilitation of future Syscoin features and services"
+  2. `about.features.list.f2` = "Seniority benefits to masternode operators"
+  3. `about.features.list.f3` = "Z-DAG Protocol's instant asset transfer"
+  4. `about.features.list.f4` = "Scalability"
+- **Title**: `about.features.title` = "What sets Syscoin SentryNodes apart?"
 - **Styling**: Cards with icons, hover effects, clean typography
 
 ### 3. Seniority Section (MAJOR REFACTOR)
 - **Current**: Vertical timeline with alternating left/right blocks
-- **New**: Toggle button system with expandable calculation boxes
-  - Toggle buttons: "1 Month", "1 Year", "2.5 Years"
-  - Selected button shows calculation details
-  - Smooth transitions between states
-  - Each period displays different percentage increase
+- **New**: Multi-part layout with TX Data blocks and two-column detail cards
+  - Title: `about.seniority.title` = "SENTRY NODE SENIORITY EXPLAINED"
+  - Description: `about.seniority.description` = Explanation paragraph
+  - **TX Data Section**: 3 data blocks showing block calculations
+    - `about.seniority.blockInfo.label` = "Syscoin Average Block is 60 Seconds. Therefore:"
+    - GAMMA: "43,800 Blocks" | BETA: "526,600 Blocks" | ALPHA: "1,314,000 Blocks"
+  - **Two Column Cards**:
+    - Left: `about.seniority.oneYear.title` = "1 YEAR 35% increase of base rate"
+    - Right: `about.seniority.twoAndHalf.title` = "2.5 YEARS 100% increase of base rate"
+  - **Final Note**: `about.seniority.note.main` = Seniority note about transaction block height
+  - Smooth transitions and polished layout
 
 ### 4. Other Sections (Style Updates)
 - Governance section: Refine styling and spacing
@@ -206,25 +213,48 @@ $breakpoint-tablet: 768px
 $breakpoint-desktop: 992px
 ```
 
-### i18n Key Naming Convention
-```
-about.hero.heading
-about.hero.paragraph1
-about.hero.paragraph2
-about.hero.paragraph3
+### i18n Keys - Already Available
+All translation keys from the Figma design have been added to `src/shared/locales/en/pages/about/index.js` and are ready to use:
 
-about.features.title
-about.features.card1.title
-about.features.card1.description
-about.features.card2.title
-...etc
+**Hero Section:**
+- `about.hero.title` = "Learn about Syscoin SentryNodes"
+- `about.hero.description` = Full SentryNodes description paragraph
 
-about.seniority.toggles.month
-about.seniority.toggles.year
-about.seniority.toggles.years
-about.seniority.calculation.month
-...etc
-```
+**Features Section:**
+- `about.features.title` = "What sets Syscoin SentryNodes apart?"
+- `about.features.list.f1` = "Facilitation of future Syscoin features and services"
+- `about.features.list.f2` = "Seniority benefits to masternode operators"
+- `about.features.list.f3` = "Z-DAG Protocol's instant asset transfer"
+- `about.features.list.f4` = "Scalability"
+
+**Governance Section:**
+- `about.governance.title` = "Decentralized Governance"
+- `about.governance.question` = "How does Decentralized Governance work?"
+- `about.governance.description.d1` = Full governance description (combined)
+
+**Rewards Section:**
+- `about.rewards.title` = "Rewards"
+- `about.rewards.description.d1` = Block reward distribution details
+- `about.rewards.description.d2` = Seniority bonus details
+
+**Seniority Section:**
+- `about.seniority.title` = "SENTRY NODE SENIORITY EXPLAINED"
+- `about.seniority.description` = Seniority mechanism explanation
+- `about.seniority.blockInfo.label` = "Syscoin Average Block is 60 Seconds. Therefore:"
+- `about.seniority.txData.gamma.label` = "TX DATA GAMMA"
+- `about.seniority.txData.gamma.blocks` = "43,800 Blocks"
+- `about.seniority.txData.beta.label` = "TX DATA BETA"
+- `about.seniority.txData.beta.blocks` = "526,600 Blocks"
+- `about.seniority.txData.alpha.label` = "TX DATA ALPHA"
+- `about.seniority.txData.alpha.blocks` = "1,314,000 Blocks"
+- `about.seniority.oneYear.title` = "1 YEAR 35% increase of base rate"
+- `about.seniority.twoAndHalf.title` = "2.5 YEARS 100% increase of base rate"
+- `about.seniority.note.main` = Combined seniority note
+
+**Legacy Keys (Preserved for backward compatibility):**
+- `about.masternodes.*` - Old feature list
+- `about.seniority.seniority.*` - Old timeline content
+- `about.seniority.note_legacy.*` - Old note format
 
 ### Component Props Pattern
 All components should accept:
