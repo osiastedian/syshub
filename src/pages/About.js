@@ -23,7 +23,7 @@ class About extends Component {
     const { t } = this.props;
     return (
       <Background>
-        <BackgroundInner />
+        <BackgroundInner type="clean" />
         <main className="section aboutpage">
           <MetaTags>
             <title>{t("about.meta.title")}</title>
