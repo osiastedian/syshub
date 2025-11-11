@@ -21,10 +21,15 @@ Transform the About page from a traditional timeline-based layout to a modern, c
 - **Content from Figma** (Translation keys):
   - Title: `about.features.title` = "What sets Syscoin SentryNodes apart?"
   - Card 1: `about.features.list.f1` = "Facilitation of future Syscoin features and services"
+    - Icon: `/public/assets/images/about-icons/facilitation of future.png`
   - Card 2: `about.features.list.f2` = "Seniority benefits to masternode operators"
+    - Icon: `/public/assets/images/about-icons/Seniority Benefits.png`
   - Card 3: `about.features.list.f3` = "Z-DAG Protocol's instant asset transfer"
+    - Icon: `/public/assets/images/about-icons/Z-Dags Protocol.png`
   - Card 4: `about.features.list.f4` = "Scalability"
-- **Features**: Icons, hover states, responsive stacking (4 cols → 2 cols → 1 col)
+    - Icon: `/public/assets/images/about-icons/Scalability.png`
+- **Features**: Icons (100x100px), hover states, responsive stacking (4 cols → 2 cols → 1 col)
+- **Icon Details**: Black/grayscale 3D illustration style, positioned at top of each card
 
 ### 3. Seniority Section (MAJOR REFACTOR)
 - **Current**: Vertical timeline with alternating left/right blocks

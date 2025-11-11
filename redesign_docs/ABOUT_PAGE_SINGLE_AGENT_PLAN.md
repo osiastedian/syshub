@@ -23,10 +23,15 @@ Complete redesign of the About page from traditional timeline layout to modern c
 - **Layout**: 4-card responsive grid (4 cols desktop → 2 cols tablet → 1 col mobile)
 - **Cards** (from Figma):
   1. `about.features.list.f1` = "Facilitation of future Syscoin features and services"
+     - Icon: `/public/assets/images/about-icons/facilitation of future.png`
   2. `about.features.list.f2` = "Seniority benefits to masternode operators"
+     - Icon: `/public/assets/images/about-icons/Seniority Benefits.png`
   3. `about.features.list.f3` = "Z-DAG Protocol's instant asset transfer"
+     - Icon: `/public/assets/images/about-icons/Z-Dags Protocol.png`
   4. `about.features.list.f4` = "Scalability"
+     - Icon: `/public/assets/images/about-icons/Scalability.png`
 - **Title**: `about.features.title` = "What sets Syscoin SentryNodes apart?"
+- **Icon Specs**: 100x100px, black/grayscale 3D style, positioned at top of card
 - **Styling**: Cards with icons, hover effects, clean typography
 
 ### 3. Seniority Section (MAJOR REFACTOR)
