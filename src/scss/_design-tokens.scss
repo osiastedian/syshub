@@ -55,7 +55,9 @@ $color-border: $color-neutral-gray-dark;
 // ============================================================================
 
 // Font Families
-$font-family-heading: 'Sentry Slab LC', serif;
+// Note: 'Sentry Slab LC' is a premium font not available on Google Fonts
+// Using 'Playfair Display' as a high-quality serif alternative
+$font-family-heading: 'Playfair Display', serif;
 $font-family-body: 'DM Sans', sans-serif;
 $font-family-monospace: 'Courier New', monospace;
 
