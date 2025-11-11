@@ -1,0 +1,58 @@
+// ============================================================================
+// About Rewards Section Styles
+// ============================================================================
+@import 'design-tokens';
+
+.about-rewards {
+  padding: $space-3xl 0;
+  background-color: $color-background;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-2xl 0;
+  }
+
+  &__content {
+    @media (max-width: $breakpoint-lg) {
+      text-align: center;
+      margin-bottom: $space-xl;
+    }
+
+    @media (min-width: $breakpoint-lg) {
+      padding-right: $space-xl;
+    }
+  }
+
+  &__title {
+    @include typography-h2;
+    color: $color-text;
+    margin-bottom: $space-lg;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: $font-size-h3;
+    }
+  }
+
+  &__description {
+    @include typography-body-medium-regular;
+    color: $color-text-secondary;
+    line-height: $line-height-relaxed;
+    margin-bottom: $space-md;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  &__image {
+    text-align: center;
+
+    @media (min-width: $breakpoint-lg) {
+      text-align: left;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+    }
+  }
+}

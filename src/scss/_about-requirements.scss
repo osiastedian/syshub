@@ -1,0 +1,55 @@
+// ============================================================================
+// About Requirements Section Styles
+// ============================================================================
+@import 'design-tokens';
+
+.about-requirements {
+  padding: $space-3xl 0;
+  background-color: $color-surface;
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-2xl 0;
+  }
+
+  &__title {
+    @include typography-h2;
+    color: $color-text;
+    margin-bottom: $space-2xl;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: $font-size-h3;
+      margin-bottom: $space-xl;
+    }
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  &__item {
+    @include typography-body-medium-regular;
+    color: $color-text;
+    padding: $space-md 0;
+    border-bottom: 1px solid $color-border;
+    transition: all $transition-fast;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    &:hover {
+      color: $color-primary;
+      padding-left: $space-sm;
+    }
+
+    i {
+      color: $color-primary;
+      margin-right: $space-sm;
+    }
+  }
+}
