@@ -25,6 +25,8 @@
     @include typography-h1;
     color: $color-text;
     margin-bottom: $space-xl;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    line-height: 1.2; // Tight for headlines
 
     @media (max-width: $breakpoint-md) {
       font-size: $font-size-h2;
@@ -34,7 +36,7 @@
   &__description {
     @include typography-body-large-regular;
     color: $color-text-secondary;
-    line-height: $line-height-relaxed;
+    line-height: 1.8; // Relaxed for long-form content
     margin-bottom: 0;
   }
 
@@ -48,6 +50,7 @@
     img {
       max-width: 100%;
       height: auto;
+      filter: drop-shadow(0 10px 30px rgba(251, 176, 59, 0.15));
     }
   }
 }
