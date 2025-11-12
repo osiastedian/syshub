@@ -11,18 +11,18 @@ import "./RewardsSection.scss";
  */
 const RewardsSection = ({ t }) => {
   return (
-    <section className="about-rewards">
+    <section className="about-rewards d-flex flex-column">
       {/* Header Section - Centered title only */}
-      <div className="about-rewards__header">
+      <div className="about-rewards__header d-flex flex-column align-items-center text-center">
         <h2 className="about-rewards__title">
           {t("about.rewards.title")}
         </h2>
       </div>
 
       {/* Content Section - Text left, Chart right */}
-      <div className="about-rewards__content-wrapper">
+      <div className="about-rewards__content-wrapper d-flex align-items-center flex-md-column">
         {/* Text Content - Left side */}
-        <div className="about-rewards__content">
+        <div className="about-rewards__content d-flex flex-column">
           <div className="about-rewards__description">
             <p>{t("about.rewards.description.d1")}</p>
             <p>{t("about.rewards.description.d2")}</p>
@@ -31,7 +31,7 @@ const RewardsSection = ({ t }) => {
         </div>
 
         {/* Chart/Image - Right side */}
-        <div className="about-rewards__chart">
+        <div className="about-rewards__chart d-flex align-items-center justify-content-center">
           <img
             src="/assets/images/reward.png"
             alt="Masternode Reward Increase"

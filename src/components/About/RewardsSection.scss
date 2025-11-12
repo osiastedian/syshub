@@ -6,8 +6,7 @@
 .about-rewards {
   // Section container with flexbox column layout
   // Matches Figma spec: flex-col, gap-60px, px-180px, py-100px
-  display: flex;
-  flex-direction: column;
+  // Bootstrap utilities: d-flex flex-column
   gap: 3.75rem;
   padding: 6.25rem 11.25rem;
   background-color: transparent;
@@ -28,10 +27,7 @@
   // Header Section - Title only (no gap needed as there's only one element)
   // ============================================================================
   &__header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
+    // Bootstrap utilities: d-flex flex-column align-items-center text-center
   }
 
   // ============================================================================
@@ -57,17 +53,15 @@
   // Content Section - Side-by-side layout with text (left) and chart (right)
   // ============================================================================
   &__content-wrapper {
-    display: flex;
+    // Bootstrap utilities: d-flex align-items-center flex-md-column
     gap: 3.75rem;
-    align-items: center;
 
     @media (max-width: $breakpoint-lg) {
       gap: 3rem;
     }
 
     @media (max-width: $breakpoint-md) {
-      // Mobile: stack vertically
-      flex-direction: column;
+      // Mobile: stack vertically (via flex-md-column utility)
       gap: 2rem;
     }
   }
@@ -76,9 +70,8 @@
   // Text Content Section - Left side of layout
   // ============================================================================
   &__content {
+    // Bootstrap utilities: d-flex flex-column
     flex: 1 1 0%;
-    display: flex;
-    flex-direction: column;
     gap: $space-lg;
   }
 
@@ -112,13 +105,11 @@
   // Chart Container - Right side, fixed size per Figma spec (similar to Governance)
   // ============================================================================
   &__chart {
+    // Bootstrap utilities: d-flex align-items-center justify-content-center
     // Fixed dimensions as per Figma design (490px × 389px)
     width: 30.625rem;
     height: 24.3125rem;
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     @media (max-width: $breakpoint-lg) {
       // Tablet: slightly smaller
