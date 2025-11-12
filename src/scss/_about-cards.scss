@@ -42,6 +42,7 @@
     @media (max-width: $breakpoint-md) {
       // Mobile Figma spec: vertical stack with 192px gap between cards
       flex-direction: column;
+      align-items: center;
       gap: 12rem;
       padding: 0;
     }
