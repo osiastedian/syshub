@@ -111,11 +111,50 @@ The codebase uses several crypto libraries for blockchain operations:
 - `crypto-js` - Encryption utilities
 - Seeds are encrypted with password and stored locally
 
-### Styling
+### Styling & Design System
 
 - SCSS modules in `src/scss/styles.scss`
 - Bootstrap 5 for component styling
 - CSS-in-JS possible via inline styles
+
+**Design System Structure:**
+- Design tokens defined in `src/scss/_design-tokens.scss` (shared across all components)
+- Global component styles: `src/scss/` directory (buttons, inputs, cards, tables, modal, icons, etc.)
+- Page-specific component styles: Colocated with components (e.g., `src/components/About/HeroSection.scss` with `src/components/About/HeroSection.jsx`)
+- All component SCSS files import shared design tokens: `@import '../../scss/design-tokens';`
+- Breakpoints: `$breakpoint-md` (768px for mobile), `$breakpoint-lg` (992px), `$breakpoint-sm` (576px)
+- Typography mixins: `typography-hero-h1`, `typography-section-h2`, `typography-body-large-regular`
+- Color tokens: `$color-text`, `$color-primary`, `$color-brand-gold`, `$color-brand-blue`, `$color-neutral-white`, `$color-neutral-black`
+- Spacing tokens: `$space-lg` (24px), `$space-xl` (32px), `$space-2xl` (64px), `$space-3xl` (100px)
+
+**Responsive Design Standards (Figma Mobile Spec: node-id=2082-12308):**
+- Mobile padding: 60px vertical (3.75rem), 16px horizontal (1rem)
+- Desktop padding: 100px vertical (6.25rem), 180px horizontal (11.25rem)
+- Mobile gaps between sections: 24px (1.5rem)
+- Typography: Different sizes for desktop vs mobile (e.g., 38px desktop → 32px mobile)
+- Layout: Desktop flex-row layouts convert to flex-column on mobile with center alignment
+- Labels/text splitting: Content that doesn't fit mobile is split in translation files
+
+**About Page Redesign (Figma: https://www.figma.com/design/azvuitP9PvixRa2SM1sLXj/SentryNodes)**
+Hybrid SCSS architecture - page-level and component-level styles:
+
+**Page-level styles** (`src/pages/About.scss`):
+- Container styles (`.aboutpage`)
+- Imported directly in `src/pages/About.js`
+- Keeps page styles colocated with page component
+
+**Component-level styles** (colocated in `src/components/About/`):
+- Each section component has its own SCSS file (imported in the component):
+  - `HeroSection.jsx` + `HeroSection.scss`: 100px gap between image/content, responsive typography
+  - `FeatureCards.jsx` + `FeatureCards.scss`: Icon + text cards, 24px gap on mobile
+  - `GovernanceSection.jsx` + `GovernanceSection.scss`: Governance section styling
+  - `RewardsSection.jsx` + `RewardsSection.scss`: Rewards section styling
+  - `SenioritySection.jsx` + `SenioritySection.scss`: TX data items stay horizontal on mobile with space-between
+  - `RequirementsSection.jsx` + `RequirementsSection.scss`: Centered desktop (993px max-width), left-aligned mobile
+- Each component SCSS imports design tokens: `@import '../../scss/design-tokens';`
+- Each component imports its own SCSS: `import "./SectionName.scss";`
+
+**Translation patterns**: Split content for mobile (e.g., TX data labels separate from block numbers in `src/shared/locales/en/pages/about/index.js`)
 
 ### Internationalization
 
@@ -188,6 +227,21 @@ await apiClient.get('/endpoint');
 - Use `createSeed(password)` to create/encrypt seed
 - Use `getSeed()` to retrieve encrypted seed
 - Use `removeSeed()` to clear seed on logout
+
+### Git Workflow & Branch Management
+
+**Proper workflow for all changes:**
+1. Work on a feature branch (e.g., `feature-name`)
+2. Commit changes locally
+3. Push ONLY to your upstream feature branch: `git push origin [your-feature-branch]`
+4. Create a Pull Request (PR) to merge into `redesign` branch
+5. **NEVER push directly to `redesign` or `master` branches**
+
+**Key principles:**
+- Always push to your current upstream branch: `git push origin [current-branch]`
+- Use PRs for all changes to `redesign`, `master`, or other shared branches
+- PRs enable code review, CI checks, and proper change tracking
+- Feature branches keep work isolated and organized
 
 ## Important Gotchas
 

@@ -1,0 +1,21 @@
+// ============================================================================
+// About Page Styles
+// ============================================================================
+// Main about page styling that imports all section-specific styles
+// ============================================================================
+
+@import 'design-tokens';
+@import 'about-hero';
+@import 'about-cards';
+@import 'about-governance';
+@import 'about-rewards';
+@import 'about-seniority';
+@import 'about-requirements';
+
+// ============================================================================
+// About Page Layout
+// ============================================================================
+
+.aboutpage {
+  min-height: 100vh;
+}
