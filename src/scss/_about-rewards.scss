@@ -23,10 +23,9 @@
   }
 
   &__title {
-    @include typography-h2;
+    @include typography-section-title-bold;
     color: $color-text;
     margin-bottom: $space-lg;
-    line-height: 1.2; // Tight for headlines
 
     @media (max-width: $breakpoint-md) {
       font-size: $font-size-h3;
