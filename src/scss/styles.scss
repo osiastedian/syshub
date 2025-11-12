@@ -15,6 +15,11 @@
 // Settings and variable overrides (must come before Bootstrap)
 $body-bg: #0a0a0a; // Design token base background color
 $body-color: #D3DFFF;
+
+// Bootstrap 5 CSS variables (must come before Bootstrap import)
+$variable-prefix: bs-;
+$body-bg-rgb: rgb(10, 10, 10);
+
 @import "_settings.scss";
 
 // Bootstrap-specific overrides (convert px to rem for compatibility)
@@ -23,11 +28,6 @@ $line-height-base: 2.5;
 
 // Bootstrap (needs settings variables)
 @import "bootstrap/scss/bootstrap";
-
-// Override Bootstrap CSS custom properties to match design tokens
-:root {
-  --bs-body-bg: #0a0a0a !important;
-}
 
 // Design Tokens (foundation of the design system)
 @import "_design-tokens.scss";
