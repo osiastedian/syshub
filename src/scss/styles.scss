@@ -24,6 +24,11 @@ $line-height-base: 2.5;
 // Bootstrap (needs settings variables)
 @import "bootstrap/scss/bootstrap";
 
+// Override Bootstrap CSS custom properties to match design tokens
+:root {
+  --bs-body-bg: #0a0a0a;
+}
+
 // Design Tokens (foundation of the design system)
 @import "_design-tokens.scss";
 
