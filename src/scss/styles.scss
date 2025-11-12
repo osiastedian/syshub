@@ -29,6 +29,11 @@ $line-height-base: 2.5;
 // Bootstrap (needs settings variables)
 @import "bootstrap/scss/bootstrap";
 
+// Ensure body background is set to design token color (overrides Bootstrap defaults)
+body {
+  background-color: #0a0a0a;
+}
+
 // Design Tokens (foundation of the design system)
 @import "_design-tokens.scss";
 
