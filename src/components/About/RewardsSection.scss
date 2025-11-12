@@ -4,23 +4,25 @@
 @import '../../scss/design-tokens';
 
 .about-rewards {
-  // Section container with flexbox column layout
-  // Matches Figma spec: flex-col, gap-60px, px-180px, py-100px
-  // Bootstrap utilities: d-flex flex-column
-  gap: 3.75rem;
-  padding: 6.25rem 11.25rem;
+  // Section container - background and minimal padding
   background-color: transparent;
 
-  @media (max-width: $breakpoint-lg) {
-    // Tablet: reduce padding (100px 80px)
-    padding: 6.25rem 5rem;
-    gap: 3rem;
-  }
-
-  @media (max-width: $breakpoint-md) {
-    // Mobile Figma spec (node-id=2082-12308): 60px vertical, 16px horizontal, 60px gap
-    padding: 3.75rem 1rem;
+  > .container {
+    // Bootstrap utilities: d-flex flex-column
     gap: 3.75rem;
+    padding: 6.25rem 11.25rem; // Figma spec: 100px vertical, 180px horizontal
+
+    @media (max-width: $breakpoint-lg) {
+      // Tablet: reduce padding
+      padding: 6.25rem 5rem;
+      gap: 3rem;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      // Mobile Figma spec (node-id=2082-12308): 60px vertical, 16px horizontal, 60px gap
+      padding: 3.75rem 1rem;
+      gap: 3.75rem;
+    }
   }
 
   // ============================================================================
