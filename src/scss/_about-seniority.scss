@@ -4,150 +4,330 @@
 @import 'design-tokens';
 
 .about-seniority {
-  padding: $space-3xl 0;
   background-color: $color-background;
+  padding: 0;
 
-  @media (max-width: $breakpoint-md) {
-    padding: $space-2xl 0;
-  }
+  &__wrapper {
+    padding: 100px 180px;
+    max-width: 1440px;
+    margin: 0 auto;
 
-  &__header {
-    margin-bottom: $space-3xl;
+    @media (max-width: $breakpoint-lg) {
+      padding: 80px 80px;
+    }
 
     @media (max-width: $breakpoint-md) {
-      margin-bottom: $space-2xl;
+      padding: 60px 40px;
+    }
+  }
+
+  // ============================================================================
+  // Header Section (Title + Description)
+  // ============================================================================
+
+  &__header {
+    text-align: center;
+    margin-bottom: 60px;
+
+    @media (max-width: $breakpoint-md) {
+      margin-bottom: 48px;
     }
   }
 
   &__title {
-    @include typography-section-title-bold;
-    color: $color-text;
+    font-family: $font-family-body;
+    font-size: 38px;
+    font-weight: $font-weight-semi-bold;
+    line-height: 1.3;
     text-transform: uppercase;
-    letter-spacing: 1px;
-    margin-bottom: $space-lg;
+    letter-spacing: 0;
+    margin-bottom: 24px;
+    font-variation-settings: 'opsz' 14;
 
     @media (max-width: $breakpoint-md) {
-      font-size: $font-size-h3;
+      font-size: 24px;
+      margin-bottom: 16px;
     }
   }
 
   &__description {
-    @include typography-body-large-regular;
-    color: $color-text-secondary;
-    max-width: 800px;
+    font-family: $font-family-body;
+    font-size: 18px;
+    font-weight: $font-weight-regular;
+    line-height: 1.3;
+    color: $color-neutral-white;
+    max-width: 100%;
     margin: 0 auto;
-    line-height: 1.8; // Relaxed for long-form content
-  }
-
-  &__tx-data {
-    background-color: $color-surface;
-    border-radius: $radius-lg;
-    padding: $space-xl;
-    margin-bottom: $space-3xl;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    font-variation-settings: 'opsz' 14;
 
     @media (max-width: $breakpoint-md) {
-      padding: $space-lg;
-      margin-bottom: $space-2xl;
+      font-size: 16px;
     }
   }
 
-  &__tx-data-label {
-    @include typography-body-large-semi-bold;
-    color: $color-text;
-    text-align: center;
-    margin-bottom: $space-lg;
+  // ============================================================================
+  // Middle Section (Three-Column Layout)
+  // ============================================================================
+
+  &__middle-section {
+    display: flex;
+    flex-direction: row;
+    gap: 80px;
+    width: 1080px;
+    height: 191px;
+    margin: 0 auto 60px;
+    align-items: flex-start;
+
+    @media (max-width: $breakpoint-lg) {
+      width: 100%;
+      gap: 60px;
+      height: auto;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      flex-direction: column;
+      gap: 32px;
+      height: auto;
+    }
   }
+
+  &__middle-text {
+    font-family: $font-family-body;
+    font-size: 18px;
+    font-weight: $font-weight-regular;
+    line-height: 1.3;
+    color: $color-neutral-white;
+    flex: 0 0 auto;
+    max-width: 250px;
+    font-variation-settings: 'opsz' 14;
+
+    @media (max-width: $breakpoint-md) {
+      max-width: 100%;
+    }
+  }
+
+  // ============================================================================
+  // TX Data Section
+  // ============================================================================
 
   &__tx-data-grid {
     display: flex;
     flex-direction: column;
-    gap: $space-md; // 16px vertical gap between items
+    gap: 12px;
+    flex: 1 1 auto;
+    min-width: 300px;
+
+    @media (max-width: $breakpoint-md) {
+      gap: 12px;
+    }
   }
 
   &__tx-data-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: $color-neutral-gray-dark;
-    border-radius: $radius-md;
-    padding: $space-lg;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: $color-neutral-black;
+    border: 1px solid $color-brand-gold;
+    border-radius: 12px;
+    padding: 8px 16px;
+    gap: 16px;
+
+    @media (max-width: $breakpoint-md) {
+      padding: 8px 16px;
+    }
   }
 
   &__tx-data-label-text {
-    @include typography-body-small-semi-bold;
-    color: $color-primary;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    font-size: 14px;
-    font-weight: 700;
+    font-family: $font-family-body;
+    font-size: 18px;
+    font-weight: $font-weight-semi-bold;
+    line-height: 1.3;
+    color: $color-neutral-white;
+    text-align: center;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    font-variation-settings: 'opsz' 14;
   }
 
   &__tx-data-blocks {
-    @include typography-body-medium-semi-bold;
-    color: $color-text;
-    background-color: $color-neutral-gray-medium;
-    padding: $space-xs $space-sm;
-    border-radius: 6px;
-    white-space: nowrap;
+    font-family: $font-family-body;
     font-size: 16px;
-    font-weight: 600;
+    font-weight: $font-weight-semi-bold;
+    line-height: 1.3;
+    padding: 8px;
+    border-radius: 12px;
+    white-space: nowrap;
+    flex: 0 0 auto;
+    font-variation-settings: 'opsz' 14;
+
+    // Color-coded by type
+    &--month {
+      background-color: rgba(31, 94, 255, 0.2);
+      color: $color-brand-blue;
+    }
+
+    &--year {
+      background-color: rgba(251, 176, 59, 0.2);
+      color: $color-brand-gold;
+    }
+
+    &--twoHalf {
+      background-color: rgba(251, 176, 59, 0.2);
+      color: $color-brand-gold;
+    }
   }
 
-  &__card {
-    background-color: $color-surface;
-    border: 2px solid $color-primary;
-    border-radius: $radius-lg;
-    padding: $space-xl;
-    text-align: center;
-    margin-bottom: $space-lg;
-    transition: all $transition-base;
+  &__middle-column-3 {
+    flex: 0 0 auto;
+    min-width: 100px;
+
+    @media (max-width: $breakpoint-md) {
+      display: none;
+    }
+  }
+
+  // ============================================================================
+  // Cards Container & Layout
+  // ============================================================================
+
+  &__cards-container {
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+    width: 1080px;
+    margin: 0 auto 60px;
+    align-items: flex-start;
 
     @media (max-width: $breakpoint-lg) {
-      margin-bottom: $space-lg;
+      width: 100%;
+      gap: 60px;
     }
-
-    &:hover {
-      transform: translateY(-2px);
-      box-shadow: $shadow-md;
-      border-color: $color-brand-gold-dark;
-    }
-  }
-
-  &__card-title {
-    @include typography-card-h3;
-    color: $color-text;
-    text-transform: uppercase;
-    margin-bottom: 0;
 
     @media (max-width: $breakpoint-md) {
-      font-size: $font-size-h4;
+      flex-direction: column;
+      gap: 32px;
+      width: 100%;
     }
   }
+
+  // ============================================================================
+  // Seniority Card Component
+  // ============================================================================
+}
+
+.seniority-card {
+  flex: 1 1 0;
+  border-radius: 8px;
+  padding: 32px;
+  background-color: transparent;
+  border: 1px solid $color-brand-gold;
+  transition: all $transition-base;
+
+  &--2half {
+    border-color: $color-brand-blue;
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  &__header {
+    margin-bottom: 44px;
+  }
+
+  &__title-main {
+    font-family: $font-family-body;
+    font-size: 24px;
+    font-weight: $font-weight-semi-bold;
+    line-height: 1.3;
+    color: $color-neutral-white;
+    margin: 0 0 0 0;
+    font-variation-settings: 'opsz' 14;
+  }
+
+  &__title-subtitle {
+    font-family: $font-family-body;
+    font-size: 24px;
+    font-weight: $font-weight-medium;
+    line-height: 1.3;
+    color: $color-neutral-white;
+    margin: 0;
+    font-variation-settings: 'opsz' 14;
+  }
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__subheading {
+    font-family: $font-family-body;
+    font-size: 18px;
+    font-weight: $font-weight-medium;
+    line-height: 1.167; // 21px line-height
+    color: $color-neutral-white;
+    margin: 0 0 24px 0;
+    font-variation-settings: 'opsz' 14;
+  }
+
+  &__text-blocks {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  &__text-block {
+    font-family: $font-family-body;
+    font-size: 18px;
+    font-weight: $font-weight-regular;
+    line-height: 1.167; // 21px line-height
+    color: $color-neutral-white;
+    margin: 0;
+    font-variation-settings: 'opsz' 14;
+
+    &--bold-gold {
+      font-weight: $font-weight-bold;
+      color: $color-brand-gold;
+      line-height: 1.4; // 25.2px line-height
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: 24px;
+  }
+}
+
+.about-seniority {
+  // ============================================================================
+  // Final Note Section
+  // ============================================================================
 
   &__note {
-    background-color: $color-surface;
-    border-left: 4px solid $color-primary;
-    border-radius: $radius-md;
-    padding: $space-xl;
-    margin-top: $space-3xl;
-
-    @media (max-width: $breakpoint-md) {
-      padding: $space-lg;
-      margin-top: $space-2xl;
-    }
+    color: $color-neutral-white;
+    margin-top: 0;
+    font-variation-settings: 'opsz' 14;
 
     p {
-      @include typography-body-medium-regular;
-      color: $color-text-secondary;
-      margin-bottom: 0;
-      line-height: 1.8; // Relaxed for long-form content
+      font-family: $font-family-body;
+      font-size: 16px;
+      font-weight: $font-weight-regular;
+      line-height: 1.3;
+      color: $color-neutral-white;
+      margin: 0;
+      font-variation-settings: 'opsz' 14;
 
-      &:last-child {
-        margin-bottom: 0;
+      strong {
+        font-weight: $font-weight-bold;
+        color: $color-neutral-white;
+      }
+    }
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 14px;
+
+      p {
+        font-size: 14px;
       }
     }
   }
