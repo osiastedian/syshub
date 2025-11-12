@@ -5,7 +5,7 @@
 .main { position: relative; padding-top: 200px; overflow: hidden; min-height: 100vh; }
 
 /*  Main Gradient  */
-.main .main__gradient { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -5; background-color: $color-background; /* Solid black background - design token compliant */ }
+.main .main__gradient { position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: -5; }
 
 /*  Main Backgrounds  */
 .main .main__backgrounds { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: -5; pointer-events: none; }
