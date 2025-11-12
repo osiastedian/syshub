@@ -228,6 +228,21 @@ await apiClient.get('/endpoint');
 - Use `getSeed()` to retrieve encrypted seed
 - Use `removeSeed()` to clear seed on logout
 
+### Git Workflow & Branch Management
+
+**Proper workflow for all changes:**
+1. Work on a feature branch (e.g., `feature-name`)
+2. Commit changes locally
+3. Push ONLY to your upstream feature branch: `git push origin [your-feature-branch]`
+4. Create a Pull Request (PR) to merge into `redesign` branch
+5. **NEVER push directly to `redesign` or `master` branches**
+
+**Key principles:**
+- Always push to your current upstream branch: `git push origin [current-branch]`
+- Use PRs for all changes to `redesign`, `master`, or other shared branches
+- PRs enable code review, CI checks, and proper change tracking
+- Feature branches keep work isolated and organized
+
 ## Important Gotchas
 
 - **Webpack Polyfills**: Node.js modules are polyfilled for browser use (crypto, buffer, etc.) - don't assume they work as in Node.js
