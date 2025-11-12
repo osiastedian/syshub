@@ -17,9 +17,17 @@ const HeroSection = ({ t }) => {
               <h1 className="about-hero__title">
                 {t("about.hero.title")}
               </h1>
-              <p className="about-hero__description">
-                {t("about.hero.description")}
-              </p>
+              <div className="about-hero__description">
+                <p className="about-hero__description-paragraph">
+                  {t("about.hero.description.p1")}
+                </p>
+                <p className="about-hero__description-paragraph">
+                  {t("about.hero.description.p2")}
+                </p>
+                <p className="about-hero__description-paragraph">
+                  {t("about.hero.description.p3")}
+                </p>
+              </div>
             </div>
           </div>
           <div className="col-lg-5 col-md-12 order-1 order-lg-2">

@@ -8,7 +8,11 @@ const about = {
     title: 'Learn About Syscoin SentryNodes',
     hero: {
       title: 'Learn about Syscoin SentryNodes',
-      description: 'Syscoin SentryNodes protect the blockchain from network attacks, in the same vein as traditional proof of stake algorithms. It\'s often expensive to accumulate enough of a currency to create a masternode. This expense helps keep the network decentralised, as it would take an ungodly amount of money to purchase enough currency to have a monopoly on its nodes. The cost of operating a Sentry Node also keeps operators honest. Unlike Bitcoin miners, who may switch from one coin on its blockchain to the next based on profitability, operators are incentivised to properly maintain and upkeep their Syscoin SentryNodes. The exorbitant initial investment serves as collateral, whereby if operators want their investment to pay off, they have to play by the blockchain\'s rules. Between the high operation costs and promising return on investment, it\'s in an operator\'s best interest to operate his/her node properly and without any malicious intent.',
+      description: {
+        p1: 'Syscoin SentryNodes protect the blockchain from network attacks, in the same vein as traditional proof of stake algorithms. It\'s often expensive to accumulate enough of a currency to create a masternode. This expense helps keep the network decentralised, as it would take an ungodly amount of money to purchase enough currency to have a monopoly on its nodes.',
+        p2: 'The cost of operating a Sentry Node also keeps operators honest. Unlike Bitcoin miners, who may switch from one coin on its blockchain to the next based on profitability, operators are incentivised to properly maintain and upkeep their Syscoin SentryNodes.',
+        p3: 'The exorbitant initial investment serves as collateral, whereby if operators want their investment to pay off, they have to play by the blockchain\'s rules. Between the high operation costs and promising return on investment, it\'s in an operator\'s best interest to operate his/her node properly and without any malicious intent.',
+      },
     },
     features: {
       title: 'What sets Syscoin SentryNodes apart?',
