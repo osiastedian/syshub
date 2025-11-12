@@ -37,10 +37,10 @@ const FeatureCards = ({ t }) => {
         <h2 className="about-features__title text-center">
           {t("about.features.title")}
         </h2>
-        <div className="about-features__grid">
+        <div className="about-features__grid d-flex justify-content-between align-items-start flex-wrap flex-md-column justify-content-md-center align-items-md-center mx-auto">
           {features.map((feature) => (
-            <div key={feature.key} className="about-feature-card">
-              <div className="about-feature-card__icon">
+            <div key={feature.key} className="about-feature-card d-flex flex-column align-items-center text-center">
+              <div className="about-feature-card__icon d-flex justify-content-center align-items-center">
                 <img
                   src={feature.icon}
                   alt={feature.alt}

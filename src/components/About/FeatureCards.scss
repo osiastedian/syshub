@@ -28,24 +28,16 @@
   }
 
   &__grid {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
     gap: 0; // Cards spread evenly with space-between
     max-width: 75rem;
-    margin: 0 auto;
     padding: 0 11.25rem; // Figma spec: 180px horizontal padding
 
     @media (max-width: $breakpoint-lg) {
-      flex-wrap: wrap;
-      justify-content: center;
       padding: 0 $space-xl;
     }
 
     @media (max-width: $breakpoint-md) {
       // Mobile: vertical stack with 24px gap between cards
-      flex-direction: column;
-      align-items: center;
       gap: 1.5rem;
       padding: 0;
     }
@@ -56,15 +48,10 @@
   background-color: transparent; // Figma spec: no card background
   border-radius: 0;
   padding: 0;
-  text-align: center;
   transition: all $transition-base;
   border: none;
   box-shadow: none;
   min-height: auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
   flex: 1;
   max-width: 13.75rem; // Figma spec: card width 220px
 
@@ -76,9 +63,6 @@
 
   &__icon {
     margin-bottom: $space-lg; // 24px gap between icon and text
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 6.25rem;
     width: 6.25rem;
 
