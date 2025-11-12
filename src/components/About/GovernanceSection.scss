@@ -6,8 +6,7 @@
 .about-governance {
   // Section container with flexbox column layout
   // Matches Figma spec: flex-col, gap-60px, px-180px, py-100px
-  display: flex;
-  flex-direction: column;
+  // Bootstrap utilities: d-flex flex-column
   gap: 3.75rem;
   padding: 6.25rem 11.25rem;
   background-color: transparent;
@@ -28,11 +27,8 @@
   // Header Section - Centered title and question
   // ============================================================================
   &__header {
-    display: flex;
-    flex-direction: column;
+    // Bootstrap utilities: d-flex flex-column align-items-center text-center
     gap: 1.5rem;
-    align-items: center;
-    text-align: center;
   }
 
   // ============================================================================
@@ -73,17 +69,15 @@
   // Content Section - Side-by-side layout with chart (left) and text (right)
   // ============================================================================
   &__content-wrapper {
-    display: flex;
+    // Bootstrap utilities: d-flex align-items-center flex-md-column
     gap: 3.75rem;
-    align-items: center;
 
     @media (max-width: $breakpoint-lg) {
       gap: 3rem;
     }
 
     @media (max-width: $breakpoint-md) {
-      // Mobile: stack vertically
-      flex-direction: column;
+      // Mobile: stack vertically (via flex-md-column utility)
       gap: 2rem;
     }
   }
@@ -92,13 +86,11 @@
   // Image Container - Figma spec: Fixed 490px × 389px chart
   // ============================================================================
   &__image {
+    // Bootstrap utilities: d-flex align-items-center justify-content-center
     // Fixed dimensions as per Figma design
     width: 30.625rem;
     height: 24.3125rem;
     flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     @media (max-width: $breakpoint-lg) {
       // Tablet: slightly smaller
@@ -125,9 +117,8 @@
   // Text Content Section - Right side of layout
   // ============================================================================
   &__content {
+    // Bootstrap utilities: d-flex flex-column
     flex: 1;
-    display: flex;
-    flex-direction: column;
     gap: $space-lg;
   }
 
