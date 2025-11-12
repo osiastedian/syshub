@@ -26,7 +26,7 @@ $line-height-base: 2.5;
 
 // Override Bootstrap CSS custom properties to match design tokens
 :root {
-  --bs-body-bg: #0a0a0a;
+  --bs-body-bg: #0a0a0a !important;
 }
 
 // Design Tokens (foundation of the design system)
