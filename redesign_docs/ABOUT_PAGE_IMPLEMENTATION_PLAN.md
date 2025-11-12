@@ -15,6 +15,22 @@ Transform the About page from a traditional timeline-based layout to a modern, c
   - Description: `about.hero.description` = "Syscoin SentryNodes protect the blockchain from network attacks, in the same vein as traditional proof of stake algorithms. It's often expensive to accumulate enough of a currency to create a masternode. This expense helps keep the network decentralised, as it would take an ungodly amount of money to purchase enough currency to have a monopoly on its nodes. The cost of operating a Sentry Node also keeps operators honest. Unlike Bitcoin miners, who may switch from one coin on its blockchain to the next based on profitability, operators are incentivised to properly maintain and upkeep their Syscoin SentryNodes. The exorbitant initial investment serves as collateral, whereby if operators want their investment to pay off, they have to play by the blockchain's rules. Between the high operation costs and promising return on investment, it's in an operator's best interest to operate his/her node properly and without any malicious intent."
   - Image: Illustration with decorative ellipses
 
+**Typography Specifications (Per Figma Design node 2015:797)**:
+- **Hero Title "Learn about Syscoin SentryNodes"**:
+  - Font Family: DM Sans (sans-serif)
+  - Font Size: 45px (exact, not 48px)
+  - Font Weight: 600 (SemiBold, not Bold)
+  - Line Height: 130% (1.3, not 1.2)
+  - Color: #FFFFFF (white)
+  - Text Shadow: 0 2px 4px rgba(0, 0, 0, 0.3)
+  - Letter Spacing: 0 (default, no adjustment)
+- **Hero Description**:
+  - Font Family: DM Sans (sans-serif)
+  - Font Size: 18px
+  - Font Weight: 400 (Regular)
+  - Line Height: 130% (1.3)
+  - Color: #FFFFFF (white)
+
 ### 2. Feature Cards Section (NEW)
 - **Location**: After hero, before governance
 - **Layout**: 4-card responsive grid
@@ -30,6 +46,21 @@ Transform the About page from a traditional timeline-based layout to a modern, c
     - Icon: `/public/assets/images/about-icons/about-feature-scalability.png`
 - **Features**: Icons (100x100px), hover states, responsive stacking (4 cols → 2 cols → 1 col)
 - **Icon Details**: Black/grayscale 3D illustration style, positioned at top of each card
+
+**Typography Specifications (Per Figma Design node 2015:801)**:
+- **Section Title "What sets Sycoin SentryNodes apart?"**:
+  - Font Family: DM Sans (sans-serif)
+  - Font Size: 38px
+  - Font Weight: 400 (Regular)
+  - Line Height: 130% (1.3)
+  - Color: #FFFFFF (white)
+  - Text Alignment: Center
+- **Card Text**:
+  - Font Family: DM Sans (sans-serif)
+  - Font Size: 16px
+  - Font Weight: 400 (Regular)
+  - Line Height: 130% (1.3)
+  - Color: #FFFFFF (white)
 
 ### 3. Seniority Section (MAJOR REFACTOR)
 - **Current**: Vertical timeline with alternating left/right blocks
@@ -220,6 +251,60 @@ Transform the About page from a traditional timeline-based layout to a modern, c
 ### Translation Files
 - `public/locales/en/about.json` - English translations (MODIFY)
 - `public/locales/[lang]/about.json` - Other languages (MODIFY)
+
+---
+
+## Complete Typography System (Per Figma Design)
+
+**CRITICAL:** All typography in the Figma design uses **DM Sans sans-serif** exclusively. There are NO serif fonts in the actual design. The design system is built on a consistent sans-serif foundation.
+
+### Design Token Updates Required
+
+**File:** `/Users/ted/syscoin/syshub/src/scss/_design-tokens.scss`
+
+Add new hero-specific mixin:
+```scss
+@mixin typography-hero-h1 {
+  font-family: $font-family-body;           // DM Sans (sans-serif)
+  font-size: 45px;
+  font-weight: $font-weight-semi-bold;      // 600 (SemiBold)
+  line-height: 1.3;                         // 130%
+  letter-spacing: 0;                        // No adjustment
+}
+```
+
+Update line-height tokens to match Figma:
+```scss
+// Change from 1.2 to 1.3 for consistency with Figma design
+$line-height-tight: 1.3;    // Was 1.2, but Figma uses 1.3 consistently
+```
+
+### Section Typography Reference
+
+| Section | Element | Font Family | Size | Weight | Line Height | Notes |
+|---------|---------|-------------|------|--------|-------------|-------|
+| Hero | Title | DM Sans | 45px | 600 | 1.3 | Use new `typography-hero-h1` mixin |
+| Hero | Description | DM Sans | 18px | 400 | 1.3 | Use `typography-body-large-regular` |
+| Features | Section Title | DM Sans | 38px | 400 | 1.3 | Regular weight, not bold |
+| Features | Card Text | DM Sans | 16px | 400 | 1.3 | Use `typography-body-medium-regular` |
+| Governance | Section Title | DM Sans | 40px | 700 | 1.3 | Bold for section headers |
+| Governance | Description | DM Sans | 18px | 400 | 1.3 | Body large regular |
+| Rewards | Section Title | DM Sans | 40px | 700 | 1.3 | Bold for section headers |
+| Rewards | Description | DM Sans | 18px | 400 | 1.3 | Body large regular |
+| Seniority | Section Title | DM Sans | 40px | 700 | 1.3 | Bold for section headers |
+| Seniority | Description | DM Sans | 18px | 400 | 1.3 | Body large regular |
+| Seniority | TX Data Labels | DM Sans | 16px | 600 | 1.3 | SemiBold for emphasis |
+| Seniority | TX Data Values | DM Sans | 16px | 400 | 1.3 | Regular for numbers |
+| Requirements | Title | DM Sans | 40px | 700 | 1.3 | Bold for section headers |
+| Requirements | List Items | DM Sans | 16px | 400 | 1.3 | Regular body text |
+
+**KEY CHANGES FROM CURRENT TOKENS:**
+- ✅ All headings use DM Sans (not serif Sentry Slab LC)
+- ✅ Line-height is 1.3 throughout (not 1.2)
+- ✅ Hero title uses 600 SemiBold (not 700 Bold)
+- ✅ Hero title is 45px (not 48px)
+- ✅ No letter-spacing adjustments on any heading
+- ✅ Feature section title is 38px regular (not bold)
 
 ---
 
