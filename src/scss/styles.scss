@@ -60,5 +60,5 @@ body {
 // Content & Typography
 @import "_article.scss";
 
-// Pages
-@import "_about.scss";
+// Pages (page-level container styles)
+@import "_pages/_about.scss";

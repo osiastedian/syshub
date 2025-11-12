@@ -1,5 +1,6 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
+import "./RewardsSection.scss";
 
 /**
  * Rewards section explaining Sentry Node rewards and seniority benefits

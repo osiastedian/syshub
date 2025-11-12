@@ -1,5 +1,6 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
+import "./FeatureCards.scss";
 
 /**
  * Feature cards section displaying 4 key features of Syscoin SentryNodes
