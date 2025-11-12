@@ -18,7 +18,7 @@ const HeroSection = ({ t }) => {
               <h1 className="about-hero__title">
                 {t("about.hero.title")}
               </h1>
-              <div className="about-hero__description">
+              <div className="about-hero__description d-flex flex-column">
                 <p className="about-hero__description-paragraph">
                   {t("about.hero.description.p1")}
                 </p>
