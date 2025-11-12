@@ -60,9 +60,6 @@ const SenioritySection = ({ t }) => {
               </div>
             ))}
           </div>
-
-          {/* Column 3: Empty for now */}
-          <div className="about-seniority__middle-column-3"></div>
         </div>
 
         {/* Seniority Cards */}
