@@ -28,10 +28,10 @@ const RequirementsSection = ({ t }) => {
             <h2 className="about-requirements__title">
               {t("about.requirements.title")}
             </h2>
-            <ul className="about-requirements__list">
+            <ul className="about-requirements__list d-flex flex-column">
               {requirementKeys.map((key) => (
-                <li key={key} className="about-requirements__item">
-                  <div className="about-requirements__icon">
+                <li key={key} className="about-requirements__item d-flex align-items-center">
+                  <div className="about-requirements__icon d-flex align-items-center justify-content-center">
                     <img src={ArrowIcon} alt="" />
                   </div>
                   <p className="about-requirements__text">{t(key)}</p>
