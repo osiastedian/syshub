@@ -22,11 +22,10 @@
   }
 
   &__title {
-    @include typography-h1;
+    @include typography-hero-h1;
     color: $color-text;
     margin-bottom: $space-xl;
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-    line-height: 1.2; // Tight for headlines
 
     @media (max-width: $breakpoint-md) {
       font-size: $font-size-h2;
