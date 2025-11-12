@@ -19,32 +19,4 @@
 .aboutpage {
   background-color: $color-background;
   min-height: 100vh;
-
-  .shell-large {
-    max-width: 90rem;
-    padding-left: $space-xl;
-    padding-right: $space-xl;
-    margin: 0 auto;
-
-    @media (max-width: $breakpoint-md) {
-      padding-left: $space-lg;
-      padding-right: $space-lg;
-    }
-
-    @media (max-width: $breakpoint-sm) {
-      padding-left: $space-md;
-      padding-right: $space-md;
-    }
-  }
-
-  .section__body {
-    padding-top: $space-2xl;
-    padding-bottom: $space-2xl;
-  }
-
-  .articles {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
 }
