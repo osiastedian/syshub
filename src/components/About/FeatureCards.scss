@@ -4,11 +4,11 @@
 @import '../../scss/design-tokens';
 
 .about-features {
-  padding: 6.25rem 0; // Figma spec: 100px vertical padding
+  padding: 6.25rem 0; // Figma spec: 100px vertical padding, horizontal from main.container
 
   @media (max-width: $breakpoint-md) {
-    // Mobile Figma spec (node-id=2082-12308): 60px vertical, 16px horizontal
-    padding: 3.75rem 1rem;
+    // Mobile Figma spec: 60px vertical, horizontal from main.container
+    padding: 3.75rem 0;
   }
 
   &__title {
@@ -30,16 +30,11 @@
   &__grid {
     gap: 0; // Cards spread evenly with space-between
     max-width: 75rem;
-    padding: 0 11.25rem; // Figma spec: 180px horizontal padding
-
-    @media (max-width: $breakpoint-lg) {
-      padding: 0 $space-xl;
-    }
+    // Horizontal padding from main.container, no additional padding needed
 
     @media (max-width: $breakpoint-md) {
       // Mobile: vertical stack with 24px gap between cards
       gap: 1.5rem;
-      padding: 0;
     }
   }
 }

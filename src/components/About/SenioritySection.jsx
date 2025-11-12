@@ -28,8 +28,7 @@ const SenioritySection = ({ t }) => {
   ];
 
   return (
-    <section className="about-seniority">
-      <div className="container d-flex flex-column align-items-center">
+    <section className="about-seniority d-flex flex-column align-items-center">
         {/* Title and Description */}
         <div className="about-seniority__header text-center d-flex flex-column align-items-center">
           <h2 className="about-seniority__title">
@@ -131,7 +130,6 @@ const SenioritySection = ({ t }) => {
             does not effect your Seniority.
           </p>
         </div>
-      </div>
     </section>
   );
 };

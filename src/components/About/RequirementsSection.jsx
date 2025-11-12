@@ -22,8 +22,7 @@ const RequirementsSection = ({ t }) => {
 
   return (
     <section className="about-requirements">
-      <div className="container">
-        <div className="row">
+      <div className="row">
           <div className="col-12 text-center">
             <h2 className="about-requirements__title">
               {t("about.requirements.title")}
@@ -40,7 +39,6 @@ const RequirementsSection = ({ t }) => {
             </ul>
           </div>
         </div>
-      </div>
     </section>
   );
 };

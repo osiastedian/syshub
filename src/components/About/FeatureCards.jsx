@@ -33,7 +33,6 @@ const FeatureCards = ({ t }) => {
 
   return (
     <section className="about-features">
-      <div className="container">
         <h2 className="about-features__title text-center">
           {t("about.features.title")}
         </h2>
@@ -54,7 +53,6 @@ const FeatureCards = ({ t }) => {
             </div>
           ))}
         </div>
-      </div>
     </section>
   );
 };

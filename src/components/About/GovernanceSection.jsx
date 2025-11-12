@@ -11,8 +11,7 @@ import "./GovernanceSection.scss";
  */
 const GovernanceSection = ({ t }) => {
   return (
-    <section className="about-governance">
-      <div className="container d-flex flex-column">
+    <section className="about-governance d-flex flex-column">
         {/* Header Section - Centered title and question */}
         <div className="about-governance__header d-flex flex-column align-items-center text-center">
           <h2 className="about-governance__title">
@@ -43,7 +42,6 @@ const GovernanceSection = ({ t }) => {
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 };
