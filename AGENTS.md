@@ -138,9 +138,10 @@ The codebase uses several crypto libraries for blockchain operations:
 **About Page Redesign (Figma: https://www.figma.com/design/azvuitP9PvixRa2SM1sLXj/SentryNodes)**
 Hybrid SCSS architecture - page-level and component-level styles:
 
-**Page-level styles** (`src/scss/_pages/_about.scss`):
+**Page-level styles** (`src/pages/About.scss`):
 - Container styles (`.aboutpage`)
-- Imported in both `src/pages/About.js` and global `src/scss/styles.scss`
+- Imported directly in `src/pages/About.js`
+- Keeps page styles colocated with page component
 
 **Component-level styles** (colocated in `src/components/About/`):
 - Each section component has its own SCSS file (imported in the component):
