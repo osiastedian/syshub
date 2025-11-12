@@ -55,9 +55,7 @@ $color-border: $color-neutral-gray-dark;
 // ============================================================================
 
 // Font Families
-// Note: 'Sentry Slab LC' is a premium font not available on Google Fonts
-// Using 'Playfair Display' as a high-quality serif alternative
-$font-family-heading: 'Playfair Display', serif;
+$font-family-heading: 'DM Sans', sans-serif;  // Changed from serif to match Figma design philosophy
 $font-family-body: 'DM Sans', sans-serif;
 $font-family-monospace: 'Courier New', monospace;
 
@@ -141,7 +139,7 @@ $line-height-relaxed: 1.8;
 // LEGACY H2 - DO NOT USE FOR NEW COMPONENTS
 // All new components should use typography-section-h2 or typography-section-title-bold
 @mixin typography-h2 {
-  font-family: $font-family-body;           // FIXED: Changed from serif to DM Sans
+  font-family: $font-family-heading;        // Now correctly uses DM Sans from root variable
   font-size: $font-size-h2;
   font-weight: $font-weight-bold;
   line-height: $line-height-tight;
@@ -150,7 +148,7 @@ $line-height-relaxed: 1.8;
 // LEGACY H3 - DO NOT USE FOR NEW COMPONENTS
 // All new components should use typography-card-h3
 @mixin typography-h3 {
-  font-family: $font-family-body;           // FIXED: Changed from serif to DM Sans
+  font-family: $font-family-heading;        // Now correctly uses DM Sans from root variable
   font-size: $font-size-h3;
   font-weight: $font-weight-bold;
   line-height: $line-height-tight;
