@@ -4,7 +4,7 @@
 @import 'design-tokens';
 
 .about-features {
-  padding: 100px 0; // Figma spec: 100px vertical padding
+  padding: 6.25rem 0; // Figma spec: 100px vertical padding
   background-color: $color-background; // Changed from $color-surface to black background
 
   @media (max-width: $breakpoint-md) {
@@ -15,7 +15,7 @@
     @include typography-section-h2;
     color: $color-text;
     text-align: center;
-    margin-bottom: 60px; // Figma spec: 60px gap between title and cards
+    margin-bottom: 3.75rem; // Figma spec: 60px gap between title and cards
 
     @media (max-width: $breakpoint-md) {
       font-size: $font-size-h3;
@@ -28,9 +28,9 @@
     justify-content: space-between;
     align-items: flex-start;
     gap: 0; // Cards spread evenly with space-between
-    max-width: 1200px;
+    max-width: 75rem;
     margin: 0 auto;
-    padding: 0 180px; // Figma spec: 180px horizontal padding
+    padding: 0 11.25rem; // Figma spec: 180px horizontal padding
 
     @media (max-width: $breakpoint-lg) {
       flex-wrap: wrap;
@@ -60,7 +60,7 @@
   align-items: center;
   justify-content: flex-start;
   flex: 1;
-  max-width: 220px; // Figma spec: card width 220px
+  max-width: 13.75rem; // Figma spec: card width 220px
 
   &:hover {
     transform: none;
@@ -73,19 +73,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
-    width: 100px;
+    height: 6.25rem;
+    width: 6.25rem;
 
     img {
-      width: 100px;
-      height: 100px;
+      width: 6.25rem;
+      height: 6.25rem;
       object-fit: contain;
     }
   }
 
   &__text {
     font-family: $font-family-body;
-    font-size: 20px; // Figma spec: 20px
+    font-size: 1.25rem; // Figma spec: 20px
     font-weight: $font-weight-semi-bold; // Figma spec: 600 SemiBold
     color: $color-primary; // Figma spec: gold color
     margin-bottom: 0;
