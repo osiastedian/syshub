@@ -34,8 +34,8 @@
 
   &__description {
     @include typography-body-large-regular;
-    color: $color-text-secondary;
-    line-height: 1.8; // Relaxed for long-form content
+    color: $color-text;
+    line-height: 1.3; // Figma spec: 1.3 (matches other body text)
     margin-bottom: 0;
   }
 
