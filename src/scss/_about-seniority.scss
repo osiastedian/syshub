@@ -95,9 +95,9 @@
     }
 
     @media (max-width: $breakpoint-md) {
-      // Mobile Figma spec: 45px gap between sections
+      // Mobile: 24px gap between sections
       flex-direction: column;
-      gap: 2.8125rem;
+      gap: 1.5rem;
       height: auto;
       width: 100%;
     }
