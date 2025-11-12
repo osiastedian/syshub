@@ -95,9 +95,9 @@ const about = {
         s2: {
           title: 'Syscoin Average Block is 60 Seconds',
           d1: 'Therefore;',
-          d2: '1 Month = 43,800 Blocks',
-          d3: '1 Year Seniority = 526,600 Blocks',
-          d4: '2.5 Year Seniority = 1,314,000 Blocks',
+          d2: '43,800 Blocks',
+          d3: '526,600 Blocks',
+          d4: '1,314,000 Blocks',
         },
         s3: {
           title: 'Calculating 1 Year Seniority',

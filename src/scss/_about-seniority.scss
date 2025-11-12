@@ -165,10 +165,6 @@
     white-space: nowrap;
     flex-shrink: 0; // Prevent label from shrinking
     font-variation-settings: 'opsz' 14;
-
-    @media (max-width: $breakpoint-md) {
-      display: none; // Hide label on mobile
-    }
   }
 
   &__tx-data-blocks {
