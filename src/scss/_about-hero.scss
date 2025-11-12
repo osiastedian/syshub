@@ -35,7 +35,7 @@
   &__title {
     @include typography-hero-h1;
     color: $color-text;
-    margin-bottom: 2rem !important; // 32px gap before description (override _settings.scss)
+    margin-bottom: 2rem; // 32px gap before description
     text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     text-align: left;
 
