@@ -2,37 +2,42 @@ import React from "react";
 import { withTranslation } from "react-i18next";
 
 /**
- * Rewards section explaining Sentry Node rewards
+ * Rewards section explaining Sentry Node rewards and seniority benefits
+ * Implements Figma design specification (Node 2016:2258)
+ * Layout: Centered header section (title + question), then side-by-side content (text left, chart right)
  * @component
  * @category About Components
  */
 const RewardsSection = ({ t }) => {
   return (
     <section className="about-rewards">
-      <div className="container">
-        <div className="row align-items-center">
-          <div className="col-lg-6 col-md-12 order-2 order-lg-1">
-            <div className="about-rewards__content">
-              <h2 className="about-rewards__title">
-                {t("about.rewards.title")}
-              </h2>
-              <p className="about-rewards__description">
-                {t("about.rewards.description.d1")}
-              </p>
-              <p className="about-rewards__description">
-                {t("about.rewards.description.d2")}
-              </p>
-            </div>
+      {/* Header Section - Centered title and question */}
+      <div className="about-rewards__header">
+        <h2 className="about-rewards__title">
+          {t("about.rewards.title")}
+        </h2>
+        <p className="about-rewards__question">
+          {t("about.rewards.question")}
+        </p>
+      </div>
+
+      {/* Content Section - Text left, Chart right */}
+      <div className="about-rewards__content-wrapper">
+        {/* Text Content - Left side */}
+        <div className="about-rewards__content">
+          <div className="about-rewards__description">
+            <p>{t("about.rewards.description.d1")}</p>
+            <p>{t("about.rewards.description.d2")}</p>
           </div>
-          <div className="col-lg-6 col-md-12 order-1 order-lg-2">
-            <div className="about-rewards__image">
-              <img
-                src="/assets/images/reward.png"
-                alt="Sentry Node Rewards"
-                className="img-fluid"
-              />
-            </div>
-          </div>
+        </div>
+
+        {/* Chart/Image - Right side */}
+        <div className="about-rewards__chart">
+          <img
+            src="/assets/images/reward.png"
+            alt="Masternode Reward Increase"
+            className="about-rewards__chart-image"
+          />
         </div>
       </div>
     </section>
