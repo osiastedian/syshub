@@ -42,7 +42,7 @@ const SenioritySection = ({ t }) => {
         </div>
 
         {/* Middle Section: Three-Column Layout */}
-        <div className="about-seniority__middle-section d-flex flex-row flex-md-column align-items-center align-items-md-start">
+        <div className="about-seniority__middle-section d-flex flex-column flex-md-row align-items-center align-items-md-start">
           {/* Column 1: Text */}
           <div className="about-seniority__middle-text d-flex align-items-center justify-content-start">
             {t("about.seniority.blockInfo.label")}
@@ -64,7 +64,7 @@ const SenioritySection = ({ t }) => {
         </div>
 
         {/* Seniority Cards */}
-        <div className="about-seniority__cards-container d-flex flex-row flex-md-column align-items-start align-items-md-start">
+        <div className="about-seniority__cards-container d-flex flex-column flex-md-row align-items-start align-items-md-start">
           {/* 1 YEAR Card */}
           <div className="seniority-card seniority-card--1year">
             <div className="seniority-card__header">

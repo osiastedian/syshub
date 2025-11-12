@@ -20,7 +20,7 @@ const RewardsSection = ({ t }) => {
       </div>
 
       {/* Content Section - Text left, Chart right */}
-      <div className="about-rewards__content-wrapper d-flex align-items-center flex-md-column">
+      <div className="about-rewards__content-wrapper d-flex flex-column flex-md-row align-items-md-center">
         {/* Text Content - Left side */}
         <div className="about-rewards__content d-flex flex-column">
           <div className="about-rewards__description">
