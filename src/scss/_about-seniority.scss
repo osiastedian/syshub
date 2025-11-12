@@ -81,7 +81,7 @@
     gap: 80px;
     width: 1080px;
     height: 191px;
-    align-items: flex-start;
+    align-items: center;
 
     @media (max-width: $breakpoint-lg) {
       width: 100%;
@@ -106,7 +106,8 @@
     flex: 1 1 0;
     font-variation-settings: 'opsz' 14;
     display: flex;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
 
     @media (max-width: $breakpoint-md) {
       max-width: 100%;
