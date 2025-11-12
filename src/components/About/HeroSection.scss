@@ -8,9 +8,7 @@
 
   @media (max-width: $breakpoint-md) {
     padding: 3.75rem 1rem; // 60px vertical, 16px horizontal per Figma mobile spec
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    // Bootstrap utilities: d-flex flex-column align-items-center
     gap: 6.25rem; // 100px gap between illustration and content per Figma
   }
 
@@ -49,8 +47,7 @@
   }
 
   &__description {
-    display: flex;
-    flex-direction: column;
+    // Bootstrap utilities: d-flex flex-column
     gap: 1.5rem; // 24px gap between paragraphs
     margin-bottom: 0;
   }
