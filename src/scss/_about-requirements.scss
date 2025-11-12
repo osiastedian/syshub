@@ -7,7 +7,8 @@
   padding: 6.25rem 11.25rem; // 100px vertical, 180px horizontal per Figma
 
   @media (max-width: $breakpoint-md) {
-    padding: 3.75rem 2.5rem; // 60px 40px - maintain proportional spacing for mobile
+    // Mobile Figma spec (node-id=2082-12308): 60px vertical, 16px horizontal
+    padding: 3.75rem 1rem;
   }
 
   &__title {
@@ -17,8 +18,10 @@
     margin: 0 0 1.5rem 0; // 24px gap between title and list items
 
     @media (max-width: $breakpoint-md) {
+      // Mobile Figma spec: 32px title, 32px margin-bottom, left-aligned
       font-size: $font-size-h3;
-      margin-bottom: $space-lg;
+      margin-bottom: 2rem;
+      text-align: left;
     }
   }
 
