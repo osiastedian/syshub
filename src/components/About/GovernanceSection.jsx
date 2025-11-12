@@ -23,7 +23,7 @@ const GovernanceSection = ({ t }) => {
       </div>
 
       {/* Content Section - Chart and text side-by-side */}
-      <div className="about-governance__content-wrapper d-flex align-items-center flex-md-column">
+      <div className="about-governance__content-wrapper d-flex flex-column flex-md-row align-items-md-center">
         {/* Chart/Image - Left side */}
         <div className="about-governance__image d-flex align-items-center justify-content-center">
           <img
