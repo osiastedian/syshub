@@ -28,9 +28,12 @@ const GovernanceSection = ({ t }) => {
               <p className="about-governance__question">
                 {t("about.governance.question")}
               </p>
-              <p className="about-governance__description">
-                {t("about.governance.description.d1")}
-              </p>
+              <div className="about-governance__description">
+                <p>{t("about.governance.description.d1")}</p>
+                <p>{t("about.governance.description.d2")}</p>
+                <p>{t("about.governance.description.d3")}</p>
+                <p>{t("about.governance.description.d4")}</p>
+              </div>
             </div>
           </div>
         </div>
