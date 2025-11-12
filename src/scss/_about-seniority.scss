@@ -36,9 +36,11 @@
   &__header {
     text-align: center;
     width: 100%;
+    margin-bottom: 24px;
 
     @media (max-width: $breakpoint-md) {
       width: 100%;
+      margin-bottom: 16px;
     }
   }
 
