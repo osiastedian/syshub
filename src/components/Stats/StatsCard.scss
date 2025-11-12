@@ -1,7 +1,210 @@
 @import '../../scss/design-tokens';
 
-// StatsCard component styles
-// TODO: Implement component styles in future phase
+// ============================================================================
+// StatsCard Component
+// ============================================================================
+// Reusable card component for displaying individual statistics
+// Supports size variants, secondary values, and change indicators
+// Mobile-first responsive design
+// ============================================================================
+
 .stats-card {
-  // Placeholder for Phase 3
+  // Layout
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+
+  // Spacing
+  padding: $space-lg;
+
+  // Background & Border
+  background: transparent;
+  border: none;
+
+  // Responsive spacing
+  @media (max-width: $breakpoint-md) {
+    padding: $space-md;
+  }
+}
+
+// Card Label (e.g., "Collateral", "MN Cost")
+.stats-card__label {
+  // Typography
+  font-family: $font-family-body;
+  font-size: $font-size-body-medium; // 16px
+  font-weight: $font-weight-regular;
+  line-height: $line-height-tight;
+
+  // Color
+  color: $color-neutral-white;
+
+  // Spacing
+  margin: 0 0 $space-md 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-body-small; // 14px
+    margin-bottom: $space-sm;
+  }
+}
+
+// Value Container (holds value and subValue)
+.stats-card__value-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+// Main Value (e.g., "100,000 SYS", "$99.01")
+.stats-card__value {
+  // Typography
+  font-family: $font-family-body;
+  font-size: $font-size-h4; // 24px
+  font-weight: $font-weight-black; // 900
+  line-height: $line-height-tight;
+
+  // Color
+  color: $color-neutral-white;
+
+  // Spacing
+  margin: 0 0 $space-sm 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-h5; // 20px
+  }
+}
+
+// Unit indicator (e.g., "SYS", "BTC")
+.stats-card__unit {
+  // Typography
+  font-size: $font-size-sub-1; // 14px
+  font-weight: $font-weight-semi-bold;
+
+  // Color
+  color: $color-brand-gold;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-sub-2; // 12px
+  }
+}
+
+// Sub value (e.g., secondary pricing info "$330.16")
+.stats-card__subvalue {
+  // Typography
+  font-family: $font-family-body;
+  font-size: $font-size-sub-1; // 14px
+  font-weight: $font-weight-regular;
+  line-height: $line-height-tight;
+
+  // Color
+  color: $color-brand-gold;
+
+  // Spacing
+  margin: 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-sub-2; // 12px
+  }
+}
+
+// Change indicator (e.g., "↑ 2.5%")
+.stats-card__change {
+  // Typography
+  font-family: $font-family-body;
+  font-size: $font-size-sub-2; // 12px
+  font-weight: $font-weight-semi-bold;
+
+  // Color (default neutral)
+  color: $color-neutral-gray-light;
+
+  // Spacing
+  margin-top: $space-xs;
+
+  // Direction variants
+  &--up {
+    color: $color-success-text; // Green for positive change
+  }
+
+  &--down {
+    color: $color-error-text; // Red for negative change
+  }
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-sub-3; // 10px
+  }
+}
+
+// Size Variants
+// ============================================================================
+
+// Small size (compact cards for less important stats)
+.stats-card--small {
+  padding: $space-md;
+
+  .stats-card__label {
+    font-size: $font-size-body-small; // 14px
+    margin-bottom: $space-sm;
+  }
+
+  .stats-card__value {
+    font-size: $font-size-h5; // 20px
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-sm;
+
+    .stats-card__label {
+      font-size: $font-size-sub-1; // 14px
+    }
+
+    .stats-card__value {
+      font-size: $font-size-body-large; // 18px
+    }
+  }
+}
+
+// Medium size (default, most common)
+.stats-card--medium {
+  // Uses base styles defined above
+}
+
+// Large size (prominent stats for key metrics)
+.stats-card--large {
+  padding: $space-xl;
+
+  .stats-card__label {
+    font-size: $font-size-body-large; // 18px
+    margin-bottom: $space-lg;
+  }
+
+  .stats-card__value {
+    font-size: $font-size-h3; // 32px
+    font-weight: $font-weight-bold;
+  }
+
+  .stats-card__unit {
+    font-size: $font-size-body-medium; // 16px
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-lg;
+
+    .stats-card__label {
+      font-size: $font-size-body-medium; // 16px
+    }
+
+    .stats-card__value {
+      font-size: $font-size-h4; // 24px
+    }
+
+    .stats-card__unit {
+      font-size: $font-size-body-small; // 14px
+    }
+  }
 }
