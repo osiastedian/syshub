@@ -47,7 +47,7 @@ const about = {
     },
     rewards: {
       title: 'Rewards',
-      question: 'How does Decentralized Governance work?',
+      question: 'How are Sentry Node Rewards distributed?',
       description: {
         d1: '75% of each regular block reward is distributed to Sentry Node operators as an incentive to continue running the node. Each payout amounts to roughly 25 SYS, though this will increase over time due to the Seniority Benefits mechanism. The likelihood of a Sentry Node receiving a payout is inversely proportional to the total number of SentryNodes on the network. At the time of writing, a Sentry Node is likely to receive a 53 SYS reward roughly once every 4-5 days.',
         d2: 'As a seniority benefit, Sentry Node operators receive a 35% bonus to their base reward after one year, and a 100% bonus after 2.5 years. This benefit is paid only if the collateral for an active Sentry Node is kept locked at the same address for the entire qualification period.',
