@@ -118,11 +118,10 @@
   }
 
   &__card-title {
-    @include typography-h3;
+    @include typography-card-h3;
     color: $color-text;
     text-transform: uppercase;
     margin-bottom: 0;
-    line-height: 1.2; // Tight for headlines
 
     @media (max-width: $breakpoint-md) {
       font-size: $font-size-h4;
