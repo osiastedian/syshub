@@ -41,7 +41,7 @@ const SenioritySection = ({ t }) => {
         </div>
 
         {/* Middle Section: Three-Column Layout */}
-        <div className="about-seniority__middle-section d-flex flex-column flex-md-row align-items-center align-items-md-start">
+        <div className="about-seniority__middle-section d-flex flex-column align-items-center flex-md-row align-items-md-center">
           {/* Column 1: Text */}
           <div className="about-seniority__middle-text d-flex align-items-center justify-content-start">
             {t("about.seniority.blockInfo.label")}
