@@ -15,11 +15,11 @@
     @include typography-section-h2;
     color: $color-text;
     text-align: center; // Explicit center alignment per Figma
-    margin-bottom: 3.75rem; // 60px per Figma (was 48px)
+    margin-bottom: 1.5rem; // 24px gap between title and list items
 
     @media (max-width: $breakpoint-md) {
       font-size: $font-size-h3;
-      margin-bottom: $space-xl;
+      margin-bottom: $space-lg;
     }
   }
 
