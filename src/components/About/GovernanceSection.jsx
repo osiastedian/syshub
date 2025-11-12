@@ -11,9 +11,9 @@ import "./GovernanceSection.scss";
  */
 const GovernanceSection = ({ t }) => {
   return (
-    <section className="about-governance">
+    <section className="about-governance d-flex flex-column">
       {/* Header Section - Centered title and question */}
-      <div className="about-governance__header">
+      <div className="about-governance__header d-flex flex-column align-items-center text-center">
         <h2 className="about-governance__title">
           <span style={{ color: '#FBB03B' }}>Decentralized</span> Governance
         </h2>
@@ -23,9 +23,9 @@ const GovernanceSection = ({ t }) => {
       </div>
 
       {/* Content Section - Chart and text side-by-side */}
-      <div className="about-governance__content-wrapper">
+      <div className="about-governance__content-wrapper d-flex align-items-center flex-md-column">
         {/* Chart/Image - Left side */}
-        <div className="about-governance__image">
+        <div className="about-governance__image d-flex align-items-center justify-content-center">
           <img
             src="/assets/images/governance.png"
             alt="Decentralized Governance"
@@ -33,7 +33,7 @@ const GovernanceSection = ({ t }) => {
         </div>
 
         {/* Text Content - Right side */}
-        <div className="about-governance__content">
+        <div className="about-governance__content d-flex flex-column">
           <div className="about-governance__description">
             <p>{t("about.governance.description.d1")}</p>
             <p>{t("about.governance.description.d2")}</p>
