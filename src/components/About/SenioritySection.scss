@@ -4,11 +4,10 @@
 @import '../../scss/design-tokens';
 
 .about-seniority {
-  padding: 0;
+  // Section container - background and minimal padding
 
-  &__wrapper {
-    width: 100%;
-    max-width: 90rem;
+  > .container {
+    // Bootstrap utilities: d-flex flex-column align-items-center
     padding: 3.75rem 11.25rem; // Figma spec: 60px vertical, 180px horizontal
     gap: 3.75rem;
 
@@ -22,6 +21,11 @@
       padding: 3.75rem 1rem;
       gap: 2rem;
     }
+  }
+
+  // Keep __wrapper for backward compatibility if needed elsewhere
+  &__wrapper {
+    // Deprecated - use .container instead
   }
 
   // ============================================================================
