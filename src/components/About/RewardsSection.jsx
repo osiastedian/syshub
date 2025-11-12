@@ -11,8 +11,7 @@ import "./RewardsSection.scss";
  */
 const RewardsSection = ({ t }) => {
   return (
-    <section className="about-rewards">
-      <div className="container d-flex flex-column">
+    <section className="about-rewards d-flex flex-column">
         {/* Header Section - Centered title only */}
         <div className="about-rewards__header d-flex flex-column align-items-center text-center">
           <h2 className="about-rewards__title">
@@ -40,7 +39,6 @@ const RewardsSection = ({ t }) => {
             />
           </div>
         </div>
-      </div>
     </section>
   );
 };

@@ -25,7 +25,7 @@ class About extends Component {
     return (
       <Background>
         <BackgroundInner type="clean" />
-        <main className="section aboutpage">
+        <main className="section aboutpage container">
           <MetaTags>
             <title>{t("about.meta.title")}</title>
             <meta name="keywords" content={t("about.meta.keywords")} />

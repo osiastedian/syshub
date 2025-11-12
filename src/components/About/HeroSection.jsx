@@ -11,8 +11,7 @@ import "./HeroSection.scss";
 const HeroSection = ({ t }) => {
   return (
     <section className="about-hero">
-      <div className="container">
-        <div className="row align-items-center">
+      <div className="row align-items-center">
           <div className="col-lg-7 col-md-12 order-2 order-lg-1">
             <div className="about-hero__content">
               <h1 className="about-hero__title">
@@ -41,7 +40,6 @@ const HeroSection = ({ t }) => {
             </div>
           </div>
         </div>
-      </div>
     </section>
   );
 };

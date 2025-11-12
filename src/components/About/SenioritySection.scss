@@ -4,28 +4,18 @@
 @import '../../scss/design-tokens';
 
 .about-seniority {
-  // Section container - background and minimal padding
+  padding: 3.75rem 0; // Figma spec: 60px vertical, 180px horizontal (horizontal from main.container)
+  gap: 3.75rem;
 
-  > .container {
-    // Bootstrap utilities: d-flex flex-column align-items-center
-    padding: 3.75rem 11.25rem; // Figma spec: 60px vertical, 180px horizontal
-    gap: 3.75rem;
-
-    @media (max-width: $breakpoint-lg) {
-      padding: 5rem 5rem;
-      gap: 3rem;
-    }
-
-    @media (max-width: $breakpoint-md) {
-      // Mobile Figma spec (node-id=2082-12308): 60px vertical, 16px horizontal
-      padding: 3.75rem 1rem;
-      gap: 2rem;
-    }
+  @media (max-width: $breakpoint-lg) {
+    padding: 5rem 0;
+    gap: 3rem;
   }
 
-  // Keep __wrapper for backward compatibility if needed elsewhere
-  &__wrapper {
-    // Deprecated - use .container instead
+  @media (max-width: $breakpoint-md) {
+    // Mobile Figma spec: 60px vertical, horizontal from main.container
+    padding: 3.75rem 0;
+    gap: 2rem;
   }
 
   // ============================================================================
@@ -131,7 +121,6 @@
   }
 
   &__tx-data-item {
-    // Keep horizontal on mobile per Figma (Bootstrap utilities: d-flex flex-row justify-content-between align-items-center)
     background-color: $color-neutral-black;
     border: 1px solid $color-brand-gold;
     border-radius: 0.75rem;
@@ -244,7 +233,6 @@
   }
 
   &__content {
-    // Bootstrap utilities: d-flex flex-column
   }
 
   &__subheading {
@@ -258,7 +246,6 @@
   }
 
   &__text-blocks {
-    // Bootstrap utilities: d-flex flex-column
     gap: 0.5rem;
   }
 

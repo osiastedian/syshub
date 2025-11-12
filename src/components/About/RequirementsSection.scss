@@ -4,11 +4,11 @@
 @import '../../scss/design-tokens';
 
 .about-requirements {
-  padding: 6.25rem 11.25rem; // 100px vertical, 180px horizontal per Figma
+  padding: 6.25rem 0; // 100px vertical, 180px horizontal per Figma (horizontal from main.container)
 
   @media (max-width: $breakpoint-md) {
-    // Mobile Figma spec (node-id=2082-12308): 60px vertical, 16px horizontal
-    padding: 3.75rem 1rem;
+    // Mobile Figma spec: 60px vertical, horizontal from main.container
+    padding: 3.75rem 0;
   }
 
   &__title {
@@ -26,7 +26,6 @@
   }
 
   &__list {
-    // Bootstrap utilities: d-flex flex-column
     list-style: none;
     padding: 0;
     margin: 0 auto;
@@ -42,13 +41,11 @@
   }
 
   &__item {
-    // Bootstrap utilities: d-flex align-items-center
     gap: 1rem; // 16px gap between icon and text per Figma
     width: 100%;
   }
 
   &__icon {
-    // Bootstrap utilities: d-flex align-items-center justify-content-center
     background-color: $color-brand-gold; // #FBB03B per Figma
     border-radius: 500px; // Full circle per Figma
     padding: 0.25rem; // 4px padding

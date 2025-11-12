@@ -4,37 +4,25 @@
 @import '../../scss/design-tokens';
 
 .about-rewards {
-  // Section container - background and minimal padding
   background-color: transparent;
+  gap: 3.75rem;
+  padding: 6.25rem 0; // Figma spec: 100px vertical, 180px horizontal (horizontal from main.container)
 
-  > .container {
-    // Bootstrap utilities: d-flex flex-column
+  @media (max-width: $breakpoint-lg) {
+    // Tablet: reduce padding
+    padding: 6.25rem 0;
+    gap: 3rem;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    // Mobile Figma spec: 60px vertical, horizontal from main.container
+    padding: 3.75rem 0;
     gap: 3.75rem;
-    padding: 6.25rem 11.25rem; // Figma spec: 100px vertical, 180px horizontal
-
-    @media (max-width: $breakpoint-lg) {
-      // Tablet: reduce padding
-      padding: 6.25rem 5rem;
-      gap: 3rem;
-    }
-
-    @media (max-width: $breakpoint-md) {
-      // Mobile Figma spec (node-id=2082-12308): 60px vertical, 16px horizontal, 60px gap
-      padding: 3.75rem 1rem;
-      gap: 3.75rem;
-    }
   }
 
-  // ============================================================================
-  // Header Section - Title only (no gap needed as there's only one element)
-  // ============================================================================
   &__header {
-    // Bootstrap utilities: d-flex flex-column align-items-center text-center
   }
 
-  // ============================================================================
-  // Title Styling - Figma spec: 38px, 600 SemiBold, UPPERCASE
-  // ============================================================================
   &__title {
     font-family: $font-family-body;
     font-size: 2.375rem;
@@ -51,11 +39,7 @@
     }
   }
 
-  // ============================================================================
-  // Content Section - Side-by-side layout with text (left) and chart (right)
-  // ============================================================================
   &__content-wrapper {
-    // Bootstrap utilities: d-flex align-items-center flex-md-column
     gap: 3.75rem;
 
     @media (max-width: $breakpoint-lg) {
@@ -68,18 +52,11 @@
     }
   }
 
-  // ============================================================================
-  // Text Content Section - Left side of layout
-  // ============================================================================
   &__content {
-    // Bootstrap utilities: d-flex flex-column
     flex: 1 1 0%;
     gap: $space-lg;
   }
 
-  // ============================================================================
-  // Description Text - Figma spec: 18px, Regular, White
-  // ============================================================================
   &__description {
     font-family: $font-family-body;
     font-size: 1.125rem;
@@ -103,12 +80,7 @@
     }
   }
 
-  // ============================================================================
-  // Chart Container - Right side, fixed size per Figma spec (similar to Governance)
-  // ============================================================================
   &__chart {
-    // Bootstrap utilities: d-flex align-items-center justify-content-center
-    // Fixed dimensions as per Figma design (490px × 389px)
     width: 30.625rem;
     height: 24.3125rem;
     flex-shrink: 0;
@@ -128,9 +100,6 @@
     }
   }
 
-  // ============================================================================
-  // Chart Image - Responsive sizing
-  // ============================================================================
   &__chart-image {
     width: 100%;
     height: 100%;
