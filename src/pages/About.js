@@ -29,29 +29,23 @@ class About extends Component {
             <title>{t("about.meta.title")}</title>
             <meta name="keywords" content={t("about.meta.keywords")} />
           </MetaTags>
-          <div className="shell-large">
-            <div className="section__body">
-              <div className="articles">
-                {/* Hero Section */}
-                <HeroSection />
+          {/* Hero Section */}
+          <HeroSection />
 
-                {/* Feature Cards */}
-                <FeatureCards />
+          {/* Feature Cards */}
+          <FeatureCards />
 
-                {/* Governance Section */}
-                <GovernanceSection />
+          {/* Governance Section */}
+          <GovernanceSection />
 
-                {/* Rewards Section */}
-                <RewardsSection />
+          {/* Rewards Section */}
+          <RewardsSection />
 
-                {/* Seniority Section */}
-                <SenioritySection />
+          {/* Seniority Section */}
+          <SenioritySection />
 
-                {/* Requirements Section */}
-                <RequirementsSection />
-              </div>
-            </div>
-          </div>
+          {/* Requirements Section */}
+          <RequirementsSection />
         </main>
       </Background>
     );
