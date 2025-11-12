@@ -5,16 +5,11 @@
 
 .about-seniority {
   padding: 0;
-  display: flex;
-  justify-content: center;
 
   &__wrapper {
     width: 100%;
     max-width: 90rem;
     padding: 3.75rem 11.25rem; // Figma spec: 60px vertical, 180px horizontal
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     gap: 3.75rem;
 
     @media (max-width: $breakpoint-lg) {
@@ -34,13 +29,9 @@
   // ============================================================================
 
   &__header {
-    text-align: center;
     width: 100%;
     margin-bottom: 0;
-    display: flex;
-    flex-direction: column;
     gap: 1.5rem;
-    align-items: center;
 
     @media (max-width: $breakpoint-md) {
       // Mobile Figma spec: 24px gap between title and description
@@ -81,12 +72,9 @@
   // ============================================================================
 
   &__middle-section {
-    display: flex;
-    flex-direction: row;
     gap: 5rem;
     width: 67.5rem;
     height: 11.9375rem;
-    align-items: center;
 
     @media (max-width: $breakpoint-lg) {
       width: 100%;
@@ -96,7 +84,6 @@
 
     @media (max-width: $breakpoint-md) {
       // Mobile: 24px gap between sections
-      flex-direction: column;
       gap: 1.5rem;
       height: auto;
       width: 100%;
@@ -111,9 +98,6 @@
     color: $color-neutral-white;
     flex: 1 1 auto;
     font-variation-settings: 'opsz' 14;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
 
     @media (max-width: $breakpoint-md) {
       font-size: 1rem; // Mobile: 16px
@@ -126,8 +110,6 @@
   // ============================================================================
 
   &__tx-data-grid {
-    display: flex;
-    flex-direction: column;
     gap: 1rem;
     width: 30.625rem;
     flex-shrink: 0;
@@ -145,10 +127,7 @@
   }
 
   &__tx-data-item {
-    display: flex;
-    flex-direction: row; // Keep horizontal on mobile per Figma
-    justify-content: space-between;
-    align-items: center;
+    // Keep horizontal on mobile per Figma (Bootstrap utilities: d-flex flex-row justify-content-between align-items-center)
     background-color: $color-neutral-black;
     border: 1px solid $color-brand-gold;
     border-radius: 0.75rem;
@@ -200,11 +179,8 @@
   // ============================================================================
 
   &__cards-container {
-    display: flex;
-    flex-direction: row;
     gap: 6.25rem;
     width: 67.5rem;
-    align-items: flex-start;
 
     @media (max-width: $breakpoint-lg) {
       width: 100%;
@@ -212,7 +188,6 @@
     }
 
     @media (max-width: $breakpoint-md) {
-      flex-direction: column;
       gap: 2rem;
       width: 100%;
     }
@@ -265,8 +240,7 @@
   }
 
   &__content {
-    display: flex;
-    flex-direction: column;
+    // Bootstrap utilities: d-flex flex-column
   }
 
   &__subheading {
@@ -280,8 +254,7 @@
   }
 
   &__text-blocks {
-    display: flex;
-    flex-direction: column;
+    // Bootstrap utilities: d-flex flex-column
     gap: 0.5rem;
   }
 

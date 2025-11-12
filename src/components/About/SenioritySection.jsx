@@ -28,10 +28,10 @@ const SenioritySection = ({ t }) => {
   ];
 
   return (
-    <section className="about-seniority">
-      <div className="about-seniority__wrapper">
+    <section className="about-seniority d-flex justify-content-center">
+      <div className="about-seniority__wrapper d-flex flex-column align-items-center">
         {/* Title and Description */}
-        <div className="about-seniority__header">
+        <div className="about-seniority__header text-center d-flex flex-column align-items-center">
           <h2 className="about-seniority__title">
             <span style={{ color: "#ffffff" }}>SENTRY NODE SENIORITY</span>
             <span style={{ color: "#fbb03b" }}> EXPLAINED</span>
@@ -42,16 +42,16 @@ const SenioritySection = ({ t }) => {
         </div>
 
         {/* Middle Section: Three-Column Layout */}
-        <div className="about-seniority__middle-section">
+        <div className="about-seniority__middle-section d-flex flex-row flex-md-column align-items-center align-items-md-start">
           {/* Column 1: Text */}
-          <div className="about-seniority__middle-text">
+          <div className="about-seniority__middle-text d-flex align-items-center justify-content-start">
             {t("about.seniority.blockInfo.label")}
           </div>
 
           {/* Column 2: TX Data Grid */}
-          <div className="about-seniority__tx-data-grid">
+          <div className="about-seniority__tx-data-grid d-flex flex-column">
             {txData.map((data) => (
-              <div key={data.key} className={`about-seniority__tx-data-item about-seniority__tx-data-item--${data.key}`}>
+              <div key={data.key} className={`about-seniority__tx-data-item about-seniority__tx-data-item--${data.key} d-flex flex-row justify-content-between align-items-center`}>
                 <div className="about-seniority__tx-data-label-text">
                   {data.label}
                 </div>
@@ -64,7 +64,7 @@ const SenioritySection = ({ t }) => {
         </div>
 
         {/* Seniority Cards */}
-        <div className="about-seniority__cards-container">
+        <div className="about-seniority__cards-container d-flex flex-row flex-md-column align-items-start align-items-md-start">
           {/* 1 YEAR Card */}
           <div className="seniority-card seniority-card--1year">
             <div className="seniority-card__header">
@@ -72,12 +72,12 @@ const SenioritySection = ({ t }) => {
               <p className="seniority-card__title-subtitle">35% increase of base rate</p>
             </div>
 
-            <div className="seniority-card__content">
+            <div className="seniority-card__content d-flex flex-column">
               <h4 className="seniority-card__subheading">
                 {t("about.seniority.seniority.s3.title")}
               </h4>
 
-              <div className="seniority-card__text-blocks">
+              <div className="seniority-card__text-blocks d-flex flex-column">
                 <p className="seniority-card__text-block">
                   {t("about.seniority.seniority.s3.d1")}
                 </p>
@@ -98,12 +98,12 @@ const SenioritySection = ({ t }) => {
               <p className="seniority-card__title-subtitle">100% increase of base rate</p>
             </div>
 
-            <div className="seniority-card__content">
+            <div className="seniority-card__content d-flex flex-column">
               <h4 className="seniority-card__subheading">
                 {t("about.seniority.seniority.s4.title")}
               </h4>
 
-              <div className="seniority-card__text-blocks">
+              <div className="seniority-card__text-blocks d-flex flex-column">
                 <p className="seniority-card__text-block">
                   {t("about.seniority.seniority.s4.d1")}
                 </p>
