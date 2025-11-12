@@ -111,11 +111,35 @@ The codebase uses several crypto libraries for blockchain operations:
 - `crypto-js` - Encryption utilities
 - Seeds are encrypted with password and stored locally
 
-### Styling
+### Styling & Design System
 
 - SCSS modules in `src/scss/styles.scss`
 - Bootstrap 5 for component styling
 - CSS-in-JS possible via inline styles
+
+**Design System Structure:**
+- Design tokens defined in `src/scss/_design-tokens.scss`
+- Component-specific styles in modular SCSS files (`_about-hero.scss`, `_about-cards.scss`, etc.)
+- Breakpoints: `$breakpoint-md` (768px for mobile), `$breakpoint-lg` (992px), `$breakpoint-sm` (576px)
+- Typography mixins: `typography-hero-h1`, `typography-section-h2`, `typography-body-large-regular`
+- Color tokens: `$color-text`, `$color-primary`, `$color-brand-gold`, `$color-brand-blue`, `$color-neutral-white`, `$color-neutral-black`
+- Spacing tokens: `$space-lg` (24px), `$space-xl` (32px), `$space-2xl` (64px), `$space-3xl` (100px)
+
+**Responsive Design Standards (Figma Mobile Spec: node-id=2082-12308):**
+- Mobile padding: 60px vertical (3.75rem), 16px horizontal (1rem)
+- Desktop padding: 100px vertical (6.25rem), 180px horizontal (11.25rem)
+- Mobile gaps between sections: 24px (1.5rem)
+- Typography: Different sizes for desktop vs mobile (e.g., 38px desktop → 32px mobile)
+- Layout: Desktop flex-row layouts convert to flex-column on mobile with center alignment
+- Labels/text splitting: Content that doesn't fit mobile is split in translation files
+
+**About Page Redesign (Figma: https://www.figma.com/design/azvuitP9PvixRa2SM1sLXj/SentryNodes)**
+Key styling files and patterns:
+- Hero section (`_about-hero.scss`): 100px gap between image/content, responsive typography
+- Feature cards (`_about-cards.scss`): Icon + text cards, 24px gap on mobile
+- Seniority section (`_about-seniority.scss`): TX data items stay horizontal on mobile with space-between
+- Requirements section (`_about-requirements.scss`): Centered desktop (993px max-width), left-aligned mobile
+- Translation file pattern: Split content for mobile (e.g., TX data labels separate from block numbers in `src/shared/locales/en/pages/about/index.js`)
 
 ### Internationalization
 
