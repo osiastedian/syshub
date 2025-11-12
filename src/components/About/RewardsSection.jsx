@@ -11,14 +11,11 @@ import { withTranslation } from "react-i18next";
 const RewardsSection = ({ t }) => {
   return (
     <section className="about-rewards">
-      {/* Header Section - Centered title and question */}
+      {/* Header Section - Centered title only */}
       <div className="about-rewards__header">
         <h2 className="about-rewards__title">
           {t("about.rewards.title")}
         </h2>
-        <p className="about-rewards__question">
-          {t("about.rewards.question")}
-        </p>
       </div>
 
       {/* Content Section - Text left, Chart right */}
