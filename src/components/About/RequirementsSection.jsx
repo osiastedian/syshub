@@ -1,6 +1,7 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
 import ArrowIcon from "../../images/arrow-right-requirement.svg";
+import "./RequirementsSection.scss";
 
 /**
  * Requirements section listing Sentry Node setup requirements

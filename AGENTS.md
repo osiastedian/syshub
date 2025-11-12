@@ -118,8 +118,10 @@ The codebase uses several crypto libraries for blockchain operations:
 - CSS-in-JS possible via inline styles
 
 **Design System Structure:**
-- Design tokens defined in `src/scss/_design-tokens.scss`
-- Component-specific styles in modular SCSS files (`_about-hero.scss`, `_about-cards.scss`, etc.)
+- Design tokens defined in `src/scss/_design-tokens.scss` (shared across all components)
+- Global component styles: `src/scss/` directory (buttons, inputs, cards, tables, modal, icons, etc.)
+- Page-specific component styles: Colocated with components (e.g., `src/components/About/HeroSection.scss` with `src/components/About/HeroSection.jsx`)
+- All component SCSS files import shared design tokens: `@import '../../scss/design-tokens';`
 - Breakpoints: `$breakpoint-md` (768px for mobile), `$breakpoint-lg` (992px), `$breakpoint-sm` (576px)
 - Typography mixins: `typography-hero-h1`, `typography-section-h2`, `typography-body-large-regular`
 - Color tokens: `$color-text`, `$color-primary`, `$color-brand-gold`, `$color-brand-blue`, `$color-neutral-white`, `$color-neutral-black`
@@ -134,12 +136,24 @@ The codebase uses several crypto libraries for blockchain operations:
 - Labels/text splitting: Content that doesn't fit mobile is split in translation files
 
 **About Page Redesign (Figma: https://www.figma.com/design/azvuitP9PvixRa2SM1sLXj/SentryNodes)**
-Key styling files and patterns:
-- Hero section (`_about-hero.scss`): 100px gap between image/content, responsive typography
-- Feature cards (`_about-cards.scss`): Icon + text cards, 24px gap on mobile
-- Seniority section (`_about-seniority.scss`): TX data items stay horizontal on mobile with space-between
-- Requirements section (`_about-requirements.scss`): Centered desktop (993px max-width), left-aligned mobile
-- Translation file pattern: Split content for mobile (e.g., TX data labels separate from block numbers in `src/shared/locales/en/pages/about/index.js`)
+Hybrid SCSS architecture - page-level and component-level styles:
+
+**Page-level styles** (`src/scss/_pages/_about.scss`):
+- Container styles (`.aboutpage`)
+- Imported in both `src/pages/About.js` and global `src/scss/styles.scss`
+
+**Component-level styles** (colocated in `src/components/About/`):
+- Each section component has its own SCSS file (imported in the component):
+  - `HeroSection.jsx` + `HeroSection.scss`: 100px gap between image/content, responsive typography
+  - `FeatureCards.jsx` + `FeatureCards.scss`: Icon + text cards, 24px gap on mobile
+  - `GovernanceSection.jsx` + `GovernanceSection.scss`: Governance section styling
+  - `RewardsSection.jsx` + `RewardsSection.scss`: Rewards section styling
+  - `SenioritySection.jsx` + `SenioritySection.scss`: TX data items stay horizontal on mobile with space-between
+  - `RequirementsSection.jsx` + `RequirementsSection.scss`: Centered desktop (993px max-width), left-aligned mobile
+- Each component SCSS imports design tokens: `@import '../../scss/design-tokens';`
+- Each component imports its own SCSS: `import "./SectionName.scss";`
+
+**Translation patterns**: Split content for mobile (e.g., TX data labels separate from block numbers in `src/shared/locales/en/pages/about/index.js`)
 
 ### Internationalization
 

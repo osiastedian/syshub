@@ -1,5 +1,6 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
+import "./SenioritySection.scss";
 
 /**
  * Seniority section explaining the Sentry Node seniority mechanism
