@@ -1,5 +1,6 @@
 import React from "react";
 import { withTranslation } from "react-i18next";
+import ArrowIcon from "../../images/arrow-right-requirement.svg";
 
 /**
  * Requirements section listing Sentry Node setup requirements
@@ -29,7 +30,10 @@ const RequirementsSection = ({ t }) => {
             <ul className="about-requirements__list">
               {requirementKeys.map((key) => (
                 <li key={key} className="about-requirements__item">
-                  <i className="fa fa-angle-right"></i> {t(key)}
+                  <div className="about-requirements__icon">
+                    <img src={ArrowIcon} alt="" />
+                  </div>
+                  <p className="about-requirements__text">{t(key)}</p>
                 </li>
               ))}
             </ul>
