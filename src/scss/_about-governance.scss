@@ -1,72 +1,154 @@
 // ============================================================================
-// About Governance Section Styles
+// About Governance Section Styles - Figma Design Spec (Node 2016:678)
 // ============================================================================
 @import 'design-tokens';
 
 .about-governance {
-  padding: $space-3xl 0;
-  background-color: transparent; // Figma spec: transparent background
+  // Section container with flexbox column layout
+  // Matches Figma spec: flex-col, gap-60px, px-180px, py-100px
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  padding: 100px 180px;
+  background-color: transparent;
+
+  @media (max-width: $breakpoint-lg) {
+    // Tablet: reduce padding
+    padding: 64px 48px;
+    gap: 48px;
+  }
 
   @media (max-width: $breakpoint-md) {
-    padding: $space-2xl 0;
+    // Mobile: stack vertically with reduced padding
+    padding: 48px 24px;
+    gap: 32px;
   }
 
-  &__image {
+  // ============================================================================
+  // Header Section - Centered title and question
+  // ============================================================================
+  &__header {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    align-items: center;
     text-align: center;
-
-    @media (min-width: $breakpoint-lg) {
-      text-align: right;
-    }
-
-    @media (max-width: $breakpoint-lg) {
-      margin-bottom: $space-xl;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-    }
   }
 
-  &__content {
-    @media (max-width: $breakpoint-lg) {
-      text-align: center;
-    }
-
-    @media (min-width: $breakpoint-lg) {
-      padding-left: $space-xl;
-    }
-  }
-
+  // ============================================================================
+  // Title Styling - Figma spec: 38px, 600 SemiBold, UPPERCASE
+  // ============================================================================
   &__title {
-    @include typography-section-title-bold;
+    font-family: $font-family-body;
+    font-size: 38px;
+    font-weight: $font-weight-semi-bold;
     color: $color-text;
-    margin-bottom: $space-lg;
+    line-height: 1.3;
+    text-transform: uppercase;
+    margin: 0;
 
     @media (max-width: $breakpoint-md) {
-      font-size: $font-size-h3;
+      font-size: 32px;
     }
   }
 
+  // ============================================================================
+  // Question Text - Figma spec: 18px, Regular
+  // ============================================================================
   &__question {
     font-family: $font-family-body;
     font-size: 18px;
     font-weight: $font-weight-regular;
-    color: $color-text; // Figma spec: white text, not gold
-    font-style: normal; // Figma spec: regular, not italic
-    margin-bottom: $space-lg;
-    line-height: 1.3; // Figma spec: 1.3
+    color: $color-text;
+    line-height: 1.3;
+    margin: 0;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 16px;
+    }
   }
 
+  // ============================================================================
+  // Content Section - Side-by-side layout with chart (left) and text (right)
+  // ============================================================================
+  &__content-wrapper {
+    display: flex;
+    gap: 60px;
+    align-items: center;
+
+    @media (max-width: $breakpoint-lg) {
+      gap: 48px;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      // Mobile: stack vertically
+      flex-direction: column;
+      gap: 32px;
+    }
+  }
+
+  // ============================================================================
+  // Image Container - Figma spec: Fixed 490px × 389px chart
+  // ============================================================================
+  &__image {
+    // Fixed dimensions as per Figma design
+    width: 490px;
+    height: 389px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @media (max-width: $breakpoint-lg) {
+      // Tablet: slightly smaller
+      width: 400px;
+      height: 318px;
+    }
+
+    @media (max-width: $breakpoint-md) {
+      // Mobile: responsive width
+      width: 100%;
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 490 / 389;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  }
+
+  // ============================================================================
+  // Text Content Section - Right side of layout
+  // ============================================================================
+  &__content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $space-lg;
+  }
+
+  // ============================================================================
+  // Description Text - Figma spec: 18px, Regular
+  // ============================================================================
   &__description {
-    @include typography-body-medium-regular;
-    color: $color-text; // Figma spec: white text, not secondary gray
-    line-height: 1.3; // Figma spec: 1.3 (was 1.8)
-    margin-bottom: $space-lg;
+    font-family: $font-family-body;
+    font-size: 18px;
+    font-weight: $font-weight-regular;
+    color: $color-text;
+    line-height: 1.3;
+    margin: 0;
+
+    @media (max-width: $breakpoint-md) {
+      font-size: 16px;
+    }
 
     // Paragraphs separated by spacing per Figma spec
     p {
       margin-bottom: $space-lg;
+      margin-top: 0;
 
       &:last-child {
         margin-bottom: 0;
