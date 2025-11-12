@@ -11,21 +11,21 @@
 
   &__wrapper {
     width: 100%;
-    max-width: 1440px;
-    padding: 100px 180px;
+    max-width: 90rem;
+    padding: 6.25rem 11.25rem;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 60px;
+    gap: 3.75rem;
 
     @media (max-width: $breakpoint-lg) {
-      padding: 80px 80px;
-      gap: 48px;
+      padding: 5rem 5rem;
+      gap: 3rem;
     }
 
     @media (max-width: $breakpoint-md) {
-      padding: 60px 40px;
-      gap: 32px;
+      padding: 3.75rem 2.5rem;
+      gap: 2rem;
     }
   }
 
@@ -36,33 +36,33 @@
   &__header {
     text-align: center;
     width: 100%;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
 
     @media (max-width: $breakpoint-md) {
       width: 100%;
-      margin-bottom: 16px;
+      margin-bottom: 1rem;
     }
   }
 
   &__title {
     font-family: $font-family-body;
-    font-size: 38px;
+    font-size: 2.375rem;
     font-weight: $font-weight-semi-bold;
     line-height: 1.3;
     text-transform: uppercase;
     letter-spacing: 0;
-    margin-bottom: 24px;
+    margin-bottom: 1.5rem;
     font-variation-settings: 'opsz' 14;
 
     @media (max-width: $breakpoint-md) {
-      font-size: 24px;
-      margin-bottom: 16px;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
     }
   }
 
   &__description {
     font-family: $font-family-body;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: $font-weight-regular;
     line-height: 1.3;
     color: $color-neutral-white;
@@ -71,7 +71,7 @@
     font-variation-settings: 'opsz' 14;
 
     @media (max-width: $breakpoint-md) {
-      font-size: 16px;
+      font-size: 1rem;
     }
   }
 
@@ -82,20 +82,20 @@
   &__middle-section {
     display: flex;
     flex-direction: row;
-    gap: 80px;
-    width: 1080px;
-    height: 191px;
+    gap: 5rem;
+    width: 67.5rem;
+    height: 11.9375rem;
     align-items: center;
 
     @media (max-width: $breakpoint-lg) {
       width: 100%;
-      gap: 60px;
+      gap: 3.75rem;
       height: auto;
     }
 
     @media (max-width: $breakpoint-md) {
       flex-direction: column;
-      gap: 32px;
+      gap: 2rem;
       height: auto;
       width: 100%;
     }
@@ -103,7 +103,7 @@
 
   &__middle-text {
     font-family: $font-family-body;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: $font-weight-regular;
     line-height: 1.3;
     color: $color-neutral-white;
@@ -125,18 +125,18 @@
   &__tx-data-grid {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    width: 490px;
+    gap: 1rem;
+    width: 30.625rem;
     flex-shrink: 0;
 
     @media (max-width: $breakpoint-lg) {
-      width: 400px;
-      gap: 12px;
+      width: 25rem;
+      gap: 0.75rem;
     }
 
     @media (max-width: $breakpoint-md) {
       width: 100%;
-      gap: 12px;
+      gap: 0.75rem;
     }
   }
 
@@ -146,18 +146,18 @@
     align-items: center;
     background-color: $color-neutral-black;
     border: 1px solid $color-brand-gold;
-    border-radius: 12px;
-    padding: 8px 16px;
-    gap: 16px;
+    border-radius: 0.75rem;
+    padding: 0.5rem 1rem;
+    gap: 1rem;
 
     @media (max-width: $breakpoint-md) {
-      padding: 8px 16px;
+      padding: 0.5rem 1rem;
     }
   }
 
   &__tx-data-label-text {
     font-family: $font-family-body;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: $font-weight-semi-bold;
     line-height: 1.3;
     color: $color-neutral-white;
@@ -169,11 +169,11 @@
 
   &__tx-data-blocks {
     font-family: $font-family-body;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: $font-weight-semi-bold;
     line-height: 1.3;
-    padding: 8px;
-    border-radius: 12px;
+    padding: 0.5rem;
+    border-radius: 0.75rem;
     white-space: nowrap;
     flex: 0 0 auto;
     font-variation-settings: 'opsz' 14;
@@ -202,18 +202,18 @@
   &__cards-container {
     display: flex;
     flex-direction: row;
-    gap: 100px;
-    width: 1080px;
+    gap: 6.25rem;
+    width: 67.5rem;
     align-items: flex-start;
 
     @media (max-width: $breakpoint-lg) {
       width: 100%;
-      gap: 60px;
+      gap: 3.75rem;
     }
 
     @media (max-width: $breakpoint-md) {
       flex-direction: column;
-      gap: 32px;
+      gap: 2rem;
       width: 100%;
     }
   }
@@ -225,8 +225,8 @@
 
 .seniority-card {
   flex: 1 1 0;
-  border-radius: 8px;
-  padding: 32px;
+  border-radius: 0.5rem;
+  padding: 2rem;
   background-color: transparent;
   border: 1px solid $color-brand-gold;
   transition: all $transition-base;
@@ -236,17 +236,17 @@
   }
 
   &:hover {
-    transform: translateY(-2px);
+    transform: translateY(-0.125rem);
     box-shadow: $shadow-md;
   }
 
   &__header {
-    margin-bottom: 44px;
+    margin-bottom: 2.75rem;
   }
 
   &__title-main {
     font-family: $font-family-body;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: $font-weight-semi-bold;
     line-height: 1.3;
     color: $color-neutral-white;
@@ -256,7 +256,7 @@
 
   &__title-subtitle {
     font-family: $font-family-body;
-    font-size: 24px;
+    font-size: 1.5rem;
     font-weight: $font-weight-medium;
     line-height: 1.3;
     color: $color-neutral-white;
@@ -271,23 +271,23 @@
 
   &__subheading {
     font-family: $font-family-body;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: $font-weight-medium;
     line-height: 1.167; // 21px line-height
     color: $color-neutral-white;
-    margin: 0 0 24px 0;
+    margin: 0 0 1.5rem 0;
     font-variation-settings: 'opsz' 14;
   }
 
   &__text-blocks {
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 0.5rem;
   }
 
   &__text-block {
     font-family: $font-family-body;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: $font-weight-regular;
     line-height: 1.167; // 21px line-height
     color: $color-neutral-white;
@@ -302,7 +302,7 @@
   }
 
   @media (max-width: $breakpoint-md) {
-    padding: 24px;
+    padding: 1.5rem;
   }
 }
 
@@ -319,7 +319,7 @@
 
     p {
       font-family: $font-family-body;
-      font-size: 16px;
+      font-size: 1rem;
       font-weight: $font-weight-regular;
       line-height: 1.3;
       color: $color-neutral-white;
@@ -333,10 +333,10 @@
     }
 
     @media (max-width: $breakpoint-md) {
-      font-size: 14px;
+      font-size: 0.875rem;
 
       p {
-        font-size: 14px;
+        font-size: 0.875rem;
       }
     }
   }
