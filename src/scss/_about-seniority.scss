@@ -23,7 +23,8 @@
     }
 
     @media (max-width: $breakpoint-md) {
-      padding: 3.75rem 2.5rem;
+      // Mobile Figma spec (node-id=2082-12308): 60px vertical, 16px horizontal
+      padding: 3.75rem 1rem;
       gap: 2rem;
     }
   }
@@ -42,9 +43,10 @@
     align-items: center;
 
     @media (max-width: $breakpoint-md) {
+      // Mobile Figma spec: 24px gap between title and description
       width: 100%;
       margin-bottom: 0;
-      gap: 1rem;
+      gap: 1.5rem;
     }
   }
 
@@ -59,7 +61,8 @@
     font-variation-settings: 'opsz' 14;
 
     @media (max-width: $breakpoint-md) {
-      font-size: 1.5rem;
+      // Mobile Figma spec: 32px title
+      font-size: 2rem;
       margin: 0;
     }
   }
@@ -98,8 +101,9 @@
     }
 
     @media (max-width: $breakpoint-md) {
+      // Mobile Figma spec: 45px gap between sections
       flex-direction: column;
-      gap: 2rem;
+      gap: 2.8125rem;
       height: auto;
       width: 100%;
     }
@@ -139,8 +143,9 @@
     }
 
     @media (max-width: $breakpoint-md) {
+      // Mobile Figma spec: 17px gap between items
       width: 100%;
-      gap: 0.75rem;
+      gap: 1.0625rem;
     }
   }
 
@@ -337,10 +342,11 @@
     }
 
     @media (max-width: $breakpoint-md) {
-      font-size: 0.875rem;
+      // Mobile Figma spec: 16px font-size
+      font-size: 1rem;
 
       p {
-        font-size: 0.875rem;
+        font-size: 1rem;
       }
     }
   }

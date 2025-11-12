@@ -19,18 +19,17 @@
   }
 
   @media (max-width: $breakpoint-md) {
-    // Mobile: stack vertically with reduced padding (60px 40px)
-    padding: 3.75rem 2.5rem;
-    gap: 2rem;
+    // Mobile Figma spec (node-id=2082-12308): 60px vertical, 16px horizontal, 60px gap
+    padding: 3.75rem 1rem;
+    gap: 3.75rem;
   }
 
   // ============================================================================
-  // Header Section - Centered title only (no question text per Figma spec)
+  // Header Section - Title only (no gap needed as there's only one element)
   // ============================================================================
   &__header {
     display: flex;
     flex-direction: column;
-    gap: 1.5rem;
     align-items: center;
     text-align: center;
   }
@@ -45,10 +44,12 @@
     color: $color-text;
     line-height: 1.3;
     text-transform: uppercase;
-    margin: 0;
+    margin: 0 0 3.75rem 0; // Desktop: 60px margin-bottom per Figma
 
     @media (max-width: $breakpoint-md) {
-      font-size: 2rem;
+      // Mobile Figma spec: UNIQUE 26px title size with 42px margin-bottom
+      font-size: 1.625rem;
+      margin-bottom: 2.625rem;
     }
   }
 
@@ -126,11 +127,11 @@
     }
 
     @media (max-width: $breakpoint-md) {
-      // Mobile: responsive width
+      // Mobile Figma spec: 358.04px × 212.69px with aspect-ratio
       width: 100%;
       max-width: 100%;
       height: auto;
-      aspect-ratio: 490 / 389;
+      aspect-ratio: 358.04 / 212.69;
     }
   }
 
