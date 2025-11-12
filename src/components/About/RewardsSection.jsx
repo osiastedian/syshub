@@ -25,6 +25,7 @@ const RewardsSection = ({ t }) => {
           <div className="about-rewards__description">
             <p>{t("about.rewards.description.d1")}</p>
             <p>{t("about.rewards.description.d2")}</p>
+            <p>{t("about.rewards.description.d3")}</p>
           </div>
         </div>
 
