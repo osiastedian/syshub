@@ -97,10 +97,32 @@ Transform the About page from a traditional timeline-based layout to a modern, c
   - Right side: Reward chart showing masternode reward increase over operational time (0-32+ months)
   - Chart shows +35% at 1 year, +100% at 2.5 years with labeled milestone cards
 
-### 6. Requirements List (Style Updates Only)
-- Retained from current implementation
-- Polish typography and spacing
-- Maintain icon styling
+### 6. Requirements List (MAJOR REFACTOR)
+- **Current**: Using Font Awesome `fa-angle-right` icon with 16px body text, 800px max-width
+- **New**: SVG arrow icon in circular gold background, 18px body text, 993px fixed width
+- **Content from Figma** (Translation keys):
+  - Title: `about.requirements.title` = "Requirements to Setup a Syscoin Sentry Node"
+  - Requirements: `about.requirements.requirement.r1` through `r8`
+- **Key Changes per Figma Design (Node 2017-2577)**:
+  - **Section Padding**: 100px vertical, 180px horizontal (changed from 64px vertical)
+  - **Icon System**: Replace Font Awesome with SVG arrow in circular gold (#FBB03B) background
+    - Icon size: 8x8px SVG inside 16x16px circular container
+    - Icon to text spacing: 16px (changed from 12px)
+  - **Typography**:
+    - Title: 38px, Regular, centered (already correct)
+    - List items: 18px, Regular, 1.3 line-height (changed from 16px, 1.5 line-height)
+  - **List Layout**:
+    - Container width: 993px fixed (changed from 800px max-width)
+    - Item layout: Flex with 16px gap (changed from padding + border-bottom)
+    - Remove border-bottom separators (not in design)
+    - Remove hover effects (not in design)
+  - **Spacing**:
+    - Title to list gap: 60px (changed from 48px)
+    - Items gap: 16px (changed from 32px with border)
+
+**Figma Design Reference:**
+- Figma URL: https://www.figma.com/design/azvuitP9PvixRa2SM1sLXj/SentryNodes?node-id=2017-2577&m=dev
+- Detailed audit report: `/Users/ted/syscoin/syshub/AUDIT-REQUIREMENTS-SECTION.md`
 
 ---
 
@@ -166,6 +188,23 @@ Transform the About page from a traditional timeline-based layout to a modern, c
 - **Owner**: Component Builder Agent
 - **Input**: Figma design specs
 - **Output**: Updated sections JSX and SCSS
+
+**Task 2.5: Requirements Section Refactor**
+- Replace Font Awesome `fa-angle-right` with SVG arrow icon
+- Create circular gold background container for icon (16x16px with 8x8px icon)
+- Update list item layout to flex with 16px gap
+- Increase list item font size from 16px to 18px
+- Update line-height from 1.5 to 1.3
+- Remove border-bottom separators from list items
+- Remove hover effects (not in design)
+- Update section padding to 100px vertical, 180px horizontal
+- Update container width to 993px (from 800px max-width)
+- Increase title to list gap to 60px (from 48px)
+- Increase icon to text spacing to 16px (from 12px)
+- **Owner**: Component Builder Agent
+- **Input**: Figma design specs (Node 2017-2577), audit report
+- **Output**: Refactored requirements component JSX and SCSS, SVG icon asset
+- **Reference**: Detailed audit report at `/Users/ted/syscoin/syshub/AUDIT-REQUIREMENTS-SECTION.md`
 
 ---
 
