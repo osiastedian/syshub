@@ -16,7 +16,7 @@
 
   &__content {
     padding-right: $space-2xl;
-    margin-top: 6.25rem; // 100px gap before title
+    margin-top: 6.25rem; // 100px gap between image and content
 
     @media (max-width: $breakpoint-lg) {
       padding-right: 0;
@@ -28,7 +28,7 @@
       padding-right: 0;
       margin-bottom: 0;
       text-align: left;
-      margin-top: 0; // Remove on mobile, spacing handled by flex gap
+      margin-top: 6.25rem; // Keep 100px gap on mobile
     }
   }
 
