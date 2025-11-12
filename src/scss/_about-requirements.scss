@@ -5,7 +5,7 @@
 
 .about-requirements {
   padding: 6.25rem 11.25rem; // 100px vertical, 180px horizontal per Figma
-  background-color: $color-surface;
+  background-color: $color-background;
 
   @media (max-width: $breakpoint-md) {
     padding: 3.75rem 2.5rem; // 60px 40px - maintain proportional spacing for mobile
