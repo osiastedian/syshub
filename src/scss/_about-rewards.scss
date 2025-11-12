@@ -124,18 +124,29 @@
   }
 
   // ============================================================================
-  // Chart Container - Right side, fixed size per Figma spec
+  // Chart Container - Right side, fixed size per Figma spec (similar to Governance)
   // ============================================================================
   &__chart {
-    // Fixed dimensions, no flex shrinking
+    // Fixed dimensions as per Figma design (490px × 389px)
+    width: 490px;
+    height: 389px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
 
+    @media (max-width: $breakpoint-lg) {
+      // Tablet: slightly smaller
+      width: 400px;
+      height: 318px;
+    }
+
     @media (max-width: $breakpoint-md) {
       // Mobile: responsive width
       width: 100%;
+      max-width: 100%;
+      height: auto;
+      aspect-ratio: 490 / 389;
     }
   }
 
@@ -144,7 +155,7 @@
   // ============================================================================
   &__chart-image {
     width: 100%;
-    height: auto;
+    height: 100%;
     object-fit: contain;
   }
 }
