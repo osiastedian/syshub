@@ -23,7 +23,7 @@ const GovernanceSection = ({ t }) => {
           <div className="col-lg-6 col-md-12 order-1 order-lg-2">
             <div className="about-governance__content">
               <h2 className="about-governance__title">
-                {t("about.governance.title")}
+                <span style={{ color: '#FBB03B' }}>Decentralized</span> Governance
               </h2>
               <p className="about-governance__question">
                 {t("about.governance.question")}
