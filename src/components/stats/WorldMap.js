@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Datamaps from 'datamaps';
 import { withTranslation } from "react-i18next";
-import SubTitle from '../global/SubTitle';
 import './WorldMap.css';
 
 /**
@@ -107,10 +106,9 @@ class WorldMap extends Component {
     }
 
     render() {
-        const { t } = this.props;
         return (
             <>
-                <SubTitle heading={t('worldMap.title')} className="section-header" />
+                <h2 className="section-title">SENTRYNODES LOCATIONS</h2>
                 <div ref={this.worldMapRef} className="world_map"></div>
             </>
         )

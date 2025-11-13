@@ -24,7 +24,7 @@ $stats-hero-padding-vertical-mobile: 40px;
 .stats-hero__title {
   // Typography
   font-family: $font-family-body;
-  font-size: 2.375rem; // 38px - from design spec
+  font-size: 2rem; // 32px - consistent across all breakpoints
   font-weight: $font-weight-semi-bold; // 600
   line-height: $line-height-tight; // 1.3
   text-transform: uppercase;
@@ -37,6 +37,15 @@ $stats-hero-padding-vertical-mobile: 40px;
 
   // Mobile responsive
   @media (max-width: $breakpoint-md) {
-    font-size: 1.75rem; // 28px - from design spec
+    font-size: 2rem; // 32px - same size on mobile
   }
+}
+
+// Two-tone color for title
+.stats-hero__title-gold {
+  color: $color-brand-gold;
+}
+
+.stats-hero__title-white {
+  color: $color-neutral-white;
 }

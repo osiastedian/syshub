@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withTranslation } from "react-i18next";
-import SubTitle from '../global/SubTitle';
 
 /**
  * Component to show the price data
@@ -63,7 +62,7 @@ class Price extends Component {
         if(this.state.dataload===1) {
             return (
                 <>
-                    <SubTitle heading={t('price.title')} />
+                    <h2 className="section-title">PRICE STATS</h2>
                     <div className="ministats mndata-expanded">
                         <div className="stat">
                             {t('price.priceTable.price')}

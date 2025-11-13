@@ -12,7 +12,7 @@
   // Layout: CSS Grid for flexible responsive columns
   display: grid;
   grid-template-columns: 1fr; // Mobile: 1 column
-  gap: $space-lg; // 24px between cards
+  gap: $space-md; // 16px for mobile
 
   // Container width
   max-width: 100%;
@@ -21,14 +21,14 @@
   // Tablet: 2-column layout (768px+)
   @media (min-width: $breakpoint-md) {
     grid-template-columns: repeat(2, 1fr);
-    gap: $space-lg; // 24px
+    gap: $space-lg; // 24px for tablet+
     max-width: 800px; // Constrain width on tablet
   }
 
   // Desktop: 4-column layout (992px+)
   @media (min-width: $breakpoint-lg) {
     grid-template-columns: repeat(4, 1fr);
-    gap: $space-lg; // 24px
+    gap: $space-lg; // 24px for desktop
     max-width: 1200px; // Full container width on desktop
   }
 

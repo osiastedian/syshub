@@ -8,6 +8,21 @@
   margin-top: 58px;
 }
 
+// Chart heading styles
+.chart-heading {
+  font-family: $font-family-body;
+  font-size: $font-size-h4; // 24px
+  font-weight: $font-weight-semi-bold;
+  line-height: $line-height-tight;
+  color: $color-neutral-white;
+  text-align: center;
+  margin-bottom: $space-md;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-h4; // Keep 24px on mobile
+  }
+}
+
 // Dark gold color for Locked section in coins chart
 .ministats:nth-of-type(2) .chart-mini-hor .dark-gold {
   background-color: $color-brand-gold-dark;

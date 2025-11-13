@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withTranslation } from "react-i18next";
-import SubTitle from '../global/SubTitle';
 
 /**
  * Component to show the blockchain stats
@@ -42,7 +41,7 @@ class Blockchain extends Component {
         if(this.state.dataload===1) {
             return (
                 <>
-                    <SubTitle heading={t('investment.blockchainTable.title')} />
+                    <h2 className="section-title">BLOCKCHAIN STATS</h2>
                     <div className="ministats mndata-expanded">
                         <div className="stat">
                             {t('investment.blockchainTable.version')}

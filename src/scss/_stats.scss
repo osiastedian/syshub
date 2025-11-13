@@ -24,6 +24,27 @@
 $section-spacing-desktop: 60px;
 $section-spacing-mobile: 40px;
 
+// Standardized Section Title
+.section-title {
+  font-family: $font-family-body;
+  font-size: 2rem; // 32px
+  font-weight: $font-weight-semi-bold;
+  line-height: $line-height-tight;
+  color: $color-neutral-white;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 $space-xl 0;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 2rem;
+    margin-bottom: $space-lg;
+  }
+
+  &--black {
+    color: $color-neutral-black;
+  }
+}
+
 // Stats Hero Section
 .stats-hero {
   // Spacing handled by HeroSection component
@@ -73,14 +94,25 @@ $section-spacing-mobile: 40px;
   }
 }
 
-// Stats Investment Section
+// Stats Investment Section - Full-width gold background
 .stats-investment {
-  // Vertical spacing
-  padding: $section-spacing-desktop 0;
+  background-color: $color-brand-gold;
+  margin: 0 calc(-50vw + 50%);
+  padding: $section-spacing-desktop calc(50vw - 50%);
 
-  // Mobile responsive
+  .section-title {
+    color: $color-neutral-black;
+  }
+
+  .stats-card__label,
+  .stats-card__value,
+  .stats-card__subvalue,
+  .stats-card__unit {
+    color: $color-neutral-black;
+  }
+
   @media (max-width: $breakpoint-md) {
-    padding: $section-spacing-mobile 0;
+    padding: $section-spacing-mobile $space-lg;
   }
 }
 
