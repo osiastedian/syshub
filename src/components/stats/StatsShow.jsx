@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
-import StatsGrid from '../Stats/StatsGrid';
-import StatsCard from '../Stats/StatsCard';
+import StatsGrid from './StatsGrid';
+import StatsCard from './StatsCard';
 import "./StatsShow.scss";
 
 /**

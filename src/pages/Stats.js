@@ -6,7 +6,7 @@ import MetaTags from 'react-meta-tags';
 import Background from '../components/global/Background';
 import BackgroundInner from '../components/global/BackgroundInner';
 
-import HeroSection from '../components/Stats/HeroSection';
+import HeroSection from '../components/stats/HeroSection';
 import StatsShow from '../components/stats/StatsShow';
 import LinearChart from '../components/stats/LinearCharts';
 import Income from '../components/stats/Income';
