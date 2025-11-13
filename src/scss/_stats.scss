@@ -3,6 +3,8 @@
 // ============================================================================
 // Imports for all stats page components
 // Phase 1-2: Hero section and foundational components
+// Phase 3: Stats display components (StatsCard, StatsGrid)
+// Phase 4: Chart wrapper and section spacing
 // ============================================================================
 
 // Stats Components
@@ -10,3 +12,96 @@
 @import '../components/Stats/StatsCard.scss';
 @import '../components/Stats/StatsGrid.scss';
 @import '../components/Stats/StatsChart.scss';
+
+// ============================================================================
+// Section Spacing & Layout
+// ============================================================================
+// Consistent spacing between major sections
+// Mobile-first responsive approach
+// ============================================================================
+
+// Section vertical spacing
+$section-spacing-desktop: 60px;
+$section-spacing-mobile: 40px;
+
+// Stats Hero Section
+.stats-hero {
+  // Spacing handled by HeroSection component
+}
+
+// Stats Show Section (Primary stat cards)
+.stats-show {
+  // Vertical spacing
+  padding: $section-spacing-desktop 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    padding: $section-spacing-mobile 0;
+  }
+}
+
+// Stats Charts Section (Bar charts)
+.stats-charts {
+  // Vertical spacing
+  padding: $section-spacing-desktop 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    padding: $section-spacing-mobile 0;
+  }
+}
+
+// Stats Income Section
+.stats-income {
+  // Vertical spacing
+  padding: $section-spacing-desktop 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    padding: $section-spacing-mobile 0;
+  }
+}
+
+// Stats Price Section
+.stats-price {
+  // Vertical spacing
+  padding: $section-spacing-desktop 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    padding: $section-spacing-mobile 0;
+  }
+}
+
+// Stats Investment Section
+.stats-investment {
+  // Vertical spacing
+  padding: $section-spacing-desktop 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    padding: $section-spacing-mobile 0;
+  }
+}
+
+// Stats Blockchain Section
+.stats-blockchain {
+  // Vertical spacing
+  padding: $section-spacing-desktop 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    padding: $section-spacing-mobile 0;
+  }
+}
+
+// Stats Locations Section (World Map)
+.stats-locations {
+  // Vertical spacing
+  padding: $section-spacing-desktop 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    padding: $section-spacing-mobile 0;
+  }
+}

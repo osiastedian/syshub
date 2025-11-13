@@ -1,7 +1,59 @@
 @import '../../scss/design-tokens';
 
-// StatsChart component styles
-// TODO: Implement component styles in future phase
+// ============================================================================
+// StatsChart Component
+// ============================================================================
+// Wrapper component for chart visualizations
+// Provides consistent styling and layout for bar charts, line charts, etc.
+// Mobile-first responsive design
+// ============================================================================
+
 .stats-chart {
-  // Placeholder for Phase 4
+  // Layout
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  // Spacing
+  margin-bottom: $space-2xl; // 48px between charts
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    margin-bottom: $space-xl; // 32px on mobile
+  }
+}
+
+// Chart Title (e.g., "Total SentryNodes", "Coins Collateralized")
+.stats-chart__title {
+  // Typography
+  font-family: $font-family-body;
+  font-size: $font-size-h5; // 20px
+  font-weight: $font-weight-semi-bold;
+  line-height: $line-height-tight;
+  text-align: center;
+
+  // Color
+  color: $color-neutral-white;
+
+  // Spacing
+  margin: 0 0 $space-lg 0; // 24px bottom margin
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-body-large; // 18px
+    margin-bottom: $space-md; // 16px
+  }
+}
+
+// Chart Container (holds the actual chart visualization)
+.stats-chart__container {
+  // Layout
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+  // Ensure charts are responsive
+  > * {
+    width: 100%;
+  }
 }
