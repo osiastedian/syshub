@@ -44,7 +44,7 @@
 
   // Mobile responsive
   @media (max-width: $breakpoint-md) {
-    font-size: $font-size-body-small; // 14px
+    font-size: 0.75rem; // 12px
     margin-bottom: $space-sm;
   }
 }
@@ -73,7 +73,7 @@
 
   // Mobile responsive
   @media (max-width: $breakpoint-md) {
-    font-size: $font-size-h5; // 20px
+    font-size: 1.125rem; // 18px
   }
 }
 

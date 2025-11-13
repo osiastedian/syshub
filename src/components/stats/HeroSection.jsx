@@ -10,7 +10,10 @@ import './HeroSection.scss';
 const HeroSection = () => {
   return (
     <div className="stats-hero-content d-flex flex-column align-items-center text-center">
-      <h1 className="stats-hero__title">SENTRYNODES STATS</h1>
+      <h1 className="stats-hero__title">
+        <span className="stats-hero__title-gold">SENTRYNODES </span>
+        <span className="stats-hero__title-white">STATS</span>
+      </h1>
     </div>
   );
 };
