@@ -13,10 +13,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   text-align: center;
 
   // Spacing
   padding: $space-lg;
+  gap: 0; // Remove default gap
 
   // Background & Border
   background: transparent;
@@ -40,12 +42,13 @@
   color: $color-neutral-white;
 
   // Spacing
-  margin: 0 0 $space-md 0;
+  margin: $space-md 0 0 0; // 16px gap above label (since value comes first now)
+  order: 2; // Label below value
 
   // Mobile responsive
   @media (max-width: $breakpoint-md) {
     font-size: 0.75rem; // 12px
-    margin-bottom: $space-sm;
+    margin-top: $space-md; // Keep 16px gap
   }
 }
 
@@ -55,6 +58,7 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
+  order: 1; // Value container on top
 }
 
 // Main Value (e.g., "100,000 SYS", "$99.01")
@@ -62,11 +66,11 @@
   // Typography
   font-family: $font-family-body;
   font-size: $font-size-h4; // 24px
-  font-weight: $font-weight-black; // 900
+  font-weight: $font-weight-bold; // Changed from black to bold
   line-height: $line-height-tight;
 
   // Color
-  color: $color-neutral-white;
+  color: $color-brand-gold; // Gold color for values
 
   // Spacing
   margin: 0 0 $space-sm 0;
@@ -206,5 +210,30 @@
     .stats-card__unit {
       font-size: $font-size-body-small; // 14px
     }
+  }
+}
+
+// Blockchain variant (custom value/label styling)
+.stats-card--blockchain {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+
+  .stats-card__value {
+    order: 1;
+    font-size: 1.75rem; // 28px
+    color: $color-brand-gold;
+    font-weight: $font-weight-bold;
+    margin: 0;
+  }
+
+  .stats-card__label {
+    order: 2;
+    font-size: $font-size-body-medium; // 16px
+    color: $color-neutral-white;
+    margin-top: $space-md; // 16px gap
+    margin: $space-md 0 0 0;
   }
 }

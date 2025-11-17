@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { withTranslation } from "react-i18next";
+import StatsGrid from './StatsGrid';
+import StatsCard from './StatsCard';
 
 /**
  * Component to show the blockchain stats
@@ -42,25 +44,28 @@ class Blockchain extends Component {
             return (
                 <>
                     <h2 className="section-title">BLOCKCHAIN STATS</h2>
-                    <div className="ministats mndata-expanded">
-                        <div className="stat">
-                            {t('investment.blockchainTable.version')}
-                            <div className="stat-data">{this.state.blockchainData.version}</div>
-                            <div className="stat-data">{this.state.blockchainData.sub_version}</div>
-                        </div>
-                        <div className="stat">
-                            {t('investment.blockchainTable.protocol')}
-                            <div className="stat-data">{this.state.blockchainData.protocol}</div>
-                        </div>
-                        <div className="stat">
-                            {t('investment.blockchainTable.genesisBlock')}
-                            <div className="stat-data">{this.state.blockchainData.genesis}</div>
-                        </div>
-                        <div className="stat">
-                            {t('investment.blockchainTable.averageBlockTime')}
-                            <div className="stat-data">{this.state.blockchainData.avg_block}</div>
-                        </div>
-                    </div>
+                    <StatsGrid>
+                        <StatsCard
+                            label={t('investment.blockchainTable.version')}
+                            value={`${this.state.blockchainData.version} / ${this.state.blockchainData.sub_version}`}
+                            className="stats-card--blockchain"
+                        />
+                        <StatsCard
+                            label={t('investment.blockchainTable.protocol')}
+                            value={this.state.blockchainData.protocol}
+                            className="stats-card--blockchain"
+                        />
+                        <StatsCard
+                            label={t('investment.blockchainTable.genesisBlock')}
+                            value={this.state.blockchainData.genesis}
+                            className="stats-card--blockchain"
+                        />
+                        <StatsCard
+                            label={t('investment.blockchainTable.averageBlockTime')}
+                            value={this.state.blockchainData.avg_block}
+                            className="stats-card--blockchain"
+                        />
+                    </StatsGrid>
                 </>
             )
         } else {
