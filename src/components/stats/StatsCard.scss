@@ -16,17 +16,12 @@
   justify-content: center;
   text-align: center;
 
-  // Spacing
-  padding: $space-lg;
+  // No padding - spacing managed by grid gap
+  padding: 0;
 
   // Background & Border
   background: transparent;
   border: none;
-
-  // Responsive spacing
-  @media (max-width: $breakpoint-md) {
-    padding: $space-md;
-  }
 }
 
 // Value Container (holds value and subValue) - Now appears first
@@ -35,7 +30,8 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  margin-bottom: $space-md; // 16px gap before label
+  // Margin handled by .stats-card__value bottom margin
+  margin-bottom: 0;
 }
 
 // Main Value (e.g., "100,000 SYS", "$99.01")
@@ -49,8 +45,8 @@
   // Color - Gold for emphasis
   color: $color-brand-gold;
 
-  // Spacing
-  margin: 0 0 $space-sm 0;
+  // Spacing - 16px gap between value and label
+  margin: 0 0 $space-md 0;
 
   // Mobile responsive
   @media (max-width: $breakpoint-md) {

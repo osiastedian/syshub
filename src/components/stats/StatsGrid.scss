@@ -35,14 +35,17 @@
     }
   }
 
-  // Desktop: 4-column layout with space-between (992px+)
+  // Desktop: 4-column layout with proper spacing (992px+)
   @media (min-width: $breakpoint-lg) {
-    gap: 0; // No gap, using justify-between instead
-    justify-content: space-between;
+    // 4 columns evenly spread with 60px row gap
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px; // 60px row spacing, columns auto-spread
+    max-width: 100%;
 
     > * {
-      width: 214px;
-      flex-shrink: 0;
+      width: auto;
+      flex-shrink: 1;
     }
   }
 }

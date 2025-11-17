@@ -48,8 +48,17 @@ $section-spacing-mobile: 40px;
 // Stats Show Section - Combined title and cards
 // Single section containing both HeroSection title and StatsShow cards
 .stats-show {
-  // Desktop: Regular padding
-  padding: $section-spacing-desktop 0;
+  // Desktop: 160px top margin, 100px bottom margin
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0; // 100px top/bottom for other sections
+    margin-top: 160px; // Special: 160px top margin for SentryNode section
+  }
+
+  // Tablet: Regular 100px
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+    margin: 0;
+  }
 
   // Mobile responsive - flexbox column with gap between title and cards
   @media (max-width: $breakpoint-md) {
@@ -63,8 +72,15 @@ $section-spacing-mobile: 40px;
 
 // Stats Charts Section (Bar charts)
 .stats-charts {
-  // Vertical spacing
-  padding: $section-spacing-desktop 0;
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0;
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+  }
 
   // Mobile responsive - 60px margin top/bottom
   @media (max-width: $breakpoint-md) {
@@ -76,8 +92,15 @@ $section-spacing-mobile: 40px;
 
 // Stats Income Section
 .stats-income {
-  // Vertical spacing
-  padding: $section-spacing-desktop 0;
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0;
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+  }
 
   // Mobile responsive - 60px margin top/bottom
   @media (max-width: $breakpoint-md) {
@@ -89,8 +112,15 @@ $section-spacing-mobile: 40px;
 
 // Stats Price Section
 .stats-price {
-  // Vertical spacing
-  padding: $section-spacing-desktop 0;
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0;
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+  }
 
   // Mobile responsive - 60px margin top/bottom
   @media (max-width: $breakpoint-md) {
@@ -113,7 +143,16 @@ $section-spacing-mobile: 40px;
 .stats-investment {
   background-color: $color-brand-gold;
   margin: 0 calc(-50vw + 50%);
-  padding: $section-spacing-desktop calc(50vw - 50%);
+
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px calc(50vw - 50%);
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px calc(50vw - 50%);
+  }
 
   .section-title {
     color: $color-neutral-black;
@@ -133,8 +172,15 @@ $section-spacing-mobile: 40px;
 
 // Stats Blockchain Section
 .stats-blockchain {
-  // Vertical spacing
-  padding: $section-spacing-desktop 0;
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0;
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+  }
 
   // Mobile responsive - 60px margin top/bottom
   @media (max-width: $breakpoint-md) {
@@ -146,8 +192,15 @@ $section-spacing-mobile: 40px;
 
 // Stats Locations Section (World Map)
 .stats-locations {
-  // Vertical spacing
-  padding: $section-spacing-desktop 0;
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0;
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+  }
 
   // Mobile responsive - 60px margin top/bottom
   @media (max-width: $breakpoint-md) {
