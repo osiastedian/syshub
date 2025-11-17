@@ -107,11 +107,8 @@ class Stats extends Component {
                             {/* <meta name="description" content="Sysnode.info provides Syscoin SentryNode Operators the tools to maximise the most from their SentryNodes!" /> */}
                         </MetaTags>
 
-                        <section className="stats-hero">
-                            <HeroSection />
-                        </section>
-
                         <section className="stats-show">
+                            <HeroSection />
                             <div>
                                 <StatsShow statsData={this.state.api_data.stats} />
                             </div>
