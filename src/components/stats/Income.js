@@ -26,8 +26,40 @@ class Income extends Component {
             dataload: 0,
             incomeData: [],
             incomeSenOneYrData: [],
-            incomeSenTwoYrData: []
+            incomeSenTwoYrData: [],
+            mobileColumnIndex: 0 // 0 = Daily, 1 = Weekly, 2 = Monthly, 3 = Yearly
         }
+    }
+
+    /**
+     * Handler to navigate to the previous column on mobile
+     * @function
+     */
+    handlePrevColumn = () => {
+        if (this.state.mobileColumnIndex > 0) {
+            this.setState({ mobileColumnIndex: this.state.mobileColumnIndex - 1 });
+        }
+    }
+
+    /**
+     * Handler to navigate to the next column on mobile
+     * @function
+     */
+    handleNextColumn = () => {
+        if (this.state.mobileColumnIndex < 3) {
+            this.setState({ mobileColumnIndex: this.state.mobileColumnIndex + 1 });
+        }
+    }
+
+    /**
+     * Get the column label based on the index
+     * @function
+     * @param {number} index - The column index (0-3)
+     * @returns {string} The column label
+     */
+    getColumnLabel = (index) => {
+        const labels = ['Daily', 'Weekly', 'Monthly', 'Yearly'];
+        return labels[index];
     }
 
     /**
@@ -49,6 +81,29 @@ class Income extends Component {
             <>
                 <h2 className="section-title">INCOME STATS</h2>
                 <div className="income-stats-container">
+                    {/* Mobile column navigation controls: shown only on mobile */}
+                    <div className="income-table-mobile-controls d-md-none">
+                        <button
+                            className="income-nav-btn income-nav-btn--left"
+                            onClick={this.handlePrevColumn}
+                            disabled={this.state.mobileColumnIndex === 0}
+                            aria-label="Previous column"
+                        >
+                            ←
+                        </button>
+                        <span className="income-column-label">
+                            {this.getColumnLabel(this.state.mobileColumnIndex)}
+                        </span>
+                        <button
+                            className="income-nav-btn income-nav-btn--right"
+                            onClick={this.handleNextColumn}
+                            disabled={this.state.mobileColumnIndex === 3}
+                            aria-label="Next column"
+                        >
+                            →
+                        </button>
+                    </div>
+
                     {/* Desktop table: hidden on mobile */}
                     <div className="table-resp d-none d-md-block">
                         <div className="check_table">
@@ -161,8 +216,120 @@ class Income extends Component {
                         </div>
                     </div>
 
-                    {/* Mobile cards: hidden on tablet+ */}
-                    <div className="income-cards d-md-none">
+                    {/* Mobile table: hidden on tablet+, shows Seniority + one data column */}
+                    <div className="table-resp d-md-none">
+                        <div className="check_table">
+                            <table className={`seniority mobile-column-${this.state.mobileColumnIndex}`}>
+                            <thead>
+                                <tr>
+                                <td>Seniority</td>
+                                <td className="mobile-col-0">Daily</td>
+                                <td className="mobile-col-1">Weekly</td>
+                                <td className="mobile-col-2">Monthly</td>
+                                <td className="mobile-col-3">Yearly</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                <td>Less than 1 Year</td>
+                                <td className="mobile-col-0">
+                                    {this.state.incomeData.usd.daily}
+                                    <br />
+                                    {this.state.incomeData.btc.daily}
+                                    <br />
+                                    <span className="sb">{this.state.incomeData.sys.daily}</span>
+                                </td>
+                                <td className="mobile-col-1">
+                                    {this.state.incomeData.usd.weekly}
+                                    <br />
+                                    {this.state.incomeData.btc.weekly}
+                                    <br />
+                                    <span className="sb">{this.state.incomeData.sys.weekly}</span>
+                                </td>
+                                <td className="mobile-col-2">
+                                    {this.state.incomeData.usd.monthly}
+                                    <br />
+                                    {this.state.incomeData.btc.monthly}
+                                    <br />
+                                    <span className="sb">{this.state.incomeData.sys.monthly}</span>
+                                </td>
+                                <td className="mobile-col-3">
+                                    {this.state.incomeData.usd.yearly}
+                                    <br />
+                                    {this.state.incomeData.btc.yearly}
+                                    <br />
+                                    <span className="sb">{this.state.incomeData.sys.yearly}</span>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>1+ Year</td>
+                                <td className="mobile-col-0">
+                                    {this.state.incomeSenOneYrData.usd.daily}
+                                    <br />
+                                    {this.state.incomeSenOneYrData.btc.daily}
+                                    <br />
+                                    <span className="sb">{this.state.incomeSenOneYrData.sys.daily}</span>
+                                </td>
+                                <td className="mobile-col-1">
+                                    {this.state.incomeSenOneYrData.usd.weekly}
+                                    <br />
+                                    {this.state.incomeSenOneYrData.btc.weekly}
+                                    <br />
+                                    <span className="sb">{this.state.incomeSenOneYrData.sys.weekly}</span>
+                                </td>
+                                <td className="mobile-col-2">
+                                    {this.state.incomeSenOneYrData.usd.monthly}
+                                    <br />
+                                    {this.state.incomeSenOneYrData.btc.monthly}
+                                    <br />
+                                    <span className="sb">{this.state.incomeSenOneYrData.sys.monthly}</span>
+                                </td>
+                                <td className="mobile-col-3">
+                                    {this.state.incomeSenOneYrData.usd.yearly}
+                                    <br />
+                                    {this.state.incomeSenOneYrData.btc.yearly}
+                                    <br />
+                                    <span className="sb">{this.state.incomeSenOneYrData.sys.yearly}</span>
+                                </td>
+                                </tr>
+                                <tr>
+                                <td>2.5+ Years</td>
+                                <td className="mobile-col-0">
+                                    {this.state.incomeSenTwoYrData.usd.daily}
+                                    <br />
+                                    {this.state.incomeSenTwoYrData.btc.daily}
+                                    <br />
+                                    <span className="sb">{this.state.incomeSenTwoYrData.sys.daily}</span>
+                                </td>
+                                <td className="mobile-col-1">
+                                    {this.state.incomeSenTwoYrData.usd.weekly}
+                                    <br />
+                                    {this.state.incomeSenTwoYrData.btc.weekly}
+                                    <br />
+                                    <span className="sb">{this.state.incomeSenTwoYrData.sys.weekly}</span>
+                                </td>
+                                <td className="mobile-col-2">
+                                    {this.state.incomeSenTwoYrData.usd.monthly}
+                                    <br />
+                                    {this.state.incomeSenTwoYrData.btc.monthly}
+                                    <br />
+                                    <span className="sb">{this.state.incomeSenTwoYrData.sys.monthly}</span>
+                                </td>
+                                <td className="mobile-col-3">
+                                    {this.state.incomeSenTwoYrData.usd.yearly}
+                                    <br />
+                                    {this.state.incomeSenTwoYrData.btc.yearly}
+                                    <br />
+                                    <span className="sb">{this.state.incomeSenTwoYrData.sys.yearly}</span>
+                                </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    {/* DEPRECATED: Mobile cards - keeping for reference but hidden */}
+                    <div className="income-cards d-none">
                         {/* Card 1: Less than 1 Year */}
                         <div className="income-card">
                             <h4 className="income-card__title">Less than 1 Year</h4>

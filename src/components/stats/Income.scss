@@ -1,10 +1,63 @@
 @import '../../scss/design-tokens';
 
 // ============================================================================
-// Income Component - Desktop Table & Mobile Cards
+// Income Component - Desktop Table & Mobile Table with Column Navigation
 // ============================================================================
-// Responsive layout: Table on desktop, cards on mobile
+// Responsive layout: Full table on desktop, 2-column table with navigation on mobile
 // ============================================================================
+
+// Mobile Column Navigation Controls
+.income-table-mobile-controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: $space-md; // 16px gap between elements
+  margin-bottom: $space-md; // 16px margin below controls
+  padding: 0 $space-lg; // 24px horizontal padding
+
+  @media (min-width: $breakpoint-md) {
+    display: none; // Hidden on tablet and desktop
+  }
+}
+
+// Mobile Navigation Buttons
+.income-nav-btn {
+  width: 44px; // Large touch target
+  height: 44px;
+  border-radius: $radius-full; // 50% for circular buttons
+  border: 2px solid $color-brand-gold;
+  background: transparent;
+  color: $color-brand-gold;
+  font-size: $font-size-body-large; // 18px for arrow symbols
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-base; // 200ms ease-in-out
+
+  &:hover:not(:disabled) {
+    background-color: $color-brand-gold;
+    color: $color-neutral-black;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.95);
+  }
+}
+
+// Column Label
+.income-column-label {
+  font-size: $font-size-body-medium; // 16px
+  color: $color-neutral-white;
+  font-weight: $font-weight-semi-bold; // 600
+  min-width: 80px;
+  text-align: center;
+}
 
 // Desktop Table Styling
 .seniority {
@@ -27,6 +80,52 @@
           text-align: left;
           color: $color-brand-gold; // Gold color for "Seniority" header
         }
+      }
+    }
+  }
+
+  // Mobile: Hide all data columns by default, show based on active column
+  @media (max-width: $breakpoint-md) {
+    thead tr td,
+    tbody tr td {
+      // Hide all mobile column classes by default
+      &.mobile-col-0,
+      &.mobile-col-1,
+      &.mobile-col-2,
+      &.mobile-col-3 {
+        display: none;
+      }
+    }
+
+    // Show Daily column (index 0)
+    &.mobile-column-0 {
+      thead tr td.mobile-col-0,
+      tbody tr td.mobile-col-0 {
+        display: table-cell;
+      }
+    }
+
+    // Show Weekly column (index 1)
+    &.mobile-column-1 {
+      thead tr td.mobile-col-1,
+      tbody tr td.mobile-col-1 {
+        display: table-cell;
+      }
+    }
+
+    // Show Monthly column (index 2)
+    &.mobile-column-2 {
+      thead tr td.mobile-col-2,
+      tbody tr td.mobile-col-2 {
+        display: table-cell;
+      }
+    }
+
+    // Show Yearly column (index 3)
+    &.mobile-column-3 {
+      thead tr td.mobile-col-3,
+      tbody tr td.mobile-col-3 {
+        display: table-cell;
       }
     }
   }
