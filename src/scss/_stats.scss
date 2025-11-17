@@ -52,14 +52,14 @@ $section-spacing-mobile: 40px;
 
 // Stats Show Section (Primary stat cards)
 .stats-show {
-  // Vertical spacing
+  // Desktop: Regular padding
   padding: $section-spacing-desktop 0;
 
-  // Mobile responsive - 60px margin top/bottom
+  // Mobile responsive - add top margin gap between title and cards
   @media (max-width: $breakpoint-md) {
-    margin-top: $space-3xl; // 64px (closest to 60px requirement)
-    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
     padding: 0;
+    margin-top: $space-3xl; // 60px gap between title (hero) and cards (from Figma)
+    margin-bottom: $space-3xl; // 60px spacing at bottom
   }
 }
 

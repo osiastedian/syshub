@@ -9,15 +9,15 @@
 
 // Custom spacing tokens for stats page (from design spec)
 $stats-hero-padding-vertical: 60px;
-$stats-hero-padding-vertical-mobile: 40px;
+$stats-hero-padding-vertical-mobile: 60px; // Match Figma mobile design
 
 .stats-hero {
-  // Spacing
-  padding: $stats-hero-padding-vertical 0;
+  // Spacing - 60px top, 0 bottom (gap handled by stats-show section)
+  padding: $stats-hero-padding-vertical 0 0 0;
 
-  // Mobile responsive
+  // Mobile responsive - 60px top padding from Figma
   @media (max-width: $breakpoint-md) {
-    padding: $stats-hero-padding-vertical-mobile 0;
+    padding: $stats-hero-padding-vertical-mobile 0 0 0;
   }
 }
 
