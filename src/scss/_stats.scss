@@ -57,6 +57,7 @@ $section-spacing-mobile: 40px;
     flex-direction: column;
     gap: $space-3xl; // 60px gap between title and cards (from Figma design)
     padding: $space-3xl $space-lg; // 60px top/bottom, 24px left/right
+    margin-top: 64px; // Account for fixed header height (64px)
   }
 }
 
