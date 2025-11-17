@@ -55,9 +55,11 @@ $section-spacing-mobile: 40px;
   // Vertical spacing
   padding: $section-spacing-desktop 0;
 
-  // Mobile responsive
+  // Mobile responsive - 60px margin top/bottom
   @media (max-width: $breakpoint-md) {
-    padding: $section-spacing-mobile 0;
+    margin-top: $space-3xl; // 64px (closest to 60px requirement)
+    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
+    padding: 0;
   }
 }
 
@@ -66,9 +68,11 @@ $section-spacing-mobile: 40px;
   // Vertical spacing
   padding: $section-spacing-desktop 0;
 
-  // Mobile responsive
+  // Mobile responsive - 60px margin top/bottom
   @media (max-width: $breakpoint-md) {
-    padding: $section-spacing-mobile 0;
+    margin-top: $space-3xl; // 64px (closest to 60px requirement)
+    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
+    padding: 0;
   }
 }
 
@@ -77,9 +81,11 @@ $section-spacing-mobile: 40px;
   // Vertical spacing
   padding: $section-spacing-desktop 0;
 
-  // Mobile responsive
+  // Mobile responsive - 60px margin top/bottom
   @media (max-width: $breakpoint-md) {
-    padding: $section-spacing-mobile 0;
+    margin-top: $space-3xl; // 64px (closest to 60px requirement)
+    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
+    padding: 0;
   }
 }
 
@@ -88,9 +94,20 @@ $section-spacing-mobile: 40px;
   // Vertical spacing
   padding: $section-spacing-desktop 0;
 
-  // Mobile responsive
+  // Mobile responsive - 60px margin top/bottom
   @media (max-width: $breakpoint-md) {
-    padding: $section-spacing-mobile 0;
+    margin-top: $space-3xl; // 64px (closest to 60px requirement)
+    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
+    padding: 0;
+  }
+
+  // Mobile: 1-column layout for price stats grid
+  .ministats {
+    @media (max-width: $breakpoint-md) {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: $space-md;
+    }
   }
 }
 
@@ -121,9 +138,11 @@ $section-spacing-mobile: 40px;
   // Vertical spacing
   padding: $section-spacing-desktop 0;
 
-  // Mobile responsive
+  // Mobile responsive - 60px margin top/bottom
   @media (max-width: $breakpoint-md) {
-    padding: $section-spacing-mobile 0;
+    margin-top: $space-3xl; // 64px (closest to 60px requirement)
+    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
+    padding: 0;
   }
 }
 
@@ -132,8 +151,10 @@ $section-spacing-mobile: 40px;
   // Vertical spacing
   padding: $section-spacing-desktop 0;
 
-  // Mobile responsive
+  // Mobile responsive - 60px margin top/bottom
   @media (max-width: $breakpoint-md) {
-    padding: $section-spacing-mobile 0;
+    margin-top: $space-3xl; // 64px (closest to 60px requirement)
+    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
+    padding: 0;
   }
 }
