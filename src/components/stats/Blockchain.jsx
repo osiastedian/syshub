@@ -45,8 +45,7 @@ class Blockchain extends Component {
                     <h2 className="section-title">BLOCKCHAIN STATS</h2>
                     <div className="blockchain-stats-grid">
                         <div className="blockchain-stat">
-                            <div className="blockchain-stat__value">{this.state.blockchainData.version}</div>
-                            <div className="blockchain-stat__value">{this.state.blockchainData.sub_version}</div>
+                            <div className="blockchain-stat__value">{this.state.blockchainData.version} {this.state.blockchainData.sub_version}</div>
                             <div className="blockchain-stat__label">{t('investment.blockchainTable.version')}</div>
                         </div>
                         <div className="blockchain-stat">
