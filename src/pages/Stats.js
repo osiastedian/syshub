@@ -98,7 +98,7 @@ class Stats extends Component {
     render() {
         if (this.state.dataload === 1) {
             return (
-                <Background gradient={false}>
+                <>
                     <BackgroundInner type="B" />
                     <main className="statspage container">
                         <MetaTags>
@@ -157,11 +157,11 @@ class Stats extends Component {
                             </div>
                         </section>
                     </main>
-                </Background>
+                </>
             )
         } else {
             return(
-                <Background gradient={false}>
+                <>
                     <BackgroundInner type="B" />
                     <main className="statspage container">
                         <MetaTags>
@@ -177,7 +177,7 @@ class Stats extends Component {
                             </div>
                         </section>
                     </main>
-                </Background>
+                </>
             )
         }
     }

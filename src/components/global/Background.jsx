@@ -6,10 +6,8 @@ import React from 'react';
  * @subcategory Global
  */
 const Background = (props) => {
-  const className = props.gradient === false ? 'main' : 'main main--gradient';
-
   return (
-    <div className={className}>
+    <div>
       {props.children}
     </div>
   )
