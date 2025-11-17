@@ -7,7 +7,7 @@ import React from 'react';
  */
 const Background = (props) => {
   return (
-    <div className="main main--gradient">
+    <div>
       {props.children}
     </div>
   )

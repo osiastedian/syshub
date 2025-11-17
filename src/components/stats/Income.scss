@@ -1,12 +1,68 @@
 @import '../../scss/design-tokens';
 
 // ============================================================================
-// Income Component - Mobile Cards
+// Income Component - Desktop Table & Mobile Cards
 // ============================================================================
-// Responsive card layout for mobile devices
-// Hidden on tablet+ (768px and above)
+// Responsive layout: Table on desktop, cards on mobile
 // ============================================================================
 
+// Desktop Table Styling
+.seniority {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+      td {
+        padding: $space-md;
+        font-family: $font-family-body;
+        font-size: $font-size-body-medium;
+        font-weight: $font-weight-semi-bold;
+        color: $color-neutral-white;
+        text-align: center;
+
+        &:first-child {
+          text-align: left;
+          color: $color-brand-gold; // Gold color for "Seniority" header
+        }
+      }
+    }
+  }
+
+  tbody {
+    tr {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      td {
+        padding: $space-md;
+        font-family: $font-family-body;
+        font-size: $font-size-body-medium;
+        color: $color-neutral-white;
+        text-align: center;
+        line-height: 1.6;
+
+        &:first-child {
+          text-align: left;
+          font-weight: $font-weight-semi-bold;
+          color: $color-brand-gold; // Gold color for seniority values
+        }
+
+        .sb {
+          color: $color-brand-gold;
+          font-weight: $font-weight-semi-bold;
+        }
+      }
+    }
+  }
+}
+
+// Mobile Cards Styling
 .income-cards {
   display: flex;
   flex-direction: column;

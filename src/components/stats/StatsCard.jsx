@@ -40,7 +40,6 @@ const StatsCard = ({
 
   return (
     <div className={cardClasses}>
-      <p className="stats-card__label">{label}</p>
       <div className="stats-card__value-container">
         <p className="stats-card__value">
           {value}
@@ -50,6 +49,7 @@ const StatsCard = ({
           <p className="stats-card__subvalue">{subValue}</p>
         )}
       </div>
+      <p className="stats-card__label">{label}</p>
       {change && (
         <span className={changeClasses}>
           {change.direction === 'up' && '↑ '}
