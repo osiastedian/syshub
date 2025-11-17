@@ -9,12 +9,13 @@
 // ============================================================================
 
 .stats-card {
-  // Layout
+  // Layout - Matches Figma mobile design
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
+  gap: $space-md; // 16px gap between value and label (from Figma)
 
   // No padding - spacing managed by grid gap
   padding: 0;
@@ -41,12 +42,13 @@
   font-size: $font-size-h4; // 24px
   font-weight: $font-weight-black; // 900
   line-height: $line-height-tight;
+  letter-spacing: 0.24px; // From Figma design
 
   // Color - Gold for emphasis
   color: $color-brand-gold;
 
-  // Spacing - 16px gap between value and label
-  margin: 0 0 $space-md 0;
+  // No margin - spacing handled by card gap
+  margin: 0;
 
   // Mobile responsive
   @media (max-width: $breakpoint-md) {
