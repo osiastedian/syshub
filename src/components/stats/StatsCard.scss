@@ -18,7 +18,6 @@
 
   // Spacing
   padding: $space-lg;
-  gap: 0; // Remove default gap
 
   // Background & Border
   background: transparent;
@@ -30,7 +29,36 @@
   }
 }
 
-// Card Label (e.g., "Collateral", "MN Cost")
+// Value Container (holds value and subValue) - Now appears first
+.stats-card__value-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-bottom: $space-md; // 16px gap before label
+}
+
+// Main Value (e.g., "100,000 SYS", "$99.01")
+.stats-card__value {
+  // Typography
+  font-family: $font-family-body;
+  font-size: $font-size-h4; // 24px
+  font-weight: $font-weight-black; // 900
+  line-height: $line-height-tight;
+
+  // Color - Gold for emphasis
+  color: $color-brand-gold;
+
+  // Spacing
+  margin: 0 0 $space-sm 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.125rem; // 18px
+  }
+}
+
+// Card Label (e.g., "Collateral", "MN Cost") - Now appears below value
 .stats-card__label {
   // Typography
   font-family: $font-family-body;
@@ -42,42 +70,11 @@
   color: $color-neutral-white;
 
   // Spacing
-  margin: $space-md 0 0 0; // 16px gap above label (since value comes first now)
-  order: 2; // Label below value
+  margin: 0;
 
   // Mobile responsive
   @media (max-width: $breakpoint-md) {
     font-size: 0.75rem; // 12px
-    margin-top: $space-md; // Keep 16px gap
-  }
-}
-
-// Value Container (holds value and subValue)
-.stats-card__value-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  order: 1; // Value container on top
-}
-
-// Main Value (e.g., "100,000 SYS", "$99.01")
-.stats-card__value {
-  // Typography
-  font-family: $font-family-body;
-  font-size: $font-size-h4; // 24px
-  font-weight: $font-weight-bold; // Changed from black to bold
-  line-height: $line-height-tight;
-
-  // Color
-  color: $color-brand-gold; // Gold color for values
-
-  // Spacing
-  margin: 0 0 $space-sm 0;
-
-  // Mobile responsive
-  @media (max-width: $breakpoint-md) {
-    font-size: 1.125rem; // 18px
   }
 }
 
@@ -210,30 +207,5 @@
     .stats-card__unit {
       font-size: $font-size-body-small; // 14px
     }
-  }
-}
-
-// Blockchain variant (custom value/label styling)
-.stats-card--blockchain {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-
-  .stats-card__value {
-    order: 1;
-    font-size: 1.75rem; // 28px
-    color: $color-brand-gold;
-    font-weight: $font-weight-bold;
-    margin: 0;
-  }
-
-  .stats-card__label {
-    order: 2;
-    font-size: $font-size-body-medium; // 16px
-    color: $color-neutral-white;
-    margin-top: $space-md; // 16px gap
-    margin: $space-md 0 0 0;
   }
 }
