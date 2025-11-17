@@ -89,6 +89,27 @@
             {
                 line-height: $line-height-relaxed;
                 padding: $space-sm;
+                color: $color-neutral-white; // Other columns white
+            }
+
+            // Seniority column styling (first column) - gold
+            th:first-child,
+            td:first-child {
+                color: $color-brand-gold;
+                font-weight: $font-weight-semi-bold;
+            }
+
+            // Row borders
+            tbody tr {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+                &:last-child {
+                    border-bottom: none;
+                }
+            }
+
+            thead tr {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
             }
         }
     }
