@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { withTranslation } from "react-i18next";
-
-import RemotePagination from "./RemotePagination";
 import { Link } from "react-router-dom";
+import RemotePagination from "./RemotePagination";
+import './MasternodeTable.scss';
+
 const API_URI = process.env.REACT_APP_SYS_API_URI;
 /**
  * Component that renders the masternodes table
@@ -162,55 +163,55 @@ class MasternodeTable extends Component {
     if (dataload === 1) {
       return (
         <>
-          <div className="input-form">
-            <div className="form-group">
-              <input
-                id="srcVal"
-                type="text"
-                className="ip"
-                placeholder={t("check.table.ipInput")}
-                onKeyUp={this.searchInTable}
-                style={{ marginBottom: "32px", height: "48px", fontSize: "18px" }}
-              />
-              <div className="d-flex flex-column flex-md-row gap-3 align-items-center justify-content-center mt-3">
-                {this.state.isMobile ? (
-                  <>
-                    <Link
-                      to={path !== undefined ?`${path}/masternode-registration`:`masternodes/masternode-registration`}
-                      className="sentry-btn sentry-btn--register w-100"
-                    >
-                      <span className="sentry-btn__text">{t("check.register.link")}</span>
-                    </Link>
+          {/* Search Input */}
+          <div className="sentry-search-container">
+            <input
+              id="srcVal"
+              type="text"
+              className="sentry-search-input"
+              placeholder={t("check.table.ipInput")}
+              onKeyUp={this.searchInTable}
+            />
 
-                    <button
-                      type="button"
-                      className="sentry-btn sentry-btn--reset w-100"
-                      onClick={this.resetSearch}
-                    >
-                      <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    <button
-                      type="button"
-                      className="sentry-btn sentry-btn--reset"
-                      style={{ width: "245px" }}
-                      onClick={this.resetSearch}
-                    >
-                      <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
-                    </button>
+            {/* Buttons - different layouts for mobile vs desktop */}
+            <div className={`sentry-buttons-container ${this.state.isMobile ? 'mobile' : 'desktop'}`}>
+              {this.state.isMobile ? (
+                <>
+                  {/* Mobile: Registration first, then Reset */}
+                  <Link
+                    to={path !== undefined ? `${path}/masternode-registration` : `masternodes/masternode-registration`}
+                    className="sentry-btn sentry-btn--register"
+                  >
+                    <span className="sentry-btn__text">{t("check.register.link")}</span>
+                  </Link>
 
-                    <Link
-                      to={path !== undefined ?`${path}/masternode-registration`:`masternodes/masternode-registration`}
-                      className="sentry-btn sentry-btn--register"
-                      style={{ width: "245px" }}
-                    >
-                      <span className="sentry-btn__text">{t("check.register.link")}</span>
-                    </Link>
-                  </>
-                )}
-              </div>
+                  <button
+                    type="button"
+                    className="sentry-btn sentry-btn--reset"
+                    onClick={this.resetSearch}
+                  >
+                    <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
+                  </button>
+                </>
+              ) : (
+                <>
+                  {/* Desktop: Reset first, then Registration */}
+                  <button
+                    type="button"
+                    className="sentry-btn sentry-btn--reset"
+                    onClick={this.resetSearch}
+                  >
+                    <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
+                  </button>
+
+                  <Link
+                    to={path !== undefined ? `${path}/masternode-registration` : `masternodes/masternode-registration`}
+                    className="sentry-btn sentry-btn--register"
+                  >
+                    <span className="sentry-btn__text">{t("check.register.link")}</span>
+                  </Link>
+                </>
+              )}
             </div>
           </div>
 

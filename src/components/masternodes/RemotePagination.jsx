@@ -5,6 +5,7 @@ import paginationFactory, {
   PaginationListStandalone,
 } from "react-bootstrap-table2-paginator";
 import "react-bootstrap-table-next/dist/react-bootstrap-table2.min.css";
+import './RemotePagination.scss';
 
 
 const getColumns = (t, isMobile) => {
@@ -12,43 +13,38 @@ const getColumns = (t, isMobile) => {
     {
       text: t("check.table.address"),
       dataField: "address",
+      headerStyle: {
+        width: '244px',
+        minWidth: '244px'
+      }
     },
     {
       text: t("check.table.protocol"),
       dataField: "protocol",
+      headerStyle: {
+        width: '180px',
+        minWidth: '180px'
+      }
     },
     {
       text: t("check.table.status"),
       dataField: "status",
+      headerStyle: {
+        width: '140px',
+        minWidth: '140px'
+      },
       formatter: (cell) => {
         const lowerStatus = cell?.toLowerCase() || "";
-        let styles = {
-          backgroundColor: "#f0f0f0",
-          color: "#333"
-        };
+        let badgeClass = "status-badge";
 
         if (lowerStatus === "pending") {
-          styles = {
-            backgroundColor: "#1F5EFF33",
-            color: "#1F5EFF"
-          };
+          badgeClass += " status-badge--pending";
         } else if (lowerStatus === "enabled") {
-          styles = {
-            backgroundColor: "#FBB03B33",
-            color: "#FBB03B"
-          };
+          badgeClass += " status-badge--enabled";
         }
 
         return (
-          <span style={{
-            fontSize: "12px",
-            padding: "2px 6px",
-            borderRadius: "12px",
-            whiteSpace: "nowrap",
-            display: "inline-block",
-            width: "fit-content",
-            ...styles
-          }}>
+          <span className={badgeClass}>
             {cell}
           </span>
         );
@@ -58,12 +54,7 @@ const getColumns = (t, isMobile) => {
       text: t("check.table.payee"),
       dataField: "payee",
       formatter: (cell) => (
-        <div style={{
-          maxWidth: "120px",
-          overflow: "hidden",
-          textOverflow: "ellipsis",
-          whiteSpace: "nowrap"
-        }}>
+        <div className="payee-cell">
           {cell}
         </div>
       ),
@@ -71,57 +62,33 @@ const getColumns = (t, isMobile) => {
     {
       text: t("check.table.lastpaidtime"),
       dataField: "lastpaidtime",
+      headerStyle: {
+        width: '140px',
+        minWidth: '140px'
+      }
     },
-    // {
-    //   text: t("check.table.activeseconds"),
-    //   dataField: "activeseconds",
-    // },
-    // {
-    //   text: t("check.table.lastseen"),
-    //   dataField: "lastseen",
-    // },
   ];
 
-  // Show only address and lastpaidtime on mobile, with status pill inside address cell
+  // Mobile: show only address and lastpaidtime
   if (isMobile) {
-    const getStatusStyles = (status) => {
-      const lowerStatus = status?.toLowerCase() || "";
-      if (lowerStatus === "pending") {
-        return {
-          backgroundColor: "#1F5EFF33",
-          color: "#1F5EFF"
-        };
-      } else if (lowerStatus === "enabled") {
-        return {
-          backgroundColor: "#FBB03B33",
-          color: "#FBB03B"
-        };
-      }
-      return {
-        backgroundColor: "#f0f0f0",
-        color: "#333"
-      };
-    };
-
     return [
       {
         text: t("check.table.address"),
         dataField: "address",
         formatter: (cell, row) => {
-          const statusStyles = getStatusStyles(row.status);
+          const lowerStatus = row.status?.toLowerCase() || "";
+          let badgeClass = "status-badge status-badge--mobile";
+
+          if (lowerStatus === "pending") {
+            badgeClass += " status-badge--pending";
+          } else if (lowerStatus === "enabled") {
+            badgeClass += " status-badge--enabled";
+          }
+
           return (
-            <div style={{ display: "flex", flexDirection: "column", gap: "6px" }}>
-              <span>{cell}</span>
-              <span style={{
-                fontSize: "12px",
-                backgroundColor: statusStyles.backgroundColor,
-                color: statusStyles.color,
-                padding: "2px 6px",
-                borderRadius: "12px",
-                whiteSpace: "nowrap",
-                display: "inline-block",
-                width: "fit-content"
-              }}>
+            <div className="address-cell-mobile">
+              <span className="address-text">{cell}</span>
+              <span className={badgeClass}>
                 {row.status}
               </span>
             </div>
@@ -131,8 +98,12 @@ const getColumns = (t, isMobile) => {
       {
         text: t("check.table.lastpaidtime"),
         dataField: "lastpaidtime",
+        headerStyle: {
+          width: '96px',
+          minWidth: '96px'
+        },
         formatter: (cell) => (
-          <div style={{ textAlign: "center", fontSize: "12px" }}>
+          <div className="lastpaid-cell-mobile">
             {cell}
           </div>
         ),
@@ -165,32 +136,49 @@ const RemotePagination = ({
   t,
   simple,
   isMobile
-}) => (
-  <div>
-    <PaginationProvider
-      pagination={paginationFactory({
-        custom: true,
-        page,
-        sizePerPage,
-        totalSize,
-      })}
-    >
-      {({ paginationProps, paginationTableProps }) => (
-        <div>
-          <BootstrapTable
-            remote
-            keyField="address"
-            data={data}
-            columns={getColumns(t, isMobile)}
-            onTableChange={onTableChange}
-            {...paginationTableProps}
-          />
-          
-          { !simple && <PaginationListStandalone {...paginationProps} /> }
-        </div>
-      )}
-    </PaginationProvider>
-  </div>
-);
+}) => {
+  // Calculate pagination info
+  const from = (page - 1) * sizePerPage + 1;
+  const to = Math.min(page * sizePerPage, totalSize);
+
+  return (
+    <div className="sentry-table-wrapper">
+      <PaginationProvider
+        pagination={paginationFactory({
+          custom: true,
+          page,
+          sizePerPage,
+          totalSize,
+        })}
+      >
+        {({ paginationProps, paginationTableProps }) => (
+          <div>
+            <div className="sentry-table-container">
+              <BootstrapTable
+                remote
+                keyField="address"
+                data={data}
+                columns={getColumns(t, isMobile)}
+                onTableChange={onTableChange}
+                wrapperClasses="sentry-table"
+                bordered={false}
+                {...paginationTableProps}
+              />
+            </div>
+
+            {!simple && (
+              <div className="sentry-pagination-container">
+                <div className="pagination-info">
+                  Showing {from} to {to} of {totalSize}
+                </div>
+                <PaginationListStandalone {...paginationProps} />
+              </div>
+            )}
+          </div>
+        )}
+      </PaginationProvider>
+    </div>
+  );
+};
 
 export default RemotePagination;
