@@ -100,8 +100,8 @@
   transition: all $transition-base;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 12px;
 
   &:hover:not(:disabled) {
     background: #fac133;
@@ -148,8 +148,8 @@
   transition: all $transition-base;
   display: flex;
   align-items: center;
-  justify-content: center;
-  gap: 8px;
+  justify-content: flex-start;
+  gap: 12px;
   text-decoration: none;
 
   &:hover:not(:disabled) {
