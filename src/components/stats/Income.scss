@@ -31,7 +31,7 @@
 // Mobile Navigation Buttons Container
 .mobile-nav-buttons {
   display: flex;
-  gap: 0; // No gap between buttons
+  gap: 8px; // 8px gap between buttons
   align-items: center;
 }
 
@@ -51,8 +51,8 @@
   flex-shrink: 0;
 
   svg {
-    width: 14px;
-    height: 14px;
+    width: 5px;
+    height: 10px;
   }
 
   &:hover:not(:disabled) {
