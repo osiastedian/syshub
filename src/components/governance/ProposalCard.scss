@@ -118,10 +118,11 @@
   line-height: 1.3;
   color: #FFFFFF;
   margin: 0;
-  padding: 0;
+  padding: 0 !important; // Override .btn base class padding
   border: none;
   background: none;
   text-decoration: none;
+  min-width: 0 !important; // Override .btn min-width
   // Override .btn base class centering
   justify-content: flex-start !important;
   text-align: left;
