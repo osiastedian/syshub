@@ -126,13 +126,13 @@ const SignupForm = (props) => {
           className="signup-button-primary"
           disabled={props.submitting || !recaptchaVerified || !(formState.isValid)}
         >
-          {props.submitting ? t('signup.form.creating') : t('signup.form.signUp')}
           <span className="button-icon">→</span>
+          {props.submitting ? t('signup.form.creating') : t('signup.form.signUp')}
         </button>
 
         <Link to="/login" className="signup-button-secondary text-decoration-none">
-          {t('signup.form.alreadyHaveAccount')}
           <span className="button-icon">→</span>
+          {t('signup.form.alreadyHaveAccount')}
         </Link>
       </div>
     </form>
