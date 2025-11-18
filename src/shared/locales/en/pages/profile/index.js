@@ -13,6 +13,13 @@ const profile = {
         loading: 'Loading voting address...',
         addAddress: 'Add voting address'
       }
+    },
+    sidebar: {
+      title: 'Settings',
+      information: 'Information',
+      password: 'Password',
+      twoFactor: 'Two-Factor Auth',
+      closeAccount: 'Close Account',
     }
   }
 }
