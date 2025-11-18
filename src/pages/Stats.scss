@@ -1,0 +1,247 @@
+// ============================================================================
+// Stats Page Styles
+// ============================================================================
+// Imports for all stats page components
+// Phase 1-2: Hero section and foundational components
+// Phase 3: Stats display components (StatsCard, StatsGrid)
+// Phase 4: Chart wrapper and section spacing
+// ============================================================================
+
+// Stats Components
+@import '../components/stats/HeroSection.scss';
+@import '../components/stats/StatsCard.scss';
+@import '../components/stats/StatsGrid.scss';
+@import '../components/stats/StatsChart.scss';
+
+// ============================================================================
+// Section Spacing & Layout
+// ============================================================================
+// Consistent spacing between major sections
+// Mobile-first responsive approach
+// ============================================================================
+
+// Section vertical spacing
+$section-spacing-desktop: 60px;
+$section-spacing-mobile: 40px;
+
+// Standardized Section Title
+.section-title {
+  font-family: $font-family-body;
+  font-size: 2rem; // 32px
+  font-weight: $font-weight-semi-bold;
+  line-height: $line-height-tight;
+  color: $color-neutral-white;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 $space-xl 0;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 2rem;
+    margin-bottom: $space-lg;
+  }
+
+  &--black {
+    color: $color-neutral-black;
+  }
+}
+
+// Stats Show Section - Combined title and cards
+// Single section containing both HeroSection title and StatsShow cards
+.stats-show {
+  // Desktop: 160px top margin, 100px bottom margin
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0; // 100px top/bottom for other sections
+    margin-top: 160px; // Special: 160px top margin for SentryNode section
+  }
+
+  // Tablet: Regular 100px
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+    margin: 0;
+  }
+
+  // Mobile responsive - flexbox column with gap between title and cards
+  @media (max-width: $breakpoint-md) {
+    display: flex;
+    flex-direction: column;
+    gap: $space-3xl; // 60px gap between title and cards (from Figma design)
+    padding: $space-3xl $space-lg; // 60px top/bottom, 24px left/right
+    margin-top: 64px; // Account for fixed header height (64px)
+  }
+}
+
+// Stats Charts Section (Bar charts)
+.stats-charts {
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0;
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+  }
+
+  // Mobile responsive - 60px margin top/bottom
+  @media (max-width: $breakpoint-md) {
+    margin-top: $space-3xl; // 64px (closest to 60px requirement)
+    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
+    padding: 0;
+  }
+}
+
+// Stats Income Section
+.stats-income {
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0;
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+  }
+
+  // Mobile responsive - 60px margin top/bottom
+  @media (max-width: $breakpoint-md) {
+    margin-top: $space-3xl; // 64px (closest to 60px requirement)
+    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
+    padding: 0;
+  }
+}
+
+// Stats Price Section
+.stats-price {
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0;
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+  }
+
+  // Mobile responsive - 60px margin top/bottom
+  @media (max-width: $breakpoint-md) {
+    margin-top: $space-3xl; // 64px (closest to 60px requirement)
+    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
+    padding: 0;
+  }
+
+  // Section title - 60px bottom margin
+  .section-title {
+    margin-bottom: 60px;
+  }
+
+  // Price stat value styling - gold color with specific typography
+  .stat_value {
+    color: $color-brand-gold;
+    text-align: center;
+    font-family: $font-family-body;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: $font-weight-black; // 900
+    line-height: 130%; // 36.4px
+    letter-spacing: 0.28px;
+  }
+
+  // Price stat label styling - white with regular weight
+  .stat_label {
+    color: $color-neutral-white;
+    text-align: center;
+    font-family: $font-family-body;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: $font-weight-regular; // 400
+    line-height: 130%; // 20.8px
+  }
+}
+
+// Stats Investment Section - Full-width gold background
+.stats-investment {
+  background-color: $color-brand-gold;
+  margin: 0 calc(-50vw + 50%);
+
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px calc(50vw - 50%);
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px calc(50vw - 50%);
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: $section-spacing-mobile $space-lg;
+  }
+
+  // Section title - 60px bottom margin
+  .section-title {
+    margin-bottom: 60px;
+  }
+
+  // Investment stat value styling - black text with same typography as Price stats
+  .stat_value {
+    color: $color-neutral-black;
+    text-align: center;
+    font-family: $font-family-body;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: $font-weight-black; // 900
+    line-height: 130%; // 36.4px
+    letter-spacing: 0.28px;
+  }
+
+  // Investment stat label styling - black text with same typography as Price stats
+  .stat_label {
+    color: $color-neutral-black;
+    text-align: center;
+    font-family: $font-family-body;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: $font-weight-regular; // 400
+    line-height: 130%; // 20.8px
+  }
+}
+
+// Stats Blockchain Section
+.stats-blockchain {
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0;
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+  }
+
+  // Mobile responsive - 60px margin top/bottom
+  @media (max-width: $breakpoint-md) {
+    margin-top: $space-3xl; // 64px (closest to 60px requirement)
+    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
+    padding: 0;
+  }
+}
+
+// Stats Locations Section (World Map)
+.stats-locations {
+  // Desktop: 100px top/bottom padding
+  @media (min-width: $breakpoint-lg) {
+    padding: 100px 0;
+  }
+
+  // Tablet: 100px top/bottom padding
+  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg - 1px) {
+    padding: 100px 0;
+  }
+
+  // Mobile responsive - 60px margin top/bottom
+  @media (max-width: $breakpoint-md) {
+    margin-top: $space-3xl; // 64px (closest to 60px requirement)
+    margin-bottom: $space-3xl; // 64px (closest to 60px requirement)
+    padding: 0;
+  }
+}

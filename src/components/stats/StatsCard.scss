@@ -1,0 +1,211 @@
+@import '../../scss/design-tokens';
+
+// ============================================================================
+// StatsCard Component
+// ============================================================================
+// Reusable card component for displaying individual statistics
+// Supports size variants, secondary values, and change indicators
+// Mobile-first responsive design
+// ============================================================================
+
+.stats-card {
+  // Layout - Matches Figma mobile design
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: $space-md; // 16px gap between value and label (from Figma)
+
+  // No padding - spacing managed by grid gap
+  padding: 0;
+
+  // Background & Border
+  background: transparent;
+  border: none;
+}
+
+// Value Container (holds value and subValue) - Now appears first
+.stats-card__value-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  // Margin handled by .stats-card__value bottom margin
+  margin-bottom: 0;
+}
+
+// Main Value (e.g., "100,000 SYS", "$99.01")
+.stats-card__value {
+  // Typography - matches Price Stats specification
+  font-family: $font-family-body;
+  font-size: 28px;
+  font-style: normal;
+  font-weight: $font-weight-black; // 900
+  line-height: 130%; // 36.4px
+  letter-spacing: 0.28px;
+
+  // Color - Gold for emphasis
+  color: $color-brand-gold;
+  text-align: center;
+
+  // No margin - spacing handled by card gap
+  margin: 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: 1.125rem; // 18px
+  }
+}
+
+// Card Label (e.g., "Collateral", "MN Cost") - Now appears below value
+.stats-card__label {
+  // Typography
+  font-family: $font-family-body;
+  font-size: $font-size-body-medium; // 16px
+  font-weight: $font-weight-regular;
+  line-height: $line-height-tight;
+
+  // Color
+  color: $color-neutral-white;
+
+  // Spacing
+  margin: 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: 0.75rem; // 12px
+  }
+}
+
+// Unit indicator (e.g., "SYS", "BTC")
+.stats-card__unit {
+  // Typography
+  font-size: $font-size-sub-1; // 14px
+  font-weight: $font-weight-semi-bold;
+
+  // Color
+  color: $color-brand-gold;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-sub-2; // 12px
+  }
+}
+
+// Sub value (e.g., secondary pricing info "$330.16")
+.stats-card__subvalue {
+  // Typography
+  font-family: $font-family-body;
+  font-size: $font-size-sub-1; // 14px
+  font-weight: $font-weight-regular;
+  line-height: $line-height-tight;
+
+  // Color
+  color: $color-brand-gold;
+
+  // Spacing
+  margin: 0;
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-sub-2; // 12px
+  }
+}
+
+// Change indicator (e.g., "↑ 2.5%")
+.stats-card__change {
+  // Typography
+  font-family: $font-family-body;
+  font-size: $font-size-sub-2; // 12px
+  font-weight: $font-weight-semi-bold;
+
+  // Color (default neutral)
+  color: $color-neutral-gray-light;
+
+  // Spacing
+  margin-top: $space-xs;
+
+  // Direction variants
+  &--up {
+    color: $color-success-text; // Green for positive change
+  }
+
+  &--down {
+    color: $color-error-text; // Red for negative change
+  }
+
+  // Mobile responsive
+  @media (max-width: $breakpoint-md) {
+    font-size: $font-size-sub-3; // 10px
+  }
+}
+
+// Size Variants
+// ============================================================================
+
+// Small size (compact cards for less important stats)
+.stats-card--small {
+  padding: $space-md;
+
+  .stats-card__label {
+    font-size: $font-size-body-small; // 14px
+    margin-bottom: $space-sm;
+  }
+
+  .stats-card__value {
+    font-size: $font-size-h5; // 20px
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-sm;
+
+    .stats-card__label {
+      font-size: $font-size-sub-1; // 14px
+    }
+
+    .stats-card__value {
+      font-size: $font-size-body-large; // 18px
+    }
+  }
+}
+
+// Medium size (default, most common)
+.stats-card--medium {
+  // Uses base styles defined above
+}
+
+// Large size (prominent stats for key metrics)
+.stats-card--large {
+  padding: $space-xl;
+
+  .stats-card__label {
+    font-size: $font-size-body-large; // 18px
+    margin-bottom: $space-lg;
+  }
+
+  .stats-card__value {
+    font-size: $font-size-h3; // 32px
+    font-weight: $font-weight-bold;
+  }
+
+  .stats-card__unit {
+    font-size: $font-size-body-medium; // 16px
+  }
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-lg;
+
+    .stats-card__label {
+      font-size: $font-size-body-medium; // 16px
+    }
+
+    .stats-card__value {
+      font-size: $font-size-h4; // 24px
+    }
+
+    .stats-card__unit {
+      font-size: $font-size-body-small; // 14px
+    }
+  }
+}

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withTranslation } from "react-i18next";
-import SubTitle from '../global/SubTitle';
 
 /**
  * Component to show the price data
@@ -63,26 +62,45 @@ class Price extends Component {
         if(this.state.dataload===1) {
             return (
                 <>
-                    <SubTitle heading={t('price.title')} />
-                    <div className="ministats mndata-expanded">
-                        <div className="stat">
-                            {t('price.priceTable.price')}
-                            <div className="stat-data">${this.state.priceData.price_usd}</div>
-                            <div className="stat-data">{this.state.priceData.price_btc} BTC</div>
+                    <h2 className="section-title">PRICE STATS</h2>
+                    <div className="row row-cols-1 row-cols-lg-4 g-4">
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">
+                                    ${this.state.priceData.price_usd}
+                                    <br />
+                                    {this.state.priceData.price_btc} BTC
+                                </span>
+                                <span className="stat_label">{t('price.priceTable.price')}</span>
+                            </div>
                         </div>
-                        <div className="stat">
-                            {t('price.priceTable.volume')}
-                            <div className="stat-data">${this.state.priceData.volume_usd}</div>
-                            <div className="stat-data">{this.state.priceData.volume_btc} BTC</div>
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">
+                                    ${this.state.priceData.volume_usd}
+                                    <br />
+                                    {this.state.priceData.volume_btc} BTC
+                                </span>
+                                <span className="stat_label">{t('price.priceTable.volume')}</span>
+                            </div>
                         </div>
-                        <div className="stat">
-                            {t('price.priceTable.marketcap')}
-                            <div className="stat-data">${this.state.priceData.market_cap_usd}</div>
-                            <div className="stat-data">{this.state.priceData.market_cap_btc} BTC</div>
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">
+                                    ${this.state.priceData.market_cap_usd}
+                                    <br />
+                                    {this.state.priceData.market_cap_btc} BTC
+                                </span>
+                                <span className="stat_label">{t('price.priceTable.marketcap')}</span>
+                            </div>
                         </div>
-                        <div className="stat">
-                            {t('price.priceTable.change')}
-                            <div className="stat-data">{this.priceWizard(this.state.priceData.price_change)}</div>
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">
+                                    {this.priceWizard(this.state.priceData.price_change)}
+                                </span>
+                                <span className="stat_label">{t('price.priceTable.change')}</span>
+                            </div>
                         </div>
                     </div>
                 </>

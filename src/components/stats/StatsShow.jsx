@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withTranslation } from "react-i18next";
+import StatsGrid from './StatsGrid';
+import StatsCard from './StatsCard';
 import "./StatsShow.scss";
 
 /**
@@ -39,70 +41,42 @@ class StatsShow extends Component {
 
     if (this.state.dataload === 1) {
       return (
-        <>
-          <div className="stats-grid">
-            <div className="text-center">
-              <div className="stat-value">
-                {statsData.mn_stats.collateral_req} SYS
-              </div>
-              <div className="stat-label">Collateral</div>
-            </div>
-            <div className="text-center">
-              <div className="stat-value">
-                {statsData.mn_stats.masternode_price_usd}
-              </div>
-              <div className="stat-label">MN Cost</div>
-            </div>
-            <div className="text-center">
-              <div className="stat-value">
-                <span title="Return on investment">
-                  {statsData.mn_stats.roi}
-                </span>
-              </div>
-              <div className="stat-label">ROI</div>
-            </div>
-            <div className="text-center">
-              <div className="stat-value">
-                <span title="Regular SentryNode">
-                  {statsData.income_stats.usd.monthly}
-                </span>{" "}
-                /{" "}
-                <span title="SentryNode with 1 year seniority">
-                  {statsData.income_stats_seniority_one_year.usd.monthly}
-                </span>
-              </div>
-              <div className="stat-label">Monthly income</div>
-            </div>
-            <div className="text-center">
-              <div className="stat-value">
-                {statsData.mn_stats.first_pay}
-              </div>
-              <div className="stat-label">First reward</div>
-            </div>
-            <div className="text-center">
-              <div className="stat-value">
-                {statsData.mn_stats.reward_eligble}
-              </div>
-              <div className="stat-label">Reward elegibility</div>
-            </div>
-            <div className="text-center">
-              <div className="stat-value">
-                <span title="Enabled SentryNodes">
-                  {statsData.mn_stats.enabled}
-                </span>{" "}
-                /{" "}
-                <span title="All SentryNodes">{statsData.mn_stats.total}</span>
-              </div>
-              <div className="stat-label">SentryNodes</div>
-            </div>
-            <div className="text-center">
-              <div className="stat-value">
-                {statsData.mn_stats.coins_percent_locked}
-              </div>
-              <div className="stat-label">SYS collateralized</div>
-            </div>
-          </div>
-        </>
+        <StatsGrid>
+          <StatsCard
+            label="Collateral"
+            value={statsData.mn_stats.collateral_req}
+            unit="SYS"
+          />
+          <StatsCard
+            label="MN Cost"
+            value={statsData.mn_stats.masternode_price_usd}
+          />
+          <StatsCard
+            label="ROI"
+            value={statsData.mn_stats.roi}
+          />
+          <StatsCard
+            label="Monthly income"
+            value={statsData.income_stats.usd.monthly}
+            subValue={statsData.income_stats_seniority_one_year.usd.monthly}
+          />
+          <StatsCard
+            label="First reward"
+            value={statsData.mn_stats.first_pay}
+          />
+          <StatsCard
+            label="Reward elegibility"
+            value={statsData.mn_stats.reward_eligble}
+          />
+          <StatsCard
+            label="SentryNodes"
+            value={`${statsData.mn_stats.enabled} / ${statsData.mn_stats.total}`}
+          />
+          <StatsCard
+            label="SYS collateralized"
+            value={statsData.mn_stats.coins_percent_locked}
+          />
+        </StatsGrid>
       );
     } else {
       return <p>Loading...</p>;

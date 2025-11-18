@@ -1,0 +1,51 @@
+@import '../../scss/design-tokens';
+
+// ============================================================================
+// StatsGrid Component
+// ============================================================================
+// Responsive flexbox container for stat cards
+// Mobile: flex-wrap with 160px cards, centered (Figma design)
+// Desktop: flex with justify-between, 214px cards (Figma design)
+// ============================================================================
+
+.stats-grid {
+  // Mobile: Flex wrap with centered cards, 160px width
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-md; // 16px for mobile
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 100%;
+  margin: 0 auto;
+
+  // Mobile: Fixed card width of 160px
+  > * {
+    width: 160px;
+    flex-shrink: 0;
+  }
+
+  // Tablet: 2-column layout (768px+) - still flex wrap with wider cards
+  @media (min-width: $breakpoint-md) {
+    gap: $space-lg; // 24px for tablet+
+    justify-content: space-around;
+
+    > * {
+      width: 190px;
+      flex-shrink: 0;
+    }
+  }
+
+  // Desktop: 4-column layout with proper spacing (992px+)
+  @media (min-width: $breakpoint-lg) {
+    // 4 columns evenly spread with 60px row gap
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px; // 60px row spacing, columns auto-spread
+    max-width: 100%;
+
+    > * {
+      width: auto;
+      flex-shrink: 1;
+    }
+  }
+}
