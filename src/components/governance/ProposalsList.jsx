@@ -6,8 +6,8 @@ import swal from 'sweetalert2';
 
 import { list, getUserInfo } from '../../utils/request';
 
-import SubTitle from '../global/SubTitle';
 import ProposalCard from './ProposalCard';
+import './ProposalsList.scss';
 
 /**
  * Component to show the proposal list of governance
@@ -100,7 +100,10 @@ function ProposalsList(props) {
 
   return (
     <>
-      <SubTitle heading={t('govlist.table.title')} className="section-header section-header--governance" highlightFirstWord={true} />
+      <h2 className="proposals-list__heading">
+        <span className="proposals-list__heading-highlight">CURRENT</span> PROPOSALS
+      </h2>
+
       {
         (dataload === 0) && (
           <div className="loading loading--center" role="status" aria-live="polite">
@@ -110,23 +113,29 @@ function ProposalsList(props) {
         )
       }
       {
-        (dataload === 1 && proposals.length > 0) && <div className="proposals">
-          {proposals.map(proposal => {
-            return <ProposalCard
-              key={proposal.Hash}
-              proposal={proposal}
-              onLoadProposals={loadProposals}
-              enabled={props.statsData.enabled}
-              userInfo={userInfo}
-            />
-          })}
-        </div>
+        (dataload === 1 && proposals.length > 0) && (
+          <div className="proposals-list d-flex flex-column gap-3">
+            {proposals.map(proposal => {
+              return <ProposalCard
+                key={proposal.Hash}
+                proposal={proposal}
+                onLoadProposals={loadProposals}
+                enabled={props.statsData.enabled}
+                userInfo={userInfo}
+              />
+            })}
+          </div>
+        )
       }
       {
-        (dataload === 1 && proposals.length === 0) && <p className="text-center">There are no proposals</p>
+        (dataload === 1 && proposals.length === 0) && (
+          <p className="text-center">There are no proposals</p>
+        )
       }
       {
-        (dataload === 2) && <p className="text-center">The data couldn't be fetched</p>
+        (dataload === 2) && (
+          <p className="text-center">The data couldn't be fetched</p>
+        )
       }
     </>
   )

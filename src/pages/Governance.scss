@@ -1,0 +1,48 @@
+// Import design tokens
+@import '../scss/design-tokens';
+
+// ============================================================================
+// GOVERNANCE PAGE STYLES
+// ============================================================================
+
+.governance-page {
+  min-height: 100vh;
+  padding-top: 24px;
+  padding-bottom: 100px;
+}
+
+// Section spacing
+.governance-section {
+  margin-bottom: 100px;
+
+  &--proposals {
+    margin-bottom: 100px;
+  }
+
+  &--details {
+    margin-bottom: 100px;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    margin-bottom: 60px;
+
+    &--proposals {
+      margin-bottom: 60px;
+    }
+
+    &--details {
+      margin-bottom: 60px;
+    }
+  }
+}
+
+// Desktop: shell-large has max-width and horizontal padding
+.shell-large {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 180px;
+
+  @media (max-width: $breakpoint-md) {
+    padding: 0 16px;
+  }
+}
