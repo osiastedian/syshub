@@ -1,0 +1,319 @@
+// ============================================================================
+// TwoFactorModal Component Styles
+// ============================================================================
+// Modal for 2FA code verification during setup
+// ============================================================================
+
+@import '../../scss/design-tokens';
+
+.two-factor-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: $z-modal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-md;
+  animation: two-factor-modal-fade-in 0.2s ease-out;
+}
+
+@keyframes two-factor-modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.two-factor-modal {
+  background: $color-neutral-dark-bg;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  width: 100%;
+  max-width: 450px;
+  box-shadow: $shadow-xl;
+  position: relative;
+  animation: two-factor-modal-slide-up 0.3s ease-out;
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    max-width: 90%;
+    padding: $space-lg;
+  }
+}
+
+@keyframes two-factor-modal-slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.two-factor-modal__close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.7);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all $transition-base;
+
+  &:hover {
+    color: $color-text;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-gold;
+    outline-offset: 2px;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.two-factor-modal__header {
+  margin-bottom: $space-lg;
+  padding-right: $space-xl; // Space for close button
+}
+
+.two-factor-modal__title {
+  @include typography-body-large-semi-bold;
+  font-size: 22px;
+  color: $color-text;
+  margin-bottom: $space-sm;
+}
+
+.two-factor-modal__description {
+  @include typography-body-medium-regular;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  line-height: $line-height-normal;
+}
+
+.two-factor-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+}
+
+.two-factor-modal__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.two-factor-modal__label {
+  @include typography-body-large-regular;
+  color: $color-text;
+  font-size: 18px;
+}
+
+.two-factor-modal__input {
+  width: 100%;
+  height: 56px;
+  padding: 16px 24px;
+  border-radius: $radius-md;
+  background: rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: $color-text;
+  font-family: $font-family-monospace;
+  font-size: 20px;
+  font-weight: $font-weight-semi-bold;
+  letter-spacing: 8px;
+  text-align: center;
+  transition: all $transition-base;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+    letter-spacing: normal;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-brand-gold;
+    background: rgba(0, 0, 0, 0.4);
+  }
+
+  &--error {
+    border-color: $color-error-text;
+  }
+
+  &--success {
+    border-color: $color-success-text;
+  }
+}
+
+.two-factor-modal__helper-text {
+  @include typography-body-small-regular;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  font-size: 14px;
+  text-align: center;
+}
+
+.two-factor-modal__error-text {
+  @include typography-body-small-regular;
+  color: $color-error-text;
+  margin: 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-xs;
+
+  &::before {
+    content: '⚠';
+    font-size: 16px;
+  }
+}
+
+.two-factor-modal__success-text {
+  @include typography-body-small-regular;
+  color: $color-success-text;
+  margin: 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-xs;
+
+  &::before {
+    content: '✓';
+    font-size: 16px;
+  }
+}
+
+.two-factor-modal__actions {
+  display: flex;
+  gap: $space-md;
+  margin-top: $space-md;
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    flex-direction: column;
+  }
+}
+
+.two-factor-modal__button {
+  flex: 1;
+  height: 48px;
+  padding: 12px 32px;
+  border-radius: 24px;
+  font-family: $font-family-body;
+  font-size: $font-size-body-medium;
+  font-weight: $font-weight-semi-bold;
+  cursor: pointer;
+  transition: all $transition-base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-xs;
+  border: none;
+
+  &--primary {
+    background: $color-brand-gold;
+    color: $color-neutral-black;
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+  }
+
+  &--secondary {
+    background: transparent;
+    color: $color-text;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+
+    &:hover:not(:disabled) {
+      border-color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-gold;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    width: 100%;
+  }
+}
+
+.two-factor-modal__loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: $color-neutral-black;
+  border-radius: 50%;
+  animation: two-factor-modal-spin 0.6s linear infinite;
+}
+
+@keyframes two-factor-modal-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ============================================================================
+// Accessibility
+// ============================================================================
+
+// Prevent body scroll when modal is open
+body.two-factor-modal-open {
+  overflow: hidden;
+}
+
+// Focus trap - ensure focus stays within modal
+.two-factor-modal-overlay {
+  &:focus {
+    outline: none;
+  }
+}
+
+// ============================================================================
+// Responsive Adjustments
+// ============================================================================
+
+@media (max-width: #{$breakpoint-md - 1px}) {
+  .two-factor-modal__title {
+    font-size: 20px;
+  }
+
+  .two-factor-modal__label {
+    font-size: 16px;
+  }
+
+  .two-factor-modal__input {
+    font-size: 18px;
+    letter-spacing: 6px;
+  }
+}
