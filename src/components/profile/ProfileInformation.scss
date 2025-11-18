@@ -1,0 +1,319 @@
+// ============================================================================
+// ProfileInformation Component Styles
+// ============================================================================
+// User information form for Profile page
+// Displays email and voting address with edit functionality
+// ============================================================================
+
+@import '../../scss/design-tokens';
+
+.profile-information {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profile-information__header {
+  margin-bottom: $space-xl;
+}
+
+.profile-information__title {
+  @include typography-body-large-semi-bold;
+  font-size: 22px;
+  color: $color-text;
+  margin-bottom: $space-sm;
+}
+
+.profile-information__description {
+  @include typography-body-small-regular;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+.profile-information__form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl;
+}
+
+.profile-information__form-group {
+  display: flex;
+  flex-direction: column;
+  gap: $space-sm;
+}
+
+.profile-information__label {
+  @include typography-body-large-regular;
+  color: $color-text;
+  font-size: 18px;
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+
+  &--required::after {
+    content: '*';
+    color: $color-error-text;
+    margin-left: 4px;
+  }
+}
+
+.profile-information__input {
+  width: 100%;
+  height: 48px;
+  padding: 12px 24px;
+  border-radius: $radius-md;
+  background: rgba(0, 0, 0, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: $color-text;
+  font-family: $font-family-body;
+  font-size: $font-size-body-medium;
+  font-weight: $font-weight-regular;
+  transition: all $transition-base;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: $color-brand-gold;
+    background: rgba(0, 0, 0, 0.2);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &--error {
+    border-color: $color-error-text;
+  }
+
+  &--success {
+    border-color: $color-success-text;
+  }
+}
+
+.profile-information__helper-text {
+  @include typography-body-small-regular;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  font-size: 14px;
+}
+
+.profile-information__error-text {
+  @include typography-body-small-regular;
+  color: $color-error-text;
+  margin: 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+
+  &::before {
+    content: '⚠';
+    font-size: 16px;
+  }
+}
+
+.profile-information__success-text {
+  @include typography-body-small-regular;
+  color: $color-success-text;
+  margin: 0;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: $space-xs;
+
+  &::before {
+    content: '✓';
+    font-size: 16px;
+  }
+}
+
+.profile-information__actions {
+  display: flex;
+  gap: $space-md;
+  margin-top: $space-lg;
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    flex-direction: column;
+  }
+}
+
+.profile-information__button {
+  height: 48px;
+  padding: 12px 32px;
+  border-radius: 24px;
+  border: none;
+  font-family: $font-family-body;
+  font-size: $font-size-body-medium;
+  font-weight: $font-weight-semi-bold;
+  cursor: pointer;
+  transition: all $transition-base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $space-xs;
+
+  &--primary {
+    background: $color-brand-gold;
+    color: $color-neutral-black;
+
+    &:hover:not(:disabled) {
+      opacity: 0.9;
+    }
+
+    &:active:not(:disabled) {
+      transform: scale(0.98);
+    }
+  }
+
+  &--secondary {
+    background: transparent;
+    color: $color-text;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+
+    &:hover:not(:disabled) {
+      border-color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-gold;
+    outline-offset: 2px;
+  }
+}
+
+.profile-information__button-icon {
+  width: 20px;
+  height: 20px;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+// ============================================================================
+// Loading State
+// ============================================================================
+
+.profile-information__loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  border-top-color: $color-neutral-black;
+  border-radius: 50%;
+  animation: profile-information-spin 0.6s linear infinite;
+}
+
+@keyframes profile-information-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+// ============================================================================
+// Voting Address Section
+// ============================================================================
+
+.profile-information__voting-address {
+  background: rgba(255, 255, 255, 0.05);
+  padding: $space-lg;
+  border-radius: $radius-md;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.profile-information__address-display {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  padding: $space-md;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: $radius-md;
+  margin-top: $space-md;
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
+
+.profile-information__address-text {
+  @include typography-body-medium-regular;
+  color: $color-text;
+  font-family: $font-family-monospace;
+  word-break: break-all;
+  flex: 1;
+}
+
+.profile-information__copy-button {
+  padding: $space-sm $space-md;
+  background: $color-brand-gold;
+  color: $color-neutral-black;
+  border: none;
+  border-radius: $radius-md;
+  font-size: $font-size-body-small;
+  font-weight: $font-weight-semi-bold;
+  cursor: pointer;
+  transition: all $transition-base;
+  white-space: nowrap;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+// ============================================================================
+// Responsive Adjustments
+// ============================================================================
+
+@media (max-width: #{$breakpoint-md - 1px}) {
+  .profile-information {
+    max-width: 100%;
+  }
+
+  .profile-information__title {
+    font-size: 20px;
+  }
+
+  .profile-information__label {
+    font-size: 16px;
+  }
+
+  .profile-information__voting-address {
+    padding: $space-md;
+  }
+}
+
+// ============================================================================
+// Theme Support
+// ============================================================================
+
+.profile-information__input {
+  .theme-light & {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(0, 0, 0, 0.3);
+    color: $color-neutral-black;
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.5);
+    }
+
+    &:focus {
+      background: rgba(255, 255, 255, 0.2);
+    }
+  }
+}
