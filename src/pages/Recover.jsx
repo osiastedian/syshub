@@ -4,8 +4,10 @@ import {withTranslation} from "react-i18next";
 
 import Background from "../components/global/Background";
 import BackgroundInner from "../components/global/BackgroundInner";
-import Title from "../components/global/Title";
+import Navbar from "../components/global/Navbar";
+import Footer from "../components/global/Footer";
 import FormRecover from "../components/recover/formRecover";
+import "./Recover.scss";
 
 /**
  * Recover Password page that shows at /recover
@@ -16,30 +18,22 @@ import FormRecover from "../components/recover/formRecover";
 const Recover = ({ t }) => {
   return (
     <Background>
-      <BackgroundInner/>
-      <main className="section recoverPage">
+      <BackgroundInner />
+      <Navbar />
+      <main className="recover-page">
         <MetaTags>
           <title> {t("recover.meta.title")} </title>
           <meta name="keywords" content={t("recover.meta.keywords")}/>
-          {/* <meta name="description" content={t("recover.meta.description")}/> */}
         </MetaTags>
-        <div className="shell-large">
-          <div className="section__body">
-            <div className="articles">
-              <section className="article">
-                <div className="cols">
-                  <div className="col col--size-12">
-                    <div className="article__content article__content--pull-left text-center">
-                      <Title heading={t("recover.data.heading")} />
-                      <FormRecover />
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
+
+        <section className="recover-section d-flex flex-column align-items-center">
+          <h1 className="recover-title text-white text-center">
+            {t("recover.data.heading")}
+          </h1>
+          <FormRecover />
+        </section>
       </main>
+      <Footer />
     </Background>
   )
 }
