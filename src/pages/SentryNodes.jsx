@@ -5,9 +5,9 @@ import MetaTags from "react-meta-tags";
 import { Redirect, Route, Switch, useRouteMatch } from "react-router";
 import Background from "../components/global/Background";
 import BackgroundInner from "../components/global/BackgroundInner";
-import Title from "../components/global/Title";
 import { MasternodeRegister } from "../components/masternodes/MasternodeRegister";
 import MasternodeTable from "../components/masternodes/MasternodeTable";
+import './SentryNodes.scss';
 
 /**
  * SentryNodes page that shows at /masternodes
@@ -20,36 +20,26 @@ const SentryNodes = ({ t }) => {
   return (
     <Background>
       <BackgroundInner />
-      <main className="section checkPage">
+      <main className="sentry-nodes-check-page">
         <MetaTags>
           <title>{t("check.meta.title")}</title>
           <meta name="keywords" content={t("check.meta.keywords")} />
         </MetaTags>
-        <div className="shell-large">
-          <div className="section__body">
-            <div className="articles">
-              <section className="article">
-                <div className="cols">
-                  <div className="col col--size-12">
-                    <div className="article__content article__content--pull-left text-center">
-                      <Switch>
-                        <Route exact path={path}>
-                          <Title heading={t("check.title")} />
-                          <MasternodeTable path={path} />
-                        </Route>
-                        <Route path={`${path}/masternode-registration`}>
-                          <MasternodeRegister />
-                        </Route>
-                        <Route path={path}>
-                          <Redirect to={path} />
-                        </Route>
-                      </Switch>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
+        <div className="sentry-nodes-check-container">
+          <Switch>
+            <Route exact path={path}>
+              <div className="d-flex flex-column align-items-center">
+                <h1 className="sentry-nodes-check-title">{t("check.title")}</h1>
+                <MasternodeTable path={path} />
+              </div>
+            </Route>
+            <Route path={`${path}/masternode-registration`}>
+              <MasternodeRegister />
+            </Route>
+            <Route path={path}>
+              <Redirect to={path} />
+            </Route>
+          </Switch>
         </div>
       </main>
     </Background>
