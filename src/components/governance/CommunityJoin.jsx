@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import CTAButton from '../global/CTAButton';
 import './CommunityJoin.scss';
 
 /**
@@ -35,19 +36,14 @@ function CommunityJoin() {
             Visit our Discord channel to meet the growing community of Syscoin, and hear all the latest updates.
           </p>
 
-          <a
-            href="https://discord.gg/syscoin"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="community-join__button"
+          <CTAButton
+            background="gold"
+            iconColor="black"
+            iconBackground="white"
+            onClick={() => window.open('https://discord.gg/syscoin', '_blank', 'noopener,noreferrer')}
           >
-            <div className="community-join__button-icon">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M5 8L11 8M11 8L8 5M11 8L8 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
-            <span className="community-join__button-text">Join Discord</span>
-          </a>
+            Join Discord
+          </CTAButton>
         </div>
       </div>
     </section>
