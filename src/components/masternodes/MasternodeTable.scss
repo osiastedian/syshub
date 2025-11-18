@@ -67,18 +67,16 @@
   display: flex;
   align-items: center;
   justify-content: center; // Centered buttons
+  width: 100%; // Full width to allow centering
 
   &.desktop {
     flex-direction: row;
     gap: 16px;
-    width: 506px;
-    max-width: 100%;
   }
 
   &.mobile {
     flex-direction: column;
     gap: 16px;
-    width: 100%;
   }
 }
 
