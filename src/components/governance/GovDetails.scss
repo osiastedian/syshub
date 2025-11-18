@@ -55,6 +55,13 @@
   @media (max-width: $breakpoint-md) {
     padding: 16px;
   }
+
+  // CTAButton styling within card
+  .cta-button {
+    @media (max-width: $breakpoint-md) {
+      width: 100%;
+    }
+  }
 }
 
 .gov-details__items {
@@ -102,51 +109,4 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-}
-
-// Button
-.gov-details__button {
-  display: flex;
-  align-items: center;
-  gap: 13px;
-  height: 40px;
-  padding: 4px 12px 4px 4px;
-  background: #FBB03B;
-  border-radius: 1000px;
-  border: none;
-  cursor: pointer;
-  transition: opacity 0.2s ease-in-out;
-
-  &:hover {
-    opacity: 0.9;
-  }
-
-  @media (max-width: $breakpoint-md) {
-    width: 100%;
-  }
-}
-
-.gov-details__button-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  background: #FFFFFF;
-  border-radius: 50%;
-  flex-shrink: 0;
-
-  i {
-    color: #0A0A0A;
-    font-size: 16px;
-  }
-}
-
-.gov-details__button-text {
-  font-family: 'DM Sans', sans-serif;
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 1.3;
-  color: #0A0A0A;
-  white-space: nowrap;
 }
