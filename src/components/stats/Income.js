@@ -210,8 +210,8 @@ class Income extends Component {
                                                 disabled={this.state.mobileColumnIndex === 0}
                                                 aria-label="Previous column"
                                             >
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.35254 8.57727L0.938935 5.16367C0.587463 4.81219 0.587464 4.24235 0.938935 3.89087L4.35254 0.47727" stroke="white" strokeWidth="1.35"/>
                                                 </svg>
                                             </button>
                                             <button
@@ -220,8 +220,8 @@ class Income extends Component {
                                                 disabled={this.state.mobileColumnIndex === 3}
                                                 aria-label="Next column"
                                             >
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M0.64746 0.47727L4.06107 3.89087C4.41254 4.24235 4.41254 4.81219 4.06107 5.16367L0.64746 8.57727" stroke="white" strokeWidth="1.35"/>
                                                 </svg>
                                             </button>
                                         </div>
@@ -237,8 +237,8 @@ class Income extends Component {
                                                 disabled={this.state.mobileColumnIndex === 0}
                                                 aria-label="Previous column"
                                             >
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.35254 8.57727L0.938935 5.16367C0.587463 4.81219 0.587464 4.24235 0.938935 3.89087L4.35254 0.47727" stroke="white" strokeWidth="1.35"/>
                                                 </svg>
                                             </button>
                                             <button
@@ -247,8 +247,8 @@ class Income extends Component {
                                                 disabled={this.state.mobileColumnIndex === 3}
                                                 aria-label="Next column"
                                             >
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M0.64746 0.47727L4.06107 3.89087C4.41254 4.24235 4.41254 4.81219 4.06107 5.16367L0.64746 8.57727" stroke="white" strokeWidth="1.35"/>
                                                 </svg>
                                             </button>
                                         </div>
@@ -264,8 +264,8 @@ class Income extends Component {
                                                 disabled={this.state.mobileColumnIndex === 0}
                                                 aria-label="Previous column"
                                             >
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.35254 8.57727L0.938935 5.16367C0.587463 4.81219 0.587464 4.24235 0.938935 3.89087L4.35254 0.47727" stroke="white" strokeWidth="1.35"/>
                                                 </svg>
                                             </button>
                                             <button
@@ -274,8 +274,8 @@ class Income extends Component {
                                                 disabled={this.state.mobileColumnIndex === 3}
                                                 aria-label="Next column"
                                             >
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M0.64746 0.47727L4.06107 3.89087C4.41254 4.24235 4.41254 4.81219 4.06107 5.16367L0.64746 8.57727" stroke="white" strokeWidth="1.35"/>
                                                 </svg>
                                             </button>
                                         </div>
@@ -291,8 +291,8 @@ class Income extends Component {
                                                 disabled={this.state.mobileColumnIndex === 0}
                                                 aria-label="Previous column"
                                             >
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M4.35254 8.57727L0.938935 5.16367C0.587463 4.81219 0.587464 4.24235 0.938935 3.89087L4.35254 0.47727" stroke="white" strokeWidth="1.35"/>
                                                 </svg>
                                             </button>
                                             <button
@@ -301,8 +301,8 @@ class Income extends Component {
                                                 disabled={this.state.mobileColumnIndex === 3}
                                                 aria-label="Next column"
                                             >
-                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
+                                                <svg width="5" height="10" viewBox="0 0 5 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M0.64746 0.47727L4.06107 3.89087C4.41254 4.24235 4.41254 4.81219 4.06107 5.16367L0.64746 8.57727" stroke="white" strokeWidth="1.35"/>
                                                 </svg>
                                             </button>
                                         </div>
