@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withTranslation } from "react-i18next";
+import './GovDetails.scss';
 
 /**
  * Governance Details component
@@ -43,78 +44,114 @@ class Govdetails extends Component {
         const { t } = this.props;
         if(this.state.dataload===1) {
             return (
-                <div className="cols-top cols">
-                    <div className="col col--size6">
-                        <div className="article__content">
-                            <h3 className="article__title title-border title-border--left title-border--blue">{t('superblocks.govdetailtable.title')}</h3>
-                            <div className="table-responsive">
-                                <table className="table table--governance">
-                                    <tbody>
-                                        <tr>
-                                            <td className="table-label">Current SuperBlock:</td>
-                                            <td className="table-value">{this.state.superBlockData.next_superblock}</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="table-label">SuperBlock Budget:</td>
-                                            <td className="table-value">{this.state.superBlockData.budget} SYS</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="table-label">Requested SuperBlock Budget:</td>
-                                            <td className="table-value">{this.state.budgetSum} SYS</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="table-label">SuperBlock Date (UTC):</td>
-                                            <td className="table-value">{this.state.superBlockData.superblock_date}</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="table-label">Voting Deadline (UTC):</td>
-                                            <td className="table-value">{this.state.superBlockData.voting_deadline}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                <div className="gov-details d-flex gap-5">
+                    {/* Governance Details - Gold Border */}
+                    <div className="gov-details__section gov-details__section--governance">
+                        <h3 className="gov-details__heading">
+                            {t('superblocks.govdetailtable.title', 'Governance Details')}
+                        </h3>
+
+                        <div className="gov-details__card gov-details__card--gold">
+                            <div className="gov-details__items">
+                                <div className="gov-details__item">
+                                    <div className="gov-details__label">Current Superblock</div>
+                                    <div className="gov-details__value">
+                                        {this.state.superBlockData.next_superblock}
+                                    </div>
+                                </div>
+
+                                <div className="gov-details__item">
+                                    <div className="gov-details__label">Superblock Budget</div>
+                                    <div className="gov-details__value">
+                                        {this.state.superBlockData.budget} SYS
+                                    </div>
+                                </div>
+
+                                <div className="gov-details__item">
+                                    <div className="gov-details__label">Requested Superblock Budget</div>
+                                    <div className="gov-details__value">
+                                        {this.state.budgetSum} SYS
+                                    </div>
+                                </div>
+
+                                <div className="gov-details__item">
+                                    <div className="gov-details__label">Superblock Date: UTC</div>
+                                    <div className="gov-details__value">
+                                        {this.state.superBlockData.superblock_date}
+                                    </div>
+                                </div>
+
+                                <div className="gov-details__item">
+                                    <div className="gov-details__label">Voting Deadline: UTC</div>
+                                    <div className="gov-details__value">
+                                        {this.state.superBlockData.voting_deadline}
+                                    </div>
+                                </div>
                             </div>
+
+                            <a
+                                href="https://github.com/syscoin/governance/wiki"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="gov-details__button"
+                            >
+                                <div className="gov-details__button-icon">
+                                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M5 8L11 8M11 8L8 5M11 8L8 11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                                    </svg>
+                                </div>
+                                <span className="gov-details__button-text">Access Community Wiki</span>
+                            </a>
                         </div>
                     </div>
-                    <div className="col col--size6">
-                        <div className="article__content">
-                            <h3 className="article__title title-border title-border--left title-border--blue">{t('superblocks.nextsuperblockstable.title')}</h3>
-                            <div className="table-responsive">
-                                <table className="table table--governance">
-                                    <thead>
-                                        <tr>
-                                            <th>SuperBlock</th>
-                                            <th>Budget</th>
-                                            <th>Date</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td className="table-label">{this.state.superBlockData.sb1}</td>
-                                            <td className="table-value">{this.state.superBlockData.sb1Budget || 0} SYS</td>
-                                            <td className="table-value">{this.state.superBlockData.sb1Date}</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="table-label">{this.state.superBlockData.sb2}</td>
-                                            <td className="table-value">{this.state.superBlockData.sb2Budget || 0} SYS</td>
-                                            <td className="table-value">{this.state.superBlockData.sb2Date}</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="table-label">{this.state.superBlockData.sb3}</td>
-                                            <td className="table-value">{this.state.superBlockData.sb3Budget || 0} SYS</td>
-                                            <td className="table-value">{this.state.superBlockData.sb3Date}</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="table-label">{this.state.superBlockData.sb4}</td>
-                                            <td className="table-value">{this.state.superBlockData.sb4Budget || 0} SYS</td>
-                                            <td className="table-value">{this.state.superBlockData.sb4Date}</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="table-label">{this.state.superBlockData.sb5}</td>
-                                            <td className="table-value">{this.state.superBlockData.sb5Budget || 0} SYS</td>
-                                            <td className="table-value">{this.state.superBlockData.sb5Date}</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+
+                    {/* Next 5 Superblocks - Blue Border */}
+                    <div className="gov-details__section gov-details__section--superblocks">
+                        <h3 className="gov-details__heading">
+                            {t('superblocks.nextsuperblockstable.title', 'Next 5 Superblocks')}
+                        </h3>
+
+                        <div className="gov-details__card gov-details__card--blue">
+                            <div className="gov-details__items">
+                                <div className="gov-details__item">
+                                    <div className="gov-details__sb-label">{this.state.superBlockData.sb1}</div>
+                                    <div className="gov-details__sb-info">
+                                        <div>{this.state.superBlockData.sb1Budget || 0} SYS</div>
+                                        <div>{this.state.superBlockData.sb1Date}</div>
+                                    </div>
+                                </div>
+
+                                <div className="gov-details__item">
+                                    <div className="gov-details__sb-label">{this.state.superBlockData.sb2}</div>
+                                    <div className="gov-details__sb-info">
+                                        <div>{this.state.superBlockData.sb2Budget || 0} SYS</div>
+                                        <div>{this.state.superBlockData.sb2Date}</div>
+                                    </div>
+                                </div>
+
+                                <div className="gov-details__item">
+                                    <div className="gov-details__sb-label">{this.state.superBlockData.sb3}</div>
+                                    <div className="gov-details__sb-info">
+                                        <div>{this.state.superBlockData.sb3Budget || 0} SYS</div>
+                                        <div>{this.state.superBlockData.sb3Date}</div>
+                                    </div>
+                                </div>
+
+                                <div className="gov-details__item">
+                                    <div className="gov-details__sb-label">{this.state.superBlockData.sb4}</div>
+                                    <div className="gov-details__sb-info">
+                                        <div>{this.state.superBlockData.sb4Budget || 0} SYS</div>
+                                        <div>{this.state.superBlockData.sb4Date}</div>
+                                    </div>
+                                </div>
+
+                                <div className="gov-details__item">
+                                    <div className="gov-details__sb-label">{this.state.superBlockData.sb5}</div>
+                                    <div className="gov-details__sb-info">
+                                        <div>{this.state.superBlockData.sb5Budget || 0} SYS</div>
+                                        <div>{this.state.superBlockData.sb5Date}</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

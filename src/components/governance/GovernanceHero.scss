@@ -1,0 +1,97 @@
+@import '../../scss/design-tokens';
+
+// ============================================================================
+// GOVERNANCE HERO SECTION
+// ============================================================================
+
+.governance-hero {
+  gap: 100px;
+  padding: 160px 0;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    gap: 24px;
+    padding: 60px 0;
+    align-items: center;
+  }
+}
+
+// Content (left side on desktop)
+.governance-hero__content {
+  flex: 1;
+  max-width: 572.61px;
+
+  @media (max-width: $breakpoint-md) {
+    max-width: 100%;
+    order: 2;
+  }
+}
+
+.governance-hero__title {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 45px;
+  line-height: 1.3;
+  color: #FFFFFF;
+  margin-bottom: 32px;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 32px;
+    margin-bottom: 32px;
+  }
+}
+
+.governance-hero__description {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.3;
+  color: #FFFFFF;
+
+  p {
+    margin-bottom: 0;
+
+    & + p {
+      margin-top: 0;
+    }
+  }
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 16px;
+  }
+}
+
+.governance-hero__link {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 500;
+  color: #FBB03B;
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  text-underline-position: from-font;
+}
+
+// Image (right side on desktop)
+.governance-hero__image {
+  flex: 0 0 340px;
+  height: 564px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 340px;
+    height: 564px;
+    object-fit: cover;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    flex: 0 0 253px;
+    height: 253px;
+    order: 1;
+
+    img {
+      width: 152.518px;
+      height: 253px;
+    }
+  }
+}
