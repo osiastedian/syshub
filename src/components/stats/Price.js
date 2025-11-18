@@ -64,24 +64,35 @@ class Price extends Component {
                 <>
                     <h2 className="section-title">PRICE STATS</h2>
                     <div className="ministats mndata-expanded">
-                        <div className="stat">
-                            {t('price.priceTable.price')}
-                            <div className="stat-data">${this.state.priceData.price_usd}</div>
-                            <div className="stat-data">{this.state.priceData.price_btc} BTC</div>
+                        <div className="d-flex flex-column align-items-center gap-3">
+                            <span className="stat_value">
+                                ${this.state.priceData.price_usd}
+                                <br />
+                                {this.state.priceData.price_btc} BTC
+                            </span>
+                            <span className="stat_label">{t('price.priceTable.price')}</span>
                         </div>
-                        <div className="stat">
-                            {t('price.priceTable.volume')}
-                            <div className="stat-data">${this.state.priceData.volume_usd}</div>
-                            <div className="stat-data">{this.state.priceData.volume_btc} BTC</div>
+                        <div className="d-flex flex-column align-items-center gap-3">
+                            <span className="stat_value">
+                                ${this.state.priceData.volume_usd}
+                                <br />
+                                {this.state.priceData.volume_btc} BTC
+                            </span>
+                            <span className="stat_label">{t('price.priceTable.volume')}</span>
                         </div>
-                        <div className="stat">
-                            {t('price.priceTable.marketcap')}
-                            <div className="stat-data">${this.state.priceData.market_cap_usd}</div>
-                            <div className="stat-data">{this.state.priceData.market_cap_btc} BTC</div>
+                        <div className="d-flex flex-column align-items-center gap-3">
+                            <span className="stat_value">
+                                ${this.state.priceData.market_cap_usd}
+                                <br />
+                                {this.state.priceData.market_cap_btc} BTC
+                            </span>
+                            <span className="stat_label">{t('price.priceTable.marketcap')}</span>
                         </div>
-                        <div className="stat">
-                            {t('price.priceTable.change')}
-                            <div className="stat-data">{this.priceWizard(this.state.priceData.price_change)}</div>
+                        <div className="d-flex flex-column align-items-center gap-3">
+                            <span className="stat_value">
+                                {this.priceWizard(this.state.priceData.price_change)}
+                            </span>
+                            <span className="stat_label">{t('price.priceTable.change')}</span>
                         </div>
                     </div>
                 </>
