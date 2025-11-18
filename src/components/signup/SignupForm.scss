@@ -119,16 +119,20 @@
     cursor: not-allowed;
   }
 
-  // Icon styling inside button (white circle with icon)
+  // Icon styling inside button (SVG with white background and black arrow)
   .button-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    background: rgba(255, 255, 255, 0.3);
-    border-radius: 50%;
-    font-size: 14px;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+
+    svg {
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
   }
 }
 
@@ -169,15 +173,20 @@
     cursor: not-allowed;
   }
 
-  // Icon styling inside button (gold icon)
+  // Icon styling inside button (SVG with gold background and white arrow)
   .button-icon {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
-    color: $color-brand-gold;
-    font-size: 14px;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+
+    svg {
+      width: 32px;
+      height: 32px;
+      display: block;
+    }
   }
 }
 
