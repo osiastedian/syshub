@@ -25,7 +25,15 @@ $color-neutral-gray-light: #CCCCCC;
 
 // Overlay Colors
 $color-overlay-white-10: #FFFFFF1A;
+$color-overlay-white-15: rgba(255, 255, 255, 0.15);
 $color-overlay-white-30: #FFFFFF4D;
+$color-overlay-white-50: rgba(255, 255, 255, 0.5);
+
+// Dark overlay
+$color-overlay-black-30: rgba(0, 0, 0, 0.3);
+
+// Text Colors
+$color-text-muted: #8D8D8D;
 
 // Status/Alert Colors
 $color-success-bg-light: #E0F5D6;
