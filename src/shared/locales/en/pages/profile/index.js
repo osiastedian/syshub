@@ -125,6 +125,25 @@ const profile = {
         verificationFailed: 'Invalid code. Please try again.',
       },
     },
+    closeAccount: {
+      title: 'Close Account',
+      description: 'Permanently delete your account and all associated data',
+      warningTitle: 'Warning: This action cannot be undone',
+      warningText: 'Closing your account will permanently delete all your data. Please review the consequences before proceeding:',
+      consequences: {
+        data: 'All personal information and account data will be permanently deleted',
+        access: 'You will lose access to your account immediately',
+        votes: 'All voting history and governance participation will be removed',
+        masternodes: 'Any masternode registrations will be lost',
+        irreversible: 'This action is irreversible and cannot be undone',
+      },
+      warningNote: 'This action is permanent and cannot be reversed.',
+      confirmationTitle: 'Are you absolutely sure?',
+      confirmationText: 'Once you delete your account, there is no going back. Please be certain before proceeding.',
+      delete: 'Delete My Account',
+      deleting: 'Deleting...',
+      cancel: 'Cancel',
+    }
   }
 }
 export default profile;
