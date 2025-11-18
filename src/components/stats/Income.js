@@ -202,102 +202,110 @@ class Income extends Component {
                                 <td>Seniority</td>
                                 <td className="mobile-col-0 mobile-header-cell">
                                     <div className="mobile-header-content">
-                                        <button
-                                            className="income-nav-btn income-nav-btn--left"
-                                            onClick={this.handlePrevColumn}
-                                            disabled={this.state.mobileColumnIndex === 0}
-                                            aria-label="Previous column"
-                                        >
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
-                                            </svg>
-                                        </button>
                                         <span className="mobile-header-label">Daily</span>
-                                        <button
-                                            className="income-nav-btn income-nav-btn--right"
-                                            onClick={this.handleNextColumn}
-                                            disabled={this.state.mobileColumnIndex === 3}
-                                            aria-label="Next column"
-                                        >
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
-                                            </svg>
-                                        </button>
+                                        <div className="mobile-nav-buttons">
+                                            <button
+                                                className="income-nav-btn income-nav-btn--left"
+                                                onClick={this.handlePrevColumn}
+                                                disabled={this.state.mobileColumnIndex === 0}
+                                                aria-label="Previous column"
+                                            >
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
+                                                </svg>
+                                            </button>
+                                            <button
+                                                className="income-nav-btn income-nav-btn--right"
+                                                onClick={this.handleNextColumn}
+                                                disabled={this.state.mobileColumnIndex === 3}
+                                                aria-label="Next column"
+                                            >
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </td>
                                 <td className="mobile-col-1 mobile-header-cell">
                                     <div className="mobile-header-content">
-                                        <button
-                                            className="income-nav-btn income-nav-btn--left"
-                                            onClick={this.handlePrevColumn}
-                                            disabled={this.state.mobileColumnIndex === 0}
-                                            aria-label="Previous column"
-                                        >
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
-                                            </svg>
-                                        </button>
                                         <span className="mobile-header-label">Weekly</span>
-                                        <button
-                                            className="income-nav-btn income-nav-btn--right"
-                                            onClick={this.handleNextColumn}
-                                            disabled={this.state.mobileColumnIndex === 3}
-                                            aria-label="Next column"
-                                        >
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
-                                            </svg>
-                                        </button>
+                                        <div className="mobile-nav-buttons">
+                                            <button
+                                                className="income-nav-btn income-nav-btn--left"
+                                                onClick={this.handlePrevColumn}
+                                                disabled={this.state.mobileColumnIndex === 0}
+                                                aria-label="Previous column"
+                                            >
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
+                                                </svg>
+                                            </button>
+                                            <button
+                                                className="income-nav-btn income-nav-btn--right"
+                                                onClick={this.handleNextColumn}
+                                                disabled={this.state.mobileColumnIndex === 3}
+                                                aria-label="Next column"
+                                            >
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </td>
                                 <td className="mobile-col-2 mobile-header-cell">
                                     <div className="mobile-header-content">
-                                        <button
-                                            className="income-nav-btn income-nav-btn--left"
-                                            onClick={this.handlePrevColumn}
-                                            disabled={this.state.mobileColumnIndex === 0}
-                                            aria-label="Previous column"
-                                        >
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
-                                            </svg>
-                                        </button>
                                         <span className="mobile-header-label">Monthly</span>
-                                        <button
-                                            className="income-nav-btn income-nav-btn--right"
-                                            onClick={this.handleNextColumn}
-                                            disabled={this.state.mobileColumnIndex === 3}
-                                            aria-label="Next column"
-                                        >
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
-                                            </svg>
-                                        </button>
+                                        <div className="mobile-nav-buttons">
+                                            <button
+                                                className="income-nav-btn income-nav-btn--left"
+                                                onClick={this.handlePrevColumn}
+                                                disabled={this.state.mobileColumnIndex === 0}
+                                                aria-label="Previous column"
+                                            >
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
+                                                </svg>
+                                            </button>
+                                            <button
+                                                className="income-nav-btn income-nav-btn--right"
+                                                onClick={this.handleNextColumn}
+                                                disabled={this.state.mobileColumnIndex === 3}
+                                                aria-label="Next column"
+                                            >
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </td>
                                 <td className="mobile-col-3 mobile-header-cell">
                                     <div className="mobile-header-content">
-                                        <button
-                                            className="income-nav-btn income-nav-btn--left"
-                                            onClick={this.handlePrevColumn}
-                                            disabled={this.state.mobileColumnIndex === 0}
-                                            aria-label="Previous column"
-                                        >
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
-                                            </svg>
-                                        </button>
                                         <span className="mobile-header-label">Yearly</span>
-                                        <button
-                                            className="income-nav-btn income-nav-btn--right"
-                                            onClick={this.handleNextColumn}
-                                            disabled={this.state.mobileColumnIndex === 3}
-                                            aria-label="Next column"
-                                        >
-                                            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
-                                            </svg>
-                                        </button>
+                                        <div className="mobile-nav-buttons">
+                                            <button
+                                                className="income-nav-btn income-nav-btn--left"
+                                                onClick={this.handlePrevColumn}
+                                                disabled={this.state.mobileColumnIndex === 0}
+                                                aria-label="Previous column"
+                                            >
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M11.75 2.5L5.66397 8.58603C5.27345 8.97655 5.27345 9.60972 5.66397 10.0002L11.75 16.0863" stroke="currentColor" strokeWidth="1.35"/>
+                                                </svg>
+                                            </button>
+                                            <button
+                                                className="income-nav-btn income-nav-btn--right"
+                                                onClick={this.handleNextColumn}
+                                                disabled={this.state.mobileColumnIndex === 3}
+                                                aria-label="Next column"
+                                            >
+                                                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M2.25 16.0863L8.33603 10.0002C8.72655 9.60972 8.72655 8.97655 8.33603 8.58603L2.25 2.5" stroke="currentColor" strokeWidth="1.35"/>
+                                                </svg>
+                                            </button>
+                                        </div>
                                     </div>
                                 </td>
                                 </tr>

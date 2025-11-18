@@ -16,7 +16,6 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $space-sm; // 8px gap between elements
   width: 100%;
 }
 
@@ -26,7 +25,14 @@
   color: $color-neutral-white;
   font-weight: $font-weight-semi-bold; // 600
   flex: 1;
-  text-align: center;
+  text-align: left;
+}
+
+// Mobile Navigation Buttons Container
+.mobile-nav-buttons {
+  display: flex;
+  gap: 0; // No gap between buttons
+  align-items: center;
 }
 
 // Mobile Navigation Buttons (inside table header)
