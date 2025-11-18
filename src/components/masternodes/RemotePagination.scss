@@ -1,0 +1,309 @@
+// ============================================================================
+// Remote Pagination Component Styles
+// ============================================================================
+@import '../../scss/design-tokens';
+
+// ============================================================================
+// Table Wrapper
+// ============================================================================
+
+.sentry-table-wrapper {
+  margin-top: 60px;
+  width: 100%;
+  margin-bottom: 0; // Remove bottom margin as pagination is now integrated
+
+  @media (max-width: $breakpoint-md) {
+    margin-top: 44px;
+  }
+}
+
+// ============================================================================
+// Table Container
+// ============================================================================
+
+.sentry-table-container {
+  background: $color-neutral-black;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: $radius-md;
+  overflow: hidden;
+  width: 100%;
+}
+
+.sentry-table {
+  width: 100%;
+
+  // Override bootstrap-table default styles
+  .table {
+    margin-bottom: 0;
+    background: transparent;
+    color: $color-neutral-white;
+
+    // Header styles
+    thead {
+      th {
+        background: transparent;
+        border-top: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        border-left: none;
+        border-right: none;
+
+        font-family: $font-family-body;
+        font-size: 16px;
+        font-weight: $font-weight-regular;
+        line-height: 1.4;
+        color: $color-neutral-white;
+
+        padding: 12px 20px;
+        vertical-align: middle;
+
+        &:first-child {
+          padding-left: 24px;
+        }
+
+        &:last-child {
+          padding-right: 16px;
+        }
+
+        @media (max-width: $breakpoint-md) {
+          padding: 12px;
+          font-size: 16px;
+        }
+      }
+    }
+
+    // Body styles
+    tbody {
+      tr {
+        border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+
+        &:last-child {
+          border-bottom: none;
+        }
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.05);
+        }
+
+        td {
+          background: transparent;
+          border: none;
+
+          font-family: $font-family-body;
+          font-size: 16px;
+          font-weight: $font-weight-regular;
+          line-height: 1.6;
+          color: $color-neutral-white;
+
+          padding: 20px 16px;
+          vertical-align: middle;
+
+          &:first-child {
+            padding-left: 24px;
+          }
+
+          &:last-child {
+            padding-right: 16px;
+          }
+
+          @media (max-width: $breakpoint-md) {
+            padding: 8px 12px;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
+// ============================================================================
+// Status Badges
+// ============================================================================
+
+.status-badge {
+  display: inline-block;
+  padding: 8px;
+  border-radius: 12px;
+
+  font-family: $font-family-body;
+  font-size: 16px;
+  font-weight: $font-weight-semi-bold;
+  line-height: 1.3;
+  text-align: center;
+  white-space: nowrap;
+  text-transform: uppercase;
+
+  &--pending {
+    background: rgba(31, 94, 255, 0.2);
+    color: #1F5EFF;
+  }
+
+  &--enabled {
+    background: rgba(251, 176, 59, 0.2);
+    color: #FBB03B;
+  }
+
+  // Mobile specific
+  &--mobile {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+}
+
+// ============================================================================
+// Mobile Cell Styles
+// ============================================================================
+
+.address-cell-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 8px 12px;
+
+  .address-text {
+    font-family: $font-family-body;
+    font-size: 16px;
+    font-weight: $font-weight-regular;
+    line-height: 1.6;
+    color: $color-neutral-white;
+  }
+}
+
+.lastpaid-cell-mobile {
+  font-family: $font-family-body;
+  font-size: 12px;
+  font-weight: $font-weight-regular;
+  line-height: 1.4;
+  color: $color-neutral-white;
+  text-align: left;
+  width: 96px;
+}
+
+// ============================================================================
+// Payee Cell
+// ============================================================================
+
+.payee-cell {
+  font-family: $font-family-body;
+  font-size: 14px;
+  font-weight: $font-weight-regular;
+  line-height: 1.4;
+  color: $color-neutral-white;
+
+  // Allow text to wrap if needed, or use ellipsis
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 100%;
+}
+
+// ============================================================================
+// Pagination Container - Integrated as last table row
+// ============================================================================
+
+.sentry-pagination-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 16px;
+  background: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.3);
+
+  // First column padding to match table
+  padding-left: 24px;
+  padding-right: 16px;
+
+  @media (max-width: $breakpoint-md) {
+    flex-direction: column;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 12px;
+  }
+}
+
+.pagination-info {
+  font-family: $font-family-body;
+  font-size: 14px;
+  font-weight: $font-weight-regular;
+  line-height: 1.4;
+  color: $color-neutral-white;
+
+  @media (max-width: $breakpoint-md) {
+    width: 100%;
+  }
+}
+
+// ============================================================================
+// Pagination Controls
+// ============================================================================
+
+.pagination {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  // Override global pagination styles from _tables.scss
+  &.react-bootstrap-table-page-btns-ul {
+    margin: 0 !important;
+  }
+
+  @media (max-width: $breakpoint-md) {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .page-item {
+    .page-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      min-width: 38px;
+      height: 38px;
+      padding: 6px 10px;
+
+      background: $color-neutral-black;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 6px;
+
+      font-family: $font-family-body;
+      font-size: 14px;
+      font-weight: $font-weight-regular;
+      line-height: 1.4;
+      color: $color-neutral-white;
+
+      text-decoration: none;
+      cursor: pointer;
+
+      transition: background $transition-base, border-color $transition-base;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    // Active page
+    &.active .page-link {
+      background: $color-neutral-white;
+      color: $color-neutral-black;
+      font-weight: $font-weight-medium;
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    // Disabled state
+    &.disabled .page-link {
+      opacity: 0.5;
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+
+    // Previous/Next buttons
+    &:first-child .page-link,
+    &:last-child .page-link {
+      padding: 6px 10px;
+    }
+  }
+}
