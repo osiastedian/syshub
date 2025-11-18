@@ -1,0 +1,100 @@
+@import '../../scss/design-tokens';
+
+// ============================================================================
+// Recover Password Form - Styling
+// ============================================================================
+
+// Form Container
+.recover-form {
+  width: 354px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @media (max-width: $breakpoint-md) {
+    width: 100%;
+    gap: 32px;  // Keep same gap on mobile
+  }
+}
+
+// Input Group Container
+.recover-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 100%;
+}
+
+// Input Label Styling
+.recover-input-label {
+  font-family: $font-family-body;  // DM Sans
+  font-size: 18px;
+  font-weight: $font-weight-regular;
+  color: #FFFFFF;
+  line-height: 1.3;
+  margin: 0;
+}
+
+// Glasmorphic Input Field
+.recover-input {
+  backdrop-filter: blur(50px);
+  background: rgba(255, 255, 255, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 18px;
+  color: #FFFFFF;
+  font-family: $font-family-body;  // DM Sans
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  transition: border-color 0.2s ease;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  &:focus {
+    outline: none;
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// reCAPTCHA Container
+.recover-recaptcha-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  #recaptcha-recover {
+    transform: scale(0.87);
+    transform-origin: 0 0;
+    margin: 0;
+  }
+}
+
+// Button Group Container
+.recover-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+// Error Message Styling
+.recover-error {
+  font-size: 14px;
+  color: #FF6B6B;  // Error red
+  margin: 4px 0 0 0;
+  font-family: $font-family-body;
+  line-height: 1.3;
+}

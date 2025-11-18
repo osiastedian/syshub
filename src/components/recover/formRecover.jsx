@@ -1,6 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useUser} from "../../context/user-context";
-import swal from 'sweetalert2'
+import swal from 'sweetalert2';
+import CTAButton from '../global/CTAButton';
+import './FormRecover.scss';
 
 /**
  * Component that renders the recover password form
@@ -32,7 +34,7 @@ const FormRecover = () => {
   /**
    * Function to submit the recover password form
    * @function
-   * @param {*} e 
+   * @param {*} e
    */
   const submitForm = async (e) => {
     e.preventDefault();
@@ -56,21 +58,46 @@ const FormRecover = () => {
         text: `${err}`
       });
     })
-    e.target.reset()
+    e.target.reset();
+    setEmail('');
+    setRecaptchaVerified(false);
   }
 
   return (
-    <form className="input-form centered" onSubmit={submitForm}>
-      <input className="styled-round" type="text" placeholder="Email" onChange={(e) => {
-        setEmail(e.target.value)
-      }}/>
+    <form className="recover-form d-flex flex-column gap-4" onSubmit={submitForm}>
 
-      <div className="input-cont">
-        <div id={'recaptcha-recover'} style={{display: 'inline-block'}}/>
+      {/* Email Input Group */}
+      <div className="recover-input-group d-flex flex-column gap-1">
+        <label className="recover-input-label text-white" htmlFor="email-input">
+          Email
+        </label>
+        <input
+          id="email-input"
+          className="recover-input"
+          type="email"
+          placeholder="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
       </div>
 
-      <div className="input-cont">
-        <button type={'submit'} className="btn btn--blue" disabled={!recaptchaVerified}>Send</button>
+      {/* reCAPTCHA Container */}
+      <div className="recover-recaptcha-container d-flex justify-content-center">
+        <div id="recaptcha-recover" style={{display: 'inline-block'}}></div>
+      </div>
+
+      {/* Button Group */}
+      <div className="recover-button-group d-flex flex-column gap-2">
+        <CTAButton
+          type="submit"
+          background="gold"
+          iconColor="black"
+          iconBackground="white"
+          disabled={!recaptchaVerified}
+        >
+          Send email
+        </CTAButton>
       </div>
     </form>
   );
