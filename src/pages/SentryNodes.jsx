@@ -28,7 +28,7 @@ const SentryNodes = ({ t }) => {
         <div className="sentry-nodes-check-container">
           <Switch>
             <Route exact path={path}>
-              <div className="d-flex flex-column align-items-center">
+              <div className="d-flex flex-column align-items-start">
                 <h1 className="sentry-nodes-check-title">{t("check.title")}</h1>
                 <MasternodeTable path={path} />
               </div>
