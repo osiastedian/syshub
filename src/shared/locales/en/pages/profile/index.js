@@ -20,6 +20,29 @@ const profile = {
       password: 'Password',
       twoFactor: 'Two-Factor Auth',
       closeAccount: 'Close Account',
+    },
+    information: {
+      title: 'Account Information',
+      description: 'Update your email and voting address information',
+      loading: 'Loading...',
+      emailLabel: 'Email Address',
+      emailPlaceholder: 'Enter your email address',
+      emailHelper: 'This email will be used for account notifications',
+      votingAddressLabel: 'Voting Address',
+      votingAddressPlaceholder: 'Enter your Syscoin voting address',
+      votingAddressHelper: 'Your Syscoin address for governance voting',
+      save: 'Save Changes',
+      saving: 'Saving...',
+      reset: 'Reset',
+      copy: 'Copy',
+      copied: 'Copied!',
+      success: 'Your information has been updated successfully',
+      errors: {
+        emailRequired: 'Email address is required',
+        emailInvalid: 'Please enter a valid email address',
+        votingAddressInvalid: 'Please enter a valid Syscoin address',
+        updateFailed: 'Failed to update information. Please try again.',
+      },
     }
   }
 }
