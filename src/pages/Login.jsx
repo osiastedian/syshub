@@ -4,8 +4,6 @@ import { withTranslation } from "react-i18next";
 
 import { useUser } from "../context/user-context";
 
-import Background from "../components/global/Background";
-import BackgroundInner from "../components/global/BackgroundInner";
 import LoginForm from "../components/login/LoginForm";
 import { useHistory } from "react-router-dom";
 import { get2faInfoUser, verifyGauthCode } from "../utils/request";
@@ -159,8 +157,7 @@ function Login({ t }) {
   };
 
   return (
-    <Background>
-      <BackgroundInner />
+    <>
       <main className="login-page">
         <MetaTags>
           <title> {t("login.meta.title")} </title>
@@ -183,7 +180,7 @@ function Login({ t }) {
       <CustomModal open={active2FAMethod === "gauth"} onClose={() => setActive2FAMethod(null)}>
         <GAuthTwoFAFormLogin userSignInGAuth={verifyGAuth} />
       </CustomModal>
-    </Background>
+    </>
   );
 }
 
