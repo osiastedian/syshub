@@ -2,10 +2,6 @@ import React from "react";
 import {MetaTags} from "react-meta-tags";
 import {withTranslation} from "react-i18next";
 
-import Background from "../components/global/Background";
-import BackgroundInner from "../components/global/BackgroundInner";
-import Navbar from "../components/global/Navbar";
-import Footer from "../components/global/Footer";
 import FormRecover from "../components/recover/formRecover";
 import "./Recover.scss";
 
@@ -17,24 +13,19 @@ import "./Recover.scss";
  */
 const Recover = ({ t }) => {
   return (
-    <Background>
-      <BackgroundInner />
-      <Navbar />
-      <main className="recover-page">
-        <MetaTags>
-          <title> {t("recover.meta.title")} </title>
-          <meta name="keywords" content={t("recover.meta.keywords")}/>
-        </MetaTags>
+    <main className="recover-page">
+      <MetaTags>
+        <title> {t("recover.meta.title")} </title>
+        <meta name="keywords" content={t("recover.meta.keywords")}/>
+      </MetaTags>
 
-        <section className="recover-section d-flex flex-column align-items-center">
-          <h1 className="recover-title text-white text-center">
-            {t("recover.data.heading")}
-          </h1>
-          <FormRecover />
-        </section>
-      </main>
-      <Footer />
-    </Background>
+      <section className="recover-section d-flex flex-column align-items-center">
+        <h1 className="recover-title text-white text-center">
+          {t("recover.data.heading")}
+        </h1>
+        <FormRecover />
+      </section>
+    </main>
   )
 }
 
