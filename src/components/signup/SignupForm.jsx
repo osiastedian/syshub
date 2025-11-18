@@ -6,6 +6,7 @@ import * as yup from "yup";
 import {Link} from "react-router-dom";
 import {withTranslation} from "react-i18next";
 import {useUser} from "../../context/user-context";
+import CTAButton from "../global/CTAButton";
 import './SignupForm.scss';
 
 const schema = yup.object().shape({
@@ -121,30 +122,26 @@ const SignupForm = (props) => {
 
       {/* Buttons */}
       <div className="signup-button-group">
-        <button
+        <CTAButton
           type="submit"
-          className="signup-button-primary"
+          background="gold"
+          iconColor="black"
+          iconBackground="white"
+          className="cta-button--gold"
           disabled={props.submitting || !recaptchaVerified || !(formState.isValid)}
         >
-          <span className="button-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="32" height="32" rx="16" fill="white"/>
-              <path d="M17.6191 11.9533L21.6658 16L17.6191 20.0466" stroke="#0A0A0A" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M10.334 16H21.554" stroke="#0A0A0A" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </span>
           {props.submitting ? t('signup.form.creating') : t('signup.form.signUp')}
-        </button>
+        </CTAButton>
 
-        <Link to="/login" className="signup-button-secondary text-decoration-none">
-          <span className="button-icon">
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="32" height="32" rx="16" fill="#FBB03B"/>
-              <path d="M17.6191 11.9533L21.6658 16L17.6191 20.0466" stroke="#FFFFFF" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-              <path d="M10.334 16H21.554" stroke="#FFFFFF" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-          </span>
-          {t('signup.form.alreadyHaveAccount')}
+        <Link to="/login" className="text-decoration-none">
+          <CTAButton
+            background="transparent"
+            iconColor="white"
+            iconBackground="gold"
+            className="cta-button--transparent"
+          >
+            {t('signup.form.alreadyHaveAccount')}
+          </CTAButton>
         </Link>
       </div>
     </form>
