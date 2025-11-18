@@ -6,38 +6,51 @@
 // Responsive layout: Full table on desktop, 2-column table with navigation on mobile
 // ============================================================================
 
-// Mobile Column Navigation Controls
-.income-table-mobile-controls {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  gap: $space-md; // 16px gap between elements
-  margin-bottom: $space-md; // 16px margin below controls
-  padding: 0 $space-lg; // 24px horizontal padding
-
-  @media (min-width: $breakpoint-md) {
-    display: none; // Hidden on tablet and desktop
-  }
+// Mobile Header Cell - Special styling for navigation header
+.mobile-header-cell {
+  padding: $space-sm !important;
 }
 
-// Mobile Navigation Buttons
+// Mobile Header Content - Contains navigation buttons and label
+.mobile-header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $space-sm; // 8px gap between elements
+  width: 100%;
+}
+
+// Mobile Header Label
+.mobile-header-label {
+  font-size: $font-size-body-medium; // 16px
+  color: $color-neutral-white;
+  font-weight: $font-weight-semi-bold; // 600
+  flex: 1;
+  text-align: center;
+}
+
+// Mobile Navigation Buttons (inside table header)
 .income-nav-btn {
-  width: 44px; // Large touch target
-  height: 44px;
+  width: 36px; // Touch target
+  height: 36px;
   border-radius: $radius-full; // 50% for circular buttons
-  border: 2px solid $color-brand-gold;
-  background: transparent;
-  color: $color-brand-gold;
-  font-size: $font-size-body-large; // 18px for arrow symbols
+  border: none;
+  background: rgba(255, 255, 255, 0.3);
+  color: $color-neutral-white;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: all $transition-base; // 200ms ease-in-out
+  flex-shrink: 0;
+
+  svg {
+    width: 14px;
+    height: 14px;
+  }
 
   &:hover:not(:disabled) {
-    background-color: $color-brand-gold;
-    color: $color-neutral-black;
+    background-color: rgba(255, 255, 255, 0.5);
   }
 
   &:disabled {
@@ -48,15 +61,6 @@
   &:active:not(:disabled) {
     transform: scale(0.95);
   }
-}
-
-// Column Label
-.income-column-label {
-  font-size: $font-size-body-medium; // 16px
-  color: $color-neutral-white;
-  font-weight: $font-weight-semi-bold; // 600
-  min-width: 80px;
-  text-align: center;
 }
 
 // Desktop Table Styling
@@ -86,8 +90,11 @@
 
   // Mobile: Hide all data columns by default, show based on active column
   @media (max-width: $breakpoint-md) {
+    // Mobile-specific: All cells aligned left
     thead tr td,
     tbody tr td {
+      text-align: left !important;
+
       // Hide all mobile column classes by default
       &.mobile-col-0,
       &.mobile-col-1,
