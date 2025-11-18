@@ -143,6 +143,19 @@ const profile = {
       delete: 'Delete My Account',
       deleting: 'Deleting...',
       cancel: 'Cancel',
+    },
+    closeAccountConfirmation: {
+      title: 'You are about to delete your account',
+      warningStrong: 'This action cannot be undone.',
+      warningBody: 'To confirm your account exclusion, confirm your email and password:',
+      emailLabel: 'Email *',
+      emailPlaceholder: 'Email',
+      passwordLabel: 'Password *',
+      passwordPlaceholder: 'Password',
+      confirm: 'Delete my account',
+      confirmLabel: 'Confirm account deletion',
+      deleting: 'Deleting Account...',
+      cancel: 'Cancel',
     }
   }
 }
