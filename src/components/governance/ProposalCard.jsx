@@ -8,6 +8,7 @@ import { VOTE_OUTCOME } from "../../constants/votes";
 import ProposalCardInfo from "./ProposalCardInfo";
 import CustomModal from "../global/CustomModal";
 import AddressList from "./AddressList";
+import './ProposalCard.scss';
 
 /**
  * Component to show a proposal card with the info of a single proposal
@@ -109,30 +110,14 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
   }
 
   /**
-   * Function that returns html if the proposal is passing or not
+   * Function that checks if proposal is passing
    * @function
    * @param {number} yesCount
    * @param {number} noCount
    * @param {number} enabled
-   * @param {number} absoluteYesCount
    */
-  function proposalPassing(yesCount, noCount, enabled, absoluteYesCount) {
-    if (((yesCount - noCount) / enabled) * 100 > 10) {
-      return (
-        <div className="passed" title={t("govlist.table.green_text")}>
-          Passed
-        </div>
-      );
-    } else {
-      let need = parseInt(enabled / 10 - absoluteYesCount);
-      let originalText = t("govlist.table.red_text");
-      let newText = originalText.replace("[API]", need);
-      return (
-        <div className="not-passed" title={newText}>
-          Not passed
-        </div>
-      );
-    }
+  function checkProposalPassing(yesCount, noCount, enabled) {
+    return ((yesCount - noCount) / enabled) * 100 > 10;
   }
 
   /**
@@ -162,29 +147,28 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
     await onLoadProposals();
   };
 
+  const proposalIsPassing = checkProposalPassing(
+    proposal.YesCount,
+    proposal.NoCount,
+    comaToNum(enabled)
+  );
+
   return (
-    <div className={`proposal ${useCollapse ? 'proposal--expanded' : ''}`} role="region" aria-labelledby={`proposal-title-${proposal.Hash}`}>
-      <div className="date">{proposalDate(proposal.CreationTime)}</div>
-      <div className="proposal-header">
-        <div className="vote-count">
-          <span className="yes">{proposal.YesCount}</span>
-          <span className="no">{proposal.NoCount}</span>
-        </div>
-        <div className="proposal-status">
-          {proposalPassing(
-            proposal.YesCount,
-            proposal.NoCount,
-            comaToNum(enabled),
-            proposal.AbsoluteYesCount
-          )}
+    <div className={`proposal-card ${useCollapse ? 'proposal-card--expanded' : ''}`} role="region" aria-labelledby={`proposal-title-${proposal.Hash}`}>
+      <div className="proposal-card__date-votes">
+        <div className="proposal-card__date">{proposalDate(proposal.CreationTime)}</div>
+        <div className="proposal-card__votes">
+          <span className="proposal-card__votes-yes">{proposal.YesCount}</span>
+          <span className="proposal-card__votes-separator"> / </span>
+          <span className="proposal-card__votes-no">{proposal.NoCount}</span>
         </div>
       </div>
-      <div className="description">
 
+      <div className="proposal-card__info">
         <button
           id={`proposal-title-${proposal.Hash}`}
           ref={titleButtonRef}
-          className={`proposal-title ${useCollapse ? 'expanded' : ''}`}
+          className={`proposal-card__title btn btn-link ${useCollapse ? 'expanded' : ''}`}
           aria-expanded={useCollapse}
           aria-controls={`proposal-details-${proposal.Hash}`}
           onClick={() => setUseCollapse(!useCollapse)}
@@ -208,15 +192,15 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
             }
           }}
         >
-          <span className="proposal-title__text">{proposal.title || proposal.name}</span>
+          {proposal.title || proposal.name}
         </button>
 
-        <div className="budget">
-          {`${parseFloat(proposal.payment_amount * proposal.nPayment)} SYS`}{" "}
-          <br />
-          {`${parseFloat(proposal.payment_amount)} SYS/Month`} <br />
-          {`${proposal.nPayment} Payment(s)`}
+        <div className="proposal-card__details">
+          <div>{parseFloat(proposal.payment_amount * proposal.nPayment)} SYS</div>
+          <div>{parseFloat(proposal.payment_amount)} SYS/MONTH</div>
+          <div>{proposal.nPayment} Payment(s)</div>
         </div>
+
         <Collapse
           isOpened={useCollapse}
           initialStyle={{ height: 0, overflow: "hidden" }}
@@ -228,6 +212,40 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
               month_remaining={month_remaining}
               payment_type={payment_type}
             />
+            {user && (
+              <div className="actions">
+                <button
+                  className="vote vote--yes"
+                  title={t("govlist.vote.yes_tooltip", "Vote YES - Support this proposal")}
+                  aria-label={t("govlist.vote.yes_aria", "Vote yes for this proposal")}
+                  disabled={userInfo ? false : true}
+                  onClick={() => openMnVote(VOTE_OUTCOME.YES)}
+                >
+                  <span className="vote-label">{t("govlist.vote.yes", "Vote Yes")}</span>
+                  <span className="vote-emoji">👍</span>
+                </button>
+                <button
+                  className="vote vote--abstain"
+                  title={t("govlist.vote.abstain_tooltip", "ABSTAIN - Neutral vote")}
+                  aria-label={t("govlist.vote.abstain_aria", "Abstain from voting on this proposal")}
+                  disabled={userInfo ? false : true}
+                  onClick={() => openMnVote(VOTE_OUTCOME.ABSTAIN)}
+                >
+                  <span className="vote-label">{t("govlist.vote.abstain", "Abstain")}</span>
+                  <span className="vote-emoji">➖</span>
+                </button>
+                <button
+                  className="vote vote--no"
+                  title={t("govlist.vote.no_tooltip", "Vote NO - Reject this proposal")}
+                  aria-label={t("govlist.vote.no_aria", "Vote no for this proposal")}
+                  disabled={userInfo ? false : true}
+                  onClick={() => openMnVote(VOTE_OUTCOME.NO)}
+                >
+                  <span className="vote-label">{t("govlist.vote.no", "Vote No")}</span>
+                  <span className="vote-emoji">👎</span>
+                </button>
+              </div>
+            )}
             <div className="proposal-back">
               <button
                 className="btn btn--ghost"
@@ -243,40 +261,15 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
           </div>
         </Collapse>
       </div>
-      {user && (
-        <div className="actions">
-          <button
-            className="vote vote--yes"
-            title={t("govlist.vote.yes_tooltip", "Vote YES - Support this proposal")}
-            aria-label={t("govlist.vote.yes_aria", "Vote yes for this proposal")}
-            disabled={userInfo ? false : true}
-            onClick={() => openMnVote(VOTE_OUTCOME.YES)}
-          >
-            <span className="vote-label">{t("govlist.vote.yes", "Vote Yes")}</span>
-            <span className="vote-emoji">👍</span>
-          </button>
-          <button
-            className="vote vote--abstain"
-            title={t("govlist.vote.abstain_tooltip", "ABSTAIN - Neutral vote")}
-            aria-label={t("govlist.vote.abstain_aria", "Abstain from voting on this proposal")}
-            disabled={userInfo ? false : true}
-            onClick={() => openMnVote(VOTE_OUTCOME.ABSTAIN)}
-          >
-            <span className="vote-label">{t("govlist.vote.abstain", "Abstain")}</span>
-            <span className="vote-emoji">➖</span>
-          </button>
-          <button
-            className="vote vote--no"
-            title={t("govlist.vote.no_tooltip", "Vote NO - Reject this proposal")}
-            aria-label={t("govlist.vote.no_aria", "Vote no for this proposal")}
-            disabled={userInfo ? false : true}
-            onClick={() => openMnVote(VOTE_OUTCOME.NO)}
-          >
-            <span className="vote-label">{t("govlist.vote.no", "Vote No")}</span>
-            <span className="vote-emoji">👎</span>
-          </button>
+
+      <div className="proposal-card__status">
+        <div className={`proposal-card__status-badge ${
+          proposalIsPassing ? 'proposal-card__status-badge--passed' : 'proposal-card__status-badge--not-passed'
+        }`}>
+          {proposalIsPassing ? 'Passed' : 'Not Passed'}
         </div>
-      )}
+      </div>
+
       <CustomModal
         open={openAddressList}
         onClose={() => setOpenAddressList(false)}

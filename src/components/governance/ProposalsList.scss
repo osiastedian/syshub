@@ -1,0 +1,28 @@
+@import '../../scss/design-tokens';
+
+// ============================================================================
+// PROPOSALS LIST SECTION
+// ============================================================================
+
+.proposals-list__heading {
+  font-family: 'DM Sans', sans-serif;
+  font-weight: 600;
+  font-size: 38px;
+  line-height: 1.3;
+  text-align: center;
+  color: #FFFFFF;
+  margin-bottom: 60px;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 32px;
+    margin-bottom: 60px;
+  }
+}
+
+.proposals-list__heading-highlight {
+  color: #FBB03B;
+}
+
+.proposals-list {
+  // Gap handled by Bootstrap gap-3 (24px)
+}

@@ -6,10 +6,13 @@ import MetaTags from "react-meta-tags";
 
 import Background from "../components/global/Background";
 import BackgroundInner from "../components/global/BackgroundInner";
-import BannerImage from "../components/global/BannerImage";
-import GovDetails from "../components/governance/GovDetails";
-import ProposalsList from "../components/governance/ProposalsList";
 import Breadcrumbs from "../components/global/Breadcrumbs";
+import GovernanceHero from "../components/governance/GovernanceHero";
+import ProposalsList from "../components/governance/ProposalsList";
+import GovDetails from "../components/governance/GovDetails";
+import CommunityJoin from "../components/governance/CommunityJoin";
+
+import "./Governance.scss";
 
 const API_URI = process.env.REACT_APP_SYS_API_URI;
 
@@ -147,53 +150,45 @@ class Governance extends Component {
     return (
       <Background>
         <BackgroundInner />
-        <main className="section govPage">
+        <main className="governance-page">
           <MetaTags>
             <title>{t("governance.title")}</title>
             <meta name="keywords" content={t("governance.keywords")} />
             <meta name="description" content={t("governance.description")} />
           </MetaTags>
-          <div className="shell-large">
-            <div className="section__body">
-              <div className="articles">
-                <Breadcrumbs items={[
-                  { label: t('header.home', 'Home'), to: '/' },
-                  { label: t('header.governance', 'Governance') }
-                ]} />
-                <BannerImage
-                  heading={t("governance.heading")}
-                  direction="top-right"
-                >
-                  <p>{t("governance.par1")}</p>
-                  <p>{t("governance.par2")}</p>
-                </BannerImage>
-                {isDataLoaded && (
-                  <>
-                    <section className="article article--revirse article--offsets-bottom">
-                      <div className="cols">
-                        <div className="col col--size12">
-                          <div className="article__content">
-                            <h2 className="section-heading" id="proposals-heading">{t('govlist.table.title')}</h2>
-                            <ProposalsList
-                              statsData={this.state.statsData.stats.mn_stats}
-                            />
-                          </div>
-                        </div>
-                      </div>
-                    </section>
 
-                    <section className="article">
-                      <GovDetails
-                        budgetSum={this.state.budgetSum}
-                        superBlockData={
-                          this.state.statsData?.stats?.superblock_stats ?? {}
-                        }
-                      />
-                    </section>
-                  </>
-                )}
-              </div>
-            </div>
+          <div className="shell-large">
+            <Breadcrumbs items={[
+              { label: t('header.home', 'Home'), to: '/' },
+              { label: t('header.governance', 'Governance') }
+            ]} />
+
+            {/* Hero Section */}
+            <GovernanceHero />
+
+            {isDataLoaded && (
+              <>
+                {/* Current Proposals Section */}
+                <section className="governance-section governance-section--proposals">
+                  <ProposalsList
+                    statsData={this.state.statsData.stats.mn_stats}
+                  />
+                </section>
+
+                {/* Governance Details & Superblocks */}
+                <section className="governance-section governance-section--details">
+                  <GovDetails
+                    budgetSum={this.state.budgetSum}
+                    superBlockData={
+                      this.state.statsData?.stats?.superblock_stats ?? {}
+                    }
+                  />
+                </section>
+              </>
+            )}
+
+            {/* Community Join Section */}
+            <CommunityJoin />
           </div>
         </main>
       </Background>
