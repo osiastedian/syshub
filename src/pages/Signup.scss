@@ -1,0 +1,68 @@
+@import '../scss/design-tokens';
+
+// Signup Page Layout
+.signup-page {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: $space-lg; // 24px padding on sides
+  background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+
+  @media (max-width: $breakpoint-md) {
+    padding: $space-md; // 16px on mobile
+    min-height: 100vh;
+  }
+}
+
+// Signup Container (form + content)
+.signup-container {
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-xl; // 32px
+
+  @media (max-width: $breakpoint-md) {
+    gap: $space-lg; // 24px on mobile
+  }
+}
+
+// Signup Title Section
+.signup-title-section {
+  display: flex;
+  flex-direction: column;
+  gap: $space-md; // 16px
+  text-align: center;
+}
+
+.signup-title {
+  font-family: $font-family-body;
+  font-size: 32px; // Desktop title size
+  font-weight: $font-weight-semi-bold; // 600
+  line-height: $line-height-tight;
+  color: $color-neutral-white;
+  margin: 0;
+
+  @media (max-width: $breakpoint-md) {
+    font-size: 24px; // Mobile title size
+  }
+}
+
+.signup-subtitle {
+  font-family: $font-family-body;
+  font-size: $font-size-body-medium; // 16px
+  font-weight: $font-weight-regular; // 400
+  line-height: $line-height-normal;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+}
+
+// Signup Form Wrapper (with background/styling)
+.signup-form-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
