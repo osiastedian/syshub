@@ -129,6 +129,11 @@ $section-spacing-mobile: 40px;
     padding: 0;
   }
 
+  // Section title - 60px bottom margin
+  .section-title {
+    margin-bottom: 60px;
+  }
+
   // Mobile: 1-column layout for price stats grid
   .ministats {
     @media (max-width: $breakpoint-md) {
