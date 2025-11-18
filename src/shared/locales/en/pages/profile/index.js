@@ -107,6 +107,24 @@ const profile = {
         disableFailed: 'Failed to disable 2FA. Please try again.',
       },
     },
+    twoFactorModal: {
+      enableTitle: 'Enable Two-Factor Authentication',
+      enableDescription: 'Enter the 6-digit code from your authenticator app to complete setup',
+      verifyTitle: 'Verify Two-Factor Authentication',
+      verifyDescription: 'Enter the 6-digit code from your authenticator app',
+      codeLabel: 'Verification Code',
+      codeHelper: 'Enter the code displayed in your authenticator app',
+      verify: 'Verify Code',
+      verifying: 'Verifying...',
+      verified: 'Verified!',
+      cancel: 'Cancel',
+      success: 'Code verified successfully',
+      errors: {
+        codeRequired: 'Verification code is required',
+        codeInvalid: 'Code must be 6 digits',
+        verificationFailed: 'Invalid code. Please try again.',
+      },
+    },
   }
 }
 export default profile;
