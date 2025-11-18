@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withTranslation } from "react-i18next";
-import SubTitle from '../global/SubTitle';
 
 /**
  * Component to show the investment data on stats
@@ -40,33 +39,45 @@ class Investment extends Component {
         if(this.state.dataload===1) {
             return (
                 <>
-                    <SubTitle heading={t('investment.investmentTable.title')} />
-                    <div className="ministats mndata-expanded">
-                        <div className="stat">
-                            {t('investment.investmentTable.coinsRequired')}
-                            <div className="stat-data">{this.state.investData.collateral_req}</div>
+                    <h2 className="section-title section-title--black">{t('investment.investmentTable.title')}</h2>
+                    <div className="row row-cols-1 row-cols-lg-4 g-4 mb-4">
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">{this.state.investData.collateral_req}</span>
+                                <span className="stat_label">{t('investment.investmentTable.coinsRequired')}</span>
+                            </div>
                         </div>
-                        <div className="stat">
-                            {t('investment.investmentTable.masterNodePrice')}
-                            <div className="stat-data">${this.state.investData.masternode_price_usd}</div>
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">${this.state.investData.masternode_price_usd}</span>
+                                <span className="stat_label">{t('investment.investmentTable.masterNodePrice')}</span>
+                            </div>
                         </div>
-                        <div className="stat">
-                            {t('investment.investmentTable.roi')}
-                            <div className="stat-data">{this.state.investData.roi}</div>
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">{this.state.investData.roi}</span>
+                                <span className="stat_label">{t('investment.investmentTable.roi')}</span>
+                            </div>
                         </div>
-                        <div className="stat">
-                            {t('investment.investmentTable.payoutFrequency')}
-                            <div className="stat-data">{this.state.investData.payout_frequency}</div>
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">{this.state.investData.payout_frequency}</span>
+                                <span className="stat_label">{t('investment.investmentTable.payoutFrequency')}</span>
+                            </div>
                         </div>
                     </div>
-                    <div className="ministats mndata-expanded">
-                        <div className="stat">
-                            {t('investment.investmentTable.firstPayment')}
-                            <div className="stat-data">{this.state.investData.first_pay}</div>
+                    <div className="row row-cols-1 row-cols-lg-2 g-4 justify-content-center">
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">{this.state.investData.first_pay}</span>
+                                <span className="stat_label">{t('investment.investmentTable.firstPayment')}</span>
+                            </div>
                         </div>
-                        <div className="stat">
-                            {t('investment.investmentTable.rewardAbility')}
-                            <div className="stat-data">{this.state.investData.reward_eligble}</div>
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">{this.state.investData.reward_eligble}</span>
+                                <span className="stat_label">{t('investment.investmentTable.rewardAbility')}</span>
+                            </div>
                         </div>
                     </div>
                 </>
