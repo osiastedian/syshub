@@ -143,6 +143,7 @@ const profile = {
       delete: 'Delete My Account',
       deleting: 'Deleting...',
       cancel: 'Cancel',
+      error: 'Failed to delete account. Please try again.',
     },
     closeAccountConfirmation: {
       title: 'You are about to delete your account',

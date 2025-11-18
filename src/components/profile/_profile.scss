@@ -1,0 +1,190 @@
+// ============================================================================
+// Profile Page Layout Styles
+// ============================================================================
+// Page-level layout for Profile page
+// Integrates all profile components
+// ============================================================================
+
+@import '../../scss/design-tokens';
+
+.profile-page {
+  min-height: 100vh;
+  padding: 60px 0;
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    padding: 40px 0;
+  }
+}
+
+.profile-page__container {
+  display: flex;
+  gap: $space-xl;
+  margin-top: $space-xl;
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    flex-direction: column;
+    gap: $space-lg;
+  }
+}
+
+.profile-page__content {
+  flex: 1;
+  min-width: 0; // Prevent flex overflow
+}
+
+// ============================================================================
+// Delete Account Confirmation Modal
+// ============================================================================
+
+.profile-page__modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
+  z-index: $z-modal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: $space-md;
+  animation: profile-modal-fade-in 0.2s ease-out;
+}
+
+@keyframes profile-modal-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.profile-page__modal {
+  background: $color-neutral-dark-bg;
+  border-radius: $radius-lg;
+  padding: $space-xl;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: $shadow-xl;
+  animation: profile-modal-slide-up 0.3s ease-out;
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    padding: $space-lg;
+    max-width: 90%;
+  }
+}
+
+@keyframes profile-modal-slide-up {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.profile-page__modal-title {
+  @include typography-body-large-semi-bold;
+  font-size: 22px;
+  color: $color-error-text;
+  margin-bottom: $space-md;
+  text-align: center;
+}
+
+.profile-page__modal-text {
+  @include typography-body-medium-regular;
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: $space-xl;
+  text-align: center;
+  line-height: $line-height-normal;
+}
+
+.profile-page__modal-actions {
+  display: flex;
+  gap: $space-md;
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    flex-direction: column;
+  }
+}
+
+.profile-page__modal-button {
+  flex: 1;
+  height: 48px;
+  padding: 12px 32px;
+  border-radius: 24px;
+  font-family: $font-family-body;
+  font-size: $font-size-body-medium;
+  font-weight: $font-weight-semi-bold;
+  cursor: pointer;
+  transition: all $transition-base;
+  border: none;
+
+  &--danger {
+    background: $color-error-text;
+    color: $color-neutral-white;
+
+    &:hover {
+      opacity: 0.9;
+    }
+
+    &:active {
+      transform: scale(0.98);
+    }
+  }
+
+  &--cancel {
+    background: transparent;
+    color: $color-text;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.5);
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-brand-gold;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    width: 100%;
+  }
+}
+
+// ============================================================================
+// Responsive Adjustments
+// ============================================================================
+
+@media (max-width: #{$breakpoint-md - 1px}) {
+  .profile-page__container {
+    // On mobile, ProfileSidebar becomes floating
+    // Content takes full width
+    position: relative;
+  }
+}
+
+// ============================================================================
+// Animation for Content Switching
+// ============================================================================
+
+.profile-page__content {
+  animation: profile-content-fade-in 0.3s ease-out;
+}
+
+@keyframes profile-content-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
