@@ -173,19 +173,36 @@ $section-spacing-mobile: 40px;
     padding: 100px calc(50vw - 50%);
   }
 
-  .section-title {
-    color: $color-neutral-black;
-  }
-
-  .stats-card__label,
-  .stats-card__value,
-  .stats-card__subvalue,
-  .stats-card__unit {
-    color: $color-neutral-black;
-  }
-
   @media (max-width: $breakpoint-md) {
     padding: $section-spacing-mobile $space-lg;
+  }
+
+  // Section title - 60px bottom margin
+  .section-title {
+    margin-bottom: 60px;
+  }
+
+  // Investment stat value styling - black text with same typography as Price stats
+  .stat_value {
+    color: $color-neutral-black;
+    text-align: center;
+    font-family: $font-family-body;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: $font-weight-black; // 900
+    line-height: 130%; // 36.4px
+    letter-spacing: 0.28px;
+  }
+
+  // Investment stat label styling - black text with same typography as Price stats
+  .stat_label {
+    color: $color-neutral-black;
+    text-align: center;
+    font-family: $font-family-body;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: $font-weight-regular; // 400
+    line-height: 130%; // 20.8px
   }
 }
 
