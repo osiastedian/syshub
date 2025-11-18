@@ -156,65 +156,107 @@ class MasternodeTable extends Component {
       });
   }
 
+  renderSkeletonLoader() {
+    const { isMobile } = this.state;
+    return (
+      <div className="sentry-table-skeleton">
+        {/* Skeleton Header */}
+        <div className="skeleton-header">
+          <div className="skeleton-cell skeleton-cell--address"></div>
+          {!isMobile && <div className="skeleton-cell skeleton-cell--protocol"></div>}
+          {!isMobile && <div className="skeleton-cell skeleton-cell--status"></div>}
+          {!isMobile && <div className="skeleton-cell skeleton-cell--payee"></div>}
+          <div className="skeleton-cell skeleton-cell--lastpaid"></div>
+        </div>
+
+        {/* Skeleton Rows */}
+        <div className="skeleton-rows">
+          {[...Array(10)].map((_, index) => (
+            <div key={index} className="skeleton-row">
+              <div className="skeleton-cell skeleton-cell--address"></div>
+              {!isMobile && <div className="skeleton-cell skeleton-cell--protocol"></div>}
+              {!isMobile && <div className="skeleton-cell skeleton-cell--status"></div>}
+              {!isMobile && <div className="skeleton-cell skeleton-cell--payee"></div>}
+              <div className="skeleton-cell skeleton-cell--lastpaid"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    );
+  }
+
   render() {
     const { dataload, page, tableData, sizePerPage, totalRecords } = this.state;
     const { t, path } = this.props;
+    const isLoading = dataload === 0;
+    const hasError = dataload === 2;
+    const hasData = dataload === 1;
 
-    if (dataload === 1) {
-      return (
-        <>
-          {/* Search Input */}
-          <div className="sentry-search-container">
-            <input
-              id="srcVal"
-              type="text"
-              className="sentry-search-input"
-              placeholder={t("check.table.ipInput")}
-              onKeyUp={this.searchInTable}
-            />
+    return (
+      <>
+        {/* Search Input - Always visible */}
+        <div className="sentry-search-container">
+          <input
+            id="srcVal"
+            type="text"
+            className="sentry-search-input"
+            placeholder={t("check.table.ipInput")}
+            onKeyUp={this.searchInTable}
+            disabled={isLoading}
+          />
 
-            {/* Buttons - different layouts for mobile vs desktop */}
-            <div className={`sentry-buttons-container ${this.state.isMobile ? 'mobile' : 'desktop'}`}>
-              {this.state.isMobile ? (
-                <>
-                  {/* Mobile: Registration first, then Reset */}
-                  <Link
-                    to={path !== undefined ? `${path}/masternode-registration` : `masternodes/masternode-registration`}
-                    className="sentry-btn sentry-btn--register"
-                  >
-                    <span className="sentry-btn__text">{t("check.register.link")}</span>
-                  </Link>
+          {/* Buttons - Always visible, different layouts for mobile vs desktop */}
+          <div className={`sentry-buttons-container ${this.state.isMobile ? 'mobile' : 'desktop'}`}>
+            {this.state.isMobile ? (
+              <>
+                {/* Mobile: Registration first, then Reset */}
+                <Link
+                  to={path !== undefined ? `${path}/masternode-registration` : `masternodes/masternode-registration`}
+                  className={`sentry-btn sentry-btn--register ${isLoading ? 'disabled' : ''}`}
+                  style={isLoading ? { pointerEvents: 'none', opacity: 0.6 } : {}}
+                >
+                  <span className="sentry-btn__text">{t("check.register.link")}</span>
+                </Link>
 
-                  <button
-                    type="button"
-                    className="sentry-btn sentry-btn--reset"
-                    onClick={this.resetSearch}
-                  >
-                    <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
-                  </button>
-                </>
-              ) : (
-                <>
-                  {/* Desktop: Reset first, then Registration */}
-                  <button
-                    type="button"
-                    className="sentry-btn sentry-btn--reset"
-                    onClick={this.resetSearch}
-                  >
-                    <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
-                  </button>
+                <button
+                  type="button"
+                  className="sentry-btn sentry-btn--reset"
+                  onClick={this.resetSearch}
+                  disabled={isLoading}
+                  style={isLoading ? { opacity: 0.6 } : {}}
+                >
+                  <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
+                </button>
+              </>
+            ) : (
+              <>
+                {/* Desktop: Reset first, then Registration */}
+                <button
+                  type="button"
+                  className="sentry-btn sentry-btn--reset"
+                  onClick={this.resetSearch}
+                  disabled={isLoading}
+                  style={isLoading ? { opacity: 0.6 } : {}}
+                >
+                  <span className="sentry-btn__text">{t("check.table.resetBtn")}</span>
+                </button>
 
-                  <Link
-                    to={path !== undefined ? `${path}/masternode-registration` : `masternodes/masternode-registration`}
-                    className="sentry-btn sentry-btn--register"
-                  >
-                    <span className="sentry-btn__text">{t("check.register.link")}</span>
-                  </Link>
-                </>
-              )}
-            </div>
+                <Link
+                  to={path !== undefined ? `${path}/masternode-registration` : `masternodes/masternode-registration`}
+                  className={`sentry-btn sentry-btn--register ${isLoading ? 'disabled' : ''}`}
+                  style={isLoading ? { pointerEvents: 'none', opacity: 0.6 } : {}}
+                >
+                  <span className="sentry-btn__text">{t("check.register.link")}</span>
+                </Link>
+              </>
+            )}
           </div>
+        </div>
 
+        {/* Table Area - Show skeleton when loading, table when loaded, error when failed */}
+        {isLoading && this.renderSkeletonLoader()}
+
+        {hasData && (
           <RemotePagination
             data={tableData}
             page={page}
@@ -227,13 +269,15 @@ class MasternodeTable extends Component {
             simple={this.props.simple}
             isMobile={this.state.isMobile}
           />
-        </>
-      );
-    } else if (dataload === 0) {
-      return <p className="text-center">{t("check.loading")}</p>;
-    } else {
-      return <p className="text-center">{t("check.noData")}</p>;
-    }
+        )}
+
+        {hasError && (
+          <div className="sentry-table-skeleton" style={{ padding: '40px', textAlign: 'center' }}>
+            <p>{t("check.noData")}</p>
+          </div>
+        )}
+      </>
+    );
   }
 }
 
