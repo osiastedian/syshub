@@ -362,29 +362,67 @@
 }
 
 // ============================================================================
-// Responsive Adjustments
+// Mobile Responsive Adjustments (< 768px)
 // ============================================================================
 
 @media (max-width: #{$breakpoint-md - 1px}) {
   .profile-two-factor {
     max-width: 100%;
-  }
-
-  .profile-two-factor__title {
-    font-size: 20px;
+    padding: 0;
   }
 
   .profile-two-factor__header {
-    flex-direction: column;
-    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+
+  .profile-two-factor__title {
+    font-size: 22px; // Section title size
+  }
+
+  .profile-two-factor__status-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+  }
+
+  .profile-two-factor__status-label {
+    font-size: 18px; // Mobile label size
+  }
+
+  .profile-two-factor__status-badge {
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  .profile-two-factor__note {
+    font-size: 14px;
+    color: #7a8699; // Note text color
+    margin-bottom: 24px;
   }
 
   .profile-two-factor__actions {
     flex-direction: column;
     width: 100%;
+    gap: 24px; // Button gap
+    margin-top: 24px;
+  }
 
-    .profile-two-factor__button {
-      width: 100%;
-    }
+  .profile-two-factor__button {
+    width: 100%; // Full width on mobile
+    height: 40px; // Mobile button height
+    padding: 4px 12px;
+    font-size: 16px;
+  }
+
+  .profile-two-factor__content {
+    gap: 24px;
+  }
+
+  .profile-two-factor__backup-codes {
+    padding: 16px;
+    margin-top: 24px;
   }
 }

@@ -19,17 +19,9 @@
     position: relative;
   }
 
-  // Mobile: Floating sidebar
+  // Mobile: Hide sidebar (navigation via hamburger menu)
   @media (max-width: #{$breakpoint-md - 1px}) {
-    position: fixed;
-    left: $space-md;
-    top: 120px;
-    z-index: 100;
-    background: rgba(0, 0, 0, 0.3);
-    backdrop-filter: blur(10px);
-    padding: $space-md;
-    border-radius: $radius-md;
-    box-shadow: $shadow-lg;
+    display: none;
   }
 }
 
@@ -49,10 +41,6 @@
   flex-direction: column;
   gap: $space-lg;
 
-  // Mobile: Reduce gap
-  @media (max-width: #{$breakpoint-md - 1px}) {
-    gap: $space-md;
-  }
 }
 
 .profile-sidebar__item {
@@ -90,11 +78,6 @@
     }
   }
 
-  // Mobile: Center icon only
-  @media (max-width: #{$breakpoint-md - 1px}) {
-    justify-content: center;
-    padding: 0;
-  }
 }
 
 .profile-sidebar__icon-circle {
@@ -160,19 +143,7 @@
 // Responsive Adjustments
 // ============================================================================
 
-@media (max-width: #{$breakpoint-md - 1px}) {
-  .profile-sidebar {
-    // Ensure sidebar doesn't interfere with content
-    pointer-events: all;
-  }
-}
-
-@media (min-width: $breakpoint-md) {
-  .profile-sidebar {
-    // Full sidebar on desktop
-    display: block;
-  }
-}
+// No additional responsive adjustments needed - handled inline above
 
 // ============================================================================
 // Theme Support (Dark mode ready)

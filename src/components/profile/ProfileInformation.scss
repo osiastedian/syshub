@@ -277,24 +277,68 @@
 }
 
 // ============================================================================
-// Responsive Adjustments
+// Mobile Responsive Adjustments (< 768px)
 // ============================================================================
 
 @media (max-width: #{$breakpoint-md - 1px}) {
   .profile-information {
     max-width: 100%;
+    padding: 0;
+  }
+
+  .profile-information__header {
+    margin-bottom: 24px;
   }
 
   .profile-information__title {
-    font-size: 20px;
+    font-size: 22px; // Section title size
+    text-align: left;
+  }
+
+  .profile-information__form {
+    gap: 24px; // Form element gap
+  }
+
+  .profile-information__form-group {
+    gap: 4px; // Label to input gap
   }
 
   .profile-information__label {
+    font-size: 18px; // Mobile label size
+  }
+
+  .profile-information__input {
+    height: 48px; // Mobile input height
+    padding: 12px 16px; // Mobile padding
     font-size: 16px;
   }
 
   .profile-information__voting-address {
-    padding: $space-md;
+    padding: 24px 16px;
+  }
+
+  .profile-information__address-display {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .profile-information__copy-button {
+    width: 104px; // Mobile copy button width
+    height: 40px; // Mobile button height
+    padding: 8px 16px;
+  }
+
+  .profile-information__actions {
+    display: flex;
+    gap: 24px; // Button gap
+    margin-top: 24px;
+  }
+
+  .profile-information__button {
+    flex: 1; // Equal width buttons
+    height: 40px; // Mobile button height
+    padding: 4px 12px;
+    font-size: 16px;
   }
 }
 

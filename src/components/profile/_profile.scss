@@ -159,14 +159,25 @@
 }
 
 // ============================================================================
-// Responsive Adjustments
+// Mobile Responsive Adjustments (< 768px)
 // ============================================================================
 
 @media (max-width: #{$breakpoint-md - 1px}) {
+  .profile-page {
+    // Mobile section padding: 60px vertical, 16px horizontal
+    padding: 60px 16px;
+  }
+
   .profile-page__container {
-    // On mobile, ProfileSidebar becomes floating
-    // Content takes full width
+    // Sidebar hidden on mobile, content full width
     position: relative;
+    margin-top: 0;
+    gap: 0;
+  }
+
+  .profile-page__content {
+    width: 100%;
+    padding: 0;
   }
 }
 
