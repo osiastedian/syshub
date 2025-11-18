@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 import {useUser} from "../../context/user-context";
 import swal from 'sweetalert2';
+import CTAButton from '../global/CTAButton';
 import './FormRecover.scss';
 
 /**
@@ -88,25 +89,15 @@ const FormRecover = () => {
 
       {/* Button Group */}
       <div className="recover-button-group d-flex flex-column gap-2">
-        <button
+        <CTAButton
           type="submit"
-          className="recover-button recover-button--primary"
+          background="gold"
+          iconColor="black"
+          iconBackground="white"
           disabled={!recaptchaVerified}
         >
-          <span className="recover-button__icon">
-            {/* Arrow Icon SVG */}
-            <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-              <path
-                d="M8 1L14 8M14 8L8 15M14 8H2"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-          <span>Send email</span>
-        </button>
+          Send email
+        </CTAButton>
       </div>
     </form>
   );
