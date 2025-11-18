@@ -1,16 +1,14 @@
 import React, {useState} from "react";
 import {MetaTags} from "react-meta-tags";
 import {withTranslation} from "react-i18next";
-import {Link, useHistory} from "react-router-dom";
+import {useHistory} from "react-router-dom";
 
 import {useUser} from '../context/user-context';
 
-import Background from "../components/global/Background";
-import BackgroundInner from "../components/global/BackgroundInner";
-import Title from "../components/global/Title";
 import SignupForm from "../components/signup/SignupForm";
 import swal from "sweetalert2";
 import {createSeed, removeSeed} from "../utils/encryption";
+import './Signup.scss';
 
 /**
  * Signup page showed at /signup
@@ -64,37 +62,28 @@ function Signup({ t }) {
   }
 
   return (
-    <Background>
-      <BackgroundInner/>
-      <main className="section registerPage">
-        <MetaTags>
-          <title> {t("signup.meta.title")} </title>
-          <meta name="keywords" content={t("signup.meta.keywords")}/>
-          {/* <meta name="description" content={t("signup.meta.description")}/> */}
-        </MetaTags>
-        <div className="shell-large">
-          <div className="section__body">
-            <div className="articles">
-              <section className="article">
-                <div className="cols">
-                  <div className="col col--size-12">
-                    <div className="article__content article__content--pull-left text-center">
-                      <Title heading={t("signup.data.heading")}/>
-                      
-                      <SignupForm onSignup={registerToApp} submitting={submitting}/>
+    <div className="signup-page">
+      <MetaTags>
+        <title> {t("signup.meta.title")} </title>
+        <meta name="keywords" content={t("signup.meta.keywords")}/>
+        {/* <meta name="description" content={t("signup.meta.description")}/> */}
+      </MetaTags>
 
-                      <div className="input-cont">
-                        <Link to="/login">Already have an account?</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
+      <div className="signup-container">
+        <div className="signup-title-section">
+          <h1 className="signup-title">
+            {t('signup.page.title')}
+          </h1>
+          <p className="signup-subtitle">
+            {t('signup.page.subtitle')}
+          </p>
         </div>
-      </main>
-    </Background>
+
+        <div className="signup-form-wrapper">
+          <SignupForm onSignup={registerToApp} submitting={submitting} />
+        </div>
+      </div>
+    </div>
   );
 
 }

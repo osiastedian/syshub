@@ -3,7 +3,10 @@ import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
 import {yupResolver} from '@hookform/resolvers';
 import * as yup from "yup";
+import {Link} from "react-router-dom";
+import {withTranslation} from "react-i18next";
 import {useUser} from "../../context/user-context";
+import './SignupForm.scss';
 
 const schema = yup.object().shape({
   email: yup.string().email().typeError('Must be a valid email').required('Email is required'),
@@ -19,9 +22,10 @@ const schema = yup.object().shape({
  * Component that renders the signup form
  * @component
  * @subcategory signup
- * @param {*} props props onSignup and submitting
+ * @param {*} props props onSignup, submitting, and t (translation function)
  */
 const SignupForm = (props) => {
+  const { t } = props;
   const { firebase } = useUser();
   const isMounted = useRef(false);
 
@@ -42,79 +46,97 @@ const SignupForm = (props) => {
     })
     isMounted.current = true;
     window.recaptchaVerifier.render();
-    
+
     return () => {
       isMounted.current = false;
     }
   }, [firebase]);
 
   return (
-    <>
-      <form className="input-form centered" onSubmit={handleSubmit(props.onSignup)}>
-        <div className="form-group">
-          <input
-            className="styled-round"
-            style={{marginBottom: '0'}}
-            type="email"
-            name="email"
-            placeholder="Email"
-            ref={register}
-          />
-          <ErrorMessage
-            errors={errors}
-            name="email"
-            render={({message}) => <small><p style={{lineHeight: '1.5', textAlign: 'center'}}>{message}</p></small>}
-          />
-        </div>
+    <form className="d-flex flex-column gap-4 signup-form" onSubmit={handleSubmit(props.onSignup)}>
+      {/* Email Field */}
+      <div className="signup-input-group d-flex flex-column gap-2">
+        <label className="signup-input-label text-white" htmlFor="email">
+          {t('signup.form.emailAddress')}
+        </label>
+        <input
+          id="email"
+          className={`signup-input ${errors.email ? 'error' : ''}`}
+          type="email"
+          name="email"
+          placeholder={t('signup.form.emailPlaceholder')}
+          ref={register}
+        />
+        <ErrorMessage
+          errors={errors}
+          name="email"
+          render={({message}) => <div className="signup-input-error">{message}</div>}
+        />
+      </div>
 
-        <div className="form-group">
-          <input
-            className="styled-round"
-            style={{marginBottom: '0'}}
-            type="password"
-            name="password"
-            placeholder="Password"
-            ref={register}
-          />
-          <ErrorMessage
-            errors={errors}
-            name="password"
-            render={({message}) => <small><p style={{lineHeight: '1.5', textAlign: 'center'}}>{message}</p></small>}
-          />
-        </div>
+      {/* Password Field */}
+      <div className="signup-input-group d-flex flex-column gap-2">
+        <label className="signup-input-label text-white" htmlFor="password">
+          {t('signup.form.password')}
+        </label>
+        <input
+          id="password"
+          className={`signup-input ${errors.password ? 'error' : ''}`}
+          type="password"
+          name="password"
+          placeholder={t('signup.form.passwordPlaceholder')}
+          ref={register}
+        />
+        <ErrorMessage
+          errors={errors}
+          name="password"
+          render={({message}) => <div className="signup-input-error">{message}</div>}
+        />
+      </div>
 
-        <div className="form-group">
-          <input
-            className="styled-round"
-            style={{marginBottom: '0'}}
-            type="password"
-            name="confirmPassword"
-            placeholder="Confirm your password"
-            ref={register}
-          />
-          <ErrorMessage
-            errors={errors}
-            name="confirmPassword"
-            render={({message}) => <small><p style={{lineHeight: '1.5', textAlign: 'center'}}>{message}</p></small>}
-          />
-        </div>
+      {/* Confirm Password Field */}
+      <div className="signup-input-group d-flex flex-column gap-2">
+        <label className="signup-input-label text-white" htmlFor="confirmPassword">
+          {t('signup.form.confirmPassword')}
+        </label>
+        <input
+          id="confirmPassword"
+          className={`signup-input ${errors.confirmPassword ? 'error' : ''}`}
+          type="password"
+          name="confirmPassword"
+          placeholder={t('signup.form.confirmPasswordPlaceholder')}
+          ref={register}
+        />
+        <ErrorMessage
+          errors={errors}
+          name="confirmPassword"
+          render={({message}) => <div className="signup-input-error">{message}</div>}
+        />
+      </div>
 
-        <div className="input-cont">
-          <div id={'recaptcha-sign-up'} className="recaptcha" style={{display: 'inline-block'}}/>
-        </div>
+      {/* reCAPTCHA */}
+      <div className="signup-recaptcha">
+        <div id={'recaptcha-sign-up'} className="recaptcha" style={{display: 'inline-block'}}/>
+      </div>
 
-        <div className="input-cont">
-          <button
-            className="btn btn--blue"
-            type="submit"
-            disabled={props.submitting || !recaptchaVerified || !(formState.isValid)}
-          >Sign up
-          </button>
-        </div>
+      {/* Buttons */}
+      <div className="signup-button-group">
+        <button
+          type="submit"
+          className="signup-button-primary"
+          disabled={props.submitting || !recaptchaVerified || !(formState.isValid)}
+        >
+          {props.submitting ? t('signup.form.creating') : t('signup.form.signUp')}
+          <span className="button-icon">→</span>
+        </button>
 
-      </form>
-    </>
+        <Link to="/login" className="signup-button-secondary text-decoration-none">
+          {t('signup.form.alreadyHaveAccount')}
+          <span className="button-icon">→</span>
+        </Link>
+      </div>
+    </form>
   )
 }
 
-export default SignupForm;
+export default withTranslation()(SignupForm);
