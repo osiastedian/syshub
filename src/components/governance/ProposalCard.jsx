@@ -168,7 +168,7 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
         <button
           id={`proposal-title-${proposal.Hash}`}
           ref={titleButtonRef}
-          className={`proposal-card__title ${useCollapse ? 'expanded' : ''}`}
+          className={`proposal-card__title btn btn-link ${useCollapse ? 'expanded' : ''}`}
           aria-expanded={useCollapse}
           aria-controls={`proposal-details-${proposal.Hash}`}
           onClick={() => setUseCollapse(!useCollapse)}

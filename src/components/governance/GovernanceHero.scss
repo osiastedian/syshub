@@ -50,15 +50,16 @@
 
   p {
     margin-bottom: 0;
-
-    & + p {
-      margin-top: 0;
-    }
+    margin-top: 0;
   }
 
   @media (max-width: $breakpoint-md) {
     font-size: 16px;
   }
+}
+
+.governance-hero__description-break {
+  margin-top: 16px !important;
 }
 
 .governance-hero__link {
