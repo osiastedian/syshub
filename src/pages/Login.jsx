@@ -6,8 +6,6 @@ import { useUser } from "../context/user-context";
 
 import Background from "../components/global/Background";
 import BackgroundInner from "../components/global/BackgroundInner";
-import Navbar from "../components/global/Navbar";
-import Footer from "../components/global/Footer";
 import LoginForm from "../components/login/LoginForm";
 import { useHistory } from "react-router-dom";
 import { get2faInfoUser, verifyGauthCode } from "../utils/request";
@@ -163,7 +161,6 @@ function Login({ t }) {
   return (
     <Background>
       <BackgroundInner />
-      <Navbar />
       <main className="login-page">
         <MetaTags>
           <title> {t("login.meta.title")} </title>
@@ -176,7 +173,6 @@ function Login({ t }) {
           <LoginForm onLogin={loginToApp} submitting={submitting} />
         </section>
       </main>
-      <Footer />
 
       <CustomModal open={active2FAMethod === "sms"} onClose={() => setActive2FAMethod(null)}>
         <SMSTwoFAFormLogin
