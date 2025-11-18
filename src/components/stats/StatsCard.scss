@@ -37,15 +37,17 @@
 
 // Main Value (e.g., "100,000 SYS", "$99.01")
 .stats-card__value {
-  // Typography
+  // Typography - matches Price Stats specification
   font-family: $font-family-body;
-  font-size: $font-size-h4; // 24px
+  font-size: 28px;
+  font-style: normal;
   font-weight: $font-weight-black; // 900
-  line-height: $line-height-tight;
-  letter-spacing: 0.24px; // From Figma design
+  line-height: 130%; // 36.4px
+  letter-spacing: 0.28px;
 
   // Color - Gold for emphasis
   color: $color-brand-gold;
+  text-align: center;
 
   // No margin - spacing handled by card gap
   margin: 0;
