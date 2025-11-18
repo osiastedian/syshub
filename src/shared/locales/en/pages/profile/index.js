@@ -81,6 +81,32 @@ const profile = {
         updateFailed: 'Failed to change password. Please try again.',
       },
     },
+    twoFactor: {
+      title: 'Two-Factor Authentication',
+      description: 'Add an extra layer of security to your account',
+      enabled: 'Enabled',
+      disabled: 'Disabled',
+      currentlyEnabled: '2FA is Currently Enabled',
+      currentlyDisabled: '2FA is Currently Disabled',
+      enabledDescription: 'Your account is protected with two-factor authentication. You will need your authenticator app to sign in.',
+      disabledDescription: 'Enable two-factor authentication to add an extra layer of security to your account.',
+      enable: 'Enable 2FA',
+      enabling: 'Enabling...',
+      disable: 'Disable 2FA',
+      disabling: 'Disabling...',
+      confirmDisable: 'Are you sure you want to disable two-factor authentication? This will make your account less secure.',
+      disableSuccess: 'Two-factor authentication has been disabled',
+      scanQRCode: 'Scan this QR code with your authenticator app',
+      secretKey: 'Or enter this secret key manually:',
+      backupCodes: 'Backup Codes',
+      backupWarning: 'Save these backup codes in a safe place. Each code can only be used once.',
+      copyAll: 'Copy All Codes',
+      copied: 'Copied!',
+      errors: {
+        enableFailed: 'Failed to enable 2FA. Please try again.',
+        disableFailed: 'Failed to disable 2FA. Please try again.',
+      },
+    },
   }
 }
 export default profile;
