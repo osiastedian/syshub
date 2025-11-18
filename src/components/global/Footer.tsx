@@ -1,5 +1,6 @@
 import React, { useState, FormEvent, ChangeEvent } from "react";
 import { Link } from "react-router-dom";
+import "./Footer.scss";
 
 /**
  * Footer component for SysHub

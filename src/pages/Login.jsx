@@ -6,9 +6,10 @@ import { useUser } from "../context/user-context";
 
 import Background from "../components/global/Background";
 import BackgroundInner from "../components/global/BackgroundInner";
-import Title from "../components/global/Title";
+import Navbar from "../components/global/Navbar";
+import Footer from "../components/global/Footer";
 import LoginForm from "../components/login/LoginForm";
-import { Link, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { get2faInfoUser, verifyGauthCode } from "../utils/request";
 import CustomModal from "../components/global/CustomModal";
 import SMSTwoFAFormLogin from "../components/login/SMSTwoFAFormLogin";
@@ -16,6 +17,7 @@ import GAuthTwoFAFormLogin from "../components/login/GAuthTwoFAFormLogin";
 import { createSeed, removeSeed } from "../utils/encryption";
 import swal from "sweetalert2";
 import { deleteUserData } from "../utils/auth-token";
+import "./Login.scss";
 
 /**
  * Login page showed at /login
@@ -161,34 +163,21 @@ function Login({ t }) {
   return (
     <Background>
       <BackgroundInner />
-      <main className="section loginPage">
+      <Navbar />
+      <main className="login-page">
         <MetaTags>
           <title> {t("login.meta.title")} </title>
           <meta name="keywords" content={t("login.meta.keywords")} />
-          {/* <meta name="description" content={t("login.meta.description")}/> */}
         </MetaTags>
-        <div className="shell-large">
-          <div className="section__body">
-            <div className="articles">
-              <section className="article">
-                <div className="cols">
-                  <div className="col col--size-12">
-                    <div className="article__content article__content--pull-left text-center">
-                      <Title heading={t("login.data.heading")} />
 
-                      <LoginForm onLogin={loginToApp} submitting={submitting} />
-                      <div className="input-cont">
-                        <Link to="/recover">Forgot your password?</Link> <br />
-                        <Link to="/signup">Don't have an account?</Link>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
-          </div>
-        </div>
+        <section className="login-section">
+          <h1 className="login-title">{t("login.data.heading")}</h1>
+
+          <LoginForm onLogin={loginToApp} submitting={submitting} />
+        </section>
       </main>
+      <Footer />
+
       <CustomModal open={active2FAMethod === "sms"} onClose={() => setActive2FAMethod(null)}>
         <SMSTwoFAFormLogin
           userSignInSms={verifyPhone}

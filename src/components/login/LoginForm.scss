@@ -1,0 +1,222 @@
+// ============================================================================
+// LoginForm Component Styles
+// ============================================================================
+// Glasmorphic form styling with component-level classes
+// All styles are scoped to login form only
+// ============================================================================
+
+@import '../../scss/design-tokens';
+
+// ============================================================================
+// Form Container
+// ============================================================================
+
+.login-form {
+  width: 354px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  @media (max-width: $breakpoint-md) {
+    width: 100%;
+    gap: 32px;
+  }
+}
+
+// ============================================================================
+// Input Groups
+// ============================================================================
+
+.login-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.login-input-label {
+  font-family: $font-family-body;
+  font-size: 18px;
+  font-weight: $font-weight-regular;
+  color: $color-neutral-white;
+  line-height: 1.3;
+  margin: 0;
+}
+
+// ============================================================================
+// Password Label Row (with "Forgot password?" link)
+// ============================================================================
+
+.login-password-label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  line-height: 1.3;
+
+  .login-input-label {
+    margin: 0;
+  }
+}
+
+.login-forgot-link {
+  font-family: $font-family-body;
+  font-size: 14px;
+  font-weight: $font-weight-regular;
+  color: $color-text-muted;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color $transition-base;
+
+  &:hover {
+    color: $color-neutral-white;
+  }
+}
+
+// ============================================================================
+// Glasmorphic Input Styling
+// ============================================================================
+
+.login-input {
+  backdrop-filter: blur(50px);
+  background: $color-overlay-white-15;
+  border: 2px solid $color-overlay-white-30;
+  border-radius: 8px;
+  padding: 12px 24px;
+  font-size: 18px;
+  color: $color-neutral-white;
+  text-align: left;
+  font-family: $font-family-body;
+  font-weight: $font-weight-regular;
+  width: 100%;
+  box-sizing: border-box;
+  transition: border-color $transition-base;
+  outline: none;
+
+  &::placeholder {
+    color: $color-overlay-white-50;
+  }
+
+  &:focus {
+    border-color: $color-overlay-white-50;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+// ============================================================================
+// Error Messages
+// ============================================================================
+
+.login-error {
+  font-size: 14px;
+  color: #FF6B6B;
+  margin: 4px 0 0 0;
+  font-family: $font-family-body;
+  font-weight: $font-weight-regular;
+  line-height: 1.3;
+}
+
+// ============================================================================
+// reCAPTCHA Container
+// ============================================================================
+
+.login-recaptcha-container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+
+  #recaptcha-login {
+    transform: scale(0.87);
+    transform-origin: 0 0;
+    margin: 0;
+  }
+}
+
+// ============================================================================
+// Button Group
+// ============================================================================
+
+.login-button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+// ============================================================================
+// Button Styling
+// ============================================================================
+
+.login-button {
+  height: 40px;
+  border-radius: 1000px;
+  display: flex;
+  align-items: center;
+  padding: 4px 12px 4px 4px;
+  gap: 13px;
+  font-size: 16px;
+  font-weight: $font-weight-regular;
+  font-family: $font-family-body;
+  cursor: pointer;
+  transition: opacity $transition-base, transform 0.1s;
+  border: none;
+  text-decoration: none;
+  justify-content: center;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:hover {
+    opacity: 0.9;
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  // Primary Button - Gold with Black Text
+  &--primary {
+    background: $color-brand-gold;
+    color: #0A0A0A;
+    border: none;
+
+    .login-button__icon {
+      background: $color-neutral-white;
+      color: $color-brand-gold;
+    }
+  }
+
+  // Secondary Button - Transparent with White Border
+  &--secondary {
+    background: transparent;
+    color: $color-neutral-white;
+    border: 1px solid $color-neutral-white;
+
+    .login-button__icon {
+      background: $color-brand-gold;
+      color: $color-neutral-white;
+    }
+  }
+}
+
+.login-button__icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
