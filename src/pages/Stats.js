@@ -6,6 +6,9 @@ import MetaTags from 'react-meta-tags';
 import Background from '../components/global/Background';
 import BackgroundInner from '../components/global/BackgroundInner';
 
+// Page-specific styles
+import './Stats.scss';
+
 import HeroSection from '../components/stats/HeroSection';
 import StatsShow from '../components/stats/StatsShow';
 import LinearChart from '../components/stats/LinearCharts';
