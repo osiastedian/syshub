@@ -136,6 +136,18 @@ $section-spacing-mobile: 40px;
       grid-template-columns: 1fr;
       gap: $space-md;
     }
+
+    // Price stats value styling - gold color with specific typography
+    .stat-data {
+      color: $color-brand-gold;
+      text-align: center;
+      font-family: $font-family-body;
+      font-size: 28px;
+      font-style: normal;
+      font-weight: $font-weight-black; // 900
+      line-height: 130%; // 36.4px
+      letter-spacing: 0.28px;
+    }
   }
 }
 
