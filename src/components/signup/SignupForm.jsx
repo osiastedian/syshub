@@ -126,12 +126,24 @@ const SignupForm = (props) => {
           className="signup-button-primary"
           disabled={props.submitting || !recaptchaVerified || !(formState.isValid)}
         >
-          <span className="button-icon">→</span>
+          <span className="button-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="16" fill="white"/>
+              <path d="M17.6191 11.9533L21.6658 16L17.6191 20.0466" stroke="#0A0A0A" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M10.334 16H21.554" stroke="#0A0A0A" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
           {props.submitting ? t('signup.form.creating') : t('signup.form.signUp')}
         </button>
 
         <Link to="/login" className="signup-button-secondary text-decoration-none">
-          <span className="button-icon">→</span>
+          <span className="button-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="16" fill="#FBB03B"/>
+              <path d="M17.6191 11.9533L21.6658 16L17.6191 20.0466" stroke="#FFFFFF" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M10.334 16H21.554" stroke="#FFFFFF" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
           {t('signup.form.alreadyHaveAccount')}
         </Link>
       </div>
