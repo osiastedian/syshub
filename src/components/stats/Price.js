@@ -63,36 +63,44 @@ class Price extends Component {
             return (
                 <>
                     <h2 className="section-title">PRICE STATS</h2>
-                    <div className="ministats mndata-expanded">
-                        <div className="d-flex flex-column align-items-center gap-3">
-                            <span className="stat_value">
-                                ${this.state.priceData.price_usd}
-                                <br />
-                                {this.state.priceData.price_btc} BTC
-                            </span>
-                            <span className="stat_label">{t('price.priceTable.price')}</span>
+                    <div className="row row-cols-1 row-cols-lg-4 g-4">
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">
+                                    ${this.state.priceData.price_usd}
+                                    <br />
+                                    {this.state.priceData.price_btc} BTC
+                                </span>
+                                <span className="stat_label">{t('price.priceTable.price')}</span>
+                            </div>
                         </div>
-                        <div className="d-flex flex-column align-items-center gap-3">
-                            <span className="stat_value">
-                                ${this.state.priceData.volume_usd}
-                                <br />
-                                {this.state.priceData.volume_btc} BTC
-                            </span>
-                            <span className="stat_label">{t('price.priceTable.volume')}</span>
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">
+                                    ${this.state.priceData.volume_usd}
+                                    <br />
+                                    {this.state.priceData.volume_btc} BTC
+                                </span>
+                                <span className="stat_label">{t('price.priceTable.volume')}</span>
+                            </div>
                         </div>
-                        <div className="d-flex flex-column align-items-center gap-3">
-                            <span className="stat_value">
-                                ${this.state.priceData.market_cap_usd}
-                                <br />
-                                {this.state.priceData.market_cap_btc} BTC
-                            </span>
-                            <span className="stat_label">{t('price.priceTable.marketcap')}</span>
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">
+                                    ${this.state.priceData.market_cap_usd}
+                                    <br />
+                                    {this.state.priceData.market_cap_btc} BTC
+                                </span>
+                                <span className="stat_label">{t('price.priceTable.marketcap')}</span>
+                            </div>
                         </div>
-                        <div className="d-flex flex-column align-items-center gap-3">
-                            <span className="stat_value">
-                                {this.priceWizard(this.state.priceData.price_change)}
-                            </span>
-                            <span className="stat_label">{t('price.priceTable.change')}</span>
+                        <div className="col">
+                            <div className="d-flex flex-column align-items-center gap-3">
+                                <span className="stat_value">
+                                    {this.priceWizard(this.state.priceData.price_change)}
+                                </span>
+                                <span className="stat_label">{t('price.priceTable.change')}</span>
+                            </div>
                         </div>
                     </div>
                 </>

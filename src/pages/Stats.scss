@@ -134,36 +134,27 @@ $section-spacing-mobile: 40px;
     margin-bottom: 60px;
   }
 
-  // Mobile: 1-column layout for price stats grid
-  .ministats {
-    @media (max-width: $breakpoint-md) {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: $space-md;
-    }
+  // Price stat value styling - gold color with specific typography
+  .stat_value {
+    color: $color-brand-gold;
+    text-align: center;
+    font-family: $font-family-body;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: $font-weight-black; // 900
+    line-height: 130%; // 36.4px
+    letter-spacing: 0.28px;
+  }
 
-    // Price stat value styling - gold color with specific typography
-    .stat_value {
-      color: $color-brand-gold;
-      text-align: center;
-      font-family: $font-family-body;
-      font-size: 28px;
-      font-style: normal;
-      font-weight: $font-weight-black; // 900
-      line-height: 130%; // 36.4px
-      letter-spacing: 0.28px;
-    }
-
-    // Price stat label styling - white with regular weight
-    .stat_label {
-      color: $color-neutral-white;
-      text-align: center;
-      font-family: $font-family-body;
-      font-size: 16px;
-      font-style: normal;
-      font-weight: $font-weight-regular; // 400
-      line-height: 130%; // 20.8px
-    }
+  // Price stat label styling - white with regular weight
+  .stat_label {
+    color: $color-neutral-white;
+    text-align: center;
+    font-family: $font-family-body;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: $font-weight-regular; // 400
+    line-height: 130%; // 20.8px
   }
 }
 
