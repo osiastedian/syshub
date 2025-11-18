@@ -164,16 +164,16 @@ const RemotePagination = ({
                 bordered={false}
                 {...paginationTableProps}
               />
-            </div>
 
-            {!simple && (
-              <div className="sentry-pagination-container">
-                <div className="pagination-info">
-                  Showing {from} to {to} of {totalSize}
+              {!simple && (
+                <div className="sentry-pagination-container">
+                  <div className="pagination-info">
+                    Showing {from} to {to} of {totalSize}
+                  </div>
+                  <PaginationListStandalone {...paginationProps} />
                 </div>
-                <PaginationListStandalone {...paginationProps} />
-              </div>
-            )}
+              )}
+            </div>
           </div>
         )}
       </PaginationProvider>
