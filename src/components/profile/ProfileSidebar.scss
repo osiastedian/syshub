@@ -1,0 +1,211 @@
+// ============================================================================
+// ProfileSidebar Component Styles
+// ============================================================================
+// Responsive sidebar navigation for Profile page
+// Desktop: Full width with labels
+// Mobile: Floating icon-only sidebar
+// ============================================================================
+
+@import '../../scss/design-tokens';
+
+.profile-sidebar {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: $radius-md;
+  padding: $space-lg;
+
+  // Desktop: Fixed width sidebar
+  @media (min-width: $breakpoint-md) {
+    width: 365px;
+    position: relative;
+  }
+
+  // Mobile: Floating sidebar
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    position: fixed;
+    left: $space-md;
+    top: 120px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    padding: $space-md;
+    border-radius: $radius-md;
+    box-shadow: $shadow-lg;
+  }
+}
+
+.profile-sidebar__title {
+  @include typography-body-large-semi-bold;
+  color: $color-text;
+  margin-bottom: $space-lg;
+
+  // Hide title on mobile
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    display: none;
+  }
+}
+
+.profile-sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+
+  // Mobile: Reduce gap
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    gap: $space-md;
+  }
+}
+
+.profile-sidebar__item {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+  padding: $space-sm;
+  border-radius: $radius-md;
+  cursor: pointer;
+  transition: all $transition-base;
+  text-decoration: none;
+  background: transparent;
+  border: none;
+  width: 100%;
+  text-align: left;
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+
+  &--active {
+    background: rgba(251, 176, 59, 0.2);
+
+    .profile-sidebar__icon-circle {
+      background: $color-brand-gold;
+    }
+
+    .profile-sidebar__icon {
+      color: $color-neutral-black;
+    }
+
+    .profile-sidebar__label {
+      color: $color-brand-gold;
+      font-weight: $font-weight-semi-bold;
+    }
+  }
+
+  // Mobile: Center icon only
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    justify-content: center;
+    padding: 0;
+  }
+}
+
+.profile-sidebar__icon-circle {
+  width: 40px;
+  height: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  border-radius: $radius-full;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all $transition-base;
+}
+
+.profile-sidebar__icon {
+  width: 24px;
+  height: 24px;
+  color: $color-text;
+  transition: color $transition-base;
+
+  svg {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.profile-sidebar__label {
+  @include typography-body-medium-regular;
+  color: $color-text;
+  transition: all $transition-base;
+  flex: 1;
+
+  // Hide label on mobile
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    display: none;
+  }
+}
+
+// ============================================================================
+// Icon SVG Styles
+// ============================================================================
+
+.profile-sidebar__icon {
+  svg {
+    fill: currentColor;
+    stroke: currentColor;
+  }
+}
+
+// ============================================================================
+// Accessibility
+// ============================================================================
+
+.profile-sidebar__item {
+  &:focus-visible {
+    outline: 2px solid $color-brand-gold;
+    outline-offset: 2px;
+  }
+}
+
+// ============================================================================
+// Responsive Adjustments
+// ============================================================================
+
+@media (max-width: #{$breakpoint-md - 1px}) {
+  .profile-sidebar {
+    // Ensure sidebar doesn't interfere with content
+    pointer-events: all;
+  }
+}
+
+@media (min-width: $breakpoint-md) {
+  .profile-sidebar {
+    // Full sidebar on desktop
+    display: block;
+  }
+}
+
+// ============================================================================
+// Theme Support (Dark mode ready)
+// ============================================================================
+
+.profile-sidebar {
+  // Light theme override (if needed)
+  .theme-light & {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  // Dark theme (default)
+  .theme-dark & {
+    background: rgba(0, 0, 0, 0.15);
+  }
+}
+
+// ============================================================================
+// Animation States
+// ============================================================================
+
+.profile-sidebar__item {
+  &:active {
+    transform: scale(0.98);
+  }
+}
+
+.profile-sidebar__icon-circle {
+  .profile-sidebar__item:hover & {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .profile-sidebar__item--active & {
+    background: $color-brand-gold;
+  }
+}
