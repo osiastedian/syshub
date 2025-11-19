@@ -74,6 +74,13 @@
     }
   }
 
+  &__mobile-actions {
+    display: flex;
+    align-items: center;
+    gap: $space-md;
+    flex-shrink: 0;
+  }
+
   &__login-btn {
     display: flex;
     align-items: center;
@@ -113,6 +120,38 @@
     svg {
       width: 16px;
       height: 16px;
+    }
+  }
+
+  &__hamburger {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: transparent;
+    border: 1px solid $color-overlay-white-30;
+    border-radius: 8px;
+    color: $color-neutral-white;
+    cursor: pointer;
+    transition: all $transition-base;
+
+    @media (max-width: $breakpoint-md) {
+      display: flex;
+    }
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: $color-brand-gold;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
+
+    svg {
+      width: 24px;
+      height: 24px;
     }
   }
 }

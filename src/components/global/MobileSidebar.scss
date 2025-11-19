@@ -1,0 +1,253 @@
+// ============================================================================
+// Mobile Sidebar Component Styles
+// ============================================================================
+// Right-aligned navigation drawer for mobile devices
+// Features: User header, navigation menu with expandable items, footer links
+// Design: Dark theme with gold accents
+// ============================================================================
+
+@import '../../scss/design-tokens';
+
+// ============================================================================
+// BACKDROP OVERLAY
+// ============================================================================
+.mobile-sidebar__backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: $z-modal-backdrop;
+  animation: fadeIn 0.2s ease-in-out;
+
+  @media (min-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+// ============================================================================
+// SIDEBAR CONTAINER
+// ============================================================================
+.mobile-sidebar {
+  position: fixed;
+  top: 0;
+  right: -277px; // Hidden by default
+  width: 277px;
+  height: 100vh;
+  background: $color-neutral-black;
+  border-left: 2px solid $color-brand-gold;
+  padding: 40px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: $space-lg;
+  z-index: $z-modal;
+  transition: right $transition-slow;
+  overflow-y: auto;
+
+  // Hide on desktop
+  @media (min-width: $breakpoint-md) {
+    display: none;
+  }
+
+  // Open state
+  &--open {
+    right: 0;
+  }
+
+  // ============================================================================
+  // HEADER - User Info
+  // ============================================================================
+  &__header {
+    flex-shrink: 0;
+  }
+
+  &__user-btn {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    width: 100%;
+    height: 40px;
+    padding: 4px 12px 4px 4px;
+    background: $color-neutral-white;
+    color: $color-neutral-black;
+    border: none;
+    border-radius: 1000px;
+    font-family: $font-family-body;
+    font-size: 16px;
+    font-weight: $font-weight-regular;
+    line-height: 1.3;
+    cursor: pointer;
+    transition: opacity $transition-base;
+
+    &:hover {
+      opacity: 0.9;
+    }
+  }
+
+  &__user-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 1000px;
+    background: $color-brand-gold;
+    color: $color-neutral-white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  &__user-email {
+    flex: 1;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  // ============================================================================
+  // NAVIGATION MENU
+  // ============================================================================
+  &__nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: $space-xs;
+    overflow-y: auto;
+  }
+
+  &__nav-item-wrapper {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 12px 16px;
+    background: transparent;
+    color: $color-neutral-white;
+    border: none;
+    border-radius: 100px;
+    font-family: $font-family-body;
+    font-size: 16px;
+    font-weight: $font-weight-regular;
+    line-height: 1.3;
+    text-decoration: none;
+    text-align: left;
+    cursor: pointer;
+    transition: all $transition-base;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    // Active state - Gold background
+    &--active {
+      background: $color-brand-gold;
+      color: $color-neutral-black;
+
+      &:hover {
+        background: $color-brand-gold;
+        opacity: 0.9;
+      }
+    }
+  }
+
+  &__dropdown-arrow {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    transition: transform $transition-base;
+
+    &--expanded {
+      transform: rotate(180deg);
+    }
+  }
+
+  // ============================================================================
+  // SUBMENU (for expandable items like User Profile)
+  // ============================================================================
+  &__submenu {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 16px;
+    margin-top: 4px;
+    animation: slideDown 0.2s ease-in-out;
+  }
+
+  &__submenu-item {
+    padding: 10px 16px;
+    background: transparent;
+    color: $color-neutral-white;
+    border-radius: 100px;
+    font-family: $font-family-body;
+    font-size: 14px;
+    font-weight: $font-weight-light;
+    line-height: 1.3;
+    text-decoration: none;
+    transition: all $transition-base;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  // ============================================================================
+  // FOOTER - Links
+  // ============================================================================
+  &__footer {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding-top: $space-md;
+    border-top: 1px solid $color-overlay-white-30;
+    flex-shrink: 0;
+  }
+
+  &__footer-link {
+    font-family: $font-family-body;
+    font-size: 14px;
+    font-weight: $font-weight-light;
+    line-height: 1.3;
+    color: $color-neutral-white;
+    text-decoration: none;
+    transition: color $transition-base;
+
+    &:hover {
+      color: $color-brand-gold;
+    }
+  }
+}
+
+// ============================================================================
+// ANIMATIONS
+// ============================================================================
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
