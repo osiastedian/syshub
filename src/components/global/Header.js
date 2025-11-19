@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
 import { useUser } from "../../context/user-context";
+import { mainNavigationItems, userMenuItems } from "../../config/navigation";
 
 /**
  * Component that shows the Header alongside with the navbar
@@ -88,46 +89,37 @@ function Header({ t }) {
               }}
             ></div>
           </Link>
-          {/*TODO:to open mobile menu add className .open to .header__content*/}
+          {/* Hamburger menu button - visible only on mobile */}
+          <button
+            className={`nav-trigger ${isMobileMenu ? "nav-trigger--active" : ""}`}
+            onClick={toggleMenu}
+            aria-label="Toggle navigation menu"
+            aria-expanded={isMobileMenu}
+          >
+            <span></span>
+            <span></span>
+            <span></span>
+          </button>
+
+          {/* Navigation content - toggleable on mobile */}
           <div className={`header__content ${isMobileMenu ? "open" : ""}`}>
             <nav className="nav">
               <ul style={{ width: "100%" }}>
-                <li onClick={menuLinks}>
-                  <Link to="/about">{t("header.about")}</Link>
-                </li>
-
-                <li onClick={menuLinks}>
-                  <Link to="/stats">{t("header.stats")}</Link>
-                </li>
-
-                <li onClick={menuLinks}>
-                  <a
-                    href="https://support.syscoin.org/t/syscoin-nexus-sentry-node-install-guide/463"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {t("header.setup")}
-                  </a>
-                </li>
-
-                <li onClick={menuLinks}>
-                  <Link to="/governance">{t("header.governance")}</Link>
-                </li>
-
-                <li onClick={menuLinks}>
-                  <Link to="/sentrynodes">{t("header.masternodes")}</Link>
-                </li>
-
-                <li onClick={menuLinks}>
-                  <a
-                    rel="noopener noreferrer"
-                    href="https://support.syscoin.org/"
-                    target="_blank"
-                  >
-                    {t("header.support")}
-                  </a>
-                </li>
-
+                {mainNavigationItems.map((item, index) => (
+                  <li key={index} onClick={menuLinks}>
+                    {item.external ? (
+                      <a
+                        href={item.href}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        {t(item.labelKey)}
+                      </a>
+                    ) : (
+                      <Link to={item.path}>{t(item.labelKey)}</Link>
+                    )}
+                  </li>
+                ))}
               </ul>
             </nav>
           </div>
@@ -154,22 +146,17 @@ function Header({ t }) {
               </button>
               <div className={`header__user-dropdown ${isMobileMenu ? "open" : ""}`}>
                 <ul>
-                  <li onClick={menuLinks}>
-                    <Link to="/profile">{t("header.profile")}</Link>
-                  </li>
-                  <li onClick={menuLinks}>
-                    <Link to="/create-proposal">
-                      {t("header.proposal")}
-                    </Link>
-                  </li>
-                  {userAdmin === "admin" && (
-                    <li onClick={menuLinks}>
-                      <Link to="/admin">{t("header.admin")}</Link>
-                    </li>
-                  )}
-                  <li onClick={menuLinks}>
-                    <Link to="/faq">{t("header.faq")}</Link>
-                  </li>
+                  {userMenuItems.map((item, index) => {
+                    // Skip admin-only items if user is not admin
+                    if (item.adminOnly && userAdmin !== "admin") {
+                      return null;
+                    }
+                    return (
+                      <li key={index} onClick={menuLinks}>
+                        <Link to={item.path}>{t(item.labelKey)}</Link>
+                      </li>
+                    );
+                  })}
                   <li onClick={menuLinks}>
                     <button className="nav-btn" onClick={logout}>
                       {t("header.logout")}

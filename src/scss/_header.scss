@@ -85,6 +85,69 @@
 }
 
 /* ------------------------------------------------------------ *\
+   Hamburger Menu Button (Mobile Navigation Trigger)
+\* ------------------------------------------------------------ */
+
+.nav-trigger {
+  position: relative;
+  display: none;
+  width: 30px;
+  height: 19px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  margin: 0 0 0 auto;
+  z-index: 100;
+  flex-shrink: 0;
+
+  span {
+    position: absolute;
+    display: block;
+    height: 2px;
+    width: 100%;
+    border-radius: 2px;
+    background: $color-neutral-white;
+    transition: top 0.2s 0.25s, opacity 0.2s 0.25s, transform 0.2s;
+  }
+
+  span:nth-child(1) {
+    top: 0;
+  }
+
+  span:nth-child(2) {
+    top: 8px;
+  }
+
+  span:nth-child(3) {
+    top: 16px;
+  }
+
+  &--active {
+    span {
+      transition: background 0.2s, top 0.2s, opacity 0.2s, transform 0.2s 0.25s;
+    }
+
+    span:nth-child(1),
+    span:nth-child(3) {
+      top: 8px;
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(1) {
+      transform: rotate(45deg);
+    }
+
+    span:nth-child(3) {
+      transform: rotate(-45deg);
+    }
+  }
+}
+
+/* ------------------------------------------------------------ *\
    Mobile (below 768px)
 \* ------------------------------------------------------------ */
 
@@ -110,6 +173,12 @@
     background-size: contain;
   }
 
+  // Show hamburger menu on mobile
+  .nav-trigger {
+    display: inline-block;
+    margin: 0 $space-sm 0 auto;
+  }
+
   .header__content {
     position: absolute;
     top: 100%;
@@ -124,10 +193,21 @@
     border-top: 1px solid $color-border;
     border-radius: 0 0 $radius-md $radius-md;
     z-index: 1000;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
     &.open {
       display: flex;
     }
+  }
+
+  // Adjust login button margin on mobile to not push left
+  .header__login-btn {
+    margin: 0;
+  }
+
+  // Adjust user menu button margin on mobile
+  .header__menu-btn {
+    margin: 0;
   }
 }
 
