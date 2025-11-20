@@ -118,6 +118,34 @@
   }
 }
 
+.profile-sidebar__status-pill {
+  height: 20px;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-family: $font-family-body;
+  font-size: 11px;
+  font-weight: $font-weight-semi-bold;
+  display: inline-flex;
+  align-items: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+
+  &--enabled {
+    background: rgba(251, 176, 59, 0.2);
+    color: $color-brand-gold;
+  }
+
+  &--disabled {
+    background: rgba(246, 118, 118, 0.2);
+    color: $color-error-text;
+  }
+
+  // Hide pill on mobile
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    display: none;
+  }
+}
+
 // ============================================================================
 // Icon SVG Styles
 // ============================================================================

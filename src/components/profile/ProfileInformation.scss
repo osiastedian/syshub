@@ -249,50 +249,7 @@
   margin: 0;
 }
 
-.profile-information__add-button {
-  display: flex;
-  align-items: center;
-  gap: $space-xs;
-  padding: 8px 20px;
-  height: 40px;
-  background: $color-brand-gold;
-  color: $color-neutral-black;
-  border: none;
-  border-radius: 24px;
-  font-family: $font-family-body;
-  font-size: $font-size-body-medium;
-  font-weight: $font-weight-semi-bold;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all $transition-base;
-  white-space: nowrap;
-
-  &:hover {
-    opacity: 0.9;
-  }
-
-  &:active {
-    transform: scale(0.98);
-  }
-
-  @media (max-width: #{$breakpoint-md - 1px}) {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-.profile-information__add-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 24px;
-  height: 24px;
-  background: $color-neutral-black;
-  color: $color-brand-gold;
-  border-radius: 50%;
-  font-size: 20px;
-  line-height: 1;
-}
+// CTAButton for Add Voting Address - inherits from global CTAButton component
 
 .profile-information__no-address {
   @include typography-body-medium-regular;

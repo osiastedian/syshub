@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { useUser } from '../../context/user-context';
 import './ProfileSidebar.scss';
 
 /**
@@ -25,6 +26,10 @@ import './ProfileSidebar.scss';
  */
 function ProfileSidebar({ activeSection, onSectionChange }) {
   const { t } = useTranslation();
+  const { user } = useUser();
+
+  // Check if user has 2FA enabled
+  const twoFactorEnabled = user?.twoFactorEnabled || false;
 
   const sections = [
     {
@@ -171,6 +176,17 @@ function ProfileSidebar({ activeSection, onSectionChange }) {
               <div className="profile-sidebar__icon">{renderIcon(section.icon)}</div>
             </div>
             <span className="profile-sidebar__label">{t(section.labelKey)}</span>
+            {section.id === 'twoFactor' && (
+              <span
+                className={`profile-sidebar__status-pill ${
+                  twoFactorEnabled
+                    ? 'profile-sidebar__status-pill--enabled'
+                    : 'profile-sidebar__status-pill--disabled'
+                }`}
+              >
+                {twoFactorEnabled ? 'ON' : 'OFF'}
+              </span>
+            )}
           </button>
         ))}
       </nav>

@@ -152,57 +152,78 @@ function ProfileTwoFactor({ onOpenModal }) {
 
       {/* Status Card */}
       <div className="profile-two-factor__status-card">
-        <h3 className="profile-two-factor__status-title">
-          {twoFactorEnabled ? t('profile.twoFactor.currentlyEnabled') : t('profile.twoFactor.currentlyDisabled')}
-        </h3>
-        <p className="profile-two-factor__status-text">
-          {twoFactorEnabled
-            ? t('profile.twoFactor.enabledDescription')
-            : t('profile.twoFactor.disabledDescription')}
-        </p>
+        {twoFactorEnabled ? (
+          <>
+            {/* Show Google Authenticated with ENABLED pill when 2FA is enabled */}
+            <div className="profile-two-factor__enabled-status">
+              <h3 className="profile-two-factor__enabled-title">Google Authenticator</h3>
+              <span className="profile-two-factor__status-pill profile-two-factor__status-pill--enabled">
+                ENABLED
+              </span>
+            </div>
+            <p className="profile-two-factor__status-text">
+              {t('profile.twoFactor.enabledDescription')}
+            </p>
 
-        {/* Success Message */}
-        {successMessage && <p className="profile-two-factor__success-text">{successMessage}</p>}
+            {/* Success Message */}
+            {successMessage && <p className="profile-two-factor__success-text">{successMessage}</p>}
 
-        {/* Error Message */}
-        {errorMessage && <p className="profile-two-factor__error-text">{errorMessage}</p>}
+            {/* Error Message */}
+            {errorMessage && <p className="profile-two-factor__error-text">{errorMessage}</p>}
 
-        <div className="profile-two-factor__actions">
-          {!twoFactorEnabled ? (
-            <button
-              onClick={handleEnable2FA}
-              className="profile-two-factor__button profile-two-factor__button--enable"
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <span className="profile-two-factor__loading" />
-                  {t('profile.twoFactor.enabling')}
-                </>
-              ) : (
-                <>
-                  <span className="profile-two-factor__button-icon">{renderShieldIcon()}</span>
-                  {t('profile.twoFactor.enable')}
-                </>
-              )}
-            </button>
-          ) : (
-            <button
-              onClick={handleDisable2FA}
-              className="profile-two-factor__button profile-two-factor__button--disable"
-              disabled={loading}
-            >
-              {loading ? (
-                <>
-                  <span className="profile-two-factor__loading" />
-                  {t('profile.twoFactor.disabling')}
-                </>
-              ) : (
-                t('profile.twoFactor.disable')
-              )}
-            </button>
-          )}
-        </div>
+            <div className="profile-two-factor__actions">
+              <button
+                onClick={handleDisable2FA}
+                className="profile-two-factor__button profile-two-factor__button--disable"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <span className="profile-two-factor__loading" />
+                    {t('profile.twoFactor.disabling')}
+                  </>
+                ) : (
+                  t('profile.twoFactor.disable')
+                )}
+              </button>
+            </div>
+          </>
+        ) : (
+          <>
+            <h3 className="profile-two-factor__status-title">
+              {t('profile.twoFactor.currentlyDisabled')}
+            </h3>
+            <p className="profile-two-factor__status-text">
+              {t('profile.twoFactor.disabledDescription')}
+            </p>
+
+            {/* Success Message */}
+            {successMessage && <p className="profile-two-factor__success-text">{successMessage}</p>}
+
+            {/* Error Message */}
+            {errorMessage && <p className="profile-two-factor__error-text">{errorMessage}</p>}
+
+            <div className="profile-two-factor__actions">
+              <button
+                onClick={handleEnable2FA}
+                className="profile-two-factor__button profile-two-factor__button--enable"
+                disabled={loading}
+              >
+                {loading ? (
+                  <>
+                    <span className="profile-two-factor__loading" />
+                    {t('profile.twoFactor.enabling')}
+                  </>
+                ) : (
+                  <>
+                    <span className="profile-two-factor__button-icon">{renderShieldIcon()}</span>
+                    {t('profile.twoFactor.enable')}
+                  </>
+                )}
+              </button>
+            </div>
+          </>
+        )}
       </div>
 
       {/* QR Code Section (only shown during setup) */}

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useUser } from '../../context/user-context';
 import { getUserInfo } from '../../utils/request';
+import CTAButton from '../global/CTAButton';
 import './ProfileInformation.scss';
 
 /**
@@ -20,6 +21,7 @@ import './ProfileInformation.scss';
 function ProfileInformation() {
   const { t } = useTranslation();
   const { user } = useUser();
+  const history = useHistory();
 
   const [email, setEmail] = useState('');
   const [votingAddresses, setVotingAddresses] = useState([]);
@@ -101,10 +103,14 @@ function ProfileInformation() {
             <h3 className="profile-information__voting-title">
               {t('profile.data.address.heading') || 'My voting address'}
             </h3>
-            <Link to="/profile/add-voting-address" className="profile-information__add-button">
-              <span className="profile-information__add-icon">+</span>
+            <CTAButton
+              background="gold"
+              iconColor="black"
+              iconBackground="white"
+              onClick={() => history.push('/profile/add-voting-address')}
+            >
               {t('profile.data.address.addAddress') || 'Add voting address'}
-            </Link>
+            </CTAButton>
           </div>
 
           {/* Voting Address List */}
