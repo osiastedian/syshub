@@ -1,0 +1,114 @@
+// ============================================================================
+// TwoFactorDisableModal Component Styles
+// ============================================================================
+// Multi-step modal for disabling Two-Factor Authentication
+// Uses Bootstrap modal classes with dark theme overrides
+// ============================================================================
+
+@import '../../scss/design-tokens';
+
+.two-factor-disable-modal {
+  // Dark theme modal overrides
+  .modal-content {
+    background-color: rgba(26, 26, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .modal-header,
+  .modal-footer {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  // Form inputs dark theme
+  .form-control {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: $color-text;
+
+    &:focus {
+      background-color: rgba(0, 0, 0, 0.4);
+      border-color: $color-brand-gold;
+      color: $color-text;
+      box-shadow: 0 0 0 0.25rem rgba(251, 176, 59, 0.25);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // Warning alert with gold accent
+  .alert-warning {
+    background-color: rgba(215, 157, 53, 0.15);
+    border-color: rgba(215, 157, 53, 0.3);
+    color: $color-warning-text;
+
+    svg {
+      flex-shrink: 0;
+    }
+  }
+
+  // Error alert
+  .alert-danger {
+    background-color: rgba(246, 118, 118, 0.15);
+    border-color: rgba(246, 118, 118, 0.3);
+    color: $color-error-text;
+  }
+
+  // Button styling with brand colors
+  .btn-warning {
+    background-color: $color-brand-gold;
+    border-color: $color-brand-gold;
+    color: $color-neutral-black;
+    font-weight: $font-weight-semi-bold;
+
+    &:hover {
+      background-color: #fac133;
+      border-color: #fac133;
+      color: $color-neutral-black;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgba(251, 176, 59, 0.5);
+    }
+
+    &:active {
+      background-color: #f5a500;
+      border-color: #f5a500;
+    }
+  }
+
+  .btn-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: $color-text;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: $color-text;
+    }
+  }
+
+  .btn-danger {
+    background-color: $color-error-text;
+    border-color: $color-error-text;
+
+    &:hover {
+      background-color: #d94545;
+      border-color: #d94545;
+    }
+  }
+
+  // Loading spinner
+  .spinner-border {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+// Modal backdrop dark theme
+.modal-backdrop {
+  background-color: rgba(0, 0, 0, 0.7);
+}

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import swal from 'sweetalert2';
 import { useUser } from '../../context/user-context';
 import { get2faInfoUser } from '../../utils/request';
+import TwoFactorDisableModal from './TwoFactorDisableModal';
+import TwoFactorSuccessModal from './TwoFactorSuccessModal';
 import './ProfileTwoFactor.scss';
 
 /**
@@ -32,6 +33,8 @@ function ProfileTwoFactor({ onOpenModal }) {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [copiedCodes, setCopiedCodes] = useState(false);
+  const [showDisableModal, setShowDisableModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // Load 2FA status on mount
   useEffect(() => {
@@ -75,62 +78,13 @@ function ProfileTwoFactor({ onOpenModal }) {
     }
   };
 
-  // Handle disabling 2FA (matches old behavior from UserTwoFA.jsx)
-  const handleDisable2FA = async () => {
-    // Step 1: Confirmation dialog
-    const result = await swal.fire({
-      title: "Your google auth secret will be removed",
-      text: "You will also disable Google Authenticator 2FA",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonText: "Yes, remove it",
-    });
+  // Handle disabling 2FA
+  const handleDisable2FA = () => {
+    setShowDisableModal(true);
+  };
 
-    if (!result.isConfirmed) {
-      return;
-    }
-
-    // Step 2: Password prompt
-    const { value: password } = await swal.fire({
-      title: "Enter your Password",
-      input: "password",
-      showCancelButton: true,
-      inputValidator: (value) => {
-        if (!value) {
-          return "Please enter password";
-        }
-      },
-    });
-
-    if (!password) {
-      return;
-    }
-
-    // Step 3: Google Authenticator code prompt
-    const { value: code } = await swal.fire({
-      title: "Enter your Google Authenticator Code",
-      input: "text",
-      showCancelButton: true,
-      inputValidator: (value) => {
-        if (!value) {
-          return "Please enter Google Authenticator code";
-        }
-      },
-    });
-
-    if (!code) {
-      return;
-    }
-
-    // Show loading
-    swal.fire({
-      title: "Removing please wait",
-      showConfirmButton: false,
-      willOpen: () => {
-        swal.showLoading();
-      },
-    });
-
+  // Handle 2FA disable confirmation
+  const handleDisableConfirm = async ({ password, code }) => {
     try {
       // Call backend to disable 2FA
       const currentUserDataUpdate = {
@@ -145,26 +99,22 @@ function ProfileTwoFactor({ onOpenModal }) {
         method: "gauth-disabled",
       });
 
-      // Success message
-      await swal.fire({
-        icon: "success",
-        title: "Your secret was removed",
-        text: "Google authenticator is disabled",
-        timer: 2000,
-        showConfirmButton: false,
-      });
-
-      // Force logout after 1 second
-      setTimeout(() => {
-        logoutUser();
-      }, 1000);
+      // Close disable modal and show success modal
+      setShowDisableModal(false);
+      setShowSuccessModal(true);
     } catch (err) {
-      swal.fire({
-        icon: "error",
-        title: "There was an error",
-        text: err.response?.data?.message || err.message,
-      });
+      // Error is handled by the modal component
+      throw err;
     }
+  };
+
+  // Handle success modal close (triggers logout)
+  const handleSuccessClose = () => {
+    setShowSuccessModal(false);
+    // Force logout after 1 second
+    setTimeout(() => {
+      logoutUser();
+    }, 1000);
   };
 
   // Copy all backup codes to clipboard
@@ -319,6 +269,19 @@ function ProfileTwoFactor({ onOpenModal }) {
           </button>
         </div>
       )}
+
+      {/* 2FA Disable Modal */}
+      <TwoFactorDisableModal
+        show={showDisableModal}
+        onClose={() => setShowDisableModal(false)}
+        onConfirm={handleDisableConfirm}
+      />
+
+      {/* Success Modal */}
+      <TwoFactorSuccessModal
+        show={showSuccessModal}
+        onClose={handleSuccessClose}
+      />
     </div>
   );
 }
