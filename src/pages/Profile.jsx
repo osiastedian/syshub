@@ -115,15 +115,17 @@ function Profile({ t }) {
         }
       }
 
-      // Step 1: Delete user from backend database first
-      await destroyUser(user.data.uid);
-
-      // Step 2: Delete Firebase Auth user (requires reauthentication for security)
+      // Step 1: Reauthenticate with Firebase BEFORE deletion (required by Firebase for security)
       const credential = EmailAuthProvider.credential(email, password);
       await reauthenticateWithCredential(firebase.auth.currentUser, credential);
+
+      // Step 2: Delete user from backend database
+      await destroyUser(user.data.uid);
+
+      // Step 3: Delete Firebase Auth user
       await firebase.auth.currentUser.delete();
 
-      // Step 3: Force logout immediately
+      // Step 4: Force logout immediately
       await logoutUser();
     } catch (error) {
       console.error('Error during account deletion process:', error);
