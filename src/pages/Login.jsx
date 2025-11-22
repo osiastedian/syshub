@@ -69,7 +69,7 @@ function Login({ t }) {
       if (pendingPassword) {
         createSeed(pendingPassword);
       }
-      setUserDataLogin(user);
+      await setUserDataLogin(user);
       history.push("/governance");
     },
     [history, pendingPassword, setUserDataLogin]

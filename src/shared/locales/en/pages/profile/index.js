@@ -11,7 +11,13 @@ const profile = {
         heading: 'My voting address',
         noAddress: "You don't have a voting address, please add one.",
         loading: 'Loading voting address...',
-        addAddress: 'Add voting address'
+        addAddress: 'Add voting address',
+        adding: 'Adding voting address',
+        selectType: 'Select the type of address you want to add',
+        label: 'Label',
+        descriptorWallet: 'Descriptor wallet',
+        votingAddress: 'Voting address',
+        txId: 'Tx ID',
       }
     },
     sidebar: {
@@ -143,6 +149,7 @@ const profile = {
       delete: 'Delete My Account',
       deleting: 'Deleting...',
       cancel: 'Cancel',
+      error: 'Failed to delete account. Please try again.',
     },
     closeAccountConfirmation: {
       title: 'You are about to delete your account',

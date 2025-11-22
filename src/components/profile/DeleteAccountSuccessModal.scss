@@ -1,0 +1,75 @@
+// ============================================================================
+// DeleteAccountSuccessModal Component Styles
+// ============================================================================
+// Success modal with countdown after account deletion
+// ============================================================================
+
+@import '../../scss/design-tokens';
+
+.delete-account-success-modal {
+  .modal-content {
+    background-color: rgba(26, 26, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  }
+
+  .modal-body {
+    padding: $space-xl;
+  }
+
+  // Success Icon
+  .success-icon {
+    animation: successPulse 0.5s ease-out;
+
+    svg {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto;
+      display: block;
+    }
+  }
+
+  h4 {
+    @include typography-body-large-semi-bold;
+    font-size: 22px;
+    color: $color-text;
+  }
+
+  p {
+    @include typography-body-medium-regular;
+    font-size: 16px;
+    line-height: $line-height-relaxed;
+  }
+
+  // Warning Alert
+  .alert-warning {
+    background: rgba(251, 176, 59, 0.15);
+    border: 1px solid rgba(251, 176, 59, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+    padding: $space-md;
+
+    strong {
+      color: $color-brand-gold;
+    }
+  }
+
+  // Modal Backdrop
+  .modal-backdrop {
+    background-color: rgba(0, 0, 0, 0.7);
+  }
+}
+
+// Success pulse animation
+@keyframes successPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
