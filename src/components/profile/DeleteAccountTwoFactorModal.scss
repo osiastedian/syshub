@@ -173,6 +173,31 @@
   .modal-backdrop {
     background-color: rgba(0, 0, 0, 0.7);
   }
+
+  // Success State
+  .success-icon {
+    animation: successPulse 0.5s ease-out;
+  }
+
+  h4 {
+    @include typography-body-large-semi-bold;
+    font-size: 22px;
+  }
+}
+
+// Success pulse animation
+@keyframes successPulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
 // ============================================================================

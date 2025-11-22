@@ -102,8 +102,8 @@ function Profile({ t }) {
         setShowDelete2FAModal(true);
         setDeletingAccount(false);
       } else {
-        // No 2FA, proceed with deletion
-        await deleteAccountAfter2FA();
+        // No 2FA, proceed with deletion directly
+        await deleteAccountWithoutTwoFactor();
       }
     } catch (error) {
       console.error('Error during account deletion process:', error);
@@ -113,30 +113,58 @@ function Profile({ t }) {
     }
   };
 
-  // Handle account deletion after 2FA verification
-  const deleteAccountAfter2FA = async () => {
+  // Handle account deletion for users WITHOUT 2FA
+  const deleteAccountWithoutTwoFactor = async () => {
     try {
-      setDeletingAccount(true);
-      setShowDelete2FAModal(false);
       setShowCloseAccountConfirmModal(false);
 
       // Delete user from database
       await destroyUser(user.data.uid);
 
-      // Show success message (using setTimeout to ensure it shows before logout)
-      setTimeout(() => {
-        alert(t('profile.closeAccount.success') || 'Your account has been deleted successfully.');
-      }, 100);
+      // Show success message for 2 seconds (matches old behavior)
+      alert(t('profile.closeAccount.success') || 'Your account has been deleted successfully.');
 
-      // Logout user after successful deletion
-      // This matches the old behavior from UserDelete.jsx
-      await logoutUser();
+      // Wait a bit then logout
+      setTimeout(async () => {
+        await logoutUser();
+      }, 100);
     } catch (error) {
       console.error('Error deleting account:', error);
       alert(t('profile.closeAccount.error') || 'Failed to delete account. Please try again.');
       setDeletingAccount(false);
       setShowCloseAccountConfirmModal(false);
+    }
+  };
+
+  // Handle account deletion after 2FA verification (called by DeleteAccountTwoFactorModal)
+  const deleteAccountAfter2FA = async () => {
+    try {
+      setShowCloseAccountConfirmModal(false);
+
+      // Delete user from database
+      await destroyUser(user.data.uid);
+      // Success state is shown in the modal
+      // Logout will be triggered by handleDeleteAccountSuccess after countdown
+    } catch (error) {
+      console.error('Error deleting account:', error);
+      alert(t('profile.closeAccount.error') || 'Failed to delete account. Please try again.');
       setShowDelete2FAModal(false);
+      setShowCloseAccountConfirmModal(false);
+      setDeletingAccount(false);
+      throw error; // Re-throw so modal can handle the error
+    }
+  };
+
+  // Handle successful account deletion with logout (called after countdown)
+  const handleDeleteAccountSuccess = async () => {
+    try {
+      // Logout user after successful deletion
+      // This matches the old behavior from UserDelete.jsx
+      await logoutUser();
+    } catch (error) {
+      console.error('Error logging out after account deletion:', error);
+      // Force reload to ensure logout
+      window.location.href = '/';
     }
   };
 
@@ -202,6 +230,7 @@ function Profile({ t }) {
           show={showDelete2FAModal}
           onClose={handleClose2FADeleteModal}
           onVerified={deleteAccountAfter2FA}
+          onSuccess={handleDeleteAccountSuccess}
         />
       </main>
     </Background>
