@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MetaTags } from 'react-meta-tags';
 import { withTranslation } from 'react-i18next';
+import { EmailAuthProvider } from 'firebase/auth';
 import { useUser } from '../context/user-context';
 import { get2faInfoUser, verifyGauthCode } from '../utils/request';
 
@@ -115,7 +116,7 @@ function Profile({ t }) {
       }
 
       // Reauthenticate user with Firebase before deletion (required for Firebase Auth deletion)
-      const credential = firebase.emailAuthProvider.credential(email, password);
+      const credential = EmailAuthProvider.credential(email, password);
       await firebase.auth.currentUser.reauthenticateWithCredential(credential);
 
       // Delete user from backend database first
