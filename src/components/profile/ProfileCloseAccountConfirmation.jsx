@@ -6,28 +6,32 @@ import './ProfileCloseAccountConfirmation.scss';
 /**
  * Close Account Confirmation Modal
  * Final warning before account deletion with email/password confirmation
+ * Includes 2FA code input when user has 2FA enabled
  *
  * @component
  * @subcategory Profile
  *
  * @param {Object} props
  * @param {boolean} props.isOpen - Modal visibility state
- * @param {Function} props.onConfirm - Called when user confirms deletion with email/password
+ * @param {Function} props.onConfirm - Called when user confirms deletion with email/password (and 2FA code if enabled)
  * @param {Function} props.onCancel - Called when user cancels
  * @param {boolean} props.isLoading - Loading state during deletion
+ * @param {boolean} props.has2FA - Whether user has 2FA enabled (shows 2FA code field)
  *
  * @example
  * <ProfileCloseAccountConfirmation
  *   isOpen={showModal}
- *   onConfirm={({ email, password }) => handleDelete(email, password)}
+ *   onConfirm={({ email, password, twoFactorCode }) => handleDelete(email, password, twoFactorCode)}
  *   onCancel={() => setShowModal(false)}
  *   isLoading={deleting}
+ *   has2FA={true}
  * />
  */
-function ProfileCloseAccountConfirmation({ isOpen, onConfirm, onCancel, isLoading }) {
+function ProfileCloseAccountConfirmation({ isOpen, onConfirm, onCancel, isLoading, has2FA }) {
   const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [twoFactorCode, setTwoFactorCode] = useState('');
 
   useEffect(() => {
     if (isOpen) {
@@ -50,6 +54,7 @@ function ProfileCloseAccountConfirmation({ isOpen, onConfirm, onCancel, isLoadin
       // Reset form when closed
       setEmail('');
       setPassword('');
+      setTwoFactorCode('');
     }
   }, [isOpen, onCancel]);
 
@@ -57,12 +62,13 @@ function ProfileCloseAccountConfirmation({ isOpen, onConfirm, onCancel, isLoadin
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (email && password && !isLoading) {
-      onConfirm({ email, password });
+    const isValid = has2FA ? (email && password && twoFactorCode) : (email && password);
+    if (isValid && !isLoading) {
+      onConfirm({ email, password, twoFactorCode: has2FA ? twoFactorCode : undefined });
     }
   };
 
-  const isFormValid = email && password;
+  const isFormValid = has2FA ? (email && password && twoFactorCode && twoFactorCode.length === 6) : (email && password);
 
   // Render error icon
   const renderErrorIcon = () => (
@@ -162,6 +168,43 @@ function ProfileCloseAccountConfirmation({ isOpen, onConfirm, onCancel, isLoadin
                 required
               />
             </div>
+
+            {/* 2FA Code Input (shown only when user has 2FA enabled) */}
+            {has2FA && (
+              <div className="profile-close-account-confirmation__input-group">
+                <label
+                  htmlFor="delete-account-2fa-code"
+                  className="profile-close-account-confirmation__label"
+                >
+                  Google Authenticator Code
+                </label>
+                <input
+                  id="delete-account-2fa-code"
+                  type="text"
+                  value={twoFactorCode}
+                  onChange={(e) => {
+                    const value = e.target.value.replace(/\D/g, '').slice(0, 6);
+                    setTwoFactorCode(value);
+                  }}
+                  placeholder="000000"
+                  className="profile-close-account-confirmation__input profile-close-account-confirmation__input--2fa"
+                  style={{
+                    fontSize: '20px',
+                    letterSpacing: '6px',
+                    fontWeight: '500',
+                    textAlign: 'center'
+                  }}
+                  maxLength="6"
+                  inputMode="numeric"
+                  autoComplete="one-time-code"
+                  disabled={isLoading}
+                  required
+                />
+                <div className="profile-close-account-confirmation__helper-text">
+                  Enter the 6-digit code from your authenticator app
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Action Buttons */}
@@ -194,10 +237,12 @@ ProfileCloseAccountConfirmation.propTypes = {
   onConfirm: PropTypes.func.isRequired,
   onCancel: PropTypes.func.isRequired,
   isLoading: PropTypes.bool,
+  has2FA: PropTypes.bool,
 };
 
 ProfileCloseAccountConfirmation.defaultProps = {
   isLoading: false,
+  has2FA: false,
 };
 
 export default ProfileCloseAccountConfirmation;

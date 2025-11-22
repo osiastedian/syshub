@@ -98,6 +98,46 @@
   @include typography-body-small-regular;
   color: rgba(255, 255, 255, 0.7);
   margin: 0;
+}
+
+// Email Verification Warning Banner
+.profile-information__verification-warning {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(251, 176, 59, 0.15);
+  border: 1px solid rgba(251, 176, 59, 0.3);
+  border-radius: $radius-md;
+  padding: $space-sm $space-md;
+  margin-top: $space-sm;
+  gap: $space-md;
+}
+
+.profile-information__verification-text {
+  @include typography-body-small-regular;
+  color: rgba(255, 255, 255, 0.9);
+  flex: 1;
+}
+
+.profile-information__verification-button {
+  @include typography-body-small-semi-bold;
+  background: transparent;
+  border: none;
+  color: $color-brand-gold;
+  cursor: pointer;
+  padding: $space-xs $space-sm;
+  border-radius: $radius-sm;
+  transition: all $transition-base;
+  white-space: nowrap;
+
+  &:hover:not(:disabled) {
+    background: rgba(251, 176, 59, 0.2);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
   font-size: 14px;
 }
 

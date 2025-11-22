@@ -20,13 +20,15 @@ import './ProfileInformation.scss';
  */
 function ProfileInformation() {
   const { t } = useTranslation();
-  const { user } = useUser();
+  const { user, firebase } = useUser();
   const history = useHistory();
 
   const [email, setEmail] = useState('');
+  const [emailVerified, setEmailVerified] = useState(true); // Default to true to avoid showing banner during load
   const [votingAddresses, setVotingAddresses] = useState([]);
   const [loadingData, setLoadingData] = useState(true);
   const [copiedAddress, setCopiedAddress] = useState('');
+  const [sendingVerification, setSendingVerification] = useState(false);
 
   // Load user information on mount
   useEffect(() => {
@@ -36,6 +38,7 @@ function ProfileInformation() {
         const response = await getUserInfo(user.data.uid);
         if (response.data && response.data.user) {
           setEmail(response.data.user.email || user.data.email || '');
+          setEmailVerified(response.data.user.emailVerified !== false); // Default to true if not present
           // Assuming voting addresses come as an array
           // Adjust based on actual API response structure
           setVotingAddresses(response.data.user.votingAddresses || []);
@@ -58,6 +61,20 @@ function ProfileInformation() {
       navigator.clipboard.writeText(address);
       setCopiedAddress(address);
       setTimeout(() => setCopiedAddress(''), 2000);
+    }
+  };
+
+  // Send email verification
+  const handleSendVerificationEmail = async () => {
+    try {
+      setSendingVerification(true);
+      await firebase.generateLinkVerification();
+      alert(`Verification email sent to ${email}`);
+    } catch (error) {
+      console.error('Error sending verification email:', error);
+      alert('Failed to send verification email. Please try again.');
+    } finally {
+      setSendingVerification(false);
     }
   };
 
@@ -95,6 +112,23 @@ function ProfileInformation() {
             disabled
           />
           <p className="profile-information__helper-text">{t('profile.information.emailHelper')}</p>
+
+          {/* Email Verification Warning */}
+          {!emailVerified && (
+            <div className="profile-information__verification-warning">
+              <span className="profile-information__verification-text">
+                Email is not verified.
+              </span>
+              <button
+                type="button"
+                className="profile-information__verification-button"
+                onClick={handleSendVerificationEmail}
+                disabled={sendingVerification}
+              >
+                {sendingVerification ? 'Sending...' : 'Verify now'}
+              </button>
+            </div>
+          )}
         </div>
 
         {/* Voting Address Section */}

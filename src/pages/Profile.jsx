@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { MetaTags } from 'react-meta-tags';
 import { withTranslation } from 'react-i18next';
 import { useUser } from '../context/user-context';
-import { get2faInfoUser } from '../utils/request';
+import { get2faInfoUser, verifyGauthCode } from '../utils/request';
 
 import Background from '../components/global/Background';
 import BackgroundInner from '../components/global/BackgroundInner';
@@ -13,7 +13,7 @@ import ProfileTwoFactor from '../components/profile/ProfileTwoFactor';
 import ProfileCloseAccount from '../components/profile/ProfileCloseAccount';
 import TwoFactorModal from '../components/profile/TwoFactorModal';
 import ProfileCloseAccountConfirmation from '../components/profile/ProfileCloseAccountConfirmation';
-import DeleteAccountTwoFactorModal from '../components/profile/DeleteAccountTwoFactorModal';
+import DeleteAccountSuccessModal from '../components/profile/DeleteAccountSuccessModal';
 
 import '../components/profile/_profile.scss';
 
@@ -45,8 +45,9 @@ function Profile({ t }) {
 
   // Close account modal state
   const [showCloseAccountConfirmModal, setShowCloseAccountConfirmModal] = useState(false);
-  const [showDelete2FAModal, setShowDelete2FAModal] = useState(false);
+  const [showDeleteSuccessModal, setShowDeleteSuccessModal] = useState(false);
   const [deletingAccount, setDeletingAccount] = useState(false);
+  const [has2FA, setHas2FA] = useState(false);
 
   // Handle section change from sidebar
   const handleSectionChange = (section) => {
@@ -78,8 +79,19 @@ function Profile({ t }) {
   };
 
   // Handle delete account button click (opens confirmation modal)
-  const handleDeleteAccountClick = () => {
-    setShowCloseAccountConfirmModal(true);
+  const handleDeleteAccountClick = async () => {
+    try {
+      // Check if user has 2FA enabled
+      const user2faInfo = await get2faInfoUser(user.data.uid);
+      const has2FAEnabled = user2faInfo.twoFa === true && user2faInfo.gAuth === true;
+      setHas2FA(has2FAEnabled);
+      setShowCloseAccountConfirmModal(true);
+    } catch (error) {
+      console.error('Error checking 2FA status:', error);
+      // Still show modal even if check fails
+      setHas2FA(false);
+      setShowCloseAccountConfirmModal(true);
+    }
   };
 
   // Handle close account confirmation modal cancel
@@ -87,24 +99,27 @@ function Profile({ t }) {
     setShowCloseAccountConfirmModal(false);
   };
 
-  // Handle account deletion after email/password confirmation
-  const handleConfirmDeleteAccount = async ({ email, password }) => {
+  // Handle account deletion after email/password confirmation (and 2FA if enabled)
+  const handleConfirmDeleteAccount = async ({ email, password, twoFactorCode }) => {
     try {
       setDeletingAccount(true);
 
-      // Check if user has 2FA enabled
-      const user2faInfo = await get2faInfoUser(user.data.uid);
-      const has2FA = user2faInfo.twoFa === true && user2faInfo.gAuth === true;
-
-      if (has2FA) {
-        // Show 2FA verification modal
-        setShowCloseAccountConfirmModal(false);
-        setShowDelete2FAModal(true);
-        setDeletingAccount(false);
-      } else {
-        // No 2FA, proceed with deletion directly
-        await deleteAccountWithoutTwoFactor();
+      // If 2FA is enabled, verify the code first
+      if (has2FA && twoFactorCode) {
+        const response = await verifyGauthCode(twoFactorCode);
+        if (!response.data || !response.data.ok) {
+          alert('Invalid 2FA code. Please try again.');
+          setDeletingAccount(false);
+          return;
+        }
       }
+
+      // Delete user from database
+      await destroyUser(user.data.uid);
+
+      // Close confirmation modal and show success modal
+      setShowCloseAccountConfirmModal(false);
+      setShowDeleteSuccessModal(true);
     } catch (error) {
       console.error('Error during account deletion process:', error);
       alert(t('profile.closeAccount.error') || 'Failed to delete account. Please try again.');
@@ -113,50 +128,8 @@ function Profile({ t }) {
     }
   };
 
-  // Handle account deletion for users WITHOUT 2FA
-  const deleteAccountWithoutTwoFactor = async () => {
-    try {
-      setShowCloseAccountConfirmModal(false);
-
-      // Delete user from database
-      await destroyUser(user.data.uid);
-
-      // Show success message for 2 seconds (matches old behavior)
-      alert(t('profile.closeAccount.success') || 'Your account has been deleted successfully.');
-
-      // Wait a bit then logout
-      setTimeout(async () => {
-        await logoutUser();
-      }, 100);
-    } catch (error) {
-      console.error('Error deleting account:', error);
-      alert(t('profile.closeAccount.error') || 'Failed to delete account. Please try again.');
-      setDeletingAccount(false);
-      setShowCloseAccountConfirmModal(false);
-    }
-  };
-
-  // Handle account deletion after 2FA verification (called by DeleteAccountTwoFactorModal)
-  const deleteAccountAfter2FA = async () => {
-    try {
-      setShowCloseAccountConfirmModal(false);
-
-      // Delete user from database
-      await destroyUser(user.data.uid);
-      // Success state is shown in the modal
-      // Logout will be triggered by handleDeleteAccountSuccess after countdown
-    } catch (error) {
-      console.error('Error deleting account:', error);
-      alert(t('profile.closeAccount.error') || 'Failed to delete account. Please try again.');
-      setShowDelete2FAModal(false);
-      setShowCloseAccountConfirmModal(false);
-      setDeletingAccount(false);
-      throw error; // Re-throw so modal can handle the error
-    }
-  };
-
-  // Handle successful account deletion with logout (called after countdown)
-  const handleDeleteAccountSuccess = async () => {
+  // Handle successful account deletion with logout (called after countdown in success modal)
+  const handleDeleteSuccess = async () => {
     try {
       // Logout user after successful deletion
       // This matches the old behavior from UserDelete.jsx
@@ -166,12 +139,6 @@ function Profile({ t }) {
       // Force reload to ensure logout
       window.location.href = '/';
     }
-  };
-
-  // Handle 2FA modal close
-  const handleClose2FADeleteModal = () => {
-    setShowDelete2FAModal(false);
-    setDeletingAccount(false);
   };
 
   // Render active section content
@@ -217,20 +184,19 @@ function Profile({ t }) {
           type={twoFactorModalData?.type || 'verify'}
         />
 
-        {/* Close Account Confirmation Modal */}
+        {/* Close Account Confirmation Modal (with optional 2FA code field) */}
         <ProfileCloseAccountConfirmation
           isOpen={showCloseAccountConfirmModal}
           onConfirm={handleConfirmDeleteAccount}
           onCancel={handleCloseAccountCancel}
           isLoading={deletingAccount}
+          has2FA={has2FA}
         />
 
-        {/* Delete Account 2FA Verification Modal */}
-        <DeleteAccountTwoFactorModal
-          show={showDelete2FAModal}
-          onClose={handleClose2FADeleteModal}
-          onVerified={deleteAccountAfter2FA}
-          onSuccess={handleDeleteAccountSuccess}
+        {/* Delete Account Success Modal */}
+        <DeleteAccountSuccessModal
+          show={showDeleteSuccessModal}
+          onSuccess={handleDeleteSuccess}
         />
       </main>
     </Background>
