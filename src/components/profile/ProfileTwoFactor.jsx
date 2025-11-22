@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import swal from 'sweetalert2';
 import { useUser } from '../../context/user-context';
 import { get2faInfoUser } from '../../utils/request';
 import './ProfileTwoFactor.scss';
@@ -22,7 +23,7 @@ import './ProfileTwoFactor.scss';
  */
 function ProfileTwoFactor({ onOpenModal }) {
   const { t } = useTranslation();
-  const { user, enable2FA, disable2FA } = useUser();
+  const { user, updateCurrentActionsUser, logoutUser } = useUser();
 
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -63,58 +64,106 @@ function ProfileTwoFactor({ onOpenModal }) {
 
   // Handle enabling 2FA
   const handleEnable2FA = async () => {
-    try {
-      setLoading(true);
-      setErrorMessage('');
-      setSuccessMessage('');
-
-      // Generate QR code and secret
-      const response = await enable2FA();
-
-      if (response.qrCode && response.secret && response.backupCodes) {
-        setSetupData({
-          qrCode: response.qrCode,
-          secret: response.secret,
-        });
-        setBackupCodes(response.backupCodes);
-
-        // Open modal for code verification (modal created in Task 6)
-        if (onOpenModal) {
-          onOpenModal({
-            type: 'enable',
-            secret: response.secret,
-            qrCode: response.qrCode,
-          });
-        }
-      }
-    } catch (error) {
-      console.error('Error enabling 2FA:', error);
-      setErrorMessage(t('profile.twoFactor.errors.enableFailed'));
-    } finally {
-      setLoading(false);
+    // Open modal for 2FA setup if callback provided
+    if (onOpenModal) {
+      onOpenModal({
+        type: 'enable',
+      });
+    } else {
+      // Fallback: show error message
+      setErrorMessage('2FA setup modal not available. Please use the old profile page to enable 2FA.');
     }
   };
 
-  // Handle disabling 2FA
+  // Handle disabling 2FA (matches old behavior from UserTwoFA.jsx)
   const handleDisable2FA = async () => {
-    try {
-      setLoading(true);
-      setErrorMessage('');
-      setSuccessMessage('');
+    // Step 1: Confirmation dialog
+    const result = await swal.fire({
+      title: "Your google auth secret will be removed",
+      text: "You will also disable Google Authenticator 2FA",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, remove it",
+    });
 
-      // Confirm before disabling
-      if (window.confirm(t('profile.twoFactor.confirmDisable'))) {
-        await disable2FA();
-        setTwoFactorEnabled(false);
-        setSetupData(null);
-        setBackupCodes([]);
-        setSuccessMessage(t('profile.twoFactor.disableSuccess'));
-      }
-    } catch (error) {
-      console.error('Error disabling 2FA:', error);
-      setErrorMessage(t('profile.twoFactor.errors.disableFailed'));
-    } finally {
-      setLoading(false);
+    if (!result.isConfirmed) {
+      return;
+    }
+
+    // Step 2: Password prompt
+    const { value: password } = await swal.fire({
+      title: "Enter your Password",
+      input: "password",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return "Please enter password";
+        }
+      },
+    });
+
+    if (!password) {
+      return;
+    }
+
+    // Step 3: Google Authenticator code prompt
+    const { value: code } = await swal.fire({
+      title: "Enter your Google Authenticator Code",
+      input: "text",
+      showCancelButton: true,
+      inputValidator: (value) => {
+        if (!value) {
+          return "Please enter Google Authenticator code";
+        }
+      },
+    });
+
+    if (!code) {
+      return;
+    }
+
+    // Show loading
+    swal.fire({
+      title: "Removing please wait",
+      showConfirmButton: false,
+      willOpen: () => {
+        swal.showLoading();
+      },
+    });
+
+    try {
+      // Call backend to disable 2FA
+      const currentUserDataUpdate = {
+        pwd: password,
+        code,
+        gAuthSecret: null,
+        gAuth: false,
+        twoFa: false,
+      };
+
+      await updateCurrentActionsUser(currentUserDataUpdate, {
+        method: "gauth-disabled",
+      });
+
+      // Success message
+      await swal.fire({
+        icon: "success",
+        title: "Your secret was removed",
+        text: "Google authenticator is disabled",
+        timer: 2000,
+        showConfirmButton: false,
+      });
+
+      // Force logout after 1 second
+      setTimeout(() => {
+        logoutUser();
+      }, 1000);
+    } catch (err) {
+      swal.fire({
+        icon: "error",
+        title: "There was an error",
+        text: err.response?.data?.message || err.message,
+      });
     }
   };
 
