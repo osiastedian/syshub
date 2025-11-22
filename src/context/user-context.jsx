@@ -8,6 +8,7 @@ import {
   deleteUser,
   getUserInfo,
   logout,
+  get2faInfoUser,
 } from "../utils/request";
 import { useHistory } from "react-router";
 import { getSeed, removeSeed } from "../utils/encryption";
@@ -73,6 +74,21 @@ export function UserProvider(props) {
             // console.log(userIsAdmin);
             setUserAdmin(userIsAdmin || null);
             setLoadingAdmin(false);
+
+            // Also fetch 2FA status if not already set
+            if (user.data.twoFactorEnabled === undefined) {
+              try {
+                const user2faInfo = await get2faInfoUser(user.data.uid);
+                const twoFactorEnabled = user2faInfo.twoFa === true && user2faInfo.gAuth === true;
+
+                // Update user data with 2FA status
+                const updatedUserData = { ...user.data, twoFactorEnabled };
+                saveUserData(updatedUserData);
+                setUser({ data: updatedUserData, token: user.token });
+              } catch (error) {
+                console.error('Error fetching 2FA status:', error);
+              }
+            }
           } else {
             setLoadingAdmin(false);
           }
@@ -146,12 +162,23 @@ export function UserProvider(props) {
   /**
    * To set the user data in the provider at login
    * @function
-   * @param {*} ya token of the user
+   * @param {*} user token of the user
    */
-  const setUserDataLogin = (user) => {
+  const setUserDataLogin = async (user) => {
     try {
-      saveUserData(user);
-      setUser({ data: user, token: user.accessToken });
+      // Fetch 2FA status and attach to user object
+      let twoFactorEnabled = false;
+      try {
+        const user2faInfo = await get2faInfoUser(user.uid, user.accessToken);
+        twoFactorEnabled = user2faInfo.twoFa === true && user2faInfo.gAuth === true;
+      } catch (error) {
+        console.error('Error fetching 2FA status:', error);
+      }
+
+      // Save user data with 2FA status
+      const userWithTwoFactor = { ...user, twoFactorEnabled };
+      saveUserData(userWithTwoFactor);
+      setUser({ data: userWithTwoFactor, token: user.accessToken });
       return { message: "Ok" };
     } catch (err) {
       new Error(err);

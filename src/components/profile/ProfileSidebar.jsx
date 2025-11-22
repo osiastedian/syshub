@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '../../context/user-context';
+import { get2faInfoUser } from '../../utils/request';
 import './ProfileSidebar.scss';
 
 /**
@@ -29,7 +30,31 @@ function ProfileSidebar({ activeSection, onSectionChange }) {
   const { user } = useUser();
 
   // Check if user has 2FA enabled
-  const twoFactorEnabled = user?.twoFactorEnabled || false;
+  const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
+
+  // Fetch 2FA status from backend
+  useEffect(() => {
+    const load2FAStatus = async () => {
+      try {
+        if (!user?.data?.uid) {
+          return;
+        }
+
+        // Fetch actual 2FA status from backend
+        const user2faInfo = await get2faInfoUser(user.data.uid);
+        const hasGAuth2FA = user2faInfo.twoFa === true && user2faInfo.gAuth === true;
+
+        setTwoFactorEnabled(hasGAuth2FA);
+      } catch (error) {
+        console.error('Error loading 2FA status:', error);
+        setTwoFactorEnabled(false);
+      }
+    };
+
+    if (user?.data?.uid) {
+      load2FAStatus();
+    }
+  }, [user?.data?.uid]);
 
   const sections = [
     {

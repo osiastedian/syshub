@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '../../context/user-context';
+import { get2faInfoUser } from '../../utils/request';
 import './ProfileTwoFactor.scss';
 
 /**
@@ -35,23 +36,30 @@ function ProfileTwoFactor({ onOpenModal }) {
   useEffect(() => {
     const load2FAStatus = async () => {
       try {
-        // Check if user has 2FA enabled
-        const status = user?.twoFactorEnabled || false;
-        setTwoFactorEnabled(status);
+        if (!user?.data?.uid) {
+          return;
+        }
+
+        // Fetch actual 2FA status from backend
+        const user2faInfo = await get2faInfoUser(user.data.uid);
+        const hasGAuth2FA = user2faInfo.twoFa === true && user2faInfo.gAuth === true;
+
+        setTwoFactorEnabled(hasGAuth2FA);
 
         // Load backup codes if 2FA is enabled
-        if (status && user?.backupCodes) {
-          setBackupCodes(user.backupCodes);
+        if (hasGAuth2FA && user2faInfo.backupCodes) {
+          setBackupCodes(user2faInfo.backupCodes);
         }
       } catch (error) {
         console.error('Error loading 2FA status:', error);
+        setTwoFactorEnabled(false);
       }
     };
 
-    if (user) {
+    if (user?.data?.uid) {
       load2FAStatus();
     }
-  }, [user]);
+  }, [user?.data?.uid]);
 
   // Handle enabling 2FA
   const handleEnable2FA = async () => {
