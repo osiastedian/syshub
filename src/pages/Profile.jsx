@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MetaTags } from 'react-meta-tags';
 import { withTranslation } from 'react-i18next';
+import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
 import { useUser } from '../context/user-context';
 import { get2faInfoUser, verifyGauthCode } from '../utils/request';
 
@@ -114,15 +115,16 @@ function Profile({ t }) {
         }
       }
 
-      // Delete user from backend database first
+      // Step 1: Delete user from backend database first
       await destroyUser(user.data.uid);
 
-      // Delete Firebase Auth user
+      // Step 2: Delete Firebase Auth user (requires reauthentication for security)
+      const credential = EmailAuthProvider.credential(email, password);
+      await reauthenticateWithCredential(firebase.auth.currentUser, credential);
       await firebase.auth.currentUser.delete();
 
-      // Close confirmation modal and show success modal
-      setShowCloseAccountConfirmModal(false);
-      setShowDeleteSuccessModal(true);
+      // Step 3: Force logout immediately
+      await logoutUser();
     } catch (error) {
       console.error('Error during account deletion process:', error);
 
