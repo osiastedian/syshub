@@ -47,7 +47,6 @@ function Profile({ t }) {
   const [showCloseAccountConfirmModal, setShowCloseAccountConfirmModal] = useState(false);
   const [showDelete2FAModal, setShowDelete2FAModal] = useState(false);
   const [deletingAccount, setDeletingAccount] = useState(false);
-  const [reauthCredential, setReauthCredential] = useState(null);
 
   // Handle section change from sidebar
   const handleSectionChange = (section) => {
@@ -93,17 +92,12 @@ function Profile({ t }) {
     try {
       setDeletingAccount(true);
 
-      // Reauthenticate user with email and password
-      const credential = firebase.emailAuthProvider.credential(email, password);
-      await firebase.auth.currentUser.reauthenticateWithCredential(credential);
-
       // Check if user has 2FA enabled
       const user2faInfo = await get2faInfoUser(user.data.uid);
       const has2FA = user2faInfo.twoFa === true && user2faInfo.gAuth === true;
 
       if (has2FA) {
-        // Store credential and show 2FA modal
-        setReauthCredential(credential);
+        // Show 2FA verification modal
         setShowCloseAccountConfirmModal(false);
         setShowDelete2FAModal(true);
         setDeletingAccount(false);
@@ -124,12 +118,15 @@ function Profile({ t }) {
     try {
       setDeletingAccount(true);
       setShowDelete2FAModal(false);
+      setShowCloseAccountConfirmModal(false);
 
-      // Delete user from database and Firebase Auth
+      // Delete user from database
       await destroyUser(user.data.uid);
 
-      // Show success message
-      alert(t('profile.closeAccount.success') || 'Your account has been deleted successfully.');
+      // Show success message (using setTimeout to ensure it shows before logout)
+      setTimeout(() => {
+        alert(t('profile.closeAccount.success') || 'Your account has been deleted successfully.');
+      }, 100);
 
       // Logout user after successful deletion
       // This matches the old behavior from UserDelete.jsx
@@ -138,14 +135,14 @@ function Profile({ t }) {
       console.error('Error deleting account:', error);
       alert(t('profile.closeAccount.error') || 'Failed to delete account. Please try again.');
       setDeletingAccount(false);
-      setReauthCredential(null);
+      setShowCloseAccountConfirmModal(false);
+      setShowDelete2FAModal(false);
     }
   };
 
   // Handle 2FA modal close
   const handleClose2FADeleteModal = () => {
     setShowDelete2FAModal(false);
-    setReauthCredential(null);
     setDeletingAccount(false);
   };
 
