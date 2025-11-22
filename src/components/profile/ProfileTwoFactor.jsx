@@ -5,7 +5,6 @@ import { useUser } from '../../context/user-context';
 import { get2faInfoUser } from '../../utils/request';
 import TwoFactorEnableModal from './TwoFactorEnableModal';
 import TwoFactorDisableModal from './TwoFactorDisableModal';
-import TwoFactorSuccessModal from './TwoFactorSuccessModal';
 import './ProfileTwoFactor.scss';
 
 /**
@@ -36,7 +35,6 @@ function ProfileTwoFactor({ onOpenModal }) {
   const [copiedCodes, setCopiedCodes] = useState(false);
   const [showEnableModal, setShowEnableModal] = useState(false);
   const [showDisableModal, setShowDisableModal] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   // Load 2FA status on mount
   useEffect(() => {
@@ -85,36 +83,26 @@ function ProfileTwoFactor({ onOpenModal }) {
 
   // Handle 2FA disable confirmation
   const handleDisableConfirm = async ({ password, code }) => {
-    try {
-      // Call backend to disable 2FA
-      const currentUserDataUpdate = {
-        pwd: password,
-        code,
-        gAuthSecret: null,
-        gAuth: false,
-        twoFa: false,
-      };
+    // Call backend to disable 2FA
+    const currentUserDataUpdate = {
+      pwd: password,
+      code,
+      gAuthSecret: null,
+      gAuth: false,
+      twoFa: false,
+    };
 
-      await updateCurrentActionsUser(currentUserDataUpdate, {
-        method: "gauth-disabled",
-      });
+    await updateCurrentActionsUser(currentUserDataUpdate, {
+      method: "gauth-disabled",
+    });
 
-      // Close disable modal and show success modal
-      setShowDisableModal(false);
-      setShowSuccessModal(true);
-    } catch (err) {
-      // Error is handled by the modal component
-      throw err;
-    }
+    // Success is shown within the modal, error is thrown to modal
   };
 
-  // Handle success modal close (triggers logout)
-  const handleSuccessClose = () => {
-    setShowSuccessModal(false);
-    // Force logout after 1 second
-    setTimeout(() => {
-      logoutUser();
-    }, 1000);
+  // Handle disable success (called by modal after countdown)
+  const handleDisableSuccess = () => {
+    // Logout is triggered by the modal's countdown
+    logoutUser();
   };
 
   // Copy all backup codes to clipboard
@@ -282,12 +270,7 @@ function ProfileTwoFactor({ onOpenModal }) {
         show={showDisableModal}
         onClose={() => setShowDisableModal(false)}
         onConfirm={handleDisableConfirm}
-      />
-
-      {/* Success Modal */}
-      <TwoFactorSuccessModal
-        show={showSuccessModal}
-        onClose={handleSuccessClose}
+        onSuccess={handleDisableSuccess}
       />
     </div>
   );
