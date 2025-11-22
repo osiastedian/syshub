@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { withTranslation } from "react-i18next";
 
 import { useUser } from "../../context/user-context";
+import MobileSidebar from "./MobileSidebar";
 
 /**
  * Component that shows the Header alongside with the navbar
@@ -16,7 +17,8 @@ function Header({ t }) {
   const isMounted = useRef(false);
 
   const [isNotTop, setIsNotTop] = useState(false);
-  const [isMobileMenu, setIsMobileMenu] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
+  const [isUserDropdownOpen, setIsUserDropdownOpen] = useState(false);
 
   /**
    * UseEffect used to add the scroll event so the navbar gets fixed
@@ -36,21 +38,27 @@ function Header({ t }) {
   });
 
   /**
-   * Function that handles the activation of the responsive menu
+   * Function that toggles the mobile sidebar
    * @function
    */
-  const menuLinks = () => {
-    if (isMobileMenu) {
-      toggleMenu();
-    }
+  const toggleMobileSidebar = () => {
+    setIsMobileSidebarOpen(!isMobileSidebarOpen);
   };
 
   /**
-   * Function that toggles the state of isMobileMenu
+   * Function that closes the mobile sidebar
    * @function
    */
-  const toggleMenu = () => {
-    setIsMobileMenu(!isMobileMenu);
+  const closeMobileSidebar = () => {
+    setIsMobileSidebarOpen(false);
+  };
+
+  /**
+   * Function that toggles the user dropdown menu (desktop)
+   * @function
+   */
+  const toggleUserDropdown = () => {
+    setIsUserDropdownOpen(!isUserDropdownOpen);
   };
 
   /**
@@ -59,6 +67,7 @@ function Header({ t }) {
    */
   const logout = () => {
     logoutUser();
+    setIsUserDropdownOpen(false);
   };
 
   /**
@@ -76,112 +85,124 @@ function Header({ t }) {
   };
 
   return (
-    <header className={`header ${isNotTop ? "fixed" : ""}`}>
-      {/* TODO: add className "fixed" to .header when scroll > 0 */}
-      <div className="container">
-        <div className="header__inner">
-          <Link to="/" onClick={menuLinks}>
-            <div
-              className="logo"
-              style={{
-                backgroundImage: `url(/assets/images/logo.svg)`,
-              }}
-            ></div>
-          </Link>
-          {/*TODO:to open mobile menu add className .open to .header__content*/}
-          <div className={`header__content ${isMobileMenu ? "open" : ""}`}>
-            <nav className="nav">
-              <ul style={{ width: "100%" }}>
-                <li onClick={menuLinks}>
-                  <Link to="/about">{t("header.about")}</Link>
-                </li>
-
-                <li onClick={menuLinks}>
-                  <Link to="/stats">{t("header.stats")}</Link>
-                </li>
-
-                <li onClick={menuLinks}>
-                  <a
-                    href="https://support.syscoin.org/t/syscoin-nexus-sentry-node-install-guide/463"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {t("header.setup")}
-                  </a>
-                </li>
-
-                <li onClick={menuLinks}>
-                  <Link to="/governance">{t("header.governance")}</Link>
-                </li>
-
-                <li onClick={menuLinks}>
-                  <Link to="/sentrynodes">{t("header.masternodes")}</Link>
-                </li>
-
-                <li onClick={menuLinks}>
-                  <a
-                    rel="noopener noreferrer"
-                    href="https://support.syscoin.org/"
-                    target="_blank"
-                  >
-                    {t("header.support")}
-                  </a>
-                </li>
-
-              </ul>
-            </nav>
-          </div>
-
-          {!user && (
-            <Link to="/login" className="header__login-btn">
-              <span className="header__login-btn__icon">
-                <i className="icon-right-open"></i>
-              </span>
-              <span className="header__login-btn__text">{t("header.login")}</span>
+    <>
+      <header className={`header ${isNotTop ? "fixed" : ""}`}>
+        <div className="container">
+          <div className="header__inner">
+            <Link to="/">
+              <div
+                className="logo"
+                style={{
+                  backgroundImage: `url(/assets/images/logo.svg)`,
+                }}
+              ></div>
             </Link>
-          )}
 
-          {user && (
-            <div style={{ position: "relative" }}>
-              <button
-                onClick={toggleMenu}
-                className="header__menu-btn"
-              >
-                <span className="header__menu-btn__icon">
-                  <i className="icon-user"></i>
-                </span>
-                <span className="header__menu-btn__text">{usernameWithEmail(user)}</span>
-              </button>
-              <div className={`header__user-dropdown ${isMobileMenu ? "open" : ""}`}>
-                <ul>
-                  <li onClick={menuLinks}>
-                    <Link to="/profile">{t("header.profile")}</Link>
+            {/* Desktop Navigation - Hidden on mobile */}
+            <div className="header__content">
+              <nav className="nav">
+                <ul style={{ width: "100%" }}>
+                  <li>
+                    <Link to="/about">{t("header.about")}</Link>
                   </li>
-                  <li onClick={menuLinks}>
-                    <Link to="/create-proposal">
-                      {t("header.proposal")}
-                    </Link>
+                  <li>
+                    <Link to="/stats">{t("header.stats")}</Link>
                   </li>
-                  {userAdmin === "admin" && (
-                    <li onClick={menuLinks}>
-                      <Link to="/admin">{t("header.admin")}</Link>
-                    </li>
-                  )}
-                  <li onClick={menuLinks}>
-                    <Link to="/faq">{t("header.faq")}</Link>
+                  <li>
+                    <a
+                      href="https://support.syscoin.org/t/syscoin-nexus-sentry-node-install-guide/463"
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {t("header.setup")}
+                    </a>
                   </li>
-                  <li onClick={menuLinks}>
-                    <button className="nav-btn" onClick={logout}>
-                      {t("header.logout")}
-                    </button>
+                  <li>
+                    <Link to="/governance">{t("header.governance")}</Link>
+                  </li>
+                  <li>
+                    <Link to="/sentrynodes">{t("header.masternodes")}</Link>
+                  </li>
+                  <li>
+                    <a
+                      rel="noopener noreferrer"
+                      href="https://support.syscoin.org/"
+                      target="_blank"
+                    >
+                      {t("header.support")}
+                    </a>
                   </li>
                 </ul>
-              </div>
+              </nav>
             </div>
-          )}
+
+            <div className="header__actions">
+              {!user && (
+                <Link to="/login" className="header__login-btn">
+                  <span className="header__login-btn__icon">
+                    <i className="icon-right-open"></i>
+                  </span>
+                  <span className="header__login-btn__text">{t("header.login")}</span>
+                </Link>
+              )}
+
+              {user && (
+                <div style={{ position: "relative" }}>
+                  <button
+                    onClick={toggleUserDropdown}
+                    className="header__menu-btn"
+                  >
+                    <span className="header__menu-btn__icon">
+                      <i className="icon-user"></i>
+                    </span>
+                    <span className="header__menu-btn__text">{usernameWithEmail(user)}</span>
+                  </button>
+                  <div className={`header__user-dropdown ${isUserDropdownOpen ? "open" : ""}`}>
+                    <ul>
+                      <li onClick={toggleUserDropdown}>
+                        <Link to="/profile">{t("header.profile")}</Link>
+                      </li>
+                      <li onClick={toggleUserDropdown}>
+                        <Link to="/create-proposal">
+                          {t("header.proposal")}
+                        </Link>
+                      </li>
+                      {userAdmin === "admin" && (
+                        <li onClick={toggleUserDropdown}>
+                          <Link to="/admin">{t("header.admin")}</Link>
+                        </li>
+                      )}
+                      <li onClick={toggleUserDropdown}>
+                        <Link to="/faq">{t("header.faq")}</Link>
+                      </li>
+                      <li onClick={toggleUserDropdown}>
+                        <button className="nav-btn" onClick={logout}>
+                          {t("header.logout")}
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              )}
+
+              {/* Hamburger Menu Button - Only on mobile */}
+              <button
+                className="header__hamburger"
+                onClick={toggleMobileSidebar}
+                aria-label="Toggle mobile menu"
+              >
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+            </div>
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {/* Mobile Sidebar */}
+      <MobileSidebar isOpen={isMobileSidebarOpen} onClose={closeMobileSidebar} />
+    </>
   );
 }
 export default withTranslation()(Header);
