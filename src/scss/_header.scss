@@ -131,6 +131,18 @@
   }
 }
 
+/* ------------------------------------------------------------ *\
+   Header Actions Container
+\* ------------------------------------------------------------ */
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: $space-md;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
 /* Login Button - Desktop and Mobile */
 .header__login-btn {
   display: flex;
@@ -138,7 +150,6 @@
   align-items: center;
   padding: 4px 12px 4px 4px; /* top: 4px, right: 12px, bottom: 4px, left: 4px */
   gap: 12px;
-  margin: 0 0 0 auto;
   width: auto;
   height: 40px;
   background: #FFFFFF;
@@ -185,6 +196,42 @@
     align-items: center;
     line-height: 1;
     white-space: nowrap;
+  }
+}
+
+/* ------------------------------------------------------------ *\
+   Hamburger Menu Button (Mobile Only)
+\* ------------------------------------------------------------ */
+
+.header__hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: transparent;
+  border: 1px solid $color-overlay-white-30;
+  border-radius: 8px;
+  color: $color-neutral-white;
+  cursor: pointer;
+  transition: all $transition-base;
+
+  @media (max-width: $breakpoint-md) {
+    display: flex;
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: $color-brand-gold;
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
   }
 }
 
@@ -276,7 +323,6 @@
   align-items: center;
   padding: 4px 16px 4px 4px;
   gap: 12px;
-  margin: 0 0 0 auto;
   width: auto;
   height: 40px;
   background: $color-brand-gold;

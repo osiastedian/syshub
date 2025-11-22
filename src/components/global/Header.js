@@ -132,53 +132,66 @@ function Header({ t }) {
             </nav>
           </div>
 
-          {!user && (
-            <Link to="/login" className="header__login-btn">
-              <span className="header__login-btn__icon">
-                <i className="icon-right-open"></i>
-              </span>
-              <span className="header__login-btn__text">{t("header.login")}</span>
-            </Link>
-          )}
-
-          {user && (
-            <div style={{ position: "relative" }}>
-              <button
-                onClick={toggleMenu}
-                className="header__menu-btn"
-              >
-                <span className="header__menu-btn__icon">
-                  <i className="icon-user"></i>
+          <div className="header__actions">
+            {!user && (
+              <Link to="/login" className="header__login-btn">
+                <span className="header__login-btn__icon">
+                  <i className="icon-right-open"></i>
                 </span>
-                <span className="header__menu-btn__text">{usernameWithEmail(user)}</span>
-              </button>
-              <div className={`header__user-dropdown ${isMobileMenu ? "open" : ""}`}>
-                <ul>
-                  <li onClick={menuLinks}>
-                    <Link to="/profile">{t("header.profile")}</Link>
-                  </li>
-                  <li onClick={menuLinks}>
-                    <Link to="/create-proposal">
-                      {t("header.proposal")}
-                    </Link>
-                  </li>
-                  {userAdmin === "admin" && (
+                <span className="header__login-btn__text">{t("header.login")}</span>
+              </Link>
+            )}
+
+            {user && (
+              <div style={{ position: "relative" }}>
+                <button
+                  onClick={toggleMenu}
+                  className="header__menu-btn"
+                >
+                  <span className="header__menu-btn__icon">
+                    <i className="icon-user"></i>
+                  </span>
+                  <span className="header__menu-btn__text">{usernameWithEmail(user)}</span>
+                </button>
+                <div className={`header__user-dropdown ${isMobileMenu ? "open" : ""}`}>
+                  <ul>
                     <li onClick={menuLinks}>
-                      <Link to="/admin">{t("header.admin")}</Link>
+                      <Link to="/profile">{t("header.profile")}</Link>
                     </li>
-                  )}
-                  <li onClick={menuLinks}>
-                    <Link to="/faq">{t("header.faq")}</Link>
-                  </li>
-                  <li onClick={menuLinks}>
-                    <button className="nav-btn" onClick={logout}>
-                      {t("header.logout")}
-                    </button>
-                  </li>
-                </ul>
+                    <li onClick={menuLinks}>
+                      <Link to="/create-proposal">
+                        {t("header.proposal")}
+                      </Link>
+                    </li>
+                    {userAdmin === "admin" && (
+                      <li onClick={menuLinks}>
+                        <Link to="/admin">{t("header.admin")}</Link>
+                      </li>
+                    )}
+                    <li onClick={menuLinks}>
+                      <Link to="/faq">{t("header.faq")}</Link>
+                    </li>
+                    <li onClick={menuLinks}>
+                      <button className="nav-btn" onClick={logout}>
+                        {t("header.logout")}
+                      </button>
+                    </li>
+                  </ul>
+                </div>
               </div>
-            </div>
-          )}
+            )}
+
+            {/* Hamburger Menu Button - Only on mobile */}
+            <button
+              className="header__hamburger"
+              onClick={toggleMenu}
+              aria-label="Toggle mobile menu"
+            >
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 12H21M3 6H21M3 18H21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
     </header>
