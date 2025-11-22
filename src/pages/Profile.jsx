@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { MetaTags } from 'react-meta-tags';
 import { withTranslation } from 'react-i18next';
 import { useUser } from '../context/user-context';
+import { get2faInfoUser } from '../utils/request';
 
 import Background from '../components/global/Background';
 import BackgroundInner from '../components/global/BackgroundInner';
@@ -12,6 +13,7 @@ import ProfileTwoFactor from '../components/profile/ProfileTwoFactor';
 import ProfileCloseAccount from '../components/profile/ProfileCloseAccount';
 import TwoFactorModal from '../components/profile/TwoFactorModal';
 import ProfileCloseAccountConfirmation from '../components/profile/ProfileCloseAccountConfirmation';
+import DeleteAccountTwoFactorModal from '../components/profile/DeleteAccountTwoFactorModal';
 
 import '../components/profile/_profile.scss';
 
@@ -32,7 +34,7 @@ import '../components/profile/_profile.scss';
  * @param {Object} t - Translation function from withTranslation
  */
 function Profile({ t }) {
-  const { user, destroyUser, firebase } = useUser();
+  const { user, destroyUser, logoutUser, firebase } = useUser();
 
   // Section navigation state
   const [activeSection, setActiveSection] = useState('information');
@@ -43,7 +45,9 @@ function Profile({ t }) {
 
   // Close account modal state
   const [showCloseAccountConfirmModal, setShowCloseAccountConfirmModal] = useState(false);
+  const [showDelete2FAModal, setShowDelete2FAModal] = useState(false);
   const [deletingAccount, setDeletingAccount] = useState(false);
+  const [reauthCredential, setReauthCredential] = useState(null);
 
   // Handle section change from sidebar
   const handleSectionChange = (section) => {
@@ -93,18 +97,56 @@ function Profile({ t }) {
       const credential = firebase.emailAuthProvider.credential(email, password);
       await firebase.auth.currentUser.reauthenticateWithCredential(credential);
 
-      // Delete user from database and Firebase Auth
-      await destroyUser(user.data.uid);
+      // Check if user has 2FA enabled
+      const user2faInfo = await get2faInfoUser(user.data.uid);
+      const has2FA = user2faInfo.twoFa === true && user2faInfo.gAuth === true;
 
-      // User will be logged out automatically
-      // Redirect to home or login page
+      if (has2FA) {
+        // Store credential and show 2FA modal
+        setReauthCredential(credential);
+        setShowCloseAccountConfirmModal(false);
+        setShowDelete2FAModal(true);
+        setDeletingAccount(false);
+      } else {
+        // No 2FA, proceed with deletion
+        await deleteAccountAfter2FA();
+      }
     } catch (error) {
-      console.error('Error deleting account:', error);
+      console.error('Error during account deletion process:', error);
       alert(t('profile.closeAccount.error') || 'Failed to delete account. Please try again.');
-    } finally {
       setDeletingAccount(false);
       setShowCloseAccountConfirmModal(false);
     }
+  };
+
+  // Handle account deletion after 2FA verification
+  const deleteAccountAfter2FA = async () => {
+    try {
+      setDeletingAccount(true);
+      setShowDelete2FAModal(false);
+
+      // Delete user from database and Firebase Auth
+      await destroyUser(user.data.uid);
+
+      // Show success message
+      alert(t('profile.closeAccount.success') || 'Your account has been deleted successfully.');
+
+      // Logout user after successful deletion
+      // This matches the old behavior from UserDelete.jsx
+      await logoutUser();
+    } catch (error) {
+      console.error('Error deleting account:', error);
+      alert(t('profile.closeAccount.error') || 'Failed to delete account. Please try again.');
+      setDeletingAccount(false);
+      setReauthCredential(null);
+    }
+  };
+
+  // Handle 2FA modal close
+  const handleClose2FADeleteModal = () => {
+    setShowDelete2FAModal(false);
+    setReauthCredential(null);
+    setDeletingAccount(false);
   };
 
   // Render active section content
@@ -156,6 +198,13 @@ function Profile({ t }) {
           onConfirm={handleConfirmDeleteAccount}
           onCancel={handleCloseAccountCancel}
           isLoading={deletingAccount}
+        />
+
+        {/* Delete Account 2FA Verification Modal */}
+        <DeleteAccountTwoFactorModal
+          show={showDelete2FAModal}
+          onClose={handleClose2FADeleteModal}
+          onVerified={deleteAccountAfter2FA}
         />
       </main>
     </Background>
