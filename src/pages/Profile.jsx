@@ -114,15 +114,34 @@ function Profile({ t }) {
         }
       }
 
-      // Delete user from database
+      // Reauthenticate user with Firebase before deletion (required for Firebase Auth deletion)
+      const credential = firebase.emailAuthProvider.credential(email, password);
+      await firebase.auth.currentUser.reauthenticateWithCredential(credential);
+
+      // Delete user from backend database first
       await destroyUser(user.data.uid);
+
+      // Delete Firebase Auth user
+      await firebase.auth.currentUser.delete();
 
       // Close confirmation modal and show success modal
       setShowCloseAccountConfirmModal(false);
       setShowDeleteSuccessModal(true);
     } catch (error) {
       console.error('Error during account deletion process:', error);
-      alert(t('profile.closeAccount.error') || 'Failed to delete account. Please try again.');
+
+      // Provide more specific error messages
+      let errorMessage = t('profile.closeAccount.error') || 'Failed to delete account. Please try again.';
+
+      if (error.code === 'auth/wrong-password') {
+        errorMessage = 'Incorrect password. Please try again.';
+      } else if (error.code === 'auth/requires-recent-login') {
+        errorMessage = 'For security reasons, please log out and log back in before deleting your account.';
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+
+      alert(errorMessage);
       setDeletingAccount(false);
       setShowCloseAccountConfirmModal(false);
     }
