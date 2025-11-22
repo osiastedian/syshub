@@ -68,11 +68,23 @@ function ProfileInformation() {
   const handleSendVerificationEmail = async () => {
     try {
       setSendingVerification(true);
+
+      // Check if Firebase Auth user exists
+      if (!firebase.auth.currentUser) {
+        throw new Error('No authenticated user found. Please log out and log back in.');
+      }
+
       await firebase.generateLinkVerification();
       alert(`Verification email sent to ${email}`);
+
+      // Optional: You might want to refresh the user info after sending
+      // to check if emailVerified status has changed
     } catch (error) {
       console.error('Error sending verification email:', error);
-      alert('Failed to send verification email. Please try again.');
+
+      // Show specific error message
+      const errorMessage = error.message || 'Failed to send verification email. Please try again.';
+      alert(errorMessage);
     } finally {
       setSendingVerification(false);
     }
