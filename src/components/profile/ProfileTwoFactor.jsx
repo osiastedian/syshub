@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import swal from 'sweetalert2';
 import { useUser } from '../../context/user-context';
 import { get2faInfoUser } from '../../utils/request';
 import TwoFactorEnableModal from './TwoFactorEnableModal';
@@ -73,21 +72,10 @@ function ProfileTwoFactor({ onOpenModal }) {
     setShowEnableModal(true);
   };
 
-  // Handle 2FA enable success
-  const handleEnableSuccess = async () => {
-    // Show success message
-    await swal.fire({
-      icon: 'success',
-      title: 'Google Authenticator is activated',
-      text: 'Please log in again',
-      timer: 2000,
-      showConfirmButton: false,
-    });
-
-    // Force logout after 1 second
-    setTimeout(() => {
-      logoutUser();
-    }, 1000);
+  // Handle 2FA enable success (called by modal after countdown)
+  const handleEnableSuccess = () => {
+    // Logout is triggered by the modal's countdown
+    logoutUser();
   };
 
   // Handle disabling 2FA
