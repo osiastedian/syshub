@@ -24,6 +24,19 @@ Each task follows this pattern:
 4. **Only then delete** from global file
 5. Commit with clear before/after verification
 
+### Task Files Available
+
+**Detailed Task Files (Ready to Execute):**
+- ✅ `02_cli_command_container.md` - Task 2 (complete instructions)
+- ✅ `03_proposal_link_button.md` - Task 3 (complete instructions)
+- ✅ `04_voting_commands.md` - Task 4 (complete instructions)
+- ✅ `05_about_hero_section.md` - Task 5 (complete instructions)
+
+**Other Tasks (Tasks 6-24):**
+- Create task file when needed by following the pattern of Tasks 2-5
+- All necessary information is in the Investigation Report
+- Task descriptions below provide enough detail to execute
+
 ---
 
 ## Tasks (Prioritized by Independence)
