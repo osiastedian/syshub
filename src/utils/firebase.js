@@ -45,6 +45,7 @@ class Firebase {
   constructor() {
     this.firebaseApp = initializeApp(config);
     this.auth = getAuth(this.firebaseApp);
+    this.emailAuthProvider = EmailAuthProvider;
   }
 
   /**
