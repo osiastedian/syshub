@@ -1,0 +1,128 @@
+// ============================================================================
+// TwoFactorEnableModal Component Styles
+// ============================================================================
+// Modal for enabling Two-Factor Authentication with QR code
+// ============================================================================
+
+@import '../../scss/design-tokens';
+
+.two-factor-enable-modal {
+  // Dark theme modal overrides
+  .modal-content {
+    background-color: rgba(26, 26, 26, 0.95);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+  }
+
+  .modal-header,
+  .modal-footer {
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  // Form inputs dark theme
+  .form-control {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: $color-text;
+
+    &:focus {
+      background-color: rgba(0, 0, 0, 0.4);
+      border-color: $color-brand-gold;
+      color: $color-text;
+      box-shadow: 0 0 0 0.25rem rgba(251, 176, 59, 0.25);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+
+  // QR Code container
+  .qr-code-container {
+    img {
+      border: 2px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  // Secret key section
+  .secret-key-container {
+    background: rgba(0, 0, 0, 0.3);
+    padding: $space-md;
+    border-radius: $radius-md;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+
+    .font-monospace {
+      font-size: 13px;
+      letter-spacing: 0.5px;
+    }
+  }
+
+  // Button styling
+  .btn-warning {
+    background-color: $color-brand-gold;
+    border-color: $color-brand-gold;
+    color: $color-neutral-black;
+    font-weight: $font-weight-semi-bold;
+
+    &:hover:not(:disabled) {
+      background-color: #fac133;
+      border-color: #fac133;
+      color: $color-neutral-black;
+    }
+
+    &:focus {
+      box-shadow: 0 0 0 0.25rem rgba(251, 176, 59, 0.5);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+    }
+  }
+
+  .btn-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: $color-text;
+
+    &:hover:not(:disabled) {
+      background-color: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.3);
+      color: $color-text;
+    }
+  }
+
+  .btn-outline-secondary {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: $color-text;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.4);
+      color: $color-text;
+    }
+  }
+
+  // Error alert
+  .alert-danger {
+    background-color: rgba(246, 118, 118, 0.15);
+    border-color: rgba(246, 118, 118, 0.3);
+    color: $color-error-text;
+  }
+
+  // App download links
+  a {
+    transition: transform $transition-base;
+
+    &:hover {
+      transform: translateY(-2px);
+    }
+
+    img {
+      display: block;
+    }
+  }
+}

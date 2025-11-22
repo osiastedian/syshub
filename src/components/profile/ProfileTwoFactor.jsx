@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import swal from 'sweetalert2';
 import { useUser } from '../../context/user-context';
 import { get2faInfoUser } from '../../utils/request';
+import TwoFactorEnableModal from './TwoFactorEnableModal';
 import TwoFactorDisableModal from './TwoFactorDisableModal';
 import TwoFactorSuccessModal from './TwoFactorSuccessModal';
 import './ProfileTwoFactor.scss';
@@ -33,6 +35,7 @@ function ProfileTwoFactor({ onOpenModal }) {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [copiedCodes, setCopiedCodes] = useState(false);
+  const [showEnableModal, setShowEnableModal] = useState(false);
   const [showDisableModal, setShowDisableModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
 
@@ -66,16 +69,25 @@ function ProfileTwoFactor({ onOpenModal }) {
   }, [user?.data?.uid]);
 
   // Handle enabling 2FA
-  const handleEnable2FA = async () => {
-    // Open modal for 2FA setup if callback provided
-    if (onOpenModal) {
-      onOpenModal({
-        type: 'enable',
-      });
-    } else {
-      // Fallback: show error message
-      setErrorMessage('2FA setup modal not available. Please use the old profile page to enable 2FA.');
-    }
+  const handleEnable2FA = () => {
+    setShowEnableModal(true);
+  };
+
+  // Handle 2FA enable success
+  const handleEnableSuccess = async () => {
+    // Show success message
+    await swal.fire({
+      icon: 'success',
+      title: 'Google Authenticator is activated',
+      text: 'Please log in again',
+      timer: 2000,
+      showConfirmButton: false,
+    });
+
+    // Force logout after 1 second
+    setTimeout(() => {
+      logoutUser();
+    }, 1000);
   };
 
   // Handle disabling 2FA
@@ -269,6 +281,13 @@ function ProfileTwoFactor({ onOpenModal }) {
           </button>
         </div>
       )}
+
+      {/* 2FA Enable Modal */}
+      <TwoFactorEnableModal
+        show={showEnableModal}
+        onClose={() => setShowEnableModal(false)}
+        onSuccess={handleEnableSuccess}
+      />
 
       {/* 2FA Disable Modal */}
       <TwoFactorDisableModal
