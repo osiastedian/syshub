@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { MetaTags } from 'react-meta-tags';
 import { withTranslation } from 'react-i18next';
+import { EmailAuthProvider, reauthenticateWithCredential } from 'firebase/auth';
 import { useUser } from '../context/user-context';
 import { get2faInfoUser, verifyGauthCode } from '../utils/request';
 
@@ -104,7 +105,11 @@ function Profile({ t }) {
     try {
       setDeletingAccount(true);
 
-      // If 2FA is enabled, verify the code first
+      // Step 1: Verify email and password using Firebase reauthentication
+      const credential = EmailAuthProvider.credential(email, password);
+      await reauthenticateWithCredential(firebase.auth.currentUser, credential);
+
+      // Step 2: If 2FA is enabled, verify the code
       if (has2FA && twoFactorCode) {
         const response = await verifyGauthCode(twoFactorCode);
         if (!response.data || !response.data.ok) {
@@ -114,10 +119,10 @@ function Profile({ t }) {
         }
       }
 
-      // Step 1: Delete user from backend database
+      // Step 3: Delete user from backend database
       await destroyUser(user.data.uid);
 
-      // Step 2: Force logout immediately
+      // Step 4: Force logout immediately
       await logoutUser();
     } catch (error) {
       console.error('Error during account deletion process:', error);
