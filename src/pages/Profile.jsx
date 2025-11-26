@@ -15,6 +15,7 @@ import ProfileCloseAccount from '../components/profile/ProfileCloseAccount';
 import TwoFactorModal from '../components/profile/TwoFactorModal';
 import ProfileCloseAccountConfirmation from '../components/profile/ProfileCloseAccountConfirmation';
 import DeleteAccountSuccessModal from '../components/profile/DeleteAccountSuccessModal';
+import AddVotingAddress from '../components/profile/AddVotingAddress';
 
 import '../components/profile/_profile.scss';
 
@@ -40,6 +41,9 @@ function Profile({ t }) {
   // Section navigation state
   const [activeSection, setActiveSection] = useState('information');
 
+  // Voting address management state
+  const [editingVotingAddress, setEditingVotingAddress] = useState(null);
+
   // 2FA modal state
   const [showTwoFactorModal, setShowTwoFactorModal] = useState(false);
   const [twoFactorModalData, setTwoFactorModalData] = useState(null);
@@ -53,6 +57,28 @@ function Profile({ t }) {
   // Handle section change from sidebar
   const handleSectionChange = (section) => {
     setActiveSection(section);
+    // Reset voting address editing when changing sections
+    if (section !== 'addVotingAddress') {
+      setEditingVotingAddress(null);
+    }
+  };
+
+  // Handle opening add voting address form
+  const handleAddVotingAddress = () => {
+    setEditingVotingAddress(null);
+    setActiveSection('addVotingAddress');
+  };
+
+  // Handle opening edit voting address form
+  const handleEditVotingAddress = (votingAddress) => {
+    setEditingVotingAddress(votingAddress);
+    setActiveSection('addVotingAddress');
+  };
+
+  // Handle closing voting address form (back to information)
+  const handleCloseVotingAddressForm = () => {
+    setEditingVotingAddress(null);
+    setActiveSection('information');
   };
 
   // Handle opening 2FA modal
@@ -161,15 +187,32 @@ function Profile({ t }) {
   const renderContent = () => {
     switch (activeSection) {
       case 'information':
-        return <ProfileInformation />;
+        return (
+          <ProfileInformation
+            onAddVotingAddress={handleAddVotingAddress}
+            onEditVotingAddress={handleEditVotingAddress}
+          />
+        );
       case 'password':
         return <ProfilePasswordChange />;
       case 'twoFactor':
         return <ProfileTwoFactor onOpenModal={handleOpen2FAModal} />;
       case 'closeAccount':
         return <ProfileCloseAccount onDeleteAccount={handleDeleteAccountClick} />;
+      case 'addVotingAddress':
+        return (
+          <AddVotingAddress
+            editData={editingVotingAddress}
+            onClose={handleCloseVotingAddressForm}
+          />
+        );
       default:
-        return <ProfileInformation />;
+        return (
+          <ProfileInformation
+            onAddVotingAddress={handleAddVotingAddress}
+            onEditVotingAddress={handleEditVotingAddress}
+          />
+        );
     }
   };
 

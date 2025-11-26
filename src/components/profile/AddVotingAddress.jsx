@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link, useHistory, useLocation } from "react-router-dom";
+import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
 import { createVotingAddress, updateVotingAddress } from "../../utils/request";
@@ -70,18 +70,17 @@ const schema = yup.object().shape({
 });
 
 /**
- * Component to show at the profile add/edit voting address route
+ * Component to show at the profile add/edit voting address section
  * @component
  * @subcategory Profile
+ * @param {Object} editData - Voting address data when editing (null when adding)
+ * @param {function} onClose - Callback to close the form and return to information section
  */
-function AddVotingAddress() {
-  const history = useHistory();
-  const location = useLocation();
+function AddVotingAddress({ editData, onClose }) {
   const { t } = useTranslation();
   const [submitting, setSubmitting] = useState(false);
 
-  // Check if we're in edit mode (data passed via location state)
-  const editData = location.state?.votingAddress;
+  // Check if we're in edit mode
   const isEditMode = !!editData;
 
   const form = useForm({
@@ -144,7 +143,7 @@ function AddVotingAddress() {
             timer: 1800,
           });
           setSubmitting(false);
-          history.push("/profile");
+          onClose();
         })
         .catch((err) => {
           if (err.response?.status === 406) {
@@ -358,12 +357,13 @@ function AddVotingAddress() {
 
               {/* Buttons */}
               <div className="add-voting-address__buttons">
-                <Link
-                  to="/profile"
+                <button
+                  type="button"
+                  onClick={onClose}
                   className="add-voting-address__button-back"
                 >
                   <span>&lt; Back</span>
-                </Link>
+                </button>
                 <button
                   type="submit"
                   className="add-voting-address__button-submit"
@@ -383,5 +383,14 @@ function AddVotingAddress() {
     </div>
   );
 }
+
+AddVotingAddress.propTypes = {
+  editData: PropTypes.object,
+  onClose: PropTypes.func.isRequired,
+};
+
+AddVotingAddress.defaultProps = {
+  editData: null,
+};
 
 export default AddVotingAddress;

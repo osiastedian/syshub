@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
 import { useUser } from '../../context/user-context';
 import { getUserInfo } from '../../utils/request';
 import CTAButton from '../global/CTAButton';
@@ -15,13 +14,15 @@ import './ProfileInformation.scss';
  * @component
  * @subcategory Profile
  *
+ * @param {function} onAddVotingAddress - Callback to open add voting address form
+ * @param {function} onEditVotingAddress - Callback to open edit voting address form
+ *
  * @example
- * <ProfileInformation />
+ * <ProfileInformation onAddVotingAddress={handleAdd} onEditVotingAddress={handleEdit} />
  */
-function ProfileInformation() {
+function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
   const { t } = useTranslation();
   const { user, firebase } = useUser();
-  const history = useHistory();
 
   const [email, setEmail] = useState('');
   const [emailVerified, setEmailVerified] = useState(true); // Default to true to avoid showing banner during load
@@ -153,7 +154,7 @@ function ProfileInformation() {
               background="gold"
               iconColor="black"
               iconBackground="white"
-              onClick={() => history.push('/profile/add-voting-address')}
+              onClick={onAddVotingAddress}
             >
               {t('profile.data.address.addAddress') || 'Add voting address'}
             </CTAButton>
@@ -175,7 +176,7 @@ function ProfileInformation() {
                   <div className="profile-information__address-actions">
                     <button
                       type="button"
-                      onClick={() => history.push('/profile/add-voting-address', { votingAddress: addressItem })}
+                      onClick={() => onEditVotingAddress(addressItem)}
                       className="profile-information__edit-button"
                     >
                       {t('profile.information.edit') || 'Edit'}
@@ -198,6 +199,9 @@ function ProfileInformation() {
   );
 }
 
-ProfileInformation.propTypes = {};
+ProfileInformation.propTypes = {
+  onAddVotingAddress: PropTypes.func.isRequired,
+  onEditVotingAddress: PropTypes.func.isRequired,
+};
 
 export default ProfileInformation;
