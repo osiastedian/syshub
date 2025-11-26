@@ -345,6 +345,43 @@
   font-size: 14px;
 }
 
+.profile-information__address-actions {
+  display: flex;
+  align-items: center;
+  gap: $space-sm;
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    width: 100%;
+    gap: $space-xs;
+  }
+}
+
+.profile-information__edit-button {
+  padding: $space-sm $space-md;
+  height: 40px;
+  background: transparent;
+  color: $color-brand-gold;
+  border: 1px solid $color-brand-gold;
+  border-radius: 24px;
+  font-size: $font-size-body-small;
+  font-weight: $font-weight-semi-bold;
+  cursor: pointer;
+  transition: all $transition-base;
+  white-space: nowrap;
+
+  &:hover {
+    background: rgba(251, 176, 59, 0.1);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    flex: 1;
+  }
+}
+
 .profile-information__copy-button {
   padding: $space-sm $space-md;
   height: 40px;
@@ -367,7 +404,7 @@
   }
 
   @media (max-width: #{$breakpoint-md - 1px}) {
-    width: 100%;
+    flex: 1;
   }
 }
 

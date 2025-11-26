@@ -172,13 +172,22 @@ function ProfileInformation() {
                     <span className="profile-information__address-label">{addressItem.name || `Address ${index + 1}`}</span>
                     <span className="profile-information__address-text">{addressItem.address}</span>
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => handleCopyAddress(addressItem.address)}
-                    className="profile-information__copy-button"
-                  >
-                    {copiedAddress === addressItem.address ? t('profile.information.copied') : t('profile.information.copy')}
-                  </button>
+                  <div className="profile-information__address-actions">
+                    <button
+                      type="button"
+                      onClick={() => history.push('/profile/add-voting-address', { votingAddress: addressItem })}
+                      className="profile-information__edit-button"
+                    >
+                      {t('profile.information.edit') || 'Edit'}
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleCopyAddress(addressItem.address)}
+                      className="profile-information__copy-button"
+                    >
+                      {copiedAddress === addressItem.address ? t('profile.information.copied') : t('profile.information.copy')}
+                    </button>
+                  </div>
                 </div>
               ))}
             </div>

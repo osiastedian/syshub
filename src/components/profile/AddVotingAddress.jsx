@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
-import { createVotingAddress } from "../../utils/request";
+import { createVotingAddress, updateVotingAddress } from "../../utils/request";
 import { FormProvider, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers";
@@ -70,28 +70,46 @@ const schema = yup.object().shape({
 });
 
 /**
- * Component to show at the profile add voting address route
+ * Component to show at the profile add/edit voting address route
  * @component
  * @subcategory Profile
  */
 function AddVotingAddress() {
   const history = useHistory();
+  const location = useLocation();
   const { t } = useTranslation();
   const [submitting, setSubmitting] = useState(false);
+
+  // Check if we're in edit mode (data passed via location state)
+  const editData = location.state?.votingAddress;
+  const isEditMode = !!editData;
 
   const form = useForm({
     resolver: yupResolver(schema),
     defaultValues: {
-      type: "descriptor",
-      name: "",
-      privateKey: "",
-      address: "",
-      txId: "",
+      type: editData?.type || "descriptor",
+      name: editData?.name || "",
+      privateKey: editData?.privateKey || "",
+      address: editData?.address || "",
+      txId: editData?.txId || "",
     },
   });
 
-  const { register, handleSubmit, formState } = form;
+  const { register, handleSubmit, formState, reset } = form;
   const { errors } = formState;
+
+  // Update form values when editData changes
+  useEffect(() => {
+    if (editData) {
+      reset({
+        type: editData.type || "descriptor",
+        name: editData.name || "",
+        privateKey: editData.privateKey || "",
+        address: editData.address || "",
+        txId: editData.txId || "",
+      });
+    }
+  }, [editData, reset]);
 
   /**
    * Handle form submission
@@ -100,15 +118,24 @@ function AddVotingAddress() {
   const addAddress = async (data) => {
     setSubmitting(true);
     try {
+      const actionText = isEditMode
+        ? t("profile.data.address.updating") || "Updating voting address"
+        : t("profile.data.address.adding") || "Adding voting address";
+
       Swal.fire({
-        title: t("profile.data.address.adding") || "Adding voting address",
+        title: actionText,
         showConfirmButton: false,
         willOpen: () => {
           Swal.showLoading();
         },
       });
 
-      await createVotingAddress(data)
+      // Call appropriate API method based on mode
+      const apiCall = isEditMode
+        ? updateVotingAddress(editData._id, data)
+        : createVotingAddress(data);
+
+      await apiCall
         .then(async (res) => {
           await Swal.fire({
             icon: "success",
@@ -165,7 +192,9 @@ function AddVotingAddress() {
             >
               {/* Section title */}
               <h2 className="add-voting-address__section-title">
-                {t("profile.data.address.addAddress") || "Add voting address"}
+                {isEditMode
+                  ? t("profile.data.address.editAddress") || "Edit voting address"
+                  : t("profile.data.address.addAddress") || "Add voting address"}
               </h2>
 
               {/* Address type selection */}
@@ -342,8 +371,9 @@ function AddVotingAddress() {
                 >
                   {submitting
                     ? t("common.submitting") || "Submitting..."
-                    : t("profile.data.address.addAddress") ||
-                      "Add voting address"}
+                    : isEditMode
+                    ? t("profile.data.address.saveChanges") || "Save Changes"
+                    : t("profile.data.address.addAddress") || "Add voting address"}
                 </button>
               </div>
             </form>
