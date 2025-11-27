@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import Swal from 'sweetalert2';
 import { useUser } from '../../context/user-context';
-import { getUserInfo } from '../../utils/request';
+import { getUserInfo, destroyVotingAddress } from '../../utils/request';
 import CTAButton from '../global/CTAButton';
 import './ProfileInformation.scss';
 
@@ -30,6 +31,8 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
   const [loadingData, setLoadingData] = useState(true);
   const [copiedAddress, setCopiedAddress] = useState('');
   const [sendingVerification, setSendingVerification] = useState(false);
+  const [expandedAddresses, setExpandedAddresses] = useState({});
+  const [visiblePrivateKeys, setVisiblePrivateKeys] = useState({});
 
   // Load user information on mount
   useEffect(() => {
@@ -62,6 +65,72 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
       navigator.clipboard.writeText(address);
       setCopiedAddress(address);
       setTimeout(() => setCopiedAddress(''), 2000);
+    }
+  };
+
+  // Toggle address expansion to show/hide details
+  const handleToggleExpanded = (id) => {
+    setExpandedAddresses(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
+  // Toggle private key visibility
+  const handleTogglePrivateKeyVisibility = (id) => {
+    setVisiblePrivateKeys(prev => ({
+      ...prev,
+      [id]: !prev[id]
+    }));
+  };
+
+  // Handle remove voting address
+  const handleRemoveVotingAddress = async (addressId, addressName) => {
+    try {
+      const result = await Swal.fire({
+        icon: 'warning',
+        title: t('common.confirm') || 'Are you sure?',
+        text: `${t('profile.data.address.deleteConfirm') || 'Are you sure you want to delete'} "${addressName}"?`,
+        showCancelButton: true,
+        confirmButtonText: t('common.delete') || 'Delete',
+        confirmButtonColor: '#E74C3C',
+        cancelButtonText: t('common.cancel') || 'Cancel',
+      });
+
+      if (!result.isConfirmed) return;
+
+      // Show loading
+      Swal.fire({
+        title: t('profile.data.address.deleting') || 'Deleting voting address',
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
+      // Call API to delete
+      await destroyVotingAddress(addressId);
+
+      // Show success message
+      await Swal.fire({
+        icon: 'success',
+        title: t('profile.data.address.deletedSuccess') || 'Voting address deleted successfully',
+        showConfirmButton: false,
+        timer: 1800,
+      });
+
+      // Reload data
+      const response = await getUserInfo(user.data.uid);
+      if (response.data && response.data.user) {
+        setVotingAddresses(response.data.user.votingAddresses || []);
+      }
+    } catch (error) {
+      console.error('Error deleting voting address:', error);
+      Swal.fire({
+        icon: 'error',
+        title: t('common.error') || 'Error',
+        text: error.response?.data?.message || error.message || t('profile.data.address.deleteError') || 'Failed to delete voting address',
+      });
     }
   };
 
@@ -167,30 +236,124 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
             </p>
           ) : (
             <div className="profile-information__address-list">
-              {votingAddresses.map((addressItem, index) => (
-                <div key={index} className="profile-information__address-item">
-                  <div className="profile-information__address-info">
-                    <span className="profile-information__address-label">{addressItem.name || `Address ${index + 1}`}</span>
-                    <span className="profile-information__address-text">{addressItem.address}</span>
+              {votingAddresses.map((addressItem, index) => {
+                const addressId = addressItem._id || addressItem.uid || index;
+                const isExpanded = expandedAddresses[addressId];
+                const isPrivateKeyVisible = visiblePrivateKeys[addressId];
+
+                return (
+                  <div key={addressId} className={`profile-information__address-item ${isExpanded ? 'expanded' : ''}`}>
+                    {/* Main Address Header */}
+                    <div className="profile-information__address-header">
+                      <div className="profile-information__address-info">
+                        <span className="profile-information__address-label">{addressItem.name || `Address ${index + 1}`}</span>
+                        <span className="profile-information__address-text" title={addressItem.address}>{addressItem.address}</span>
+                      </div>
+                      <div className="profile-information__address-actions">
+                        <button
+                          type="button"
+                          onClick={() => handleToggleExpanded(addressId)}
+                          className="profile-information__toggle-button"
+                          title={isExpanded ? 'Hide details' : 'Show details'}
+                        >
+                          {isExpanded ? '−' : '+'}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => onEditVotingAddress(addressItem)}
+                          className="profile-information__edit-button"
+                        >
+                          {t('profile.information.edit') || 'Edit'}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleCopyAddress(addressItem.address)}
+                          className="profile-information__copy-button"
+                        >
+                          {copiedAddress === addressItem.address ? t('profile.information.copied') : t('profile.information.copy')}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => handleRemoveVotingAddress(addressId, addressItem.name || `Address ${index + 1}`)}
+                          className="profile-information__remove-button"
+                          title="Delete this voting address"
+                        >
+                          {t('common.delete') || 'Remove'}
+                        </button>
+                      </div>
+                    </div>
+
+                    {/* Expanded Details */}
+                    {isExpanded && (
+                      <div className="profile-information__address-details">
+                        {/* TxId Field */}
+                        <div className="profile-information__detail-group">
+                          <label className="profile-information__detail-label">
+                            {t('profile.data.address.txId') || 'Tx ID'}
+                          </label>
+                          <div className="profile-information__detail-input-wrapper">
+                            <input
+                              type="text"
+                              value={addressItem.txId || ''}
+                              readOnly
+                              className="profile-information__detail-input"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => {
+                                if (addressItem.txId) {
+                                  navigator.clipboard.writeText(addressItem.txId);
+                                  setCopiedAddress(addressItem.txId);
+                                  setTimeout(() => setCopiedAddress(''), 2000);
+                                }
+                              }}
+                              className="profile-information__detail-copy-btn"
+                            >
+                              {copiedAddress === addressItem.txId ? '✓' : '📋'}
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Private Key Field */}
+                        <div className="profile-information__detail-group">
+                          <label className="profile-information__detail-label">
+                            {t('profile.data.address.wifPrivateKey') || t('profile.data.address.descriptorWallet') || 'Private Key'}
+                          </label>
+                          <div className="profile-information__detail-input-wrapper">
+                            <input
+                              type={isPrivateKeyVisible ? 'text' : 'password'}
+                              value={addressItem.privateKey || ''}
+                              readOnly
+                              className="profile-information__detail-input"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => handleTogglePrivateKeyVisibility(addressId)}
+                              className="profile-information__detail-toggle-btn"
+                              title={isPrivateKeyVisible ? 'Hide private key' : 'Show private key'}
+                            >
+                              {isPrivateKeyVisible ? '🙈' : '👁'}
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => {
+                                if (addressItem.privateKey) {
+                                  navigator.clipboard.writeText(addressItem.privateKey);
+                                  setCopiedAddress(addressItem.privateKey);
+                                  setTimeout(() => setCopiedAddress(''), 2000);
+                                }
+                              }}
+                              className="profile-information__detail-copy-btn"
+                            >
+                              {copiedAddress === addressItem.privateKey ? '✓' : '📋'}
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <div className="profile-information__address-actions">
-                    <button
-                      type="button"
-                      onClick={() => onEditVotingAddress(addressItem)}
-                      className="profile-information__edit-button"
-                    >
-                      {t('profile.information.edit') || 'Edit'}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handleCopyAddress(addressItem.address)}
-                      className="profile-information__copy-button"
-                    >
-                      {copiedAddress === addressItem.address ? t('profile.information.copied') : t('profile.information.copy')}
-                    </button>
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           )}
         </div>
