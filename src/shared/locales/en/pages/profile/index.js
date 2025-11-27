@@ -26,6 +26,7 @@ const profile = {
         deleting: 'Deleting voting address',
         deletedSuccess: 'Voting address deleted successfully',
         deleteError: 'Failed to delete voting address',
+        submitting: 'Submitting...',
       }
     },
     sidebar: {
@@ -52,6 +53,8 @@ const profile = {
       copy: 'Copy',
       copied: 'Copied!',
       delete: 'Remove',
+      confirm: 'Are you sure?',
+      cancel: 'Cancel',
       success: 'Your information has been updated successfully',
       errors: {
         emailRequired: 'Email address is required',

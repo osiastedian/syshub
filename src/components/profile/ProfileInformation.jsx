@@ -147,12 +147,12 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
     try {
       const result = await Swal.fire({
         icon: 'warning',
-        title: t('common.confirm') || 'Are you sure?',
+        title: t('profile.information.confirm') || 'Are you sure?',
         text: `${t('profile.data.address.deleteConfirm') || 'Are you sure you want to delete'} "${addressName}"?`,
         showCancelButton: true,
-        confirmButtonText: t('common.delete') || 'Delete',
+        confirmButtonText: t('profile.information.delete') || 'Delete',
         confirmButtonColor: '#E74C3C',
-        cancelButtonText: t('common.cancel') || 'Cancel',
+        cancelButtonText: t('profile.information.cancel') || 'Cancel',
       });
 
       if (!result.isConfirmed) return;
@@ -323,21 +323,27 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
                         className="profile-information__edit-button"
                         title={t('profile.information.edit') || 'Edit'}
                         aria-label={t('profile.information.edit') || 'Edit'}
-                      />
+                      >
+                        {t('profile.information.edit') || 'Edit'}
+                      </button>
                       <button
                         type="button"
                         onClick={() => handleCopyAddress(addressItem.address)}
                         className="profile-information__copy-button"
                         title={copiedAddress === addressItem.address ? t('profile.information.copied') : t('profile.information.copy')}
                         aria-label={t('profile.information.copy') || 'Copy'}
-                      />
+                      >
+                        {copiedAddress === addressItem.address ? t('profile.information.copied') : t('profile.information.copy')}
+                      </button>
                       <button
                         type="button"
                         onClick={() => handleRemoveVotingAddress(addressId, addressItem.name || `Address ${index + 1}`)}
                         className="profile-information__remove-button"
                         title={t('profile.information.delete') || 'Remove'}
                         aria-label={t('profile.information.delete') || 'Remove'}
-                      />
+                      >
+                        {t('profile.information.delete') || 'Remove'}
+                      </button>
                     </div>
 
                     {/* Expanded Details */}

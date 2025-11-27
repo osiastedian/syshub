@@ -380,13 +380,12 @@
 }
 
 .profile-information__edit-button {
-  padding: 0;
-  width: 40px;
+  padding: $space-sm $space-md;
   height: 40px;
   background: transparent;
   color: $color-brand-gold;
   border: 1px solid $color-brand-gold;
-  border-radius: 8px;
+  border-radius: 24px;
   font-size: $font-size-body-small;
   font-weight: $font-weight-semi-bold;
   cursor: pointer;
@@ -395,12 +394,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   flex-shrink: 0;
 
   // Edit pencil icon
   &::before {
     content: '✎';
-    font-size: 18px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &:hover {
@@ -412,19 +415,18 @@
   }
 
   @media (max-width: #{$breakpoint-md - 1px}) {
-    width: 36px;
     height: 36px;
+    padding: $space-xs 12px;
   }
 }
 
 .profile-information__copy-button {
-  padding: 0;
-  width: 40px;
+  padding: $space-sm $space-md;
   height: 40px;
   background: $color-neutral-white;
   color: $color-neutral-black;
   border: none;
-  border-radius: 8px;
+  border-radius: 24px;
   font-size: $font-size-body-small;
   font-weight: $font-weight-semi-bold;
   cursor: pointer;
@@ -433,13 +435,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   flex-shrink: 0;
 
   // Copy icon
   &::before {
-    content: '⋮';
-    font-size: 18px;
-    transform: rotate(90deg);
+    content: '📋';
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &:hover {
@@ -451,8 +456,8 @@
   }
 
   @media (max-width: #{$breakpoint-md - 1px}) {
-    width: 36px;
     height: 36px;
+    padding: $space-xs 12px;
   }
 }
 
@@ -500,13 +505,12 @@
 }
 
 .profile-information__remove-button {
-  padding: 0;
-  width: 40px;
+  padding: $space-sm $space-md;
   height: 40px;
   background: rgba(231, 76, 60, 0.15);
   color: #E74C3C;
   border: 1px solid rgba(231, 76, 60, 0.5);
-  border-radius: 8px;
+  border-radius: 24px;
   font-size: $font-size-body-small;
   font-weight: $font-weight-semi-bold;
   cursor: pointer;
@@ -515,12 +519,16 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 6px;
   flex-shrink: 0;
 
   // Delete trash icon
   &::before {
     content: '🗑';
-    font-size: 18px;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   &:hover {
@@ -533,8 +541,8 @@
   }
 
   @media (max-width: #{$breakpoint-md - 1px}) {
-    width: 36px;
     height: 36px;
+    padding: $space-xs 12px;
   }
 }
 

@@ -15,58 +15,87 @@ import {
 
 import "./AddVotingAddress.scss";
 
-// Validation schema
-const schema = yup.object().shape({
-  type: yup
-    .string()
-    .required("Address type is required")
-    .oneOf(
-      ["descriptor", "legacy"],
-      "Address type must be descriptor or legacy"
-    ),
-  name: yup.string().required("Label is required"),
-  privateKey: yup.string().required("Descriptor wallet is required"),
-  address: yup
-    .string()
-    .required("Voting address is required")
-    .test(
-      "Validated Address Validity",
-      "Invalid Address",
-      (value, { parent }) => {
-        if (!parent?.privateKey || !value) {
-          return false;
-        }
-
-        if (parent.type === "legacy") {
+// Validation schema factory to support edit mode
+const createValidationSchema = (isEditMode, originalData) => {
+  return yup.object().shape({
+    type: yup
+      .string()
+      .required("Address type is required")
+      .oneOf(
+        ["descriptor", "legacy"],
+        "Address type must be descriptor or legacy"
+      ),
+    name: yup.string().required("Label is required"),
+    privateKey: yup.string().required("Descriptor wallet is required"),
+    address: yup
+      .string()
+      .required("Voting address is required")
+      .test(
+        "Validated Address Validity",
+        "Invalid Address",
+        (value, { parent }) => {
           try {
-            const derived = deriveAddressFromWifPrivKey(parent.privateKey);
-            return (derived || "").toLowerCase() === value.toLowerCase();
-          } catch (_) {
+            if (!parent?.privateKey || !value) {
+              return false;
+            }
+
+            // In edit mode, skip validation if neither privateKey nor address have changed
+            if (isEditMode && originalData) {
+              if (
+                parent.privateKey === originalData.privateKey &&
+                value === originalData.address
+              ) {
+                return true;
+              }
+            }
+
+            // Check if privateKey looks like encrypted data (starts with "U2FsdGVkX1")
+            // If so, skip validation since we can't parse encrypted data
+            if (parent.privateKey && parent.privateKey.startsWith("U2FsdGVkX1")) {
+              return true;
+            }
+
+            if (parent.type === "legacy") {
+              try {
+                const derived = deriveAddressFromWifPrivKey(parent.privateKey);
+                return (derived || "").toLowerCase() === value.toLowerCase();
+              } catch (_) {
+                return false;
+              }
+            }
+
+            try {
+              const results = parseDescriptor(parent.privateKey);
+              if (!results || !results.xprv || !results.path) {
+                return false;
+              }
+
+              const addresses = deriveAddressesFromXprv(
+                results.xprv,
+                results.path,
+                100
+              );
+
+              return addresses
+                .map((a) => (a || "").toLowerCase())
+                .includes(value.toLowerCase());
+            } catch (_) {
+              // If parsing fails (e.g., encrypted data), return false
+              return false;
+            }
+          } catch (error) {
+            // Catch any unexpected errors during validation
+            console.error('Address validation error:', error);
             return false;
           }
         }
-
-        const results = parseDescriptor(parent.privateKey);
-        if (!results || !results.xprv || !results.path) {
-          return false;
-        }
-
-        const addresses = deriveAddressesFromXprv(
-          results.xprv,
-          results.path,
-          100
-        );
-
-        return addresses
-          .map((a) => (a || "").toLowerCase())
-          .includes(value.toLowerCase());
-      }
-    ),
-  txId: yup
-    .string()
-    .matches(/-0$|-1$/, "Tx ID must end with the index: -0 or -1")
-    .required("Tx ID is required"),
-});
+      ),
+    txId: yup
+      .string()
+      .matches(/-0$|-1$/, "Tx ID must end with the index: -0 or -1")
+      .required("Tx ID is required"),
+  });
+};
 
 /**
  * Component to show at the profile add/edit voting address section
@@ -82,8 +111,11 @@ function AddVotingAddress({ editData, onClose }) {
   // Check if we're in edit mode
   const isEditMode = !!editData;
 
+  // Create validation schema with edit mode awareness
+  const validationSchema = createValidationSchema(isEditMode, editData);
+
   const form = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(validationSchema),
     defaultValues: {
       type: editData?.type || "descriptor",
       name: editData?.name || "",
@@ -93,8 +125,8 @@ function AddVotingAddress({ editData, onClose }) {
     },
   });
 
-  const { register, handleSubmit, formState, reset, watch } = form;
-  const { errors } = formState;
+  const { register, handleSubmit, formState, reset, watch, trigger } = form;
+  const { errors, isValid } = formState;
   const selectedType = watch("type");
 
   // Update form values when editData changes
@@ -146,15 +178,16 @@ function AddVotingAddress({ editData, onClose }) {
           onClose();
         })
         .catch((err) => {
+          setSubmitting(false);
           if (err.response?.status === 406) {
             Swal.fire({
               title: t("common.error") || "There was an error",
               text: err.response.data.message,
               icon: "error",
             });
-            setSubmitting(false);
-          }
-          if (err.response?.status === 500) {
+          } else if (err.response?.status === 500) {
+            throw err;
+          } else {
             throw err;
           }
         });
@@ -371,7 +404,7 @@ function AddVotingAddress({ editData, onClose }) {
                   disabled={submitting}
                 >
                   {submitting
-                    ? t("common.submitting") || "Submitting..."
+                    ? t("profile.data.address.submitting") || "Submitting..."
                     : isEditMode
                     ? t("profile.data.address.saveChanges") || "Save Changes"
                     : t("profile.data.address.addAddress") || "Add voting address"}
