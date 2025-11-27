@@ -93,8 +93,9 @@ function AddVotingAddress({ editData, onClose }) {
     },
   });
 
-  const { register, handleSubmit, formState, reset } = form;
+  const { register, handleSubmit, formState, reset, watch } = form;
   const { errors } = formState;
+  const selectedType = watch("type");
 
   // Update form values when editData changes
   useEffect(() => {
@@ -265,8 +266,9 @@ function AddVotingAddress({ editData, onClose }) {
                   htmlFor="privateKey"
                   className="add-voting-address__label"
                 >
-                  {t("profile.data.address.descriptorWallet") ||
-                    "Descriptor wallet"}
+                  {selectedType === "legacy"
+                    ? t("profile.data.address.wifPrivateKey") || "WIF Private Key"
+                    : t("profile.data.address.descriptorWallet") || "Descriptor wallet"}
                   <span className="required">*</span>
                 </label>
                 <div className="add-voting-address__input-wrapper">
@@ -278,7 +280,7 @@ function AddVotingAddress({ editData, onClose }) {
                     className={`add-voting-address__input ${
                       errors.privateKey ? "error" : ""
                     }`}
-                    placeholder="wpkh(...)"
+                    placeholder={selectedType === "legacy" ? "" : "wpkh(...)"}
                   />
                   <span className="add-voting-address__info-icon" title="Help">?</span>
                 </div>

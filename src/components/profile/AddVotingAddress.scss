@@ -10,14 +10,12 @@
 
   // Main section container
   &__section {
-    padding: 100px 180px;
     display: flex;
     align-items: flex-start;
     justify-content: center;
     gap: 60px;
 
     @media (max-width: $breakpoint-md) {
-      padding: 60px 16px;
       flex-direction: column;
       gap: 40px;
     }
