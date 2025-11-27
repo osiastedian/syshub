@@ -387,6 +387,9 @@
   cursor: pointer;
   transition: all $transition-base;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background: rgba(251, 176, 59, 0.1);
@@ -413,6 +416,9 @@
   cursor: pointer;
   transition: all $transition-base;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     opacity: 0.9;
@@ -465,6 +471,9 @@
   cursor: pointer;
   transition: all $transition-base;
   white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
     background: rgba(231, 76, 60, 0.25);
