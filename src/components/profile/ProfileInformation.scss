@@ -312,10 +312,12 @@
   flex-direction: column;
   gap: $space-md;
   padding: $space-md;
+  padding-top: 48px; // Space for top-right toggle button
   background: rgba(255, 255, 255, 0.05);
   border-radius: $radius-md;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all $transition-base;
+  position: relative;
 
   &.expanded {
     background: rgba(255, 255, 255, 0.08);
@@ -324,6 +326,7 @@
 
   @media (max-width: #{$breakpoint-md - 1px}) {
     padding: $space-sm;
+    padding-top: 48px;
   }
 }
 
@@ -365,23 +368,25 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: $space-sm;
+  gap: $space-xs;
   flex-wrap: wrap;
   padding-top: $space-xs;
 
   @media (max-width: #{$breakpoint-md - 1px}) {
     width: 100%;
     gap: $space-xs;
+    justify-content: flex-start;
   }
 }
 
 .profile-information__edit-button {
-  padding: $space-sm $space-md;
+  padding: 0;
+  width: 40px;
   height: 40px;
   background: transparent;
   color: $color-brand-gold;
   border: 1px solid $color-brand-gold;
-  border-radius: 24px;
+  border-radius: 8px;
   font-size: $font-size-body-small;
   font-weight: $font-weight-semi-bold;
   cursor: pointer;
@@ -390,6 +395,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+
+  // Edit pencil icon
+  &::before {
+    content: '✎';
+    font-size: 18px;
+  }
 
   &:hover {
     background: rgba(251, 176, 59, 0.1);
@@ -400,17 +412,19 @@
   }
 
   @media (max-width: #{$breakpoint-md - 1px}) {
-    flex: 1;
+    width: 36px;
+    height: 36px;
   }
 }
 
 .profile-information__copy-button {
-  padding: $space-sm $space-md;
+  padding: 0;
+  width: 40px;
   height: 40px;
   background: $color-neutral-white;
   color: $color-neutral-black;
   border: none;
-  border-radius: 24px;
+  border-radius: 8px;
   font-size: $font-size-body-small;
   font-weight: $font-weight-semi-bold;
   cursor: pointer;
@@ -419,6 +433,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+
+  // Copy icon
+  &::before {
+    content: '⋮';
+    font-size: 18px;
+    transform: rotate(90deg);
+  }
 
   &:hover {
     opacity: 0.9;
@@ -429,25 +451,36 @@
   }
 
   @media (max-width: #{$breakpoint-md - 1px}) {
-    flex: 1;
+    width: 36px;
+    height: 36px;
   }
 }
 
 .profile-information__toggle-button {
-  padding: 8px 16px;
-  height: 40px;
+  position: absolute;
+  top: $space-sm;
+  right: $space-sm;
+  width: 36px;
+  height: 36px;
+  padding: 0;
   background: transparent;
   color: $color-brand-gold;
   border: 1px solid rgba(251, 176, 59, 0.5);
-  border-radius: 24px;
+  border-radius: 6px;
   font-size: 20px;
   font-weight: $font-weight-semi-bold;
   cursor: pointer;
   transition: all $transition-base;
-  min-width: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
+
+  // Icon styling - shows + or - symbol
+  &::before {
+    content: '+';
+    font-size: 24px;
+    line-height: 1;
+  }
 
   &:hover {
     background: rgba(251, 176, 59, 0.1);
@@ -457,15 +490,23 @@
   &:active {
     transform: scale(0.95);
   }
+
+  @media (max-width: #{$breakpoint-md - 1px}) {
+    width: 32px;
+    height: 32px;
+    top: 8px;
+    right: 8px;
+  }
 }
 
 .profile-information__remove-button {
-  padding: $space-sm $space-md;
+  padding: 0;
+  width: 40px;
   height: 40px;
   background: rgba(231, 76, 60, 0.15);
   color: #E74C3C;
   border: 1px solid rgba(231, 76, 60, 0.5);
-  border-radius: 24px;
+  border-radius: 8px;
   font-size: $font-size-body-small;
   font-weight: $font-weight-semi-bold;
   cursor: pointer;
@@ -474,6 +515,13 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+
+  // Delete trash icon
+  &::before {
+    content: '🗑';
+    font-size: 18px;
+  }
 
   &:hover {
     background: rgba(231, 76, 60, 0.25);
@@ -485,7 +533,8 @@
   }
 
   @media (max-width: #{$breakpoint-md - 1px}) {
-    flex: 1;
+    width: 36px;
+    height: 36px;
   }
 }
 

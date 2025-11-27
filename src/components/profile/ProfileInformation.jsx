@@ -298,44 +298,46 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
 
                 return (
                   <div key={addressId} className={`profile-information__address-item ${isExpanded ? 'expanded' : ''}`}>
+                    {/* Toggle Button (Top Right) */}
+                    <button
+                      type="button"
+                      onClick={() => handleToggleExpanded(addressId)}
+                      className="profile-information__toggle-button"
+                      title={isExpanded ? 'Hide details' : 'Show details'}
+                      aria-label={isExpanded ? 'Hide details' : 'Show details'}
+                    />
+
                     {/* Main Address Header */}
                     <div className="profile-information__address-header">
                       <div className="profile-information__address-info">
                         <span className="profile-information__address-label">{addressItem.name || `Address ${index + 1}`}</span>
                         <span className="profile-information__address-text" title={addressItem.address}>{addressItem.address}</span>
                       </div>
-                      <div className="profile-information__address-actions">
-                        <button
-                          type="button"
-                          onClick={() => handleToggleExpanded(addressId)}
-                          className="profile-information__toggle-button"
-                          title={isExpanded ? 'Hide details' : 'Show details'}
-                        >
-                          {isExpanded ? '−' : '+'}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => onEditVotingAddress(addressItem)}
-                          className="profile-information__edit-button"
-                        >
-                          {t('profile.information.edit') || 'Edit'}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleCopyAddress(addressItem.address)}
-                          className="profile-information__copy-button"
-                        >
-                          {copiedAddress === addressItem.address ? t('profile.information.copied') : t('profile.information.copy')}
-                        </button>
-                        <button
-                          type="button"
-                          onClick={() => handleRemoveVotingAddress(addressId, addressItem.name || `Address ${index + 1}`)}
-                          className="profile-information__remove-button"
-                          title="Delete this voting address"
-                        >
-                          {t('common.delete') || 'Remove'}
-                        </button>
-                      </div>
+                    </div>
+
+                    {/* Action Buttons */}
+                    <div className="profile-information__address-actions">
+                      <button
+                        type="button"
+                        onClick={() => onEditVotingAddress(addressItem)}
+                        className="profile-information__edit-button"
+                        title={t('profile.information.edit') || 'Edit'}
+                        aria-label={t('profile.information.edit') || 'Edit'}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleCopyAddress(addressItem.address)}
+                        className="profile-information__copy-button"
+                        title={copiedAddress === addressItem.address ? t('profile.information.copied') : t('profile.information.copy')}
+                        aria-label={t('profile.information.copy') || 'Copy'}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => handleRemoveVotingAddress(addressId, addressItem.name || `Address ${index + 1}`)}
+                        className="profile-information__remove-button"
+                        title={t('profile.information.delete') || 'Remove'}
+                        aria-label={t('profile.information.delete') || 'Remove'}
+                      />
                     </div>
 
                     {/* Expanded Details */}
