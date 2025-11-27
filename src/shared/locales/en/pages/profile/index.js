@@ -19,8 +19,13 @@ const profile = {
         selectType: 'Select the type of address you want to add',
         label: 'Label',
         descriptorWallet: 'Descriptor wallet',
+        wifPrivateKey: 'WIF Private Key',
         votingAddress: 'Voting address',
         txId: 'Tx ID',
+        deleteConfirm: 'Are you sure you want to delete',
+        deleting: 'Deleting voting address',
+        deletedSuccess: 'Voting address deleted successfully',
+        deleteError: 'Failed to delete voting address',
       }
     },
     sidebar: {
@@ -46,6 +51,7 @@ const profile = {
       edit: 'Edit',
       copy: 'Copy',
       copied: 'Copied!',
+      delete: 'Remove',
       success: 'Your information has been updated successfully',
       errors: {
         emailRequired: 'Email address is required',
