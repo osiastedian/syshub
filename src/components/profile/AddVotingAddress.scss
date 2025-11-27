@@ -194,8 +194,21 @@
     transform: translateY(-50%);
     width: 20px;
     height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
     color: $color-neutral-white;
-    cursor: pointer;
+    font-size: 12px;
+    font-weight: $font-weight-semi-bold;
+    cursor: help;
+    transition: all $transition-base;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: $color-neutral-white;
+    }
 
     @media (max-width: $breakpoint-md) {
       right: 12px;

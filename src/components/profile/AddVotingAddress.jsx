@@ -7,7 +7,6 @@ import { FormProvider, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers";
 import * as yup from "yup";
-import { RiQuestionLine } from "react-icons/ri";
 import {
   parseDescriptor,
   deriveAddressesFromXprv,
@@ -249,7 +248,7 @@ function AddVotingAddress({ editData, onClose }) {
                     }`}
                     placeholder=" "
                   />
-                  <RiQuestionLine className="add-voting-address__info-icon" />
+                  <span className="add-voting-address__info-icon" title="Help">?</span>
                 </div>
                 <ErrorMessage
                   errors={errors}
@@ -281,7 +280,7 @@ function AddVotingAddress({ editData, onClose }) {
                     }`}
                     placeholder="wpkh(...)"
                   />
-                  <RiQuestionLine className="add-voting-address__info-icon" />
+                  <span className="add-voting-address__info-icon" title="Help">?</span>
                 </div>
                 <ErrorMessage
                   errors={errors}
@@ -313,7 +312,7 @@ function AddVotingAddress({ editData, onClose }) {
                     }`}
                     placeholder=" "
                   />
-                  <RiQuestionLine className="add-voting-address__info-icon" />
+                  <span className="add-voting-address__info-icon" title="Help">?</span>
                 </div>
                 <ErrorMessage
                   errors={errors}
@@ -344,7 +343,7 @@ function AddVotingAddress({ editData, onClose }) {
                     }`}
                     placeholder=" "
                   />
-                  <RiQuestionLine className="add-voting-address__info-icon" />
+                  <span className="add-voting-address__info-icon" title="Help">?</span>
                 </div>
                 <ErrorMessage
                   errors={errors}
