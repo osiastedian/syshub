@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useUser } from '../../context/user-context';
-import { getUserInfo, destroyVotingAddress } from '../../utils/request';
+import { getUserInfo, getUserVotingAddress, destroyVotingAddress } from '../../utils/request';
 import CTAButton from '../global/CTAButton';
 import './ProfileInformation.scss';
 
@@ -33,31 +34,88 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
   const [sendingVerification, setSendingVerification] = useState(false);
   const [expandedAddresses, setExpandedAddresses] = useState({});
   const [visiblePrivateKeys, setVisiblePrivateKeys] = useState({});
+  const isMounted = useRef(false);
+  const cancelSource = useMemo(() => axios.CancelToken.source(), []);
 
-  // Load user information on mount
+  // Helper function to reload voting addresses (used after delete)
+  const reloadVotingAddresses = async () => {
+    try {
+      const { data, status } = await getUserVotingAddress({ cancelToken: cancelSource.token });
+
+      if (isMounted.current) {
+        if (status === 200 && data) {
+          setVotingAddresses(data.nodes || []);
+        } else if (status === 204) {
+          setVotingAddresses([]);
+        }
+      }
+    } catch (error) {
+      if (isMounted.current) {
+        if (error.message !== 'The request has been canceled') {
+          console.error('Error reloading voting addresses:', error);
+        }
+      }
+    }
+  };
+
+  // Load both user info and voting addresses on mount
   useEffect(() => {
-    const loadUserData = async () => {
+    const loadData = async () => {
       try {
         setLoadingData(true);
-        const response = await getUserInfo(user.data.uid);
-        if (response.data && response.data.user) {
-          setEmail(response.data.user.email || user.data.email || '');
-          setEmailVerified(response.data.user.emailVerified !== false); // Default to true if not present
-          // Assuming voting addresses come as an array
-          // Adjust based on actual API response structure
-          setVotingAddresses(response.data.user.votingAddresses || []);
+        isMounted.current = true;
+
+        if (!user || !user.data || !user.data.uid) {
+          setLoadingData(false);
+          return;
         }
-      } catch (error) {
-        console.error('Error loading user data:', error);
+
+        // Load user info
+        try {
+          const response = await getUserInfo(user.data.uid);
+          if (isMounted.current && response.data && response.data.user) {
+            setEmail(response.data.user.email || user.data.email || '');
+            setEmailVerified(response.data.user.emailVerified !== false);
+          }
+        } catch (error) {
+          if (isMounted.current) {
+            console.error('Error loading user info:', error);
+          }
+        }
+
+        // Load voting addresses
+        try {
+          const { data, status } = await getUserVotingAddress({ cancelToken: cancelSource.token });
+
+          if (isMounted.current) {
+            if (status === 200 && data) {
+              setVotingAddresses(data.nodes || []);
+            } else if (status === 204) {
+              setVotingAddresses([]);
+            }
+          }
+        } catch (error) {
+          if (isMounted.current) {
+            if (error.message !== 'The request has been canceled') {
+              console.error('Error loading voting addresses:', error);
+            }
+          }
+        }
       } finally {
-        setLoadingData(false);
+        if (isMounted.current) {
+          setLoadingData(false);
+        }
       }
     };
 
-    if (user && user.data && user.data.uid) {
-      loadUserData();
-    }
-  }, [user]);
+    loadData();
+
+    // Cleanup on unmount
+    return () => {
+      isMounted.current = false;
+      cancelSource.cancel('The request has been canceled');
+    };
+  }, [user, cancelSource]);
 
   // Copy voting address to clipboard
   const handleCopyAddress = (address) => {
@@ -119,11 +177,8 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
         timer: 1800,
       });
 
-      // Reload data
-      const response = await getUserInfo(user.data.uid);
-      if (response.data && response.data.user) {
-        setVotingAddresses(response.data.user.votingAddresses || []);
-      }
+      // Reload voting addresses
+      await reloadVotingAddresses();
     } catch (error) {
       console.error('Error deleting voting address:', error);
       Swal.fire({
