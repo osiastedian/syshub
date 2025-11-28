@@ -1,66 +1,241 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import axios from 'axios';
+import Swal from 'sweetalert2';
 import { useUser } from '../../context/user-context';
-import { getUserInfo } from '../../utils/request';
+import { getUserInfo, getUserVotingAddress, destroyVotingAddress, updateVotingAddress } from '../../utils/request';
 import CTAButton from '../global/CTAButton';
+import VotingAddressItem from './VotingAddressItem';
 import './ProfileInformation.scss';
 
 /**
  * ProfileInformation Component
  *
- * Displays user email (readonly) and voting addresses list.
+ * Displays user email (readonly) and voting addresses list with inline editing.
  *
  * @component
  * @subcategory Profile
  *
+ * @param {function} onAddVotingAddress - Callback to open add voting address form
+ *
  * @example
- * <ProfileInformation />
+ * <ProfileInformation onAddVotingAddress={handleAdd} />
  */
-function ProfileInformation() {
+function ProfileInformation({ onAddVotingAddress }) {
   const { t } = useTranslation();
   const { user, firebase } = useUser();
-  const history = useHistory();
 
   const [email, setEmail] = useState('');
   const [emailVerified, setEmailVerified] = useState(true); // Default to true to avoid showing banner during load
   const [votingAddresses, setVotingAddresses] = useState([]);
   const [loadingData, setLoadingData] = useState(true);
-  const [copiedAddress, setCopiedAddress] = useState('');
   const [sendingVerification, setSendingVerification] = useState(false);
+  const isMounted = useRef(false);
+  const cancelSource = useMemo(() => axios.CancelToken.source(), []);
 
-  // Load user information on mount
+  // Helper function to reload voting addresses (used after delete)
+  const reloadVotingAddresses = async () => {
+    try {
+      const { data, status } = await getUserVotingAddress({ cancelToken: cancelSource.token });
+
+      if (isMounted.current) {
+        if (status === 200 && data) {
+          setVotingAddresses(data.nodes || []);
+        } else if (status === 204) {
+          setVotingAddresses([]);
+        }
+      }
+    } catch (error) {
+      if (isMounted.current) {
+        if (error.message !== 'The request has been canceled') {
+          console.error('Error reloading voting addresses:', error);
+        }
+      }
+    }
+  };
+
+  // Helper function to map API error responses to user-friendly messages
+  const getErrorMessage = (error) => {
+    // Check if it's a network error
+    if (!error.response) {
+      return t('profile.data.address.errors.network_error') || 'Unable to connect to server. Please check your connection and try again.';
+    }
+
+    const status = error.response.status;
+    const apiMessage = error.response?.data?.message;
+
+    // Map status codes to specific error messages
+    switch (status) {
+      case 400:
+        // Bad request - likely validation error
+        if (apiMessage && apiMessage.toLowerCase().includes('invalid')) {
+          return t('profile.data.address.errors.invalid_data') || 'Invalid data. Please check the voting address details and try again.';
+        }
+        return apiMessage || t('profile.data.address.errors.invalid_data') || 'Invalid data. Please check your input and try again.';
+
+      case 406:
+        // Not acceptable - validation failed
+        return t('profile.data.address.errors.validation_failed') || 'Invalid voting address data. Please verify all fields are correct.';
+
+      case 409:
+        // Conflict - duplicate address
+        return t('profile.data.address.errors.address_exists') || 'This voting address already exists. Please use a different address.';
+
+      case 422:
+        // Unprocessable entity - validation error
+        return t('profile.data.address.errors.invalid_format') || 'Invalid address format. Please check your voting address and transaction ID.';
+
+      case 500:
+      case 502:
+      case 503:
+        // Server errors
+        return t('profile.data.address.errors.server_error') || 'Server error. Please try again later.';
+
+      default:
+        // Use API message if available, otherwise use generic error
+        return apiMessage || t('profile.data.address.updateError') || 'Failed to update voting address. Please try again.';
+    }
+  };
+
+  // Handle edit voting address
+  const handleEditVotingAddress = async (addressId, data) => {
+    try {
+      Swal.fire({
+        title: t('profile.data.address.updating') || 'Updating voting address',
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
+      await updateVotingAddress(addressId, data);
+
+      await Swal.fire({
+        icon: 'success',
+        title: t('profile.data.address.updatedSuccess') || 'Voting address updated successfully',
+        showConfirmButton: false,
+        timer: 800,
+      });
+
+      await reloadVotingAddresses();
+    } catch (error) {
+      console.error('Error updating voting address:', error);
+      const errorMessage = getErrorMessage(error);
+
+      Swal.fire({
+        icon: 'error',
+        title: t('profile.data.address.errors.update_failed_title') || 'Update Failed',
+        text: errorMessage,
+      });
+    }
+  };
+
+  // Load both user info and voting addresses on mount
   useEffect(() => {
-    const loadUserData = async () => {
+    const loadData = async () => {
       try {
         setLoadingData(true);
-        const response = await getUserInfo(user.data.uid);
-        if (response.data && response.data.user) {
-          setEmail(response.data.user.email || user.data.email || '');
-          setEmailVerified(response.data.user.emailVerified !== false); // Default to true if not present
-          // Assuming voting addresses come as an array
-          // Adjust based on actual API response structure
-          setVotingAddresses(response.data.user.votingAddresses || []);
+        isMounted.current = true;
+
+        if (!user || !user.data || !user.data.uid) {
+          setLoadingData(false);
+          return;
         }
-      } catch (error) {
-        console.error('Error loading user data:', error);
+
+        // Load user info
+        try {
+          const response = await getUserInfo(user.data.uid);
+          if (isMounted.current && response.data && response.data.user) {
+            setEmail(response.data.user.email || user.data.email || '');
+            setEmailVerified(response.data.user.emailVerified !== false);
+          }
+        } catch (error) {
+          if (isMounted.current) {
+            console.error('Error loading user info:', error);
+          }
+        }
+
+        // Load voting addresses
+        try {
+          const { data, status } = await getUserVotingAddress({ cancelToken: cancelSource.token });
+
+          if (isMounted.current) {
+            if (status === 200 && data) {
+              setVotingAddresses(data.nodes || []);
+            } else if (status === 204) {
+              setVotingAddresses([]);
+            }
+          }
+        } catch (error) {
+          if (isMounted.current) {
+            if (error.message !== 'The request has been canceled') {
+              console.error('Error loading voting addresses:', error);
+            }
+          }
+        }
       } finally {
-        setLoadingData(false);
+        if (isMounted.current) {
+          setLoadingData(false);
+        }
       }
     };
 
-    if (user && user.data && user.data.uid) {
-      loadUserData();
-    }
-  }, [user]);
+    loadData();
 
-  // Copy voting address to clipboard
-  const handleCopyAddress = (address) => {
-    if (address) {
-      navigator.clipboard.writeText(address);
-      setCopiedAddress(address);
-      setTimeout(() => setCopiedAddress(''), 2000);
+    // Cleanup on unmount
+    return () => {
+      isMounted.current = false;
+      cancelSource.cancel('The request has been canceled');
+    };
+  }, [user, cancelSource]);
+
+  // Handle remove voting address
+  const handleRemoveVotingAddress = async (addressId, addressName) => {
+    try {
+      const result = await Swal.fire({
+        icon: 'warning',
+        title: t('profile.information.confirm') || 'Are you sure?',
+        text: `${t('profile.data.address.deleteConfirm') || 'Are you sure you want to delete'} "${addressName}"?`,
+        showCancelButton: true,
+        confirmButtonText: t('profile.information.delete') || 'Delete',
+        confirmButtonColor: '#E74C3C',
+        cancelButtonText: t('profile.information.cancel') || 'Cancel',
+      });
+
+      if (!result.isConfirmed) return;
+
+      // Show loading
+      Swal.fire({
+        title: t('profile.data.address.deleting') || 'Deleting voting address',
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
+      // Call API to delete
+      await destroyVotingAddress(addressId);
+
+      // Show success message
+      await Swal.fire({
+        icon: 'success',
+        title: t('profile.data.address.deletedSuccess') || 'Voting address deleted successfully',
+        showConfirmButton: false,
+        timer: 1800,
+      });
+
+      // Reload voting addresses
+      await reloadVotingAddresses();
+    } catch (error) {
+      console.error('Error deleting voting address:', error);
+      const errorMessage = getErrorMessage(error);
+
+      Swal.fire({
+        icon: 'error',
+        title: t('profile.data.address.errors.delete_failed_title') || 'Delete Failed',
+        text: errorMessage,
+      });
     }
   };
 
@@ -153,7 +328,7 @@ function ProfileInformation() {
               background="gold"
               iconColor="black"
               iconBackground="white"
-              onClick={() => history.push('/profile/add-voting-address')}
+              onClick={onAddVotingAddress}
             >
               {t('profile.data.address.addAddress') || 'Add voting address'}
             </CTAButton>
@@ -167,19 +342,13 @@ function ProfileInformation() {
           ) : (
             <div className="profile-information__address-list">
               {votingAddresses.map((addressItem, index) => (
-                <div key={index} className="profile-information__address-item">
-                  <div className="profile-information__address-info">
-                    <span className="profile-information__address-label">{addressItem.name || `Address ${index + 1}`}</span>
-                    <span className="profile-information__address-text">{addressItem.address}</span>
-                  </div>
-                  <button
-                    type="button"
-                    onClick={() => handleCopyAddress(addressItem.address)}
-                    className="profile-information__copy-button"
-                  >
-                    {copiedAddress === addressItem.address ? t('profile.information.copied') : t('profile.information.copy')}
-                  </button>
-                </div>
+                <VotingAddressItem
+                  key={addressItem._id || addressItem.uid || index}
+                  address={addressItem}
+                  index={index}
+                  onEdit={handleEditVotingAddress}
+                  onRemove={(id) => handleRemoveVotingAddress(id, addressItem.name || `Address ${index + 1}`)}
+                />
               ))}
             </div>
           )}
@@ -189,6 +358,8 @@ function ProfileInformation() {
   );
 }
 
-ProfileInformation.propTypes = {};
+ProfileInformation.propTypes = {
+  onAddVotingAddress: PropTypes.func.isRequired,
+};
 
 export default ProfileInformation;

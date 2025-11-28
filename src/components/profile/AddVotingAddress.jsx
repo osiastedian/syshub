@@ -1,13 +1,12 @@
-import React, { useState } from "react";
-import { Link, useHistory } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import { useTranslation } from "react-i18next";
-import { createVotingAddress } from "../../utils/request";
+import { createVotingAddress, updateVotingAddress } from "../../utils/request";
 import { FormProvider, useForm } from "react-hook-form";
 import { ErrorMessage } from "@hookform/error-message";
 import { yupResolver } from "@hookform/resolvers";
 import * as yup from "yup";
-import { RiQuestionLine } from "react-icons/ri";
 import {
   parseDescriptor,
   deriveAddressesFromXprv,
@@ -16,82 +15,132 @@ import {
 
 import "./AddVotingAddress.scss";
 
-// Validation schema
-const schema = yup.object().shape({
-  type: yup
-    .string()
-    .required("Address type is required")
-    .oneOf(
-      ["descriptor", "legacy"],
-      "Address type must be descriptor or legacy"
-    ),
-  name: yup.string().required("Label is required"),
-  privateKey: yup.string().required("Descriptor wallet is required"),
-  address: yup
-    .string()
-    .required("Voting address is required")
-    .test(
-      "Validated Address Validity",
-      "Invalid Address",
-      (value, { parent }) => {
-        if (!parent?.privateKey || !value) {
-          return false;
-        }
-
-        if (parent.type === "legacy") {
+// Validation schema factory to support edit mode
+const createValidationSchema = (isEditMode, originalData) => {
+  return yup.object().shape({
+    type: yup
+      .string()
+      .required("Address type is required")
+      .oneOf(
+        ["descriptor", "legacy"],
+        "Address type must be descriptor or legacy"
+      ),
+    name: yup.string().required("Label is required"),
+    privateKey: yup.string().required("Descriptor wallet is required"),
+    address: yup
+      .string()
+      .required("Voting address is required")
+      .test(
+        "Validated Address Validity",
+        "Invalid Address",
+        (value, { parent }) => {
           try {
-            const derived = deriveAddressFromWifPrivKey(parent.privateKey);
-            return (derived || "").toLowerCase() === value.toLowerCase();
-          } catch (_) {
+            if (!parent?.privateKey || !value) {
+              return false;
+            }
+
+            // In edit mode, skip validation if neither privateKey nor address have changed
+            if (isEditMode && originalData) {
+              if (
+                parent.privateKey === originalData.privateKey &&
+                value === originalData.address
+              ) {
+                return true;
+              }
+            }
+
+            // Check if privateKey looks like encrypted data (starts with "U2FsdGVkX1")
+            // If so, skip validation since we can't parse encrypted data
+            if (parent.privateKey && parent.privateKey.startsWith("U2FsdGVkX1")) {
+              return true;
+            }
+
+            if (parent.type === "legacy") {
+              try {
+                const derived = deriveAddressFromWifPrivKey(parent.privateKey);
+                return (derived || "").toLowerCase() === value.toLowerCase();
+              } catch (_) {
+                return false;
+              }
+            }
+
+            try {
+              const results = parseDescriptor(parent.privateKey);
+              if (!results || !results.xprv || !results.path) {
+                return false;
+              }
+
+              const addresses = deriveAddressesFromXprv(
+                results.xprv,
+                results.path,
+                100
+              );
+
+              return addresses
+                .map((a) => (a || "").toLowerCase())
+                .includes(value.toLowerCase());
+            } catch (_) {
+              // If parsing fails (e.g., encrypted data), return false
+              return false;
+            }
+          } catch (error) {
+            // Catch any unexpected errors during validation
+            console.error('Address validation error:', error);
             return false;
           }
         }
-
-        const results = parseDescriptor(parent.privateKey);
-        if (!results || !results.xprv || !results.path) {
-          return false;
-        }
-
-        const addresses = deriveAddressesFromXprv(
-          results.xprv,
-          results.path,
-          100
-        );
-
-        return addresses
-          .map((a) => (a || "").toLowerCase())
-          .includes(value.toLowerCase());
-      }
-    ),
-  txId: yup
-    .string()
-    .matches(/-0$|-1$/, "Tx ID must end with the index: -0 or -1")
-    .required("Tx ID is required"),
-});
+      ),
+    txId: yup
+      .string()
+      .matches(/-0$|-1$/, "Tx ID must end with the index: -0 or -1")
+      .required("Tx ID is required"),
+  });
+};
 
 /**
- * Component to show at the profile add voting address route
+ * Component to show at the profile add/edit voting address section
  * @component
  * @subcategory Profile
+ * @param {Object} editData - Voting address data when editing (null when adding)
+ * @param {function} onClose - Callback to close the form and return to information section
  */
-function AddVotingAddress() {
-  const history = useHistory();
+function AddVotingAddress({ editData, onClose }) {
   const { t } = useTranslation();
   const [submitting, setSubmitting] = useState(false);
 
+  // Check if we're in edit mode
+  const isEditMode = !!editData;
+
+  // Create validation schema with edit mode awareness
+  const validationSchema = createValidationSchema(isEditMode, editData);
+
   const form = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(validationSchema),
     defaultValues: {
-      type: "descriptor",
-      name: "",
-      privateKey: "",
-      address: "",
-      txId: "",
+      type: editData?.type || "descriptor",
+      name: editData?.name || "",
+      privateKey: editData?.privateKey || "",
+      address: editData?.address || "",
+      txId: editData?.txId || "",
     },
   });
 
-  const { register, handleSubmit, formState } = form;
-  const { errors } = formState;
+  const { register, handleSubmit, formState, reset, watch, trigger } = form;
+  const { errors, isValid } = formState;
+  const selectedType = watch("type");
+
+  // Update form values when editData changes
+  useEffect(() => {
+    if (editData) {
+      reset({
+        type: editData.type || "descriptor",
+        name: editData.name || "",
+        privateKey: editData.privateKey || "",
+        address: editData.address || "",
+        txId: editData.txId || "",
+      });
+    }
+  }, [editData, reset]);
 
   /**
    * Handle form submission
@@ -100,15 +149,24 @@ function AddVotingAddress() {
   const addAddress = async (data) => {
     setSubmitting(true);
     try {
+      const actionText = isEditMode
+        ? t("profile.data.address.updating") || "Updating voting address"
+        : t("profile.data.address.adding") || "Adding voting address";
+
       Swal.fire({
-        title: t("profile.data.address.adding") || "Adding voting address",
+        title: actionText,
         showConfirmButton: false,
         willOpen: () => {
           Swal.showLoading();
         },
       });
 
-      await createVotingAddress(data)
+      // Call appropriate API method based on mode
+      const apiCall = isEditMode
+        ? updateVotingAddress(editData._id, data)
+        : createVotingAddress(data);
+
+      await apiCall
         .then(async (res) => {
           await Swal.fire({
             icon: "success",
@@ -117,18 +175,19 @@ function AddVotingAddress() {
             timer: 1800,
           });
           setSubmitting(false);
-          history.push("/profile");
+          onClose();
         })
         .catch((err) => {
+          setSubmitting(false);
           if (err.response?.status === 406) {
             Swal.fire({
               title: t("common.error") || "There was an error",
               text: err.response.data.message,
               icon: "error",
             });
-            setSubmitting(false);
-          }
-          if (err.response?.status === 500) {
+          } else if (err.response?.status === 500) {
+            throw err;
+          } else {
             throw err;
           }
         });
@@ -165,7 +224,9 @@ function AddVotingAddress() {
             >
               {/* Section title */}
               <h2 className="add-voting-address__section-title">
-                {t("profile.data.address.addAddress") || "Add voting address"}
+                {isEditMode
+                  ? t("profile.data.address.editAddress") || "Edit voting address"
+                  : t("profile.data.address.addAddress") || "Add voting address"}
               </h2>
 
               {/* Address type selection */}
@@ -221,7 +282,7 @@ function AddVotingAddress() {
                     }`}
                     placeholder=" "
                   />
-                  <RiQuestionLine className="add-voting-address__info-icon" />
+                  <span className="add-voting-address__info-icon" title="Help">?</span>
                 </div>
                 <ErrorMessage
                   errors={errors}
@@ -238,8 +299,9 @@ function AddVotingAddress() {
                   htmlFor="privateKey"
                   className="add-voting-address__label"
                 >
-                  {t("profile.data.address.descriptorWallet") ||
-                    "Descriptor wallet"}
+                  {selectedType === "legacy"
+                    ? t("profile.data.address.wifPrivateKey") || "WIF Private Key"
+                    : t("profile.data.address.descriptorWallet") || "Descriptor wallet"}
                   <span className="required">*</span>
                 </label>
                 <div className="add-voting-address__input-wrapper">
@@ -251,9 +313,9 @@ function AddVotingAddress() {
                     className={`add-voting-address__input ${
                       errors.privateKey ? "error" : ""
                     }`}
-                    placeholder="wpkh(...)"
+                    placeholder={selectedType === "legacy" ? "" : "wpkh(...)"}
                   />
-                  <RiQuestionLine className="add-voting-address__info-icon" />
+                  <span className="add-voting-address__info-icon" title="Help">?</span>
                 </div>
                 <ErrorMessage
                   errors={errors}
@@ -285,7 +347,7 @@ function AddVotingAddress() {
                     }`}
                     placeholder=" "
                   />
-                  <RiQuestionLine className="add-voting-address__info-icon" />
+                  <span className="add-voting-address__info-icon" title="Help">?</span>
                 </div>
                 <ErrorMessage
                   errors={errors}
@@ -316,7 +378,7 @@ function AddVotingAddress() {
                     }`}
                     placeholder=" "
                   />
-                  <RiQuestionLine className="add-voting-address__info-icon" />
+                  <span className="add-voting-address__info-icon" title="Help">?</span>
                 </div>
                 <ErrorMessage
                   errors={errors}
@@ -329,21 +391,23 @@ function AddVotingAddress() {
 
               {/* Buttons */}
               <div className="add-voting-address__buttons">
-                <Link
-                  to="/profile"
+                <button
+                  type="button"
+                  onClick={onClose}
                   className="add-voting-address__button-back"
                 >
                   <span>&lt; Back</span>
-                </Link>
+                </button>
                 <button
                   type="submit"
                   className="add-voting-address__button-submit"
                   disabled={submitting}
                 >
                   {submitting
-                    ? t("common.submitting") || "Submitting..."
-                    : t("profile.data.address.addAddress") ||
-                      "Add voting address"}
+                    ? t("profile.data.address.submitting") || "Submitting..."
+                    : isEditMode
+                    ? t("profile.data.address.saveChanges") || "Save Changes"
+                    : t("profile.data.address.addAddress") || "Add voting address"}
                 </button>
               </div>
             </form>
@@ -353,5 +417,14 @@ function AddVotingAddress() {
     </div>
   );
 }
+
+AddVotingAddress.propTypes = {
+  editData: PropTypes.object,
+  onClose: PropTypes.func.isRequired,
+};
+
+AddVotingAddress.defaultProps = {
+  editData: null,
+};
 
 export default AddVotingAddress;
