@@ -4,25 +4,25 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useUser } from '../../context/user-context';
-import { getUserInfo, getUserVotingAddress, destroyVotingAddress } from '../../utils/request';
+import { getUserInfo, getUserVotingAddress, destroyVotingAddress, updateVotingAddress } from '../../utils/request';
 import CTAButton from '../global/CTAButton';
+import VotingAddressItem from './VotingAddressItem';
 import './ProfileInformation.scss';
 
 /**
  * ProfileInformation Component
  *
- * Displays user email (readonly) and voting addresses list.
+ * Displays user email (readonly) and voting addresses list with inline editing.
  *
  * @component
  * @subcategory Profile
  *
  * @param {function} onAddVotingAddress - Callback to open add voting address form
- * @param {function} onEditVotingAddress - Callback to open edit voting address form
  *
  * @example
- * <ProfileInformation onAddVotingAddress={handleAdd} onEditVotingAddress={handleEdit} />
+ * <ProfileInformation onAddVotingAddress={handleAdd} />
  */
-function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
+function ProfileInformation({ onAddVotingAddress }) {
   const { t } = useTranslation();
   const { user, firebase } = useUser();
 
@@ -30,10 +30,7 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
   const [emailVerified, setEmailVerified] = useState(true); // Default to true to avoid showing banner during load
   const [votingAddresses, setVotingAddresses] = useState([]);
   const [loadingData, setLoadingData] = useState(true);
-  const [copiedAddress, setCopiedAddress] = useState('');
   const [sendingVerification, setSendingVerification] = useState(false);
-  const [expandedAddresses, setExpandedAddresses] = useState({});
-  const [visiblePrivateKeys, setVisiblePrivateKeys] = useState({});
   const isMounted = useRef(false);
   const cancelSource = useMemo(() => axios.CancelToken.source(), []);
 
@@ -55,6 +52,82 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
           console.error('Error reloading voting addresses:', error);
         }
       }
+    }
+  };
+
+  // Helper function to map API error responses to user-friendly messages
+  const getErrorMessage = (error) => {
+    // Check if it's a network error
+    if (!error.response) {
+      return t('profile.data.address.errors.network_error') || 'Unable to connect to server. Please check your connection and try again.';
+    }
+
+    const status = error.response.status;
+    const apiMessage = error.response?.data?.message;
+
+    // Map status codes to specific error messages
+    switch (status) {
+      case 400:
+        // Bad request - likely validation error
+        if (apiMessage && apiMessage.toLowerCase().includes('invalid')) {
+          return t('profile.data.address.errors.invalid_data') || 'Invalid data. Please check the voting address details and try again.';
+        }
+        return apiMessage || t('profile.data.address.errors.invalid_data') || 'Invalid data. Please check your input and try again.';
+
+      case 406:
+        // Not acceptable - validation failed
+        return t('profile.data.address.errors.validation_failed') || 'Invalid voting address data. Please verify all fields are correct.';
+
+      case 409:
+        // Conflict - duplicate address
+        return t('profile.data.address.errors.address_exists') || 'This voting address already exists. Please use a different address.';
+
+      case 422:
+        // Unprocessable entity - validation error
+        return t('profile.data.address.errors.invalid_format') || 'Invalid address format. Please check your voting address and transaction ID.';
+
+      case 500:
+      case 502:
+      case 503:
+        // Server errors
+        return t('profile.data.address.errors.server_error') || 'Server error. Please try again later.';
+
+      default:
+        // Use API message if available, otherwise use generic error
+        return apiMessage || t('profile.data.address.updateError') || 'Failed to update voting address. Please try again.';
+    }
+  };
+
+  // Handle edit voting address
+  const handleEditVotingAddress = async (addressId, data) => {
+    try {
+      Swal.fire({
+        title: t('profile.data.address.updating') || 'Updating voting address',
+        showConfirmButton: false,
+        willOpen: () => {
+          Swal.showLoading();
+        },
+      });
+
+      await updateVotingAddress(addressId, data);
+
+      await Swal.fire({
+        icon: 'success',
+        title: t('profile.data.address.updatedSuccess') || 'Voting address updated successfully',
+        showConfirmButton: false,
+        timer: 800,
+      });
+
+      await reloadVotingAddresses();
+    } catch (error) {
+      console.error('Error updating voting address:', error);
+      const errorMessage = getErrorMessage(error);
+
+      Swal.fire({
+        icon: 'error',
+        title: t('profile.data.address.errors.update_failed_title') || 'Update Failed',
+        text: errorMessage,
+      });
     }
   };
 
@@ -117,31 +190,6 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
     };
   }, [user, cancelSource]);
 
-  // Copy voting address to clipboard
-  const handleCopyAddress = (address) => {
-    if (address) {
-      navigator.clipboard.writeText(address);
-      setCopiedAddress(address);
-      setTimeout(() => setCopiedAddress(''), 2000);
-    }
-  };
-
-  // Toggle address expansion to show/hide details
-  const handleToggleExpanded = (id) => {
-    setExpandedAddresses(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
-
-  // Toggle private key visibility
-  const handleTogglePrivateKeyVisibility = (id) => {
-    setVisiblePrivateKeys(prev => ({
-      ...prev,
-      [id]: !prev[id]
-    }));
-  };
-
   // Handle remove voting address
   const handleRemoveVotingAddress = async (addressId, addressName) => {
     try {
@@ -181,10 +229,12 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
       await reloadVotingAddresses();
     } catch (error) {
       console.error('Error deleting voting address:', error);
+      const errorMessage = getErrorMessage(error);
+
       Swal.fire({
         icon: 'error',
-        title: t('common.error') || 'Error',
-        text: error.response?.data?.message || error.message || t('profile.data.address.deleteError') || 'Failed to delete voting address',
+        title: t('profile.data.address.errors.delete_failed_title') || 'Delete Failed',
+        text: errorMessage,
       });
     }
   };
@@ -291,132 +341,15 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
             </p>
           ) : (
             <div className="profile-information__address-list">
-              {votingAddresses.map((addressItem, index) => {
-                const addressId = addressItem._id || addressItem.uid || index;
-                const isExpanded = expandedAddresses[addressId];
-                const isPrivateKeyVisible = visiblePrivateKeys[addressId];
-
-                return (
-                  <div key={addressId} className={`profile-information__address-item ${isExpanded ? 'expanded' : ''}`}>
-                    {/* Toggle Button (Top Right) */}
-                    <button
-                      type="button"
-                      onClick={() => handleToggleExpanded(addressId)}
-                      className="profile-information__toggle-button"
-                      title={isExpanded ? 'Hide details' : 'Show details'}
-                      aria-label={isExpanded ? 'Hide details' : 'Show details'}
-                    />
-
-                    {/* Main Address Header */}
-                    <div className="profile-information__address-header">
-                      <div className="profile-information__address-info">
-                        <span className="profile-information__address-label">{addressItem.name || `Address ${index + 1}`}</span>
-                        <span className="profile-information__address-text" title={addressItem.address}>{addressItem.address}</span>
-                      </div>
-                    </div>
-
-                    {/* Action Buttons */}
-                    <div className="profile-information__address-actions">
-                      <button
-                        type="button"
-                        onClick={() => onEditVotingAddress(addressItem)}
-                        className="profile-information__edit-button"
-                        title={t('profile.information.edit') || 'Edit'}
-                        aria-label={t('profile.information.edit') || 'Edit'}
-                      >
-                        {t('profile.information.edit') || 'Edit'}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleCopyAddress(addressItem.address)}
-                        className="profile-information__copy-button"
-                        title={copiedAddress === addressItem.address ? t('profile.information.copied') : t('profile.information.copy')}
-                        aria-label={t('profile.information.copy') || 'Copy'}
-                      >
-                        {copiedAddress === addressItem.address ? t('profile.information.copied') : t('profile.information.copy')}
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => handleRemoveVotingAddress(addressId, addressItem.name || `Address ${index + 1}`)}
-                        className="profile-information__remove-button"
-                        title={t('profile.information.delete') || 'Remove'}
-                        aria-label={t('profile.information.delete') || 'Remove'}
-                      >
-                        {t('profile.information.delete') || 'Remove'}
-                      </button>
-                    </div>
-
-                    {/* Expanded Details */}
-                    {isExpanded && (
-                      <div className="profile-information__address-details">
-                        {/* TxId Field */}
-                        <div className="profile-information__detail-group">
-                          <label className="profile-information__detail-label">
-                            {t('profile.data.address.txId') || 'Tx ID'}
-                          </label>
-                          <div className="profile-information__detail-input-wrapper">
-                            <input
-                              type="text"
-                              value={addressItem.txId || ''}
-                              readOnly
-                              className="profile-information__detail-input"
-                            />
-                            <button
-                              type="button"
-                              onClick={() => {
-                                if (addressItem.txId) {
-                                  navigator.clipboard.writeText(addressItem.txId);
-                                  setCopiedAddress(addressItem.txId);
-                                  setTimeout(() => setCopiedAddress(''), 2000);
-                                }
-                              }}
-                              className="profile-information__detail-copy-btn"
-                            >
-                              {copiedAddress === addressItem.txId ? '✓' : '📋'}
-                            </button>
-                          </div>
-                        </div>
-
-                        {/* Private Key Field */}
-                        <div className="profile-information__detail-group">
-                          <label className="profile-information__detail-label">
-                            {t('profile.data.address.wifPrivateKey') || t('profile.data.address.descriptorWallet') || 'Private Key'}
-                          </label>
-                          <div className="profile-information__detail-input-wrapper">
-                            <input
-                              type={isPrivateKeyVisible ? 'text' : 'password'}
-                              value={addressItem.privateKey || ''}
-                              readOnly
-                              className="profile-information__detail-input"
-                            />
-                            <button
-                              type="button"
-                              onClick={() => handleTogglePrivateKeyVisibility(addressId)}
-                              className="profile-information__detail-toggle-btn"
-                              title={isPrivateKeyVisible ? 'Hide private key' : 'Show private key'}
-                            >
-                              {isPrivateKeyVisible ? '🙈' : '👁'}
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => {
-                                if (addressItem.privateKey) {
-                                  navigator.clipboard.writeText(addressItem.privateKey);
-                                  setCopiedAddress(addressItem.privateKey);
-                                  setTimeout(() => setCopiedAddress(''), 2000);
-                                }
-                              }}
-                              className="profile-information__detail-copy-btn"
-                            >
-                              {copiedAddress === addressItem.privateKey ? '✓' : '📋'}
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                );
-              })}
+              {votingAddresses.map((addressItem, index) => (
+                <VotingAddressItem
+                  key={addressItem._id || addressItem.uid || index}
+                  address={addressItem}
+                  index={index}
+                  onEdit={handleEditVotingAddress}
+                  onRemove={(id) => handleRemoveVotingAddress(id, addressItem.name || `Address ${index + 1}`)}
+                />
+              ))}
             </div>
           )}
         </div>
@@ -427,7 +360,6 @@ function ProfileInformation({ onAddVotingAddress, onEditVotingAddress }) {
 
 ProfileInformation.propTypes = {
   onAddVotingAddress: PropTypes.func.isRequired,
-  onEditVotingAddress: PropTypes.func.isRequired,
 };
 
 export default ProfileInformation;

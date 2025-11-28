@@ -69,12 +69,6 @@ function Profile({ t }) {
     setActiveSection('addVotingAddress');
   };
 
-  // Handle opening edit voting address form
-  const handleEditVotingAddress = (votingAddress) => {
-    setEditingVotingAddress(votingAddress);
-    setActiveSection('addVotingAddress');
-  };
-
   // Handle closing voting address form (back to information)
   const handleCloseVotingAddressForm = () => {
     setEditingVotingAddress(null);
@@ -190,7 +184,6 @@ function Profile({ t }) {
         return (
           <ProfileInformation
             onAddVotingAddress={handleAddVotingAddress}
-            onEditVotingAddress={handleEditVotingAddress}
           />
         );
       case 'password':
@@ -210,7 +203,6 @@ function Profile({ t }) {
         return (
           <ProfileInformation
             onAddVotingAddress={handleAddVotingAddress}
-            onEditVotingAddress={handleEditVotingAddress}
           />
         );
     }

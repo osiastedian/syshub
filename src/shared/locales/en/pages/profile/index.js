@@ -15,7 +15,13 @@ const profile = {
         editAddress: 'Edit voting address',
         adding: 'Adding voting address',
         updating: 'Updating voting address',
+        updatedSuccess: 'Voting address updated successfully',
+        updateError: 'Failed to update voting address',
         saveChanges: 'Save Changes',
+        save: 'Save',
+        cancel: 'Cancel',
+        show: 'Show',
+        hide: 'Hide',
         selectType: 'Select the type of address you want to add',
         label: 'Label',
         descriptorWallet: 'Descriptor wallet',
@@ -27,6 +33,25 @@ const profile = {
         deletedSuccess: 'Voting address deleted successfully',
         deleteError: 'Failed to delete voting address',
         submitting: 'Submitting...',
+        errors: {
+          // Field validation errors
+          required_field: 'This field is required',
+          invalid_address: 'Please enter a valid voting address (starts with t or sys)',
+          invalid_txid: 'Tx ID must end with -0 or -1',
+          invalid_privatekey: 'Private key appears to be invalid',
+
+          // API error responses
+          address_exists: 'This voting address already exists. Please use a different address.',
+          invalid_data: 'Invalid data. Please check the voting address details and try again.',
+          validation_failed: 'Invalid voting address data. Please verify all fields are correct.',
+          invalid_format: 'Invalid address format. Please check your voting address and transaction ID.',
+          network_error: 'Unable to connect to server. Please check your connection and try again.',
+          server_error: 'Server error. Please try again later.',
+
+          // Error titles
+          update_failed_title: 'Update Failed',
+          delete_failed_title: 'Delete Failed',
+        },
       }
     },
     sidebar: {

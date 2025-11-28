@@ -420,6 +420,13 @@
   }
 }
 
+// Override icon for Cancel button (when edit-button class is used for Cancel)
+.profile-information__address-item .profile-information__edit-button:not([title*="Edit"]) {
+  &::before {
+    content: '✕';
+  }
+}
+
 .profile-information__copy-button {
   padding: $space-sm $space-md;
   height: 40px;
@@ -458,6 +465,13 @@
   @media (max-width: #{$breakpoint-md - 1px}) {
     height: 36px;
     padding: $space-xs 12px;
+  }
+}
+
+// Override icon for Save button (when copy-button class is used for Save)
+.profile-information__address-item .profile-information__copy-button:not([title*="Copy"]):not([title*="Copied"]) {
+  &::before {
+    content: '✓';
   }
 }
 
@@ -721,5 +735,38 @@
     &:focus {
       background: rgba(255, 255, 255, 0.2);
     }
+  }
+}
+
+// ============================================================================
+// Validation Error Styling
+// ============================================================================
+
+// Field error message styling
+.profile-information__field-error {
+  @include typography-body-small-regular;
+  color: $color-error-text;
+  margin-top: 4px;
+  display: block;
+  font-size: 14px;
+}
+
+// Error state for inputs
+.profile-information__address-label-input.error,
+.profile-information__address-text-input.error,
+.profile-information__detail-input.error {
+  border-color: $color-error-text !important;
+  background: rgba(231, 76, 60, 0.1);
+}
+
+// Disabled button styling when validation fails
+.profile-information__copy-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: rgba(255, 255, 255, 0.1);
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: none;
   }
 }
