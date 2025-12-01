@@ -1,12 +1,6 @@
 import React, {useState, useEffect, useMemo, useRef} from "react";
-import {CopyToClipboard} from "react-copy-to-clipboard";
 import swal from "sweetalert2";
-import {Collapse} from 'react-collapse';
 import {useHistory} from "react-router";
-import {useForm} from "react-hook-form";
-import {ErrorMessage} from '@hookform/error-message';
-import {yupResolver} from '@hookform/resolvers';
-import * as yup from "yup";
 import {RiCheckLine} from 'react-icons/ri';
 
 import {checkProposal, prepareProposal, notCompletedProposal, destroyProposal} from "../../utils/request";
@@ -196,19 +190,6 @@ function ProposalForm() {
   const next = () => {
     setCurrentStep(currentStep + 1);
   };
-
-  /**
-   * function that triggers sweet alert to show the copy is successful
-   * @function
-   */
-  const copyButton = () => {
-    swal.fire({
-      icon: "success",
-      title: "Copied",
-      timer: 2000,
-      showConfirmButton: false,
-    });
-  }
 
   /**
    * function that sets in the state the title from the input

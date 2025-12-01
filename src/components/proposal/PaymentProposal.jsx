@@ -54,7 +54,7 @@ const PaymentProposal = ({onNext, onBack}) => {
 
   const cancelSource = useMemo(() => axios.CancelToken.source(), []);
 
-  const {register, watch, handleSubmit, errors} = useForm({
+  const {register, handleSubmit, errors} = useForm({
     mode: 'onSubmit',
     resolver: yupResolver(schema),
     defaultValues: {
@@ -62,9 +62,6 @@ const PaymentProposal = ({onNext, onBack}) => {
       paymentAmount: amount
     }
   });
-
-  const watchedAmount = watch('paymentAmount');
-  const watchNPayment = watch('paymentNumber');
 
   /**
    * Formats the date to have the correct format in usa, eu or default

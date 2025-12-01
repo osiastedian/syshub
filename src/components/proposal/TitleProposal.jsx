@@ -21,7 +21,7 @@ const schema = yup.object().shape({
  */
 function TitleProposal({ onNext }) {
 
-  const { register, watch, handleSubmit, errors, formState } = useForm({
+  const { register, watch, handleSubmit, errors } = useForm({
     mode: 'onChange',
     resolver: yupResolver(schema),
     defaultValues: {
