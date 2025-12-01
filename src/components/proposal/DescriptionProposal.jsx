@@ -160,7 +160,7 @@ function DescriptionProposal({onNext, onBack}) {
                                 type="button"
                                 style={{
                                     position: 'absolute',
-                                    top: '12px',
+                                    top: '1.5rem',
                                     right: '16px',
                                     zIndex: 20,
                                     fontSize: '14px',
@@ -210,7 +210,7 @@ function DescriptionProposal({onNext, onBack}) {
                                 type="button"
                                 style={{
                                     position: 'absolute',
-                                    top: '12px',
+                                    top: '1.5rem',
                                     right: '16px',
                                     zIndex: 20,
                                     fontSize: '14px',
