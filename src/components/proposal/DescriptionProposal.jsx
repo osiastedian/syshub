@@ -171,7 +171,7 @@ function DescriptionProposal({onNext, onBack}) {
                             <small
                                 style={{
                                     position: 'absolute',
-                                    top: '12px',
+                                    top: '4rem',
                                     right: '16px',
                                     color: '#9fa6b0',
                                     fontSize: '0.875rem',
