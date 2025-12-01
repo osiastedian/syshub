@@ -178,41 +178,21 @@
   background: transparent !important;
   border: none !important;
 
-  // Style toolbar option wrappers (buttons)
+  // Make toolbar icons white
   .rdw-option-wrapper {
-    background: transparent !important;
-    border: 1px solid transparent !important;
-    transition: border-color 0.2s ease;
-
     svg {
       fill: #ffffff;
       color: #ffffff;
-    }
-
-    &:hover {
-      border: 1px solid #ffffff !important;
-    }
-
-    &.rdw-option-active {
-      border: 1px solid #ffffff !important;
-      background: transparent !important;
     }
   }
 
   // Style toolbar buttons
   button {
     color: #ffffff !important;
-    background: transparent !important;
-    border: 1px solid transparent !important;
-    transition: border-color 0.2s ease;
 
     svg {
       fill: #ffffff !important;
       color: #ffffff !important;
-    }
-
-    &:hover {
-      border: 1px solid #ffffff !important;
     }
   }
 }
