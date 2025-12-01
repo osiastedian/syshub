@@ -144,8 +144,8 @@ function DescriptionProposal({onNext, onBack}) {
                                     options: ["unordered", "ordered"],
                                 },
                             }}
-                            toolbarClassName="toolbarClassName"
-                            toolbarStyle={{borderRadius: "3px", color: "#0f1f1f"}}
+                            toolbarClassName="editor-toolbar-transparent"
+                            toolbarStyle={{borderRadius: "3px", color: "#0f1f1f", background: 'transparent', border: 'none'}}
                             editorStyle={{
                                 paddingTop: '12px',
                                 paddingBottom: '12px',
@@ -163,7 +163,7 @@ function DescriptionProposal({onNext, onBack}) {
                                     position: 'absolute',
                                     top: '12px',
                                     right: '16px',
-                                    zIndex: 10,
+                                    zIndex: 20,
                                     fontSize: '14px',
                                     padding: '4px 12px',
                                     height: 'auto',

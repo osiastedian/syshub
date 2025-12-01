@@ -172,3 +172,27 @@
 .stepFormContent > div[style*="position: relative"] {
   position: relative;
 }
+
+// Transparent toolbar styling
+:global(.editor-toolbar-transparent) {
+  background: transparent !important;
+  border: none !important;
+
+  // Make toolbar icons white
+  .rdw-option-wrapper {
+    svg {
+      fill: #ffffff;
+      color: #ffffff;
+    }
+  }
+
+  // Style toolbar buttons
+  button {
+    color: #ffffff !important;
+
+    svg {
+      fill: #ffffff !important;
+      color: #ffffff !important;
+    }
+  }
+}
