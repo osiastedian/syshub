@@ -147,9 +147,13 @@ function DescriptionProposal({onNext, onBack}) {
                             toolbarClassName="toolbarClassName"
                             toolbarStyle={{borderRadius: "3px", color: "#0f1f1f"}}
                             editorStyle={{
-                                paddingTop: 0,
-                                paddingBottom: 0,
+                                paddingTop: '12px',
+                                paddingBottom: '12px',
+                                paddingLeft: '12px',
+                                paddingRight: '12px',
                                 color: "#ffffff",
+                                textAlign: 'left',
+                                minHeight: '200px'
                             }}
                         />
                             <button
