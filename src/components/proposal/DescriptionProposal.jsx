@@ -145,15 +145,15 @@ function DescriptionProposal({onNext, onBack}) {
                                 },
                             }}
                             toolbarClassName="editor-toolbar-transparent"
-                            toolbarStyle={{borderRadius: "3px", color: "#0f1f1f", background: 'transparent', border: 'none'}}
+                            toolbarStyle={{borderRadius: "0.1875rem", color: "#0f1f1f", background: 'transparent', border: 'none'}}
                             editorStyle={{
-                                paddingTop: '12px',
-                                paddingBottom: '12px',
-                                paddingLeft: '12px',
-                                paddingRight: '12px',
+                                paddingTop: '0.75rem',
+                                paddingBottom: '0.75rem',
+                                paddingLeft: '0.75rem',
+                                paddingRight: '0.75rem',
                                 color: "#ffffff",
                                 textAlign: 'left',
-                                minHeight: '200px'
+                                minHeight: '12.5rem'
                             }}
                         />
                             <button
@@ -161,13 +161,13 @@ function DescriptionProposal({onNext, onBack}) {
                                 style={{
                                     position: 'absolute',
                                     top: '1.5rem',
-                                    right: '16px',
+                                    right: '1rem',
                                     zIndex: 20,
-                                    fontSize: '14px',
+                                    fontSize: '0.875rem',
                                     padding: '0.25rem 2rem',
                                     lineHeight: '1rem',
                                     borderRadius: '1000px',
-                                    border: '1px solid #ffffff',
+                                    border: '0.0625rem solid #ffffff',
                                     background: 'transparent',
                                     color: '#ffffff',
                                     cursor: 'pointer',
@@ -185,7 +185,7 @@ function DescriptionProposal({onNext, onBack}) {
                                 style={{
                                     position: 'absolute',
                                     top: '4rem',
-                                    right: '16px',
+                                    right: '1rem',
                                     color: '#9fa6b0',
                                     fontSize: '0.875rem',
                                     zIndex: 10,
@@ -211,13 +211,13 @@ function DescriptionProposal({onNext, onBack}) {
                                 style={{
                                     position: 'absolute',
                                     top: '1.5rem',
-                                    right: '16px',
+                                    right: '1rem',
                                     zIndex: 20,
-                                    fontSize: '14px',
+                                    fontSize: '0.875rem',
                                     padding: '0.25rem 2rem',
                                     lineHeight: '1rem',
                                     borderRadius: '1000px',
-                                    border: '1px solid #ffffff',
+                                    border: '0.0625rem solid #ffffff',
                                     background: 'transparent',
                                     color: '#ffffff',
                                     cursor: 'pointer',
