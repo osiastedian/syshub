@@ -158,6 +158,7 @@ function DescriptionProposal({onNext, onBack}) {
                         />
                             <button
                                 type="button"
+                                className="preview-button"
                                 style={{
                                     position: 'absolute',
                                     top: '1.5rem',
