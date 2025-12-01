@@ -29,10 +29,12 @@
     justify-content: center;
 
     // Hide text, show only chevron
-    font-size: 0;
+    font-size: 0 !important;
 
     &::before {
-      font-size: 1.25rem;
+      content: '<' !important;
+      font-size: 1rem !important;
+      line-height: 1 !important;
     }
   }
 }
@@ -42,5 +44,9 @@
   @media (max-width: 768px) {
     flex: 1;
     min-width: auto;
+
+    &::after {
+      content: '>' !important;
+    }
   }
 }
