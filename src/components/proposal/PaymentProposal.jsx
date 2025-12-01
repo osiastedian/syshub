@@ -145,24 +145,27 @@ const PaymentProposal = ({onNext, onBack}) => {
    * Gets the payment quantity and their values and sets them in the state
    * @function
    */
-  const paymentQuantityValue = () => {
+  const paymentQuantityValue = (nPayments, paymentAmount) => {
+    const numPayments = parseInt(nPayments) || 0;
+    const amountPay = parseInt(paymentAmount) || 0;
+
     if (typeof nextGovernanceDate !== "undefined") {
       const {endEpoch, proposalPayoutDates} = lastPaymentCalculator(
-        watchNPayment,
+        numPayments,
         nextGovernanceDate
       );
 
       setProposalEndEpoch(endEpoch);
       setProposalPayoutDates(proposalPayoutDates);
-      setAmount(parseInt(watchedAmount));
-      setTotalAmount(parseInt(watchedAmount) * parseInt(watchNPayment))
-      setPaymentQuantity(parseInt(watchNPayment))
+      setAmount(amountPay);
+      setTotalAmount(amountPay * numPayments)
+      setPaymentQuantity(numPayments)
     } else {
       setProposalEndEpoch(0)
       setProposalPayoutDates([]);
-      setAmount(parseInt(watchedAmount));
-      setTotalAmount(parseInt(watchedAmount) * parseInt(watchNPayment))
-      setPaymentQuantity(parseInt(watchNPayment))
+      setAmount(amountPay);
+      setTotalAmount(amountPay * numPayments)
+      setPaymentQuantity(numPayments)
     }
   }
 
@@ -209,59 +212,61 @@ const PaymentProposal = ({onNext, onBack}) => {
   }, [cancelSource])
 
   return (
-    <form className="input-form" onSubmit={handleSubmit(nextPayment)}>
-      <div className="row g-4 mb-3">
-        <div className="col-md-6">
-          <div className="form-group">
-            <label htmlFor="paymentNumber">Number of payments</label>
+    <form className="input-form w-100" onSubmit={handleSubmit(nextPayment)}>
+      <div style={{display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1.5rem', marginBottom: '1.5rem', width: '100%'}}>
+        <div className="form-group" style={{margin: 0}}>
+          <label htmlFor="paymentNumber">Number of payments</label>
+          <input
+            type="number"
+            id="paymentNumber"
+            ref={register}
+            name="paymentNumber"
+            className="form-control input-glass w-100"
+            onChange={(e) => paymentQuantityValue(e.target.value, document.getElementById('paymentAmount').value)}
+          />
+          <ErrorMessage
+            errors={errors}
+            name="paymentNumber"
+            render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
+          />
+        </div>
+        <div className="form-group" style={{margin: 0}}>
+          <label htmlFor="paymentAmount">Amount per payment</label>
+          <div style={{position: 'relative', display: 'block'}}>
             <input
               type="number"
-              id="paymentNumber"
+              id="paymentAmount"
               ref={register}
-              name="paymentNumber"
-              className="form-control input-glass"
-              onChange={paymentQuantityValue}
-            />
-            <ErrorMessage
-              errors={errors}
-              name="paymentNumber"
-              render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
-            />
-          </div>
-        </div>
-        <div className="col-md-6">
-          <div className="form-group">
-            <label htmlFor="paymentAmount">Amount per payment</label>
-            <div className="input-group">
-              <input
-                type="number"
-                id="paymentAmount"
-                ref={register}
-                name="paymentAmount"
-                className="form-control input-glass"
-                onChange={paymentQuantityValue}
-              />
-              <span className="input-group-text" style={{
-                backgroundColor: 'rgba(255, 255, 255, 0.1)',
-                border: '1px solid rgba(255, 255, 255, 0.2)',
-                color: '#fff'
-              }}>SYS</span>
-            </div>
-            <ErrorMessage
-              errors={errors}
               name="paymentAmount"
-              render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
+              className="form-control input-glass w-100"
+              onChange={(e) => paymentQuantityValue(document.getElementById('paymentNumber').value, e.target.value)}
+              style={{paddingRight: '2.5rem'}}
             />
+            <span style={{
+              position: 'absolute',
+              right: '1rem',
+              top: '50%',
+              transform: 'translateY(-50%)',
+              color: '#fff',
+              fontSize: '1rem',
+              pointerEvents: 'none',
+              fontWeight: '500'
+            }}>SYS</span>
           </div>
+          <ErrorMessage
+            errors={errors}
+            name="paymentAmount"
+            render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
+          />
         </div>
       </div>
-      <div className="form-group">
+      <div className="form-group w-100" style={{marginBottom: '1.5rem'}}>
         <label htmlFor="paymentAddress">Payment address</label>
         <input
           type="text"
           id="paymentAddress"
           name="paymentAddress"
-          className="form-control input-glass"
+          className="form-control input-glass w-100"
           ref={register}
         />
         <ErrorMessage
@@ -270,43 +275,44 @@ const PaymentProposal = ({onNext, onBack}) => {
           render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
         />
       </div>
-      <p/>
-      <h3>Payment Info:</h3>
-      <div>
-        <p>
-          {`This proposal will result in ${paymentQuantity} payments of ${amount} SYS`}
-        </p>
-        <div>
-          <div>Payout dates approximately (in your local timezone):</div>
-          <div
-            className="payment-dates"
-            style={{
-              maxHeight: '200px',
-              overflowY: 'auto',
-              display: 'flex',
-              flexDirection: 'column'
-            }}
-          >
-            {theDatesWereLoaded === true ?
-              proposalPayoutDates.map((epoch, index) => {
-                return (
-                  <div key={index} style={{width: '100%', marginBottom: '8px'}}>
-                    {yearDayMonth(epoch * 1000, 'usa')}
-                  </div>
-                );
-              })
-              : <>
-                <p>There has been a problem loading the payment dates, please check your internet connection and reload the page!</p>
-              </>
-            }
+      <div style={{marginTop: '1.5rem', marginBottom: '1.5rem', textAlign: 'left', width: '100%', position: 'relative', zIndex: 1, clear: 'both'}}>
+        <h3 style={{fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: '#ffffff', textAlign: 'left'}}>Payment info:</h3>
+        <div style={{textAlign: 'left'}}>
+          <p style={{marginBottom: '0.75rem', color: '#ffffff'}}>
+            {`This proposal will result in – ${paymentQuantity} payments of – ${amount} SYS.`}
+          </p>
+          <div style={{textAlign: 'left'}}>
+            <p style={{fontSize: '1rem', marginBottom: '0.5rem', color: '#ffffff'}}>Payout dates approximately (in your local timezone):</p>
+            <div
+              className="payment-dates"
+              style={{
+                maxHeight: '12.5rem',
+                overflowY: 'auto',
+                display: 'flex',
+                flexDirection: 'column',
+                textAlign: 'left'
+              }}
+            >
+              {theDatesWereLoaded === true ?
+                proposalPayoutDates.map((epoch, index) => {
+                  return (
+                    <div key={index} style={{width: '100%', marginBottom: '0.5rem', color: '#ffffff'}}>
+                      {yearDayMonth(epoch * 1000, 'usa')}
+                    </div>
+                  );
+                })
+                : <>
+                  <p style={{color: '#ffffff'}}>There has been a problem loading the payment dates, please check your internet connection and reload the page!</p>
+                </>
+              }
+            </div>
           </div>
+          <p style={{marginTop: '0.75rem', marginBottom: '0', fontSize: '1rem', fontWeight: '500', color: '#ffffff'}}>
+            {`Total amount: –${totalAmount || amount}SYS.`}
+          </p>
         </div>
-        <p/>
-        <p className="">
-          {`Total amount: ${totalAmount || amount} SYS`}
-        </p>
       </div>
-      <div className="form-actions-spaced d-flex gap-2">
+      <div className="form-actions-spaced d-flex gap-2 justify-content-start">
         <button className="btn btn-white-outline btn-chevron-left" type="button" onClick={onBack}>Back</button>
         <button className="btn btn-white btn-chevron-right" type="submit" disabled={!theDatesWereLoaded}>Next</button>
       </div>

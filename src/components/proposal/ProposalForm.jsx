@@ -17,21 +17,11 @@ import TitleProposal from './TitleProposal';
 import DescriptionProposal from './DescriptionProposal';
 import PaymentProposal from './PaymentProposal';
 import ProposalPreview from "./ProposalPreview";
+import PrepareProposal from './PrepareProposal';
+import SubmitProposal from './SubmitProposal';
 import axios from 'axios';
 import useProposalSubmission from './hooks/useProposalSubmission';
 import styles from './ProposalForm.module.scss';
-
-
-const schema = yup.object().shape({
-  paymentTxId: yup.string()
-    .test('len', 'Must be exactly 64 characters', val => val.length === 64)
-    .required('Payment txid is required')
-});
-const schema2 = yup.object().shape({
-  proposalHash: yup.string()
-    .test('len', 'Must be exactly 64 characters', val => val.length === 64)
-    .required('proposal hash is required')
-});
 
 /**
  * Component to show the create Proposal form
@@ -48,8 +38,6 @@ function ProposalForm() {
   //COMPONENT STATES
   const [currentStep, setCurrentStep] = useState(0);
   const [openModal, setOpenModal] = useState(false);
-  const [collapse, setCollapse] = useState(true);
-  const [useCollapse, setUseCollapse] = useState(false);
 
   //PROPOSAL STATES
   const [title, setTitle] = useState('');
@@ -67,17 +55,6 @@ function ProposalForm() {
     proposalUid,
     history,
     setSubmitCommand,
-    setUseCollapse,
-    setCollapse,
-  });
-
-  const {register, handleSubmit, errors} = useForm({
-    mode: 'onSubmit',
-    resolver: yupResolver(schema)
-  });
-  const {register: register2, handleSubmit: handleSubmit2, errors: errors2} = useForm({
-    mode: 'onSubmit',
-    resolver: yupResolver(schema2)
   });
 
   /**
@@ -181,11 +158,9 @@ function ProposalForm() {
    * @function
    */
   const continueProposal = () => {
-    setCurrentStep(4);
-    if (submitCommand !== "") {
-      setUseCollapse(true);
-      setCollapse(false);
-    }
+    // If submit command exists, user was on Step 6 (Submit)
+    // If only prepare command exists, user was on Step 5 (Prepare) or earlier
+    setCurrentStep(submitCommand !== "" ? 5 : 4);
     setOpenModal(false);
   }
 
@@ -202,8 +177,6 @@ function ProposalForm() {
       confirmButtonText: 'Delete'
     })
     if (swalConfirm.isConfirmed) {
-      setUseCollapse(false);
-      setCollapse(true);
       cancelCurrentProposal();
     }
   }
@@ -413,131 +386,48 @@ function ProposalForm() {
             )}
           </div>
 
-          {/* Step 5: Create proposal */}
+          {/* Step 5: Prepare Proposal */}
           <div className={styles.stepItem}>
             <div className={styles.stepHeader}>
               <div className={`${styles.stepCircle} ${currentStep === 4 ? styles.active : currentStep > 4 ? styles.completed : styles.inactive}`}>
                 {currentStep > 4 ? <RiCheckLine /> : '5'}
               </div>
-              <h4 className={`${styles.stepTitle} ${currentStep !== 4 ? styles.inactive : ''}`}>Create proposal</h4>
+              <h4 className={`${styles.stepTitle} ${currentStep !== 4 ? styles.inactive : ''}`}>Prepare Proposal</h4>
             </div>
             {currentStep === 4 && (
               <div className={styles.stepForm}>
                 <div className={styles.stepFormBorder}></div>
                 <div className={styles.stepFormContent}>
-                  <Collapse
-                    isOpened={collapse}
-                    initialStyle={{height: 0, overflow: 'hidden'}}
-                  >
-                    <div className="form-group article">
-                      <div className="cli-command-container">
-                        <textarea
-                          className="styled"
-                          name="prepareCommand"
-                          id="prepareCommand"
-                          rows="5"
-                          disabled
-                          value={prepareCommand}
-                        ></textarea>
-                        <CopyToClipboard
-                          text={prepareCommand}
-                          onCopy={copyButton}
-                        >
-                          <button className="copy-icon" type="button" title="Copy command">📋</button>
-                        </CopyToClipboard>
-                      </div>
-                      <small>
-                        <p style={{lineHeight: "1.5"}}>
-                          Prepare command is ready to be copied. Please copy and paste it into Syscoin Q.T console for payment txid.
-                        </p>
-                      </small>
-                    </div>
+                  <PrepareProposal
+                    prepareCommand={prepareCommand}
+                    proposalUid={proposalUid}
+                    onNext={next}
+                    onCancel={cancelProposalBtn}
+                    enterPaymentTxId={enterPaymentTxId}
+                  />
+                </div>
+              </div>
+            )}
+          </div>
 
-                    <div className="form-actions-spaced">
-                      <CopyToClipboard
-                        text={prepareCommand}
-                        onCopy={copyButton}
-                      >
-                        <button className="btn btn--blue" type="button">Copy Command</button>
-                      </CopyToClipboard>
-                    </div>
-
-                    <form className="input-form" onSubmit={handleSubmit(enterPaymentTxId)}>
-                      <div className="form-group">
-                        <label htmlFor="paymentTxId">Payment txid</label>
-                        <input type="text" id="paymentTxId" ref={register} name="paymentTxId" className="styled" maxLength="64"/>
-                        <ErrorMessage
-                          errors={errors}
-                          name="paymentTxId"
-                          render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
-                        />
-                      </div>
-                      <div className="form-actions-spaced">
-                        <button className="btn btn-outline-primary" type="button" onClick={cancelProposalBtn}>Cancel</button>
-                        <button className="btn btn--blue" type="submit">Next</button>
-                      </div>
-                    </form>
-
-                  </Collapse>
-
-
-                  <Collapse
-                    isOpened={useCollapse}
-                    initialStyle={{height: 0, overflow: 'hidden'}}
-                  >
-                    <div className="form-group article">
-                      {/* Disclaimer about waiting before go_submit */}
-                      <div className="alert alert-warning mb-3 py-2 px-3" role="alert">
-                        <strong>Important:</strong> Please wait at least <b>5 minutes</b> or <b>1 block confirmation</b> after sending the payment transaction before running <code>go_submit</code>. Submitting too early may cause your proposal to fail.
-                      </div>
-                      <div className="cli-command-container">
-                        <textarea
-                          className="styled"
-                          name="submitCommand"
-                          id="submitCommand"
-                          rows="5"
-                          disabled
-                          value={submitCommand}
-                        ></textarea>
-                        <CopyToClipboard
-                          text={submitCommand}
-                          onCopy={copyButton}
-                        >
-                          <button className="copy-icon" type="button" title="Copy command">📋</button>
-                        </CopyToClipboard>
-                      </div>
-                      <small>
-                        <p style={{lineHeight: "1.5"}}>
-                          Submit command is ready to be copied. Please copy and paste it into Syscoin Q.T console to submit your proposal. This could take a couple minutes.
-                        </p>
-                      </small>
-                    </div>
-
-                    <div className="form-actions-spaced">
-                      <CopyToClipboard
-                        text={submitCommand}
-                        onCopy={copyButton}
-                      >
-                        <button className="btn btn--blue" type="button">Copy Command</button>
-                      </CopyToClipboard>
-                    </div>
-
-                    <form className="input-form" onSubmit={handleSubmit2(enterProposalHash)}>
-                      <div className="form-group">
-                        <label htmlFor="proposalHash">Proposal hash</label>
-                        <input type="text" id="proposalHash" ref={register2} name="proposalHash" className="styled" maxLength="64"/>
-                        <ErrorMessage
-                          errors={errors2}
-                          name="proposalHash"
-                          render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
-                        />
-                      </div>
-                      <div className="form-actions-spaced">
-                        <button className="btn btn-outline-primary" type="button" onClick={cancelProposalBtn}>Cancel</button>
-                        <button className="btn btn--blue" type="submit">Submit</button>
-                      </div>
-                    </form>
-                  </Collapse>
+          {/* Step 6: Submit Proposal */}
+          <div className={styles.stepItem}>
+            <div className={styles.stepHeader}>
+              <div className={`${styles.stepCircle} ${currentStep === 5 ? styles.active : currentStep > 5 ? styles.completed : styles.inactive}`}>
+                {currentStep > 5 ? <RiCheckLine /> : '6'}
+              </div>
+              <h4 className={`${styles.stepTitle} ${currentStep !== 5 ? styles.inactive : ''}`}>Submit Proposal</h4>
+            </div>
+            {currentStep === 5 && (
+              <div className={styles.stepForm}>
+                <div className={styles.stepFormBorder}></div>
+                <div className={styles.stepFormContent}>
+                  <SubmitProposal
+                    submitCommand={submitCommand}
+                    proposalUid={proposalUid}
+                    onCancel={cancelProposalBtn}
+                    enterProposalHash={enterProposalHash}
+                  />
                 </div>
               </div>
             )}
@@ -549,26 +439,102 @@ function ProposalForm() {
         open={openModal}
         onClose={cancelCurrentProposal}
       >
-        <h3>You were creating a proposal</h3>
-        <small>
-          <p style={{lineHeight: "1.5"}}>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <h3 style={{
+            fontSize: '1.5rem',
+            fontWeight: '600',
+            marginBottom: '0.75rem',
+            color: '#ffffff'
+          }}>
+            You were creating a proposal
+          </h3>
+          <p style={{
+            fontSize: '1rem',
+            lineHeight: '1.5',
+            color: 'rgba(255, 255, 255, 0.8)',
+            marginBottom: '1.5rem'
+          }}>
             Save and continue with the previous proposal info, or cancel it to create a new one
           </p>
-        </small>
-        <ProposalPreview title={title} description={description} url={url} payment={payment}/>
+        </div>
 
-        <button
-          className="btn btn-outline-primary"
-          style={{marginBottom: '10px', marginLeft: '10px'}}
-          onClick={cancelCurrentProposal}
-        >Cancel
-        </button>
-        <button
-          className="btn btn--blue"
-          style={{marginBottom: '10px', marginLeft: '10px'}}
-          onClick={continueProposal}
-        >Continue
-        </button>
+        <div style={{
+          marginBottom: '1.5rem',
+          padding: '1rem',
+          background: 'rgba(255, 255, 255, 0.05)',
+          borderRadius: '8px'
+        }}>
+          <div style={{ marginBottom: '0.75rem' }}>
+            <strong style={{ fontSize: '1.125rem', color: '#ffffff' }}>{title}</strong>
+          </div>
+          {description && (
+            <div style={{
+              marginBottom: '0.75rem',
+              color: 'rgba(255, 255, 255, 0.9)',
+              fontSize: '0.875rem'
+            }}>
+              {description.substring(0, 100)}{description.length > 100 ? '...' : ''}
+            </div>
+          )}
+          {payment && (
+            <>
+              <div style={{
+                display: 'inline-block',
+                backgroundColor: 'rgba(251, 176, 59, 0.2)',
+                color: '#FBB03B',
+                padding: '0.5rem',
+                borderRadius: '0.75rem',
+                fontSize: '0.875rem',
+                fontWeight: '600',
+                marginBottom: '0.5rem'
+              }}>
+                {payment.paymentAmount * payment.paymentNumber} SYS in {payment.paymentNumber} payment(s)
+              </div>
+              <div style={{
+                fontSize: '0.875rem',
+                color: 'rgba(255, 255, 255, 0.7)',
+                wordBreak: 'break-all'
+              }}>
+                Address: {payment.paymentAddress}
+              </div>
+            </>
+          )}
+        </div>
+
+        <div style={{
+          display: 'flex',
+          gap: '0.75rem',
+          justifyContent: 'flex-start'
+        }}>
+          <button
+            className="btn btn-white-outline"
+            style={{
+              flex: '1',
+              padding: '0.75rem 1.5rem',
+              fontSize: '1rem',
+              fontWeight: '500'
+            }}
+            onClick={cancelCurrentProposal}
+          >
+            Cancel
+          </button>
+          <button
+            className="btn"
+            style={{
+              flex: '1',
+              padding: '0.75rem 1.5rem',
+              fontSize: '1rem',
+              fontWeight: '500',
+              backgroundColor: '#FBB03B',
+              color: '#0a0a0a',
+              border: 'none',
+              borderRadius: '1000px'
+            }}
+            onClick={continueProposal}
+          >
+            Continue
+          </button>
+        </div>
 
       </CustomModal>
     </>

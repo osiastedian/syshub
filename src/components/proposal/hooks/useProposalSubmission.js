@@ -18,8 +18,6 @@ const useProposalSubmission = ({
   proposalUid,
   history,
   setSubmitCommand,
-  setUseCollapse,
-  setCollapse,
 }) => {
   const ensureProposalUid = useCallback(async () => {
     if (!proposalUid) {
@@ -91,8 +89,6 @@ const useProposalSubmission = ({
         }
 
         setSubmitCommand(commandSubmit)
-        setUseCollapse(true)
-        setCollapse(false)
 
         await swal.fire({
           icon: 'success',
@@ -120,7 +116,7 @@ const useProposalSubmission = ({
         clearCancelSource(cancelSource)
       }
     },
-    [clearCancelSource, createCancelSource, ensureProposalUid, proposalUid, setCollapse, setSubmitCommand, setUseCollapse]
+    [clearCancelSource, createCancelSource, ensureProposalUid, proposalUid, setSubmitCommand]
   )
 
   const confirmProposalCompletion = useCallback(

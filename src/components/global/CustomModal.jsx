@@ -16,16 +16,22 @@ export default function CustomModal(props) {
       center
       styles={{
         modal: {
-          background: '#242652',
-          borderRadius: '5px',
-          WebkitBorderRadius: '5px',
-          MozBorderRadius: '5px'
+          background: '#2E3354',
+          borderRadius: '12px',
+          WebkitBorderRadius: '12px',
+          MozBorderRadius: '12px',
+          padding: '2rem',
+          maxWidth: '600px',
+          width: '90%'
         },
-        closeButton: { fill: '#D3DFFF' }
+        closeButton: { fill: '#ffffff' },
+        overlay: {
+          background: 'rgba(0, 0, 0, 0.75)'
+        }
       }}
       blockScroll={false}
     >
-      <div className="article">
+      <div style={{ color: '#ffffff', textAlign: 'left' }}>
         {props.children}
       </div>
     </Modal>

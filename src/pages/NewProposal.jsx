@@ -4,7 +4,6 @@ import { withTranslation } from "react-i18next";
 
 import Background from "../components/global/Background";
 import BackgroundInner from "../components/global/BackgroundInner";
-import Title from "../components/global/Title";
 import ProposalForm from "../components/proposal/ProposalForm";
 
 /**
@@ -24,20 +23,9 @@ function NewProposal({ t }) {
           <meta name="keywords" content={t("proposal.meta.keywords")} />
           {/* <meta name="description" content={t("proposal.meta.description")} /> */}
         </MetaTags>
-        <div className="shell-large">
+        <div className="container">
           <div className="section__body">
-            <div className="articles">
-              <section className="article">
-                <div className="cols">
-                  <div className="col col--size-12">
-                    <div className="article__content article__content--pull-left text-center">
-                      <Title heading={t('proposal.data.heading')} />
-                      <ProposalForm />
-                    </div>
-                  </div>
-                </div>
-              </section>
-            </div>
+            <ProposalForm />
           </div>
         </div>
       </main>
