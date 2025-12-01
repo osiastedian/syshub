@@ -125,8 +125,8 @@ function DescriptionProposal({onNext, onBack}) {
     const characterCount = descriptionText.length;
 
     return (
-        <form className="input-form" onSubmit={handleSubmit(nextEditor)}>
-            <div className="form-group position-relative">
+        <form className="input-form w-100" onSubmit={handleSubmit(nextEditor)}>
+            <div className="form-group position-relative w-100">
                 {showEditor && (
                     <>
                         <div className="position-absolute top-0 end-0" style={{zIndex: 10, marginTop: '0.5rem', marginRight: '0.5rem'}}>
@@ -209,12 +209,12 @@ function DescriptionProposal({onNext, onBack}) {
                 )}
             </div>
 
-            <div className="form-group">
+            <div className="form-group w-100">
                 <label htmlFor="proposalUrl">URL</label>
                 <input
                     type="url"
                     placeholder="https://support.syscoin.org/example-proposal"
-                    className="form-control input-glass"
+                    className="form-control input-glass w-100"
                     name="proposalUrl"
                     id="proposalUrl"
                     ref={register}
@@ -231,7 +231,7 @@ function DescriptionProposal({onNext, onBack}) {
                 />
             </div>
 
-            <div className="form-actions-spaced d-flex gap-2">
+            <div className="form-actions-spaced d-flex gap-2 justify-content-start">
                 <button
                     className="btn btn-white-outline btn-chevron-left"
                     type="button"

@@ -145,3 +145,24 @@
   font-size: 18px;
   color: rgba(255, 255, 255, 0.5);
 }
+
+// ============================================================================
+// Editor & Preview Styles
+// ============================================================================
+
+.stepFormContent .proposalEditor-wrapper {
+  width: 100%;
+}
+
+.stepFormContent .proposalEditor-wrapper.article {
+  padding-top: 0;
+  padding-left: 0;
+}
+
+.stepFormContent .proposal-editor {
+  width: 100%;
+}
+
+.stepFormContent .proposalContent-div {
+  width: 100%;
+}
