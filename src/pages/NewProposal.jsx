@@ -5,6 +5,7 @@ import { withTranslation } from "react-i18next";
 import Background from "../components/global/Background";
 import BackgroundInner from "../components/global/BackgroundInner";
 import ProposalForm from "../components/proposal/ProposalForm";
+import "./NewProposal.scss";
 
 /**
  * Proposal page that shows at /create-proposal
