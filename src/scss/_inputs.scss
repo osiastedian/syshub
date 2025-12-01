@@ -158,11 +158,17 @@ input.styled-round {
 // ============================================================================
 
 .description,
-.form-text,
-small {
+.form-text {
   width: 100%;
   display: block;
   margin-bottom: $space-lg;
+  @include typography-body-small-regular;
+  color: $color-text-secondary;
+  line-height: $line-height-normal;
+}
+
+// Error messages and helper text in forms
+small {
   @include typography-body-small-regular;
   color: $color-text-secondary;
   line-height: $line-height-normal;
