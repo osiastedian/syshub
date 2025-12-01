@@ -138,22 +138,14 @@ function DescriptionProposal({onNext, onBack}) {
                             toolbar={{
                                 options: ["inline", "list"],
                                 inline: {
-                                    options: ["bold", "italic", "underline"],
+                                    options: ["bold", "italic", "underline", "monospace"],
                                 },
                                 list: {
                                     options: ["unordered", "ordered"],
                                 },
                             }}
-                            toolbarClassName="editor-toolbar"
-                            toolbarStyle={{
-                                background: '#1a1a1a',
-                                border: 'none',
-                                borderRadius: '0',
-                                display: 'flex',
-                                justifyContent: 'space-between',
-                                alignItems: 'center',
-                                padding: '12px 16px'
-                            }}
+                            toolbarClassName="toolbarClassName"
+                            toolbarStyle={{borderRadius: "3px", color: "#0f1f1f"}}
                             editorStyle={{
                                 paddingTop: '12px',
                                 paddingBottom: '12px',
