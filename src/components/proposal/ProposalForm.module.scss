@@ -161,8 +161,14 @@
 
 .stepFormContent .proposal-editor {
   width: 100%;
+  padding-right: 140px !important; // Reserve space for counter and preview button
 }
 
 .stepFormContent .proposalContent-div {
   width: 100%;
+}
+
+// Editor container to position counter and preview button
+.stepFormContent > div[style*="position: relative"] {
+  position: relative;
 }

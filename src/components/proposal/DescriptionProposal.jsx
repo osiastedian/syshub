@@ -129,22 +129,8 @@ function DescriptionProposal({onNext, onBack}) {
             <div className="form-group position-relative w-100">
                 {showEditor && (
                     <>
-                        <div className="position-absolute top-0 end-0" style={{zIndex: 10, marginTop: '0.5rem', marginRight: '0.5rem'}}>
-                            <button
-                                className="btn btn-outline-light btn-sm me-2"
-                                type="button"
-                                onClick={() => {
-                                    setShowPreview(true);
-                                    setShowEditor(false);
-                                }}
-                            >
-                                Preview
-                            </button>
-                            <small style={{color: '#fff'}}>
-                                {characterCount}/1000
-                            </small>
-                        </div>
-                        <Editor
+                        <div style={{position: 'relative', display: 'block'}}>
+                            <Editor
                             editorState={proposalDescription}
                             onEditorStateChange={onEditorStageChange}
                             wrapperClassName="proposalEditor-wrapper article"
@@ -166,6 +152,36 @@ function DescriptionProposal({onNext, onBack}) {
                                 color: "#ffffff",
                             }}
                         />
+                            <button
+                                className="btn btn-outline-light btn-sm me-2"
+                                type="button"
+                                style={{
+                                    position: 'absolute',
+                                    top: '12px',
+                                    right: '50px',
+                                    zIndex: 10
+                                }}
+                                onClick={() => {
+                                    setShowPreview(true);
+                                    setShowEditor(false);
+                                }}
+                            >
+                                Preview
+                            </button>
+                            <small
+                                style={{
+                                    position: 'absolute',
+                                    top: '12px',
+                                    right: '16px',
+                                    color: '#9fa6b0',
+                                    fontSize: '0.875rem',
+                                    zIndex: 10,
+                                    pointerEvents: 'none'
+                                }}
+                            >
+                                {characterCount}/1000
+                            </small>
+                        </div>
                         {editorEmpty(proposalDescription) && (
                             <small>
                                 <p style={{lineHeight: "1.5"}}>The description is required</p>
