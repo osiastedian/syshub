@@ -138,14 +138,22 @@ function DescriptionProposal({onNext, onBack}) {
                             toolbar={{
                                 options: ["inline", "list"],
                                 inline: {
-                                    options: ["bold", "italic", "underline", "monospace"],
+                                    options: ["bold", "italic", "underline"],
                                 },
                                 list: {
                                     options: ["unordered", "ordered"],
                                 },
                             }}
-                            toolbarClassName="toolbarClassName"
-                            toolbarStyle={{borderRadius: "3px", color: "#0f1f1f"}}
+                            toolbarClassName="editor-toolbar"
+                            toolbarStyle={{
+                                background: '#1a1a1a',
+                                border: 'none',
+                                borderRadius: '0',
+                                display: 'flex',
+                                justifyContent: 'space-between',
+                                alignItems: 'center',
+                                padding: '12px 16px'
+                            }}
                             editorStyle={{
                                 paddingTop: '12px',
                                 paddingBottom: '12px',
@@ -157,13 +165,20 @@ function DescriptionProposal({onNext, onBack}) {
                             }}
                         />
                             <button
-                                className="btn btn-outline-light btn-sm me-2"
+                                className="btn btn-white"
                                 type="button"
                                 style={{
                                     position: 'absolute',
                                     top: '12px',
-                                    right: '50px',
-                                    zIndex: 10
+                                    right: '16px',
+                                    zIndex: 10,
+                                    fontSize: '14px',
+                                    padding: '4px 12px',
+                                    height: 'auto',
+                                    borderRadius: '1000px',
+                                    border: '1px solid #ffffff',
+                                    background: 'transparent',
+                                    color: '#ffffff'
                                 }}
                                 onClick={() => {
                                     setShowPreview(true);
