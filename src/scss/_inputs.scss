@@ -409,7 +409,7 @@ input[type="radio"] {
   padding-top: $space-lg;
   display: flex;
   gap: $space-sm;
-  justify-content: center;
+  justify-content: flex-start;
   flex-wrap: wrap;
 
   .btn {
@@ -465,5 +465,26 @@ input[type="radio"] {
     width: 100% !important;
     padding: 0 !important;
     float: none !important;
+  }
+}
+
+// ============================================================================
+// Glass Input Style (Create Proposal Redesign)
+// ============================================================================
+
+.input-glass {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(50px);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  color: $color-neutral-white;
+
+  &:focus {
+    border-color: $color-brand-blue;
+    box-shadow: 0 0 0 3px rgba(31, 94, 255, 0.1);
+  }
+
+  &::placeholder {
+    color: #9fa6b0;
   }
 }

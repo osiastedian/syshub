@@ -354,3 +354,54 @@ a.btn-primary--dark-text {
     margin: 0;
   }
 }
+
+// ============================================================================
+// White Button Variants (Create Proposal Redesign)
+// ============================================================================
+
+.btn-white {
+  background-color: $color-neutral-white;
+  color: $color-neutral-black;
+  border-radius: 1000px;
+  min-width: 158px;
+  height: 40px;
+  border: none;
+  font-weight: 500;
+
+  &:hover {
+    background-color: darken($color-neutral-white, 10%);
+    color: $color-neutral-black;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+}
+
+.btn-white-outline {
+  background: transparent;
+  color: $color-neutral-white;
+  border: 1px solid $color-neutral-white;
+  border-radius: 1000px;
+  min-width: 158px;
+  height: 40px;
+  font-weight: 500;
+
+  &:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: $color-neutral-white;
+    border-color: $color-neutral-white;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+  }
+}
+
+.btn-chevron-right::after {
+  content: ' >';
+}
+
+.btn-chevron-left::before {
+  content: '< ';
+}

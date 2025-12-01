@@ -7,6 +7,7 @@ import {useForm} from "react-hook-form";
 import {ErrorMessage} from '@hookform/error-message';
 import {yupResolver} from '@hookform/resolvers';
 import * as yup from "yup";
+import {RiCheckLine} from 'react-icons/ri';
 
 import {checkProposal, prepareProposal, notCompletedProposal, destroyProposal} from "../../utils/request";
 import {getAxiosErrorFooter, getAxiosErrorMessage, logAxiosError} from "../../utils/errorHandler";
@@ -18,6 +19,7 @@ import PaymentProposal from './PaymentProposal';
 import ProposalPreview from "./ProposalPreview";
 import axios from 'axios';
 import useProposalSubmission from './hooks/useProposalSubmission';
+import styles from './ProposalForm.module.scss';
 
 
 const schema = yup.object().shape({
@@ -319,174 +321,226 @@ function ProposalForm() {
 
   }
 
-  
+
   return (
     <>
-      <div className="input-form">
-        <div className="form-group">
-          <div className="wizard-head">
-            <span>1</span>Title
-          </div>
-          <div className={`wizard-body ${currentStep === 0 ? "" : "collapsed"}`}>
-            <TitleProposal onNext={getTitle}/>
+      <div className="d-flex flex-column align-items-center gap-5 py-5 px-3">
+        {/* Page Header */}
+        <div className={`${styles.pageHeader} text-center`}>
+          <h3 className={`${styles.pageTitle} fw-semibold`}>Create a proposal</h3>
+          <p className={`${styles.pageSubtitle} text-white-50`}>All requested information is required for proposal submission</p>
+        </div>
 
-          </div>
-
-          <div className="wizard-head">
-            <span>2</span>Description
-          </div>
-          <div className={`wizard-body ${currentStep === 1 ? "" : "collapsed"}`}>
-            <DescriptionProposal onNext={getDescription} onBack={back}/>
-
-          </div>
-
-          <div className="wizard-head">
-            <span>3</span>Payment details
-          </div>
-          <div className={`wizard-body ${currentStep === 2 ? "" : "collapsed"}`}>
-            <PaymentProposal onNext={getPayment} onBack={back}/>
-
-          </div>
-
-          <div className="wizard-head">
-            <span>4</span>Preview proposal
-          </div>
-          <div className={`wizard-body ${currentStep === 3 ? "" : "collapsed"}`}>
-            <div className="article">
-              <ProposalPreview title={title} description={description} url={url} payment={payment}/>
-
-              <div className="form-actions-spaced">
-                <button className="btn btn-outline-primary" type="button" onClick={back}>Back</button>
-                <button
-                  className="btn btn--blue"
-                  type="button"
-                  onClick={checkProposalAndPrepare}
-                  disabled={preparing}
-                >Prepare
-                </button>
+        {/* Step Indicators Container */}
+        <div className={styles.stepContainer}>
+          {/* Step 1: Title */}
+          <div className={styles.stepItem}>
+            <div className={styles.stepHeader}>
+              <div className={`${styles.stepCircle} ${currentStep === 0 ? styles.active : currentStep > 0 ? styles.completed : styles.inactive}`}>
+                {currentStep > 0 ? <RiCheckLine /> : '1'}
               </div>
-
+              <h4 className={`${styles.stepTitle} ${currentStep !== 0 ? styles.inactive : ''}`}>Proposal Title</h4>
             </div>
-
+            {currentStep === 0 && (
+              <div className={styles.stepForm}>
+                <div className={styles.stepFormBorder}></div>
+                <div className={styles.stepFormContent}>
+                  <TitleProposal onNext={getTitle}/>
+                </div>
+              </div>
+            )}
           </div>
 
-          <div className="wizard-head">
-            <span>5</span>Create proposal
+          {/* Step 2: Description */}
+          <div className={styles.stepItem}>
+            <div className={styles.stepHeader}>
+              <div className={`${styles.stepCircle} ${currentStep === 1 ? styles.active : currentStep > 1 ? styles.completed : styles.inactive}`}>
+                {currentStep > 1 ? <RiCheckLine /> : '2'}
+              </div>
+              <h4 className={`${styles.stepTitle} ${currentStep !== 1 ? styles.inactive : ''}`}>Description</h4>
+            </div>
+            {currentStep === 1 && (
+              <div className={styles.stepForm}>
+                <div className={styles.stepFormBorder}></div>
+                <div className={styles.stepFormContent}>
+                  <DescriptionProposal onNext={getDescription} onBack={back}/>
+                </div>
+              </div>
+            )}
           </div>
-          <div className={`wizard-body ${currentStep === 4 ? "" : "collapsed"}`}>
-            <Collapse
-              isOpened={collapse}
-              initialStyle={{height: 0, overflow: 'hidden'}}
-            >
-              <div className="form-group article">
-                <div className="cli-command-container">
-                  <textarea
-                    className="styled"
-                    name="prepareCommand"
-                    id="prepareCommand"
-                    rows="5"
-                    disabled
-                    value={prepareCommand}
-                  ></textarea>
-                  <CopyToClipboard
-                    text={prepareCommand}
-                    onCopy={copyButton}
-                  >
-                    <button className="copy-icon" type="button" title="Copy command">📋</button>
-                  </CopyToClipboard>
+
+          {/* Step 3: Payment details */}
+          <div className={styles.stepItem}>
+            <div className={styles.stepHeader}>
+              <div className={`${styles.stepCircle} ${currentStep === 2 ? styles.active : currentStep > 2 ? styles.completed : styles.inactive}`}>
+                {currentStep > 2 ? <RiCheckLine /> : '3'}
+              </div>
+              <h4 className={`${styles.stepTitle} ${currentStep !== 2 ? styles.inactive : ''}`}>Payment details</h4>
+            </div>
+            {currentStep === 2 && (
+              <div className={styles.stepForm}>
+                <div className={styles.stepFormBorder}></div>
+                <div className={styles.stepFormContent}>
+                  <PaymentProposal onNext={getPayment} onBack={back}/>
                 </div>
-                <small>
-                  <p style={{lineHeight: "1.5"}}>
-                    Prepare command is ready to be copied. Please copy and paste it into Syscoin Q.T console for payment txid.
-                  </p>
-                </small>
               </div>
+            )}
+          </div>
 
-              <div className="form-actions-spaced">
-                <CopyToClipboard
-                  text={prepareCommand}
-                  onCopy={copyButton}
-                >
-                  <button className="btn btn--blue" type="button">Copy Command</button>
-                </CopyToClipboard>
+          {/* Step 4: Preview proposal */}
+          <div className={styles.stepItem}>
+            <div className={styles.stepHeader}>
+              <div className={`${styles.stepCircle} ${currentStep === 3 ? styles.active : currentStep > 3 ? styles.completed : styles.inactive}`}>
+                {currentStep > 3 ? <RiCheckLine /> : '4'}
               </div>
-
-              <form className="input-form" onSubmit={handleSubmit(enterPaymentTxId)}>
-                <div className="form-group">
-                  <label htmlFor="paymentTxId">Payment txid</label>
-                  <input type="text" id="paymentTxId" ref={register} name="paymentTxId" className="styled" maxLength="64"/>
-                  <ErrorMessage
-                    errors={errors}
-                    name="paymentTxId"
-                    render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
+              <h4 className={`${styles.stepTitle} ${currentStep !== 3 ? styles.inactive : ''}`}>Preview proposal</h4>
+            </div>
+            {currentStep === 3 && (
+              <div className={styles.stepForm}>
+                <div className={styles.stepFormBorder}></div>
+                <div className={styles.stepFormContent}>
+                  <ProposalPreview
+                    title={title}
+                    description={description}
+                    url={url}
+                    payment={payment}
+                    onNext={checkProposalAndPrepare}
+                    onBack={back}
+                    preparing={preparing}
                   />
                 </div>
-                <div className="form-actions-spaced">
-                  <button className="btn btn-outline-primary" type="button" onClick={cancelProposalBtn}>Cancel</button>
-                  <button className="btn btn--blue" type="submit">Next</button>
-                </div>
-              </form>
+              </div>
+            )}
+          </div>
 
-            </Collapse>
-
-
-            <Collapse
-              isOpened={useCollapse}
-              initialStyle={{height: 0, overflow: 'hidden'}}
-            >
-              <div className="form-group article">
-                {/* Disclaimer about waiting before go_submit */}
-                <div className="alert alert-warning mb-3 py-2 px-3" role="alert">
-                  <strong>Important:</strong> Please wait at least <b>5 minutes</b> or <b>1 block confirmation</b> after sending the payment transaction before running <code>go_submit</code>. Submitting too early may cause your proposal to fail.
-                </div>
-                <div className="cli-command-container">
-                  <textarea
-                    className="styled"
-                    name="submitCommand"
-                    id="submitCommand"
-                    rows="5"
-                    disabled
-                    value={submitCommand}
-                  ></textarea>
-                  <CopyToClipboard
-                    text={submitCommand}
-                    onCopy={copyButton}
+          {/* Step 5: Create proposal */}
+          <div className={styles.stepItem}>
+            <div className={styles.stepHeader}>
+              <div className={`${styles.stepCircle} ${currentStep === 4 ? styles.active : currentStep > 4 ? styles.completed : styles.inactive}`}>
+                {currentStep > 4 ? <RiCheckLine /> : '5'}
+              </div>
+              <h4 className={`${styles.stepTitle} ${currentStep !== 4 ? styles.inactive : ''}`}>Create proposal</h4>
+            </div>
+            {currentStep === 4 && (
+              <div className={styles.stepForm}>
+                <div className={styles.stepFormBorder}></div>
+                <div className={styles.stepFormContent}>
+                  <Collapse
+                    isOpened={collapse}
+                    initialStyle={{height: 0, overflow: 'hidden'}}
                   >
-                    <button className="copy-icon" type="button" title="Copy command">📋</button>
-                  </CopyToClipboard>
-                </div>
-                <small>
-                  <p style={{lineHeight: "1.5"}}>
-                    Submit command is ready to be copied. Please copy and paste it into Syscoin Q.T console to submit your proposal. This could take a couple minutes.
-                  </p>
-                </small>
-              </div>
+                    <div className="form-group article">
+                      <div className="cli-command-container">
+                        <textarea
+                          className="styled"
+                          name="prepareCommand"
+                          id="prepareCommand"
+                          rows="5"
+                          disabled
+                          value={prepareCommand}
+                        ></textarea>
+                        <CopyToClipboard
+                          text={prepareCommand}
+                          onCopy={copyButton}
+                        >
+                          <button className="copy-icon" type="button" title="Copy command">📋</button>
+                        </CopyToClipboard>
+                      </div>
+                      <small>
+                        <p style={{lineHeight: "1.5"}}>
+                          Prepare command is ready to be copied. Please copy and paste it into Syscoin Q.T console for payment txid.
+                        </p>
+                      </small>
+                    </div>
 
-              <div className="form-actions-spaced">
-                <CopyToClipboard
-                  text={submitCommand}
-                  onCopy={copyButton}
-                >
-                  <button className="btn btn--blue" type="button">Copy Command</button>
-                </CopyToClipboard>
-              </div>
+                    <div className="form-actions-spaced">
+                      <CopyToClipboard
+                        text={prepareCommand}
+                        onCopy={copyButton}
+                      >
+                        <button className="btn btn--blue" type="button">Copy Command</button>
+                      </CopyToClipboard>
+                    </div>
 
-              <form className="input-form" onSubmit={handleSubmit2(enterProposalHash)}>
-                <div className="form-group">
-                  <label htmlFor="proposalHash">Proposal hash</label>
-                  <input type="text" id="proposalHash" ref={register2} name="proposalHash" className="styled" maxLength="64"/>
-                  <ErrorMessage
-                    errors={errors2}
-                    name="proposalHash"
-                    render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
-                  />
+                    <form className="input-form" onSubmit={handleSubmit(enterPaymentTxId)}>
+                      <div className="form-group">
+                        <label htmlFor="paymentTxId">Payment txid</label>
+                        <input type="text" id="paymentTxId" ref={register} name="paymentTxId" className="styled" maxLength="64"/>
+                        <ErrorMessage
+                          errors={errors}
+                          name="paymentTxId"
+                          render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
+                        />
+                      </div>
+                      <div className="form-actions-spaced">
+                        <button className="btn btn-outline-primary" type="button" onClick={cancelProposalBtn}>Cancel</button>
+                        <button className="btn btn--blue" type="submit">Next</button>
+                      </div>
+                    </form>
+
+                  </Collapse>
+
+
+                  <Collapse
+                    isOpened={useCollapse}
+                    initialStyle={{height: 0, overflow: 'hidden'}}
+                  >
+                    <div className="form-group article">
+                      {/* Disclaimer about waiting before go_submit */}
+                      <div className="alert alert-warning mb-3 py-2 px-3" role="alert">
+                        <strong>Important:</strong> Please wait at least <b>5 minutes</b> or <b>1 block confirmation</b> after sending the payment transaction before running <code>go_submit</code>. Submitting too early may cause your proposal to fail.
+                      </div>
+                      <div className="cli-command-container">
+                        <textarea
+                          className="styled"
+                          name="submitCommand"
+                          id="submitCommand"
+                          rows="5"
+                          disabled
+                          value={submitCommand}
+                        ></textarea>
+                        <CopyToClipboard
+                          text={submitCommand}
+                          onCopy={copyButton}
+                        >
+                          <button className="copy-icon" type="button" title="Copy command">📋</button>
+                        </CopyToClipboard>
+                      </div>
+                      <small>
+                        <p style={{lineHeight: "1.5"}}>
+                          Submit command is ready to be copied. Please copy and paste it into Syscoin Q.T console to submit your proposal. This could take a couple minutes.
+                        </p>
+                      </small>
+                    </div>
+
+                    <div className="form-actions-spaced">
+                      <CopyToClipboard
+                        text={submitCommand}
+                        onCopy={copyButton}
+                      >
+                        <button className="btn btn--blue" type="button">Copy Command</button>
+                      </CopyToClipboard>
+                    </div>
+
+                    <form className="input-form" onSubmit={handleSubmit2(enterProposalHash)}>
+                      <div className="form-group">
+                        <label htmlFor="proposalHash">Proposal hash</label>
+                        <input type="text" id="proposalHash" ref={register2} name="proposalHash" className="styled" maxLength="64"/>
+                        <ErrorMessage
+                          errors={errors2}
+                          name="proposalHash"
+                          render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
+                        />
+                      </div>
+                      <div className="form-actions-spaced">
+                        <button className="btn btn-outline-primary" type="button" onClick={cancelProposalBtn}>Cancel</button>
+                        <button className="btn btn--blue" type="submit">Submit</button>
+                      </div>
+                    </form>
+                  </Collapse>
                 </div>
-                <div className="form-actions-spaced">
-                  <button className="btn btn-outline-primary" type="button" onClick={cancelProposalBtn}>Cancel</button>
-                  <button className="btn btn--blue" type="submit">Submit</button>
-                </div>
-              </form>
-            </Collapse>
+              </div>
+            )}
           </div>
         </div>
       </div>

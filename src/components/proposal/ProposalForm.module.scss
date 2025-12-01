@@ -1,0 +1,147 @@
+// Step indicator container
+.stepContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+  max-width: 894px;
+}
+
+// Individual step wrapper
+.stepItem {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: relative;
+  padding-left: 0;
+}
+
+// Vertical connecting line (left of steps)
+.stepItem::before {
+  content: '';
+  position: absolute;
+  left: 20px;
+  top: 60px;
+  width: 1px;
+  height: 80px;
+  background-color: #FBB03B;
+  z-index: 0;
+}
+
+.stepItem:last-child::before {
+  display: none;
+}
+
+// Step header (number/icon + title)
+.stepHeader {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+// Step circle container
+.stepCircle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-weight: 700;
+  font-size: 18px;
+  position: relative;
+}
+
+// Active step - gold filled circle with white number
+.stepCircle.active {
+  background-color: #FBB03B;
+  color: #ffffff;
+  border: 2px solid #FBB03B;
+}
+
+// Completed step - gold filled circle with white checkmark
+.stepCircle.completed {
+  background-color: #FBB03B;
+  color: #ffffff;
+  border: 2px solid #FBB03B;
+  font-size: 20px;
+}
+
+// Inactive step - gold outline circle with gold number
+.stepCircle.inactive {
+  background-color: transparent;
+  color: #FBB03B;
+  border: 2px solid #FBB03B;
+  opacity: 0.5;
+}
+
+// Step title text
+.stepTitle {
+  font-weight: 700;
+  font-size: 16px;
+  color: #ffffff;
+}
+
+.stepTitle.inactive {
+  opacity: 0.5;
+}
+
+// Step form content (shown only for active step)
+.stepForm {
+  display: flex;
+  gap: 32px;
+  padding-left: 20px;
+  position: relative;
+  z-index: 1;
+}
+
+.stepForm.collapsed {
+  display: none;
+}
+
+// Left border line indicator
+.stepFormBorder {
+  width: 1px;
+  background-color: #FBB03B;
+  min-height: 100%;
+  flex-shrink: 0;
+}
+
+// Form content wrapper
+.stepFormContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+}
+
+// Character counter positioning
+.charCounter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 14px;
+  color: #9fa6b0;
+  padding: 4px 0;
+}
+
+// Page header
+.pageHeader {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.pageTitle {
+  font-size: 38px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 16px;
+}
+
+.pageSubtitle {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.5);
+}

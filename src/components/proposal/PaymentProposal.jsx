@@ -210,38 +210,50 @@ const PaymentProposal = ({onNext, onBack}) => {
 
   return (
     <form className="input-form" onSubmit={handleSubmit(nextPayment)}>
-      <div className="form-group">
-        <label htmlFor="paymentNumber">Number of payments</label>
-        <input
-          type="number"
-          id="paymentNumber"
-          ref={register}
-          name="paymentNumber"
-          className="styled"
-          onChange={paymentQuantityValue}
-        />
-        <ErrorMessage
-          errors={errors}
-          name="paymentNumber"
-          render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
-        />
-      </div>
-      <div className="form-group">
-        <label htmlFor="paymentAmount">Amount</label>
-        <input
-          type="number"
-          id="paymentAmount"
-          ref={register}
-          name="paymentAmount"
-          className="styled"
-          onChange={paymentQuantityValue}
-        />
-        <small><p style={{lineHeight: '1.5'}}>{watchedAmount} SYS</p></small>
-        <ErrorMessage
-          errors={errors}
-          name="paymentAmount"
-          render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
-        />
+      <div className="row g-4 mb-3">
+        <div className="col-md-6">
+          <div className="form-group">
+            <label htmlFor="paymentNumber">Number of payments</label>
+            <input
+              type="number"
+              id="paymentNumber"
+              ref={register}
+              name="paymentNumber"
+              className="form-control input-glass"
+              onChange={paymentQuantityValue}
+            />
+            <ErrorMessage
+              errors={errors}
+              name="paymentNumber"
+              render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
+            />
+          </div>
+        </div>
+        <div className="col-md-6">
+          <div className="form-group">
+            <label htmlFor="paymentAmount">Amount per payment</label>
+            <div className="input-group">
+              <input
+                type="number"
+                id="paymentAmount"
+                ref={register}
+                name="paymentAmount"
+                className="form-control input-glass"
+                onChange={paymentQuantityValue}
+              />
+              <span className="input-group-text" style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                border: '1px solid rgba(255, 255, 255, 0.2)',
+                color: '#fff'
+              }}>SYS</span>
+            </div>
+            <ErrorMessage
+              errors={errors}
+              name="paymentAmount"
+              render={({message}) => <small><p style={{lineHeight: '1.5'}}>{message}</p></small>}
+            />
+          </div>
+        </div>
       </div>
       <div className="form-group">
         <label htmlFor="paymentAddress">Payment address</label>
@@ -249,7 +261,7 @@ const PaymentProposal = ({onNext, onBack}) => {
           type="text"
           id="paymentAddress"
           name="paymentAddress"
-          className="styled"
+          className="form-control input-glass"
           ref={register}
         />
         <ErrorMessage
@@ -294,9 +306,9 @@ const PaymentProposal = ({onNext, onBack}) => {
           {`Total amount: ${totalAmount || amount} SYS`}
         </p>
       </div>
-      <div className="form-actions-spaced">
-        <button className="btn btn-outline-primary" type="button" onClick={onBack}>Back</button>
-        <button className="btn btn--blue" type="submit" disabled={!theDatesWereLoaded}>Next</button>
+      <div className="form-actions-spaced d-flex gap-2">
+        <button className="btn btn-white-outline btn-chevron-left" type="button" onClick={onBack}>Back</button>
+        <button className="btn btn-white btn-chevron-right" type="submit" disabled={!theDatesWereLoaded}>Next</button>
       </div>
     </form>
   )

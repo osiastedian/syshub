@@ -20,30 +20,54 @@ const schema = yup.object().shape({
  * )
  */
 function TitleProposal({ onNext }) {
-  
-  const { register, watch, handleSubmit, errors } = useForm({
-    mode: 'onSubmit',
+
+  const { register, watch, handleSubmit, errors, formState } = useForm({
+    mode: 'onChange',
     resolver: yupResolver(schema),
     defaultValues: {
       proposalTitle: ''
     }
   });
-  const watchedTitle = watch('proposalTitle');
+  const watchedTitle = watch('proposalTitle') || '';
 
   return (
-    <form className="input-form" onSubmit={handleSubmit(onNext)}>
-      <div className="form-group">
-        <label htmlFor="proposalTitle">Proposal title</label>
-        <input type="text" id="proposalTitle" ref={register} name="proposalTitle" className="styled" maxLength="40" />
-        <small><p style={{lineHeight:'1.5'}}>{40 - watchedTitle.length} characters left.</p></small>
+    <form className="input-form w-100" onSubmit={handleSubmit(onNext)}>
+      <div className="form-group position-relative mb-4">
+        <div style={{position: 'relative', display: 'block'}}>
+          <input
+            type="text"
+            id="proposalTitle"
+            ref={register}
+            name="proposalTitle"
+            className="form-control input-glass w-100"
+            maxLength="40"
+            placeholder=" "
+            style={{paddingRight: '80px'}}
+          />
+          <small
+            style={{
+              fontSize: '0.875rem',
+              color: '#9fa6b0',
+              pointerEvents: 'none',
+              position: 'absolute',
+              top: '50%',
+              right: '16px',
+              transform: 'translateY(-50%)',
+              width: 'auto',
+              marginBottom: 0
+            }}
+          >
+            {watchedTitle.length}/40
+          </small>
+        </div>
         <ErrorMessage
           errors={errors}
           name="proposalTitle"
-          render={({ message }) => <small><p style={{lineHeight:'1.5'}}>{message}</p></small>}
+          render={({ message }) => <small className="d-block mt-2 text-danger"><p style={{lineHeight:'1.5', margin: 0}}>{message}</p></small>}
         />
       </div>
-      <div className="form-actions-spaced">
-        <button className="btn btn--blue" type="submit">Next</button>
+      <div className="form-actions-spaced mt-4">
+        <button className="btn btn-white btn-chevron-right" type="submit">Next</button>
       </div>
     </form>
   )

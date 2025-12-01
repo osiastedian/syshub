@@ -15,6 +15,7 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 
 const schema = yup.object().shape({
     proposalUrl: yup.string().url("Must be a valid url").required("URL is required"),
+    proposalDescription: yup.string().max(1000, 'Description must be at most 1000 characters')
 });
 
 
@@ -119,23 +120,42 @@ function DescriptionProposal({onNext, onBack}) {
         onNext({proposalDescription: escape(descriptionRaw), ...data});
     };
 
+    // Calculate character count for description
+    const descriptionText = proposalDescription.getCurrentContent().getPlainText();
+    const characterCount = descriptionText.length;
+
     return (
         <form className="input-form" onSubmit={handleSubmit(nextEditor)}>
-            <div className="form-group">
+            <div className="form-group position-relative">
                 {showEditor && (
                     <>
+                        <div className="position-absolute top-0 end-0" style={{zIndex: 10, marginTop: '0.5rem', marginRight: '0.5rem'}}>
+                            <button
+                                className="btn btn-outline-light btn-sm me-2"
+                                type="button"
+                                onClick={() => {
+                                    setShowPreview(true);
+                                    setShowEditor(false);
+                                }}
+                            >
+                                Preview
+                            </button>
+                            <small style={{color: '#fff'}}>
+                                {characterCount}/1000
+                            </small>
+                        </div>
                         <Editor
                             editorState={proposalDescription}
                             onEditorStateChange={onEditorStageChange}
                             wrapperClassName="proposalEditor-wrapper article"
-                            editorClassName="proposal-editor styled"
+                            editorClassName="proposal-editor input-glass"
                             toolbar={{
                                 options: ["inline", "list"],
                                 inline: {
                                     options: ["bold", "italic", "underline", "monospace"],
-                                    list: {
-                                        options: ["unordered", "ordered"],
-                                    },
+                                },
+                                list: {
+                                    options: ["unordered", "ordered"],
                                 },
                             }}
                             toolbarClassName="toolbarClassName"
@@ -144,7 +164,6 @@ function DescriptionProposal({onNext, onBack}) {
                                 paddingTop: 0,
                                 paddingBottom: 0,
                                 color: "#ffffff",
-                                backgroundColor: "rgba(138, 196, 247, 0.322)",
                             }}
                         />
                         {editorEmpty(proposalDescription) && (
@@ -156,23 +175,37 @@ function DescriptionProposal({onNext, onBack}) {
                 )}
 
                 {showPreview && (
-                    <div className="proposals">
-                        <div className="proposal">
-                            <div
-                                className="proposalContent-div"
-                                id="preview-html-container"
-                                dangerouslySetInnerHTML={{
-                                    __html: DOMPurify.sanitize(
-                                        draftToHtml(
-                                            convertToRaw(proposalDescription.getCurrentContent())
-                                        ),
-                                        {ALLOWED_TAGS: ['p', '#text']}
-                                    ),
+                    <>
+                        <div className="position-absolute top-0 end-0" style={{zIndex: 10, marginTop: '0.5rem', marginRight: '0.5rem'}}>
+                            <button
+                                className="btn btn-outline-light btn-sm"
+                                type="button"
+                                onClick={() => {
+                                    setShowPreview(false);
+                                    setShowEditor(true);
                                 }}
-                                style={{margin: "0 10px"}}
-                            ></div>
+                            >
+                                Editor
+                            </button>
                         </div>
-                    </div>
+                        <div className="proposals">
+                            <div className="proposal">
+                                <div
+                                    className="proposalContent-div"
+                                    id="preview-html-container"
+                                    dangerouslySetInnerHTML={{
+                                        __html: DOMPurify.sanitize(
+                                            draftToHtml(
+                                                convertToRaw(proposalDescription.getCurrentContent())
+                                            ),
+                                            {ALLOWED_TAGS: ['p', '#text']}
+                                        ),
+                                    }}
+                                    style={{margin: "0 10px"}}
+                                ></div>
+                            </div>
+                        </div>
+                    </>
                 )}
             </div>
 
@@ -181,7 +214,7 @@ function DescriptionProposal({onNext, onBack}) {
                 <input
                     type="url"
                     placeholder="https://support.syscoin.org/example-proposal"
-                    className="styled"
+                    className="form-control input-glass"
                     name="proposalUrl"
                     id="proposalUrl"
                     ref={register}
@@ -198,42 +231,19 @@ function DescriptionProposal({onNext, onBack}) {
                 />
             </div>
 
-            <div className="form-actions-spaced">
+            <div className="form-actions-spaced d-flex gap-2">
                 <button
-                    className="btn btn-outline-primary"
+                    className="btn btn-white-outline btn-chevron-left"
                     type="button"
                     onClick={backEditor}
                 >
                     Back
                 </button>
 
-                {showEditor && (
-                    <button
-                        className="btn btn-outline-primary"
-                        onClick={() => {
-                            setShowPreview(true);
-                            setShowEditor(false);
-                        }}
-                    >
-                        Preview
-                    </button>
-                )}
-                {showPreview && (
-                    <button
-                        className="btn btn-outline-primary"
-                        onClick={() => {
-                            setShowPreview(false);
-                            setShowEditor(true);
-                        }}
-                    >
-                        Editor
-                    </button>
-                )}
-
                 <button
-                    className="btn btn--blue"
+                    className="btn btn-white btn-chevron-right"
                     type="submit"
-                    disabled={editorEmpty(proposalDescription)}
+                    disabled={editorEmpty(proposalDescription) || characterCount > 1000}
                 >
                     Next
                 </button>
