@@ -157,7 +157,6 @@ function DescriptionProposal({onNext, onBack}) {
                             }}
                         />
                             <button
-                                className="btn btn-white"
                                 type="button"
                                 style={{
                                     position: 'absolute',
@@ -165,12 +164,15 @@ function DescriptionProposal({onNext, onBack}) {
                                     right: '16px',
                                     zIndex: 20,
                                     fontSize: '14px',
-                                    padding: '4px 12px',
-                                    height: 'auto',
+                                    padding: '6px 16px',
+                                    height: '32px',
                                     borderRadius: '1000px',
                                     border: '1px solid #ffffff',
                                     background: 'transparent',
-                                    color: '#ffffff'
+                                    color: '#ffffff',
+                                    cursor: 'pointer',
+                                    fontFamily: '"DM Sans", sans-serif',
+                                    fontWeight: '500'
                                 }}
                                 onClick={() => {
                                     setShowPreview(true);
@@ -203,10 +205,25 @@ function DescriptionProposal({onNext, onBack}) {
 
                 {showPreview && (
                     <>
-                        <div className="position-absolute top-0 end-0" style={{zIndex: 10, marginTop: '0.5rem', marginRight: '0.5rem'}}>
+                        <div style={{position: 'relative', display: 'block'}}>
                             <button
-                                className="btn btn-outline-light btn-sm"
                                 type="button"
+                                style={{
+                                    position: 'absolute',
+                                    top: '12px',
+                                    right: '16px',
+                                    zIndex: 20,
+                                    fontSize: '14px',
+                                    padding: '6px 16px',
+                                    height: '32px',
+                                    borderRadius: '1000px',
+                                    border: '1px solid #ffffff',
+                                    background: 'transparent',
+                                    color: '#ffffff',
+                                    cursor: 'pointer',
+                                    fontFamily: '"DM Sans", sans-serif',
+                                    fontWeight: '500'
+                                }}
                                 onClick={() => {
                                     setShowPreview(false);
                                     setShowEditor(true);
