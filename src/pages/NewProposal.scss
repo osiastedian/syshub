@@ -73,6 +73,22 @@
   height: 40px;
   padding: 4px 12px 4px 4px;
   gap: 13px;
+  background: #ffffff;
+  color: #0a0a0a;
+  border: none;
+
+  &:hover:not(:disabled) {
+    background: darken(#ffffff, 10%);
+    color: #0a0a0a;
+  }
+
+  &:disabled,
+  &.disabled {
+    background: #ffffff !important;
+    color: #0a0a0a !important;
+    border: none !important;
+    opacity: 0.5 !important;
+  }
 
   @media (max-width: 768px) {
     // Full-width pill button on mobile
