@@ -39,7 +39,7 @@
 
 // Back button - follows CTAButton pattern
 .btn-back {
-  width: 100%;
+  width: 158px;
   height: 40px;
   padding: 4px 12px 4px 4px;
   gap: 13px;
@@ -69,19 +69,20 @@
 
 // Next button - follows CTAButton pattern
 .btn-next {
-  width: 100%;
+  width: 158px;
   height: 40px;
-  padding: 4px 4px 4px 12px;
+  padding: 4px 12px 4px 4px;
   gap: 13px;
 
   @media (max-width: 768px) {
     // Full-width pill button on mobile
     flex: 1 !important;
     min-width: auto !important;
+    width: auto !important;
     background: #ffffff !important;
     color: #0a0a0a !important;
     border: none !important;
-    padding: 4px 4px 4px 12px !important;
+    padding: 4px 12px 4px 4px !important;
 
     .btn-icon {
       width: 32px;
