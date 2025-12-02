@@ -195,6 +195,14 @@ const useProposalSubmission = ({
           allowEscapeKey: false,
           timer: TEN_MINUTES_MS,
           timerProgressBar: true,
+          background: '#2E3354',
+          color: '#ffffff',
+          customClass: {
+            popup: 'dark-modal',
+            title: 'dark-modal-title',
+            htmlContainer: 'dark-modal-content',
+            timerProgressBar: 'dark-modal-progress'
+          },
           didOpen: () => {
             swal.showLoading()
             const content = swal.getHtmlContainer()

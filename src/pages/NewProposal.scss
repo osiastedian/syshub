@@ -5,6 +5,38 @@
 // ============================================================================
 
 // ============================================================================
+// SweetAlert2 Dark Theme
+// ============================================================================
+
+:global {
+  .dark-modal {
+    border-radius: 12px !important;
+  }
+
+  .dark-modal-title {
+    color: #ffffff !important;
+    font-size: 1.5rem !important;
+    font-weight: 600 !important;
+  }
+
+  .dark-modal-content {
+    color: rgba(255, 255, 255, 0.8) !important;
+    font-size: 1rem !important;
+  }
+
+  .dark-modal-progress {
+    background: #FBB03B !important;
+  }
+
+  // Dark theme for SweetAlert2 loading spinner
+  .swal2-popup.dark-modal {
+    .swal2-loader {
+      border-color: #FBB03B transparent #FBB03B transparent !important;
+    }
+  }
+}
+
+// ============================================================================
 // Mobile Responsive Styles
 // ============================================================================
 
@@ -33,7 +65,6 @@
 }
 
 .btn-text {
-  flex: 1;
   text-align: left;
 }
 
