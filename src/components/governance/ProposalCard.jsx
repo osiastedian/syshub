@@ -99,12 +99,14 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
     var unixTimestamp = creationTime;
     var milliseconds = unixTimestamp * 1000;
     const dateObject = new Date(milliseconds);
-    const humanDateFormat =
-      dateObject.getDate() +
-      "-" +
-      (dateObject.getMonth() + 1) +
-      "-" +
-      dateObject.getFullYear();
+
+    // Zero-pad day and month to match Figma design
+    const day = String(dateObject.getDate()).padStart(2, '0');
+    const month = String(dateObject.getMonth() + 1).padStart(2, '0');
+    const year = dateObject.getFullYear();
+
+    // Use spaces around separator: "02 - 09 - 2025"
+    const humanDateFormat = `${day} - ${month} - ${year}`;
 
     return humanDateFormat;
   }
@@ -155,12 +157,22 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
 
   return (
     <div className={`proposal-card ${useCollapse ? 'proposal-card--expanded' : ''}`} role="region" aria-labelledby={`proposal-title-${proposal.Hash}`}>
-      <div className="proposal-card__date-votes">
-        <div className="proposal-card__date">{proposalDate(proposal.CreationTime)}</div>
-        <div className="proposal-card__votes">
-          <span className="proposal-card__votes-yes">{proposal.YesCount}</span>
-          <span className="proposal-card__votes-separator"> / </span>
-          <span className="proposal-card__votes-no">{proposal.NoCount}</span>
+      <div className="proposal-card__left-column">
+        <div className="proposal-card__date-votes">
+          <div className="proposal-card__date">{proposalDate(proposal.CreationTime)}</div>
+          <div className="proposal-card__votes">
+            <span className="proposal-card__votes-yes">{proposal.YesCount}</span>
+            <span className="proposal-card__votes-separator"> / </span>
+            <span className="proposal-card__votes-no">{proposal.NoCount}</span>
+          </div>
+        </div>
+
+        <div className="proposal-card__status">
+          <div className={`proposal-card__status-badge ${
+            proposalIsPassing ? 'proposal-card__status-badge--passed' : 'proposal-card__status-badge--not-passed'
+          }`}>
+            {proposalIsPassing ? 'Passed' : 'Not Passed'}
+          </div>
         </div>
       </div>
 
@@ -212,40 +224,6 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
               month_remaining={month_remaining}
               payment_type={payment_type}
             />
-            {user && (
-              <div className="actions">
-                <button
-                  className="vote vote--yes"
-                  title={t("govlist.vote.yes_tooltip", "Vote YES - Support this proposal")}
-                  aria-label={t("govlist.vote.yes_aria", "Vote yes for this proposal")}
-                  disabled={userInfo ? false : true}
-                  onClick={() => openMnVote(VOTE_OUTCOME.YES)}
-                >
-                  <span className="vote-label">{t("govlist.vote.yes", "Vote Yes")}</span>
-                  <span className="vote-emoji">👍</span>
-                </button>
-                <button
-                  className="vote vote--abstain"
-                  title={t("govlist.vote.abstain_tooltip", "ABSTAIN - Neutral vote")}
-                  aria-label={t("govlist.vote.abstain_aria", "Abstain from voting on this proposal")}
-                  disabled={userInfo ? false : true}
-                  onClick={() => openMnVote(VOTE_OUTCOME.ABSTAIN)}
-                >
-                  <span className="vote-label">{t("govlist.vote.abstain", "Abstain")}</span>
-                  <span className="vote-emoji">➖</span>
-                </button>
-                <button
-                  className="vote vote--no"
-                  title={t("govlist.vote.no_tooltip", "Vote NO - Reject this proposal")}
-                  aria-label={t("govlist.vote.no_aria", "Vote no for this proposal")}
-                  disabled={userInfo ? false : true}
-                  onClick={() => openMnVote(VOTE_OUTCOME.NO)}
-                >
-                  <span className="vote-label">{t("govlist.vote.no", "Vote No")}</span>
-                  <span className="vote-emoji">👎</span>
-                </button>
-              </div>
-            )}
             <div className="proposal-back">
               <button
                 className="btn btn--ghost"
@@ -262,13 +240,41 @@ function ProposalCard({ proposal, enabled, userInfo, onLoadProposals }) {
         </Collapse>
       </div>
 
-      <div className="proposal-card__status">
-        <div className={`proposal-card__status-badge ${
-          proposalIsPassing ? 'proposal-card__status-badge--passed' : 'proposal-card__status-badge--not-passed'
-        }`}>
-          {proposalIsPassing ? 'Passed' : 'Not Passed'}
+      {/* Vote Actions - Always Visible */}
+      {user && (
+        <div className="proposal-card__vote-actions">
+          <button
+            className="proposal-card__vote proposal-card__vote--yes"
+            title={t("govlist.vote.yes_tooltip", "Vote YES - Support this proposal")}
+            aria-label={t("govlist.vote.yes_aria", "Vote yes for this proposal")}
+            disabled={!userInfo}
+            onClick={() => openMnVote(VOTE_OUTCOME.YES)}
+          >
+            <span className="vote-label">VOTE YES</span>
+            <span className="vote-emoji">👍</span>
+          </button>
+          <button
+            className="proposal-card__vote proposal-card__vote--abstain"
+            title={t("govlist.vote.abstain_tooltip", "ABSTAIN - Neutral vote")}
+            aria-label={t("govlist.vote.abstain_aria", "Abstain from voting on this proposal")}
+            disabled={!userInfo}
+            onClick={() => openMnVote(VOTE_OUTCOME.ABSTAIN)}
+          >
+            <span className="vote-label">ABSTAIN</span>
+            <span className="vote-emoji">➖</span>
+          </button>
+          <button
+            className="proposal-card__vote proposal-card__vote--no"
+            title={t("govlist.vote.no_tooltip", "Vote NO - Reject this proposal")}
+            aria-label={t("govlist.vote.no_aria", "Vote no for this proposal")}
+            disabled={!userInfo}
+            onClick={() => openMnVote(VOTE_OUTCOME.NO)}
+          >
+            <span className="vote-label">VOTE NO</span>
+            <span className="vote-emoji">👎</span>
+          </button>
         </div>
-      </div>
+      )}
 
       <CustomModal
         open={openAddressList}
