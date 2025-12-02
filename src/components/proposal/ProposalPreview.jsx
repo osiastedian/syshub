@@ -89,8 +89,26 @@ function ProposalPreview({ title, description, url, payment, onNext, onBack, pre
       {/* Buttons */}
       {onNext && onBack && (
         <div className="d-flex gap-2" style={{marginTop: '0.5rem'}}>
-          <button className="btn btn-white-outline btn-chevron-left" type="button" onClick={onBack}>Back</button>
-          <button className="btn btn-white btn-chevron-right" type="button" onClick={onNext} disabled={preparing}>Prepare</button>
+          <button className="btn btn-white-outline btn-back" type="button" onClick={onBack}>
+            <span className="btn-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="16" fill="transparent"/>
+                <path d="M14.3809 20.0467L10.3342 16L14.3809 11.9534" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M21.666 16H10.446" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+            <span className="btn-text">Back</span>
+          </button>
+          <button className="btn btn-white btn-next" type="button" onClick={onNext} disabled={preparing}>
+            <span className="btn-text">Prepare</span>
+            <span className="btn-icon">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect width="32" height="32" rx="16" fill="transparent"/>
+                <path d="M17.6191 11.9533L21.6658 16L17.6191 20.0466" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M10.334 16H21.554" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            </span>
+          </button>
         </div>
       )}
     </div>

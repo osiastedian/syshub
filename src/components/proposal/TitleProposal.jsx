@@ -67,7 +67,16 @@ function TitleProposal({ onNext }) {
         />
       </div>
       <div className="form-actions-spaced mt-4">
-        <button className="btn btn-white btn-chevron-right" type="submit">Next</button>
+        <button className="btn btn-white btn-next" type="submit">
+          <span className="btn-text">Next</span>
+          <span className="btn-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect width="32" height="32" rx="16" fill="transparent"/>
+              <path d="M17.6191 11.9533L21.6658 16L17.6191 20.0466" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M10.334 16H21.554" stroke="currentColor" strokeMiterlimit="10" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+          </span>
+        </button>
       </div>
     </form>
   )
