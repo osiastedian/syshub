@@ -125,8 +125,8 @@ function AddVotingAddress({ editData, onClose }) {
     },
   });
 
-  const { register, handleSubmit, formState, reset, watch, trigger } = form;
-  const { errors, isValid } = formState;
+  const { register, handleSubmit, formState, reset, watch } = form;
+  const { errors } = formState;
   const selectedType = watch("type");
 
   // Update form values when editData changes

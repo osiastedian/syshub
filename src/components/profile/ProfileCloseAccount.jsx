@@ -20,7 +20,6 @@ import './ProfileCloseAccount.scss';
  */
 function ProfileCloseAccount({ onDeleteAccount }) {
   const { t } = useTranslation();
-  const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
 
   // Handle delete account button click
@@ -117,20 +116,10 @@ function ProfileCloseAccount({ onDeleteAccount }) {
           <button
             onClick={handleDeleteClick}
             className="profile-close-account__button profile-close-account__button--danger"
-            disabled={loading}
             type="button"
           >
-            {loading ? (
-              <>
-                <span className="profile-close-account__loading" />
-                {t('profile.closeAccount.deleting')}
-              </>
-            ) : (
-              <>
-                <span className="profile-close-account__button-icon">{renderTrashIcon()}</span>
-                {t('profile.closeAccount.delete')}
-              </>
-            )}
+            <span className="profile-close-account__button-icon">{renderTrashIcon()}</span>
+            {t('profile.closeAccount.delete')}
           </button>
         </div>
       </div>

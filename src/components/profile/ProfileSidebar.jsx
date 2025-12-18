@@ -193,7 +193,6 @@ function ProfileSidebar({ activeSection, onSectionChange }) {
             onClick={() => handleSectionClick(section.id)}
             onKeyPress={(e) => handleKeyPress(e, section.id)}
             type="button"
-            role="button"
             aria-current={activeSection === section.id ? 'page' : undefined}
             aria-label={t(section.labelKey)}
           >

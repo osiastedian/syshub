@@ -27,11 +27,7 @@ function ProfileTwoFactor({ onOpenModal }) {
   const { user, updateCurrentActionsUser, logoutUser } = useUser();
 
   const [twoFactorEnabled, setTwoFactorEnabled] = useState(false);
-  const [loading, setLoading] = useState(false);
-  const [setupData, setSetupData] = useState(null);
   const [backupCodes, setBackupCodes] = useState([]);
-  const [successMessage, setSuccessMessage] = useState('');
-  const [errorMessage, setErrorMessage] = useState('');
   const [copiedCodes, setCopiedCodes] = useState(false);
   const [showEnableModal, setShowEnableModal] = useState(false);
   const [showDisableModal, setShowDisableModal] = useState(false);
@@ -160,26 +156,12 @@ function ProfileTwoFactor({ onOpenModal }) {
               {t('profile.twoFactor.enabledDescription')}
             </p>
 
-            {/* Success Message */}
-            {successMessage && <p className="profile-two-factor__success-text">{successMessage}</p>}
-
-            {/* Error Message */}
-            {errorMessage && <p className="profile-two-factor__error-text">{errorMessage}</p>}
-
             <div className="profile-two-factor__actions">
               <button
                 onClick={handleDisable2FA}
                 className="profile-two-factor__button profile-two-factor__button--disable"
-                disabled={loading}
               >
-                {loading ? (
-                  <>
-                    <span className="profile-two-factor__loading" />
-                    {t('profile.twoFactor.disabling')}
-                  </>
-                ) : (
-                  t('profile.twoFactor.disable')
-                )}
+                {t('profile.twoFactor.disable')}
               </button>
             </div>
           </>
@@ -192,48 +174,18 @@ function ProfileTwoFactor({ onOpenModal }) {
               {t('profile.twoFactor.disabledDescription')}
             </p>
 
-            {/* Success Message */}
-            {successMessage && <p className="profile-two-factor__success-text">{successMessage}</p>}
-
-            {/* Error Message */}
-            {errorMessage && <p className="profile-two-factor__error-text">{errorMessage}</p>}
-
             <div className="profile-two-factor__actions">
               <button
                 onClick={handleEnable2FA}
                 className="profile-two-factor__button profile-two-factor__button--enable"
-                disabled={loading}
               >
-                {loading ? (
-                  <>
-                    <span className="profile-two-factor__loading" />
-                    {t('profile.twoFactor.enabling')}
-                  </>
-                ) : (
-                  <>
-                    <span className="profile-two-factor__button-icon">{renderShieldIcon()}</span>
-                    {t('profile.twoFactor.enable')}
-                  </>
-                )}
+                <span className="profile-two-factor__button-icon">{renderShieldIcon()}</span>
+                {t('profile.twoFactor.enable')}
               </button>
             </div>
           </>
         )}
       </div>
-
-      {/* QR Code Section (only shown during setup) */}
-      {setupData && (
-        <div className="profile-two-factor__qr-section">
-          <h3 className="profile-two-factor__qr-title">{t('profile.twoFactor.scanQRCode')}</h3>
-          <div className="profile-two-factor__qr-code">
-            <img src={setupData.qrCode} alt="2FA QR Code" />
-          </div>
-          <div className="profile-two-factor__secret-key">
-            <p className="profile-two-factor__secret-label">{t('profile.twoFactor.secretKey')}</p>
-            <p className="profile-two-factor__secret-value">{setupData.secret}</p>
-          </div>
-        </div>
-      )}
 
       {/* Backup Codes Section (only shown if 2FA is enabled) */}
       {twoFactorEnabled && backupCodes.length > 0 && (

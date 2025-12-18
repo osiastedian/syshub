@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 import { verifyGauthCode } from '../../utils/request';
 import './DeleteAccountTwoFactorModal.scss';
 
@@ -29,7 +28,6 @@ import './DeleteAccountTwoFactorModal.scss';
  * />
  */
 function DeleteAccountTwoFactorModal({ show, onClose, onVerified, onSuccess }) {
-  const { t } = useTranslation();
   const [code, setCode] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');

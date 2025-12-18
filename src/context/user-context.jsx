@@ -100,7 +100,8 @@ export function UserProvider(props) {
     }
 
     loadAdminInfo();
-  }, [user?.data]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user?.data, user?.token]);
 
   /**
    * function used to signup the user in the app
@@ -298,7 +299,7 @@ export function UserProvider(props) {
       loadingAdmin,
       firebase,
     };
-    // eslint-disable-next-line
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, loadingUser, userAdmin, loadingAdmin]);
 
   return <UserContext.Provider value={value} {...props} />;

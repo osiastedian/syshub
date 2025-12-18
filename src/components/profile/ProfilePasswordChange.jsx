@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { useUser } from '../../context/user-context';
 import './ProfilePasswordChange.scss';

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useTranslation } from 'react-i18next';
 import CTAButton from '../global/CTAButton';
 import './CommunityJoin.scss';
 
@@ -8,7 +7,6 @@ import './CommunityJoin.scss';
  * Displays Discord community join CTA
  */
 function CommunityJoin() {
-  const { t } = useTranslation();
 
   return (
     <section className="community-join">

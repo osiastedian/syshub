@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useUser } from '../../context/user-context';
 import { withTranslation } from 'react-i18next';
@@ -13,7 +13,6 @@ import './MobileSidebar.scss';
 const MobileSidebar = ({ isOpen, onClose, t }) => {
   const location = useLocation();
   const { user, userAdmin, logoutUser } = useUser();
-  const [isUserProfileExpanded, setIsUserProfileExpanded] = useState(false);
 
   const isActiveLink = (path) => {
     return location.pathname === path;
@@ -21,10 +20,6 @@ const MobileSidebar = ({ isOpen, onClose, t }) => {
 
   const handleNavClick = () => {
     onClose();
-  };
-
-  const toggleUserProfile = () => {
-    setIsUserProfileExpanded(!isUserProfileExpanded);
   };
 
   const handleLogout = () => {

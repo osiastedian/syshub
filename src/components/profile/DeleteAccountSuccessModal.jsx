@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { useTranslation } from 'react-i18next';
 import './DeleteAccountSuccessModal.scss';
 
 /**
@@ -23,7 +22,6 @@ import './DeleteAccountSuccessModal.scss';
  * />
  */
 function DeleteAccountSuccessModal({ show, onSuccess }) {
-  const { t } = useTranslation();
   const [countdown, setCountdown] = useState(3);
 
   // Reset countdown when modal opens

@@ -14,7 +14,6 @@ import ProfileTwoFactor from '../components/profile/ProfileTwoFactor';
 import ProfileCloseAccount from '../components/profile/ProfileCloseAccount';
 import TwoFactorModal from '../components/profile/TwoFactorModal';
 import ProfileCloseAccountConfirmation from '../components/profile/ProfileCloseAccountConfirmation';
-import DeleteAccountSuccessModal from '../components/profile/DeleteAccountSuccessModal';
 import AddVotingAddress from '../components/profile/AddVotingAddress';
 
 import '../components/profile/_profile.scss';
@@ -50,7 +49,6 @@ function Profile({ t }) {
 
   // Close account modal state
   const [showCloseAccountConfirmModal, setShowCloseAccountConfirmModal] = useState(false);
-  const [showDeleteSuccessModal, setShowDeleteSuccessModal] = useState(false);
   const [deletingAccount, setDeletingAccount] = useState(false);
   const [has2FA, setHas2FA] = useState(false);
 
@@ -164,19 +162,6 @@ function Profile({ t }) {
     }
   };
 
-  // Handle successful account deletion with logout (called after countdown in success modal)
-  const handleDeleteSuccess = async () => {
-    try {
-      // Logout user after successful deletion
-      // This matches the old behavior from UserDelete.jsx
-      await logoutUser();
-    } catch (error) {
-      console.error('Error logging out after account deletion:', error);
-      // Force reload to ensure logout
-      window.location.href = '/';
-    }
-  };
-
   // Render active section content
   const renderContent = () => {
     switch (activeSection) {
@@ -242,12 +227,6 @@ function Profile({ t }) {
           onCancel={handleCloseAccountCancel}
           isLoading={deletingAccount}
           has2FA={has2FA}
-        />
-
-        {/* Delete Account Success Modal */}
-        <DeleteAccountSuccessModal
-          show={showDeleteSuccessModal}
-          onSuccess={handleDeleteSuccess}
         />
       </main>
     </Background>

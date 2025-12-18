@@ -3,7 +3,6 @@ import axios from "axios";
 import prettyMilliseconds from "pretty-ms";
 
 import MetaTags from 'react-meta-tags';
-import Background from '../components/global/Background';
 import BackgroundInner from '../components/global/BackgroundInner';
 
 // Page-specific styles

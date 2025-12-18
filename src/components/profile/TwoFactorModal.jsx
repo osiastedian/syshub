@@ -57,6 +57,17 @@ function TwoFactorModal({ isOpen, onClose, onVerify, type }) {
     };
   }, [isOpen]);
 
+  // Handle modal close
+  const handleClose = () => {
+    setCode('');
+    setError('');
+    setSuccess(false);
+    setLoading(false);
+    if (onClose) {
+      onClose();
+    }
+  };
+
   // Handle ESC key to close modal
   useEffect(() => {
     const handleEscKey = (e) => {
@@ -69,6 +80,7 @@ function TwoFactorModal({ isOpen, onClose, onVerify, type }) {
     return () => {
       document.removeEventListener('keydown', handleEscKey);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isOpen]);
 
   // Handle code input change
@@ -114,17 +126,6 @@ function TwoFactorModal({ isOpen, onClose, onVerify, type }) {
       setError(t('profile.twoFactorModal.errors.verificationFailed'));
     } finally {
       setLoading(false);
-    }
-  };
-
-  // Handle modal close
-  const handleClose = () => {
-    setCode('');
-    setError('');
-    setSuccess(false);
-    setLoading(false);
-    if (onClose) {
-      onClose();
     }
   };
 
