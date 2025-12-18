@@ -164,6 +164,17 @@ const AddressList = ({proposal, vote, onAfterVote}) => {
         votingAddress: address.address
       };
       const voteData = signVote(proposalVoteNo)
+
+      // Check if signVote returned an error (string) instead of valid data (object)
+      if (typeof voteData === 'string') {
+        // signVote returned an error message
+        addressErrorVote.push({
+          name: address.name,
+          err: voteData
+        })
+        continue; // Skip to next address
+      }
+
       await voteProposal(voteData)
         .then(async data => {
           addressVoted.push({
@@ -181,9 +192,7 @@ const AddressList = ({proposal, vote, onAfterVote}) => {
           // })
         })
         .catch(err => {
-          const message = (voteData === 'Invalid network version')
-            ? 'Invalid network version'
-            : (err?.response?.data?.message || err?.message || 'Unknown error');
+          const message = err?.response?.data?.message || err?.message || 'Unknown error';
           addressErrorVote.push({
             name: address.name,
             err: message
